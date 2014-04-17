@@ -50,7 +50,7 @@ class Positions {
                 // 0 lines set
                 return array();
             }
-            $whereLines = "    AND " . LinesUtils::whereLines('rec_frt.li_nr', 'rec_frt.str_li_var', $this->lines);
+            $whereLines = "    AND (" . LinesUtils::whereLines('rec_frt.li_nr', 'rec_frt.str_li_var', $this->lines) . ")";
         }
 
         $selectActPositions = <<<EOQ
