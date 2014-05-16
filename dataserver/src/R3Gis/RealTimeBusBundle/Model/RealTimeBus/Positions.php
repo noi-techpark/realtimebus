@@ -65,10 +65,10 @@ SELECT
     li_r,
     li_g,
     li_b,
-    frt_ort_last.ort_nr,
-    frt_ort_last.onr_typ_nr,
-    rec_ort.ort_name,
-    rec_ort.ort_ref_ort_name,
+    next_rec_ort.ort_nr AS ort_nr,
+    next_rec_ort.onr_typ_nr AS onr_typ_nr,
+    next_rec_ort.ort_name AS ort_name,
+    next_rec_ort.ort_ref_ort_name AS ort_ref_ort_name,    
     ST_AsGeoJSON(ST_Transform(vehicle_position_act.the_geom, {$this->srid})) AS json_geom,
     ST_AsGeoJSON(ST_Transform(vehicle_position_act.extrapolation_geom, {$this->srid})) AS json_extrapolation_geom
 FROM vdv.vehicle_position_act
@@ -77,15 +77,16 @@ INNER JOIN vdv.rec_frt
 INNER JOIN vdv.rec_lid
     ON rec_frt.li_nr=rec_lid.li_nr
     AND rec_frt.str_li_var=rec_lid.str_li_var
-LEFT JOIN vdv.frt_ort_last
-    ON rec_frt.frt_fid=frt_ort_last.frt_fid
-LEFT JOIN vdv.rec_ort
-    ON rec_ort.onr_typ_nr=frt_ort_last.onr_typ_nr
-    AND rec_ort.ort_nr=frt_ort_last.ort_nr
+LEFT JOIN vdv.lid_verlauf lid_verlauf_next
+    ON rec_frt.li_nr=lid_verlauf_next.li_nr
+    AND rec_frt.str_li_var=lid_verlauf_next.str_li_var
+    AND vehicle_position_act.li_lfd_nr + 1 = lid_verlauf_next.li_lfd_nr
+LEFT JOIN vdv.rec_ort next_rec_ort
+    ON lid_verlauf_next.onr_typ_nr=next_rec_ort.onr_typ_nr
+    AND lid_verlauf_next.ort_nr=next_rec_ort.ort_nr
 LEFT JOIN vdv.line_attributes
     ON rec_frt.li_nr=line_attributes.li_nr
-WHERE rec_lid.li_kuerzel LIKE '%ME%'
-    AND gps_date > NOW() - interval '10 minute'
+WHERE gps_date > NOW() - interval '10 minute'
     AND vehicle_position_act.status='r'
 $whereLines
 EOQ;
