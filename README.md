@@ -12,6 +12,15 @@ SASA has provided its data as Open Data. Documentation can be found on the http:
 
 The realtimebus component connects to a http://FreeGIS.net installation installed on the SASA server infrastructure, which exposes real time data by SASA over web services.
 
+Project Team
+============
+
+- Sandy Kirchlechner, Kurverwaltung Meran http://www.meran.eu
+- Patrick Ohnewein, TIS innovation park http://www.tis.bz.it/open
+- Peter Hopfgartner, R3 GIS http://www.r3-gis.com
+- Andrea Cima, Made in Cima http://www.madeincima.it
+- Markus Windegger, SASA http://www.sasabz.it
+
 How can I install it on my local box?
 =====================================
 
