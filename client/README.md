@@ -16,11 +16,11 @@ Setup your first client:
 
 Linux (apt-get):
 -----------------
-sudo apt-get install git
-sudo apt-get install apache2
-mkdir myGitRepo
-cd myGitRepo
-git clone https://github.com/tis-innovation-park/realtimebus.git
-cd /var/www/html
-ln -s ~/myGitRepo/realtimebus/client .
-go to localhost/client
+-sudo apt-get install git
+-sudo apt-get install apache2
+-mkdir myGitRepo
+-cd myGitRepo
+-git clone https://github.com/tis-innovation-park/realtimebus.git
+-cd /var/www/html
+-ln -s ~/myGitRepo/realtimebus/client .
+-go to localhost/client
