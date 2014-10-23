@@ -34,7 +34,7 @@
 	$vars['it_merano'] = 'Merano - Azienda di soggiorno';
 	$vars['it_linea'] = 'Linea';
 	$vars['it_linkmerano'] = 'http://www.merano.eu/';
-	$vars['it_linktis'] = 'http://www.tis.bz.it/it';
+	$vars['it_linktis'] = 'http://www.tis.bz.it/open';
 	$vars['it_linksasa'] = 'http://www.sasabz.it/it/';
 	$vars['it_linkr3gis'] = 'http://www.r3-gis.com/it';
 	$vars['it_linkmadeincima'] = 'http://www.madeincima.it/';
@@ -66,7 +66,7 @@
 	$vars['en_merano'] = 'Meran Tourist Bureau';
 	$vars['en_linea'] = 'Route';
 	$vars['en_linkmerano'] = 'http://www.meran.eu/en/';
-	$vars['en_linktis'] = 'http://www.tis.bz.it/en';
+	$vars['en_linktis'] = 'http://www.tis.bz.it/open';
 	$vars['en_linksasa'] = 'http://www.sasabz.it/it/';
 	$vars['en_linkr3gis'] = 'http://www.r3-gis.com/en';
 	$vars['en_linkmadeincima'] = 'http://www.madeincima.it/en/';
@@ -98,7 +98,7 @@
 	$vars['de_merano'] = 'Kurverwaltung Meran';
 	$vars['de_linea'] = 'Linie';
 	$vars['de_linkmerano'] = 'http://www.meran.eu/de/';
-	$vars['de_linktis'] = 'http://www.tis.bz.it/de';
+	$vars['de_linktis'] = 'http://www.tis.bz.it/open';
 	$vars['de_linksasa'] = 'http://www.sasabz.it/de/';
 	$vars['de_linkr3gis'] = 'http://www.r3-gis.com/de';
 	$vars['de_infocontatti'] = 'F&uuml;r weitere Infos &uuml;ber den Dienst ';

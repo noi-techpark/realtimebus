@@ -139,9 +139,9 @@
 	            </main>
 	            <footer id="footer-1" class="footer">
 	                <ul class="logos">
-	                    <li class="merano"><a href="<?php ___('linkmerano'); ?>"><?php ___('merano'); ?></a></li>
-	                    <li class="tis"><a href="<?php ___('linktis'); ?>">TIS - Innovation Park</a></li>
-	                    <li class="sasa"><a href="<?php ___('linksasa'); ?>">SASA Bus</a></li>
+	                    <li class="merano"><a target="_blank" href="<?php ___('linkmerano'); ?>"><?php ___('merano'); ?></a></li>
+	                    <li class="tis"><a target="_blank" href="<?php ___('linktis'); ?>">TIS - Innovation Park</a></li>
+	                    <li class="sasa"><a target="_blank" href="<?php ___('linksasa'); ?>">SASA Bus</a></li>
 	                </ul>
 	            </footer>
 	            <footer id="footer-2" class="footer">
