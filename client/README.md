@@ -21,6 +21,7 @@ Linux (Ubuntu 14.04 apt-get):
 - mkdir myGitRepo
 - cd myGitRepo
 - git clone https://github.com/tis-innovation-park/realtimebus.git
+- git checkout c/s-separation  # set the dedicated branch
 - cd /var/www/html
 - ln -s ~/myGitRepo/realtimebus/client . # maybe you need to do it as root / sudo
 - go to localhost/client
