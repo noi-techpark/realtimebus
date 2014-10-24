@@ -33,7 +33,7 @@
         <!--<link href="css/smartphoneLandscape.css" media="only screen and (max-width: 671px) and (orientation: landscape)" rel="stylesheet" /> --> <!-- max-device-width: 671px -->
         <!-- media="only screen and (orientation: landscape) -->
 	<script src="js/detect_device.js" type="text/javascript"></script>
-        <script src="js/OpenLayers/OpenLayers.sasabus.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js"></script>
         <!--<script src="http://sasatest.r3-gis.com/js/OpenLayers/lib/OpenLayers.js"></script>-->
         <script src="js/OpenLayers/proj4js.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
