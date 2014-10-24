@@ -17,6 +17,7 @@ Project Team
 
 - Sandy Kirchlechner, Kurverwaltung Meran http://www.meran.eu
 - Patrick Ohnewein, TIS innovation park http://www.tis.bz.it/open
+- Patrick Bertolla, TIS innovation park http://www.tis.bz.it/open
 - Peter Hopfgartner, R3 GIS http://www.r3-gis.com
 - Andrea Cima, Made in Cima http://www.madeincima.it
 - Markus Windegger, SASA http://www.sasabz.it
