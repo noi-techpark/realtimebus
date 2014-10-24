@@ -24,7 +24,9 @@ Project Team
 How can I install it on my local box?
 =====================================
 
-We are working on getting this code base self contained and easy to be installed by developers all around the world. Stay tuned!
+To get the client side working, follow the dedicated README in the /client folder.
+
+
 
 
 
