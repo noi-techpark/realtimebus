@@ -17,6 +17,7 @@ Project Team
 
 - Sandy Kirchlechner, Kurverwaltung Meran http://www.meran.eu
 - Patrick Ohnewein, TIS innovation park http://www.tis.bz.it/open
+- Patrick Bertolla, TIS innovation park http://www.tis.bz.it/open
 - Peter Hopfgartner, R3 GIS http://www.r3-gis.com
 - Andrea Cima, Made in Cima http://www.madeincima.it
 - Markus Windegger, SASA http://www.sasabz.it
@@ -24,7 +25,9 @@ Project Team
 How can I install it on my local box?
 =====================================
 
-We are working on getting this code base self contained and easy to be installed by developers all around the world. Stay tuned!
+To get the client side working, follow the dedicated README in the /client folder.
+
+
 
 
 
