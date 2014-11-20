@@ -87,7 +87,7 @@ LEFT JOIN vdv.rec_ort next_rec_ort
 LEFT JOIN vdv.line_attributes
     ON rec_frt.li_nr=line_attributes.li_nr
 WHERE gps_date > NOW() - interval '10 minute'
-    AND vehicle_position_act.status='r'
+    -- AND vehicle_position_act.status='r'
 $whereLines
 EOQ;
         $res = $this->connection->query($selectActPositions);
