@@ -20,8 +20,8 @@ A web server, able to run PHP is needed.
 2) Setting up the data base 
 -------------------------------------
 
-A PostGIS database must be initialized. Details on this can be found in the official PostGIS documentation, [3] 
-The database schema can be found in dataserver/SQL/realtimebus-schema.sql.
+A PostGIS database must be initialized. Details on this can be found in the official PostGIS documentation, [1] 
+The database schema can be found in `dataserver/SQL/realtimebus-schema.sql`.
 If you have any detailed geometry for you bus route segments, defined as the exact geometry for going from a bus
 stop to the next one, insert these into the table ort_edges.  
 
@@ -43,6 +43,7 @@ Add the project specific parameters from `dataserver/app/config/parameters.yml.s
 Set up the web server and test you installation, using the standards API. 
 
 4) Import the VDV data
+----------------------
 
 VDV data can be imported with
 
