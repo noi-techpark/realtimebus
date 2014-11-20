@@ -1335,3 +1335,8 @@ ALTER TABLE ONLY sel_fzt_feld
 -- PostgreSQL database dump complete
 --
 
+CREATE INDEX ON vdv.ort_edges USING GIST(the_geom);
+CREATE INDEX ON vdv.lid_verlauf USING GIST(the_geom);
+CREATE INDEX ON vdv.ort_edges USING GIST(the_geom);
+CREATE INDEX ON vdv.rec_lid USING GIST(the_geom);
+CREATE INDEX ON vdv.rec_ort USING GIST(the_geom);
