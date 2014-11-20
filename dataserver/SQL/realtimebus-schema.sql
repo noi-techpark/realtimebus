@@ -293,7 +293,7 @@ BEGIN
 
 
     RAISE DEBUG 'extra_pos: %, distance to last extra_pos is % and last GPS value is %',
-                AsText(extrapolated_position_var),
+                ST_AsText(extrapolated_position_var),
                ST_Distance(extrapolated_position_var, pos_record.extrapolation_geom),
                ST_Distance(extrapolated_position_var, pos_record.the_geom);
 
