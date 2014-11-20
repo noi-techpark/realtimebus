@@ -20,7 +20,7 @@ SET client_min_messages = warning;
 CREATE SCHEMA vdv;
 
 
-SET search_path = vdv, pg_catalog;
+SET search_path = vdv, public, pg_catalog;
 
 --
 -- TOC entry 989 (class 1255 OID 591657)
@@ -610,13 +610,10 @@ CREATE TABLE lid_verlauf (
     aussteigeverbot smallint,
     zone_wabe_nr smallint,
     kurzstrecke smallint,
-    halte_typ smallint,
-    the_geom public.geometry,
-    CONSTRAINT enforce_dims_the_geom CHECK ((public.st_ndims(the_geom) = 2)),
-    CONSTRAINT enforce_geotype_the_geom CHECK (((public.geometrytype(the_geom) = 'LINESTRING'::text) OR (the_geom IS NULL))),
-    CONSTRAINT enforce_srid_the_geom CHECK ((public.st_srid(the_geom) = 25832))
+    halte_typ smallint
 );
 
+SELECT AddGeometryColumn('vdv', 'lid_verlauf', 'the_geom', 25832, 'LINESTRING', 2); 
 
 --
 -- TOC entry 169 (class 1259 OID 591702)
@@ -669,14 +666,10 @@ CREATE TABLE ort_edges (
     start_onr_typ_nr integer,
     start_ort_nr integer,
     end_onr_typ_nr integer,
-    end_ort_nr integer,
-    the_geom public.geometry,
-    CONSTRAINT enforce_dims_the_geom CHECK ((public.st_ndims(the_geom) = 2)),
-    CONSTRAINT enforce_geotype_the_geom CHECK (((public.geometrytype(the_geom) = 'LINESTRING'::text) OR (the_geom IS NULL))),
-    CONSTRAINT enforce_srid_the_geom CHECK ((public.st_srid(the_geom) = 25832))
+    end_ort_nr integer
 );
 
-
+SELECT AddGeometryColumn('vdv', 'ort_edges', 'the_geom', 25832, 'LINESTRING', 2); 
 --
 -- TOC entry 182 (class 1259 OID 985339)
 -- Dependencies: 7 181
@@ -698,26 +691,6 @@ CREATE SEQUENCE ort_edges_id_seq
 --
 
 ALTER SEQUENCE ort_edges_id_seq OWNED BY ort_edges.id;
-
-
---
--- TOC entry 192 (class 1259 OID 1178190)
--- Dependencies: 3731 3732 3733 3734 1306 7
--- Name: ort_edges_new; Type: TABLE; Schema: vdv; Owner: -
---
-
-CREATE TABLE ort_edges_new (
-    id integer DEFAULT nextval('ort_edges_id_seq'::regclass) NOT NULL,
-    start_onr_typ_nr integer,
-    start_ort_nr integer,
-    end_onr_typ_nr integer,
-    end_ort_nr integer,
-    cnt integer,
-    the_geom public.geometry,
-    CONSTRAINT enforce_dims_the_geom CHECK ((public.st_ndims(the_geom) = 2)),
-    CONSTRAINT enforce_geotype_the_geom CHECK (((public.geometrytype(the_geom) = 'LINESTRING'::text) OR (the_geom IS NULL))),
-    CONSTRAINT enforce_srid_the_geom CHECK ((public.st_srid(the_geom) = 25832))
-);
 
 
 --
@@ -800,13 +773,10 @@ CREATE TABLE rec_lid (
     linien_code smallint,
     konzessionsinhaber_nr integer,
     auftraggeber_nr integer,
-    fremdunternehmer_nr integer,
-    the_geom public.geometry,
-    CONSTRAINT enforce_dims_the_geom CHECK ((public.st_ndims(the_geom) = 2)),
-    CONSTRAINT enforce_geotype_the_geom CHECK (((public.geometrytype(the_geom) = 'LINESTRING'::text) OR (the_geom IS NULL))),
-    CONSTRAINT enforce_srid_the_geom CHECK ((public.st_srid(the_geom) = 25832))
+    fremdunternehmer_nr integer
 );
 
+SELECT AddGeometryColumn('vdv', 'rec_lid', 'the_geom', 25832, 'LINESTRING', 2); 
 
 --
 -- TOC entry 174 (class 1259 OID 591726)
@@ -830,13 +800,10 @@ CREATE TABLE rec_ort (
     ort_pos_hoehe bigint,
     ort_richtung smallint,
     ort_druckname character varying(40),
-    richtungswechsel smallint,
-    the_geom public.geometry,
-    CONSTRAINT enforce_dims_the_geom CHECK ((public.st_ndims(the_geom) = 2)),
-    CONSTRAINT enforce_geotype_the_geom CHECK (((public.geometrytype(the_geom) = 'POINT'::text) OR (the_geom IS NULL))),
-    CONSTRAINT enforce_srid_the_geom CHECK ((public.st_srid(the_geom) = 25832))
+    richtungswechsel smallint
 );
 
+SELECT AddGeometryColumn('vdv', 'rec_ort', 'the_geom', 25832, 'POINT', 2); 
 
 --
 -- TOC entry 175 (class 1259 OID 591735)
@@ -881,25 +848,19 @@ CREATE UNLOGGED TABLE vehicle_position_act (
     delay_sec integer NOT NULL,
     insert_date timestamp(0) without time zone DEFAULT now() NOT NULL,
     frt_fid bigint NOT NULL,
-    the_geom public.geometry,
     li_lfd_nr smallint,
     li_nr integer,
     str_li_var character(6),
     interpolation_linear_ref double precision,
     interpolation_distance double precision,
     extrapolation_linear_ref double precision,
-    extrapolation_geom public.geometry,
     arrival_time timestamp without time zone,
-    status character(1),
-    CONSTRAINT enforce_dims_extrapolation_geom CHECK ((public.st_ndims(extrapolation_geom) = 2)),
-    CONSTRAINT enforce_dims_the_geom CHECK ((public.st_ndims(the_geom) = 2)),
-    CONSTRAINT enforce_geotype_extrapolation_geom CHECK (((public.geometrytype(extrapolation_geom) = 'POINT'::text) OR (extrapolation_geom IS NULL))),
-    CONSTRAINT enforce_geotype_the_geom CHECK (((public.geometrytype(the_geom) = 'POINT'::text) OR (the_geom IS NULL))),
-    CONSTRAINT enforce_srid_extrapolation_geom CHECK ((public.st_srid(extrapolation_geom) = 25832)),
-    CONSTRAINT enforce_srid_the_geom CHECK ((public.st_srid(the_geom) = 25832))
+    status character(1)
 );
 
 
+SELECT AddGeometryColumn('vdv', 'vehicle_position_act', 'the_geom', 25832, 'POINT', 2); 
+SELECT AddGeometryColumn('vdv', 'vehicle_position_act', 'extrapolation_geom', 25832, 'POINT', 2); 
 --
 -- TOC entry 3812 (class 0 OID 0)
 -- Dependencies: 183
@@ -910,69 +871,12 @@ COMMENT ON COLUMN vehicle_position_act.status IS 'r=run, w=waiting, t=terminated
 
 
 --
--- TOC entry 185 (class 1259 OID 1091632)
--- Dependencies: 3727 3728 3729 3730 7 1306
--- Name: vehicle_track; Type: TABLE; Schema: vdv; Owner: -
---
-
-CREATE UNLOGGED TABLE vehicle_track (
-    vt_id bigint NOT NULL,
-    gps_date timestamp(0) with time zone,
-    delay_sec integer,
-    route_code integer,
-    notification_id character varying,
-    notification_date timestamp(0) with time zone,
-    notification_validity_date timestamp(0) with time zone,
-    acknowledge_date timestamp(0) with time zone,
-    insert_date timestamp(0) with time zone DEFAULT now() NOT NULL,
-    frt_fid bigint,
-    the_geom public.geometry,
-    filter integer,
-    CONSTRAINT enforce_dims_the_geom CHECK ((public.st_ndims(the_geom) = 2)),
-    CONSTRAINT enforce_geotype_the_geom CHECK (((public.geometrytype(the_geom) = 'POINT'::text) OR (the_geom IS NULL))),
-    CONSTRAINT enforce_srid_the_geom CHECK ((public.st_srid(the_geom) = 25832))
-);
-
-
---
--- TOC entry 184 (class 1259 OID 1091630)
--- Dependencies: 185 7
--- Name: vehicle_track_vt_id_seq; Type: SEQUENCE; Schema: vdv; Owner: -
---
-
-CREATE SEQUENCE vehicle_track_vt_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- TOC entry 3813 (class 0 OID 0)
--- Dependencies: 184
--- Name: vehicle_track_vt_id_seq; Type: SEQUENCE OWNED BY; Schema: vdv; Owner: -
---
-
-ALTER SEQUENCE vehicle_track_vt_id_seq OWNED BY vehicle_track.vt_id;
-
-
---
 -- TOC entry 3715 (class 2604 OID 985341)
 -- Dependencies: 182 181
 -- Name: id; Type: DEFAULT; Schema: vdv; Owner: -
 --
 
 ALTER TABLE ONLY ort_edges ALTER COLUMN id SET DEFAULT nextval('ort_edges_id_seq'::regclass);
-
-
---
--- TOC entry 3726 (class 2604 OID 1091635)
--- Dependencies: 185 184 185
--- Name: vt_id; Type: DEFAULT; Schema: vdv; Owner: -
---
-
-ALTER TABLE ONLY vehicle_track ALTER COLUMN vt_id SET DEFAULT nextval('vehicle_track_vt_id_seq'::regclass);
 
 
 --
@@ -1054,15 +958,6 @@ ALTER TABLE ONLY menge_fgr
 ALTER TABLE ONLY menge_tagesart
     ADD CONSTRAINT menge_tagesart_pkey PRIMARY KEY (tagesart_nr);
 
-
---
--- TOC entry 3789 (class 2606 OID 1178195)
--- Dependencies: 192 192 3806
--- Name: ort_edges_new_pkey; Type: CONSTRAINT; Schema: vdv; Owner: -
---
-
-ALTER TABLE ONLY ort_edges_new
-    ADD CONSTRAINT ort_edges_new_pkey PRIMARY KEY (id);
 
 
 --
@@ -1165,14 +1060,6 @@ ALTER TABLE ONLY vehicle_position_act
     ADD CONSTRAINT vehicle_position_act_pkey PRIMARY KEY (frt_fid);
 
 
---
--- TOC entry 3787 (class 2606 OID 1091644)
--- Dependencies: 185 185 3806
--- Name: vehicle_tracks_july_pkey; Type: CONSTRAINT; Schema: vdv; Owner: -
---
-
-ALTER TABLE ONLY vehicle_track
-    ADD CONSTRAINT vehicle_tracks_july_pkey PRIMARY KEY (vt_id);
 
 
 --
@@ -1290,24 +1177,6 @@ CREATE INDEX sel_fzt_feld_onr_typ_nr_ort_nr_idx ON sel_fzt_feld USING btree (onr
 --
 
 CREATE INDEX sel_fzt_feld_sel_ziel_typ_sel_ziel_idx ON sel_fzt_feld USING btree (sel_ziel_typ, sel_ziel);
-
-
---
--- TOC entry 3784 (class 1259 OID 1091645)
--- Dependencies: 185 3806
--- Name: vehicle_track_frt_fid_idx; Type: INDEX; Schema: vdv; Owner: -
---
-
-CREATE INDEX vehicle_track_frt_fid_idx ON vehicle_track USING btree (frt_fid);
-
-
---
--- TOC entry 3785 (class 1259 OID 1091646)
--- Dependencies: 185 3806
--- Name: vehicle_track_notification_date; Type: INDEX; Schema: vdv; Owner: -
---
-
-CREATE INDEX vehicle_track_notification_date ON vehicle_track USING btree (notification_date);
 
 
 --
