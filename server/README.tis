@@ -1,0 +1,13 @@
+Installation of serverside:
+- clone git repository to your local git
+- have php and web server installed 
+- php5-pgsql
+- go to the server folder
+- deploy web as your root folder in apache rootfolder
+- configure .htaccess
+- activate apache2 module rewrite
+- configure apache to allow htaccess files
+- the easiest way to make it run on apache is to set the owner of the app folder to www-data
+- install a2enmod rewrite
+- install mapserver (i did it like this): sudo apt-get install cgi-mapserver mapserver-bin php5-mapscript http://gis.stackexchange.com/questions/112609/problems-while-installing-mapserver-on-ubuntu
+- go to src/R3Gis/RealTimeBusBundle/Resources/config/lines_mapfile.map and modify connection to db on line 52

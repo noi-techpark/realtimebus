@@ -1,0 +1,29 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_pgsql
+    database_host: 127.0.0.1
+    database_port: 5432
+    database_name: realtimebus
+    database_user: integreen
+    database_password: integreen123
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt
+
+# data specific for the communication with VDV 
+# SRID used in the database
+    vdv.srid: 25832
+# default for import data
+    vdv.import.srid: 4326
+    vdv.import.max_speed: 40
+    vdv.import.tables: [MENGE_FGR,  REC_ORT, SEL_FZT_FELD, REC_LID, LID_VERLAUF, MENGE_TAGESART, FIRMENKALENDER, REC_FRT, REC_FRT_HZT, REC_FRT_FZT]
+
+    realtimebus.map.srid: 25832
+    # fetch stops, etc for at max seconds
+    realtimebus.timetable.time_horizon: 43200
+    # show at most n stops for a bus
+    realtimebus.timetable.next_stops_limit: 10
+

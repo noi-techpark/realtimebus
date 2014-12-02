@@ -1,10 +1,9 @@
 Proj4js.defs["EPSG:25832"] = "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs";
 Proj4js.defs["EPSG:3857"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs";
-
 var SASABus = {
 
     config: {
-        r3EndPoint: 'http://sasatest.r3-gis.com/',
+        r3EndPoint: 'http://realtimebus/',
         //r3EndPoint: 'http://sasabus.ph.r3-gis/',
         //r3EndPoint: 'http://sasabus.r3-gis/',
         busPopupSelector: '#busPopup',
@@ -42,13 +41,12 @@ var SASABus = {
         me.config.mapDivId = targetDivId;
         
         var mapOptions = {
-            //projection: new OpenLayers.Projection("EPSG:25832"),
-            projection: new OpenLayers.Projection("EPSG:3857"),
-//            maxExtent: new OpenLayers.Bounds(650000, 5135000, 700000, 5185000),
-//            controls: [new OpenLayers.Control.Attribution(), new OpenLayers.Control.Navigation()],
-//            resolutions: [264.5831904584105,176.38879363894034,88.19439681947017,35.27775872778806,17.63887936389403,8.819439681947015,3.527775872778806,1.763887936389403,0.7055551745557613,0.35277758727788067,0.17638879363894033,0.07055551745557613,0.035277758727788065,0.017638879363894033],
-//            fractionalZoom: false,
-//            units: 'm'
+            projection: new OpenLayers.Projection("EPSG:25832"),
+            maxExtent: new OpenLayers.Bounds(650000, 5135000, 700000, 5185000),
+            controls: [new OpenLayers.Control.Attribution(), new OpenLayers.Control.Navigation()],
+            resolutions: [264.5831904584105,176.38879363894034,88.19439681947017,35.27775872778806,17.63887936389403,8.819439681947015,3.527775872778806,1.763887936389403,0.7055551745557613,0.35277758727788067,0.17638879363894033,0.07055551745557613,0.035277758727788065,0.017638879363894033],
+            fractionalZoom: false,
+            units: 'm'
         };
         me.map = new OpenLayers.Map(targetDivId, mapOptions);
 
@@ -78,17 +76,17 @@ var SASABus = {
         me.locationLayer = new OpenLayers.Layer.Vector('Geolocation layer', {
             styleMap: styleMap
         });
-	var matrixIds = new Array(15); 
+                var matrixIds = new Array(15); 
 	for (var i=0; i<16; ++i) {
 		 matrixIds[i] = "GoogleMapsCompatible:" + i; 
 	} 
         var wmts = new OpenLayers.Layer.WMTS({ 
 
-		 name: "BACKGROUND", 
+		 name: "Trails", 
 
 		 url: "http://sdi.provinz.bz.it/geoserver/gwc/service/wmts/", 
 
-		 layer: "WMTS_BASEMAP_APB-PAB", 
+		 layer: "WMTS_TRAILS_APB-PAB", 
 
 		 matrixSet: "GoogleMapsCompatible", 
 
@@ -98,24 +96,70 @@ var SASABus = {
 
 		 style: "default", 
 
-		 opacity: 1, 
+		 opacity: 0.75, 
 
-		 isBaseLayer: true 
+		 isBaseLayer: false 
 
-	 }); 
+	 });
+	//TODO:Add province coordinates as layer
+/*	$.get("http://localhost:8080/parkingFrontEnd/rest/get-address",function(data){
+		
+		var ad = JSON.parse(data);
+		console.log(ad);
+		var start = ad.AddressCandidates.candidates[0];
+		var end = ad.AddressCandidates.candidates[3];
+		var data={ 
+			route : { 
+				start_point : { 
+					coordinate : [ start.location.x, start.location.y ] 
+				 }, 
+				 end_point : { 
+					 coordinate : [ end.location.x, end.location.y ] 
+				 }, 
+				 int_point : { 
+					 coordinates : [] 
+				 } 
+			 } 
+		};
+ 		var jd = JSON.stringify(data); 
+		getPoints(jd);
+	}); 	
+	function getPoints(jd){
+		$.post( "http://localhost:8080/parkingFrontEnd/rest/get-points",jd, function( data ) {
+			var route = JSON.parse(data);
+	    		var points = [];
+			var coordinates = route.route.path.coordinates;
+			var epsg3857=new OpenLayers.Projection("EPSG:3857");
+			var projectTo=me.map.getProjectionObject();
+			for (i in coordinates){
+				if (coordinates[i].coordinate!=undefined){
+					points.push(new OpenLayers.Geometry.Point(coordinates[i].coordinate[0],coordinates[i].coordinate[1] ).transform(epsg3857, projectTo));
+				}
+			}
+			var vectorLayer = new OpenLayers.Layer.Vector("Route");
+    
+				
+		    	var feature = new OpenLayers.Feature.Vector(
+        			new OpenLayers.Geometry.LineString(points)
+			);
+	    		vectorLayer.addFeatures(feature);
+	        	me.map.addLayer(vectorLayer);
+        		//me.map.zoomToExtent(vectorLayer.getDataExtent());
+		});
+	} */
+	me.map.addControl(new OpenLayers.Control.LayerSwitcher()); 
 
-        me.map.addLayers([wmts]);
+        me.map.addLayers([osm,me.linesLayer, me.stopsLayer, me.positionLayer, me.locationLayer]);
         
- //       var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000);
- //       me.map.zoomToExtent(merano);
-        me.map.zoomToMaxExtent();
+        var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000);
+        me.map.zoomToExtent(merano);
+        //me.map.zoomToMaxExtent();
         
         var control = new OpenLayers.Control.SelectFeature([me.positionLayer, me.stopsLayer]);
         control.events.register('beforefeaturehighlighted', me, me.handleSelectedFeature);
         me.map.addControl(control);
         control.activate();
-        me.map.setCenter(new OpenLayers.LonLat(1280000, 5870000), 11); 
- 
+        
         me.showLines(['all']);
         
         setTimeout(function() {
