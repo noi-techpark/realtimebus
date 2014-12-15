@@ -79,8 +79,11 @@ var SASABus = {
         
         me.map.addLayers([osm, me.linesLayer, me.stopsLayer, me.positionLayer, me.locationLayer]);
         
-        var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000);
+       	/* var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000);
         me.map.zoomToExtent(merano);
+		*/
+		var bolzano = new OpenLayers.Bounds(676000, 5148500, 681100, 5153500);
+        me.map.zoomToExtent(bolzano);
         //me.map.zoomToMaxExtent();
         
         var control = new OpenLayers.Control.SelectFeature([me.positionLayer, me.stopsLayer]);
