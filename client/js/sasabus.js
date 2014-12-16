@@ -3,7 +3,7 @@ Proj4js.defs["EPSG:25832"] = "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs"
 var SASABus = {
 
     config: {
-        r3EndPoint: 'http://sasatest.r3-gis.com/',
+        r3EndPoint: 'http://realtimebus.tis.bz.it/',
         //r3EndPoint: 'http://sasabus.ph.r3-gis/',
         //r3EndPoint: 'http://sasabus.r3-gis/',
         busPopupSelector: '#busPopup',

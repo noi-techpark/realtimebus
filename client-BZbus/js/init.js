@@ -12,19 +12,24 @@ li_r,li_g,li_b: colore RGB
 
 device = detectDevice();
 
-codificaLinee['1'] = 0;
-codificaLinee['2'] = 0;
-codificaLinee['3'] = 0;
-codificaLinee['4'] = 0;
-codificaLinee['6'] = 0;
-codificaLinee['146'] = 0;
+codificaLinee['16'] = 0;
+codificaLinee['1001'] = 0;
+codificaLinee['1003'] = 0;
+codificaLinee['1005'] = 0;
+codificaLinee['1006'] = 0;
+codificaLinee['1008'] = 0;
+codificaLinee['1009'] = 0;
+codificaLinee['1011'] = 0;
+codificaLinee['1012'] = 0;
+codificaLinee['1014'] = 0;
+codificaLinee['1071'] = 0;
+codificaLinee['1072'] = 0;
+codificaLinee['1101'] = 0;
+codificaLinee['1102'] = 0;
+codificaLinee['1153'] = 0;
 
-codificaLinee['211'] = 1;
-codificaLinee['201'] = 1;
-codificaLinee['212'] = 1;
-codificaLinee['213'] = 1;
-codificaLinee['214'] = 1;
-codificaLinee['225'] = 1;
+codificaLinee['201'] = 0;
+codificaLinee['183'] = 0;
 
 if(device[0] == 'smartphone'){
 	SASABus.config.rowsLimit = 2;

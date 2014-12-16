@@ -349,7 +349,6 @@ function initLinesAfterRead(lines)
 		var el2 = pad((''+b['li_nr']).replace(' ','_'),5)+b['str_li_var'].replace(' ','_');
 		return el1-el2;
 	});
-	//console.log(lines);
 	// devo montare l'html 
 	
 	var htmlLineeU = new Array();
@@ -357,15 +356,18 @@ function initLinesAfterRead(lines)
 	mapLinesInit = new Array();
 	for(var i=0;i<lines.length;i++)
 	{
+		if (lines[i].lidname=='10A' || lines[i].lidname=='10B')
+			console.log(lines[i]);
 		var linea = new Array();
 		var k = 0;
 		var codLinea = (''+lines[i]['li_nr']).replace(' ','_');
 		var codVariante = lines[i]['str_li_var'].replace(' ','_');
 		var nomeLinea = lines[i]['lidname'];
 		var nomeVariante = lines[i]['str_li_var'];
+		var color = 'rgb('+lines[i].li_r+','+lines[i].li_g+','+lines[i].li_b+') ';
 		if(typeof htmlLineeU[codLinea] == 'undefined' && typeof htmlLineeE[codLinea] == 'undefined')
 		{
-			linea[k++] = '<li class="tick-list"><p class="line l-'+codLinea+'"><strong class="line-no" id="l_'+codLinea+'">'+nomeLinea+'</strong>';
+			linea[k++] = '<li class="tick-list"><p class="line l-'+codLinea+'"><strong class="line-no" id="l_'+codLinea+'">'+nomeLinea+'</strong><span class="icon" style="background-color:'+color+'" />';
 			linea[k++] = '';
 			linea[k++] = '</p>';
 			linea[k++] = '<ul class="child-tick">';
@@ -420,7 +422,7 @@ function initLinesAfterRead(lines)
 	//console.log('Extra');
 	//console.log(htmlL);
 	$('#extra').html(htmlL);
-	SASABus.getLines(showLinesAfterRead);
+	SASABus.getLines(showLinesAfterRead(lines));
 }
 
 function stopPropagationCustom(){
@@ -439,7 +441,7 @@ function showLinesAfterRead(lines){
 	$(".tab-content").hide();
 	$('#variants .tabs li:first').addClass('active');
 	$("#variants .tab-content:first").show();
-	$("#variants .tab-content .line").append('<span class="icon" />');
+	//$("#variants .tab-content .line").append('<span class="icon" />');
 	
 	$('.tabbed-content').each(function(){
 		$(this).find('.tabs li').click(function(){ 
