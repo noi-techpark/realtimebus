@@ -3,8 +3,7 @@ NAME "sasabus"
 SIZE 256 256	
 MAXSIZE 4096
 RESOLUTION 72
-#FONTSET ../../fonts/fonts.list
-
+CONFIG "MS_ERRORFILE" "/var/www/html/ms_error.txt"
 WEB
 	METADATA
         # for mapserver 6.0
@@ -31,6 +30,7 @@ END
 EXTENT 660000 5145000 690000 5175000
 
 LAYER
+	DEBUG 5
 	GROUP "g_lines"
 	NAME "g_lines.line"
 	TYPE LINE

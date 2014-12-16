@@ -11,3 +11,4 @@ Installation of serverside:
 - install a2enmod rewrite
 - install mapserver (i did it like this): sudo apt-get install cgi-mapserver mapserver-bin php5-mapscript http://gis.stackexchange.com/questions/112609/problems-while-installing-mapserver-on-ubuntu
 - go to src/R3Gis/RealTimeBusBundle/Resources/config/lines_mapfile.map and modify connection to db on line 52
+- import data of buslines by filling ORT_RECORDS following the vdv-Standard

@@ -3,7 +3,7 @@ Proj4js.defs["EPSG:3857"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0
 var SASABus = {
 
     config: {
-        r3EndPoint: 'http://realtimebus/',
+        r3EndPoint: 'http://realtimebus.tis.bz.it/',
         //r3EndPoint: 'http://sasabus.ph.r3-gis/',
         //r3EndPoint: 'http://sasabus.r3-gis/',
         busPopupSelector: '#busPopup',
@@ -59,7 +59,7 @@ var SASABus = {
             attribution: '<a target="_blank" href ="http://opendatacommons.org/licenses/odbl/summary/">ODbL</a> Openstreetmap e comunità'
         });
                 
-        me.linesLayer = new OpenLayers.Layer.WMS('SASA Linee', me.config.r3EndPoint + 'ogc/wms', {layers: 0, transparent: true}, {visibility: false, singleTile: true});
+        me.linesLayer = new OpenLayers.Layer.WMS('SASA Linee', me.config.r3EndPoint + 'ogc/wms', {layers: 0, transparent: true}, {visibility: true, singleTile: true});
         
         //if(permalink) attiva le linee del permalink
         
@@ -102,27 +102,32 @@ var SASABus = {
 
 	 });
 	//TODO:Add province coordinates as layer
-/*	$.get("http://localhost:8080/parkingFrontEnd/rest/get-address",function(data){
-		
+	/*$.get("http://localhost:8080/parkingFrontEnd/rest/get-address?location=Kurprom",function(data){
 		var ad = JSON.parse(data);
 		console.log(ad);
-		var start = ad.AddressCandidates.candidates[0];
-		var end = ad.AddressCandidates.candidates[3];
-		var data={ 
-			route : { 
-				start_point : { 
-					coordinate : [ start.location.x, start.location.y ] 
-				 }, 
-				 end_point : { 
-					 coordinate : [ end.location.x, end.location.y ] 
-				 }, 
-				 int_point : { 
-					 coordinates : [] 
-				 } 
-			 } 
-		};
- 		var jd = JSON.stringify(data); 
-		getPoints(jd);
+		var start = ad.AddressCandidates.candidates;
+		console.log(start);
+		$.get("http://localhost:8080/parkingFrontEnd/rest/get-address?location=Trauttma",function(data2){
+		
+                	var ad2 = JSON.parse(data2);
+	                var end = ad2.AddressCandidates.candidates;
+			console.log(end);
+                	var dataSet={
+                        	route : {
+                                	start_point : {
+                                        	coordinate : [ start.location.x, start.location.y ]
+	                                 },
+        	                         end_point : {
+                	                         coordinate : [ end.location.x, end.location.y ]
+                        	         },
+                                	 int_point : {
+                                        	 coordinates : [] 
+	                                 } 
+        	                 } 
+                	};
+	                var jd = JSON.stringify(dataSet); 
+        	        getPoints(jd);
+        	});
 	}); 	
 	function getPoints(jd){
 		$.post( "http://localhost:8080/parkingFrontEnd/rest/get-points",jd, function( data ) {
@@ -144,10 +149,10 @@ var SASABus = {
 			);
 	    		vectorLayer.addFeatures(feature);
 	        	me.map.addLayer(vectorLayer);
-        		//me.map.zoomToExtent(vectorLayer.getDataExtent());
+        		me.map.zoomToExtent(vectorLayer.getDataExtent());
 		});
 	} */
-	me.map.addControl(new OpenLayers.Control.LayerSwitcher()); 
+	//me.map.addControl(new OpenLayers.Control.LayerSwitcher()); 
 
         me.map.addLayers([osm,me.linesLayer, me.stopsLayer, me.positionLayer, me.locationLayer]);
         

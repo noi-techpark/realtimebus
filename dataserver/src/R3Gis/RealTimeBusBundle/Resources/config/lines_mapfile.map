@@ -4,7 +4,8 @@ SIZE 256 256
 MAXSIZE 4096
 RESOLUTION 72
 #FONTSET ../../fonts/fonts.list
-
+CONFIG "MS_ERRORFILE" "/home/pbertolla/ms_error.txt"
+	DEBUG 10
 WEB
 	METADATA
         # for mapserver 6.0
@@ -14,8 +15,6 @@ WEB
 		"wfs_encoding"	"UTF-8"
 		"wms_encoding"	"UTF-8"
 
-    	#"wms_onlineresource" "http://192.168.0.13/gc/author-pietro/public/services/ows.php?project=lecco&map=lecco_ubt"
-    	#"wfs_onlineresource" "http://192.168.0.13/gc/author-pietro/public/services/ows.php?project=lecco&map=lecco_ubt"
 		"wms_feature_info_mime_type"	"text/html"
 		"wfs_namespace_prefix"	"feature"
 		"wms_srs"	"EPSG:25832"
@@ -49,7 +48,7 @@ LAYER
 		"init=epsg:25832"
 	END
 	CONNECTIONTYPE POSTGIS
-	CONNECTION "user=sasabus password=sasabus dbname=sasabus host=127.0.0.1 port=5432"
+	CONNECTION "user=integreen password=integreen123 dbname=realtimebus host=127.0.0.1 port=5432"
 	DATA "the_geom FROM vdv.rec_lid USING UNIQUE li_nr USING SRID=25832"
 	PROCESSING "CLOSE_CONNECTION=DEFER"
 	DUMP TRUE
@@ -61,7 +60,7 @@ OUTPUTFORMAT
 	NAME "AGG Q"
 	DRIVER "AGG/PNG"
 	MIMETYPE "image/png"
-	IMAGEMODE RGB
+	IMAGEMODE RGBA
 	EXTENSION "png"
 	TRANSPARENT ON
 	FORMATOPTION "INTERLACE=OFF"
