@@ -27,6 +27,8 @@ function detectDevice(){
 			deviceCat = 'tablet';
 		}
 	}
+	//deviceCat = 'smartphone';   // da cancellare
+	//deviceName = 'desktop';		// da cancellare
 	var deviceRatio = window.devicePixelRatio;
 	var device = new Array(deviceCat,deviceName,windowMin,windowMax,orientation,deviceRatio); // deviceCat 0 - deviceName 1 - windowMin 2 - windowMax 3 - orientation 4 - deviceRatio 5
 	return device;

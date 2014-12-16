@@ -31,11 +31,12 @@ if(device[0] == 'smartphone'){
 	SASABus.setDialogWidth(260);
 	SASABus.config.pinToDialogDistance 	= 48;
 	SASABus.config.pinHeight			= 40;
-	SASABus.config.yOffset				= 60;
-	$('.map-body').append('<div id="serverTime"><span class="label">Time</span><span class="reload"></span></div>');
+	SASABus.config.yOffset				= 100;
+	$('#main').append('<div id="serverTime"><span class="label">Time</span><span class="reload"></span></div>');
 }
 if(device[0] == 'desktop'){
-	SASABus.config.yOffset				= 20;
+	SASABus.config.yOffset = 182; // 20
+	//SASABus.config.pinToDialogDistance 	= 48; // added
 	SASABus.setDialogWidth(300);
 	$('.panel').append('<div id="serverTime"><span class="label">Time</span> <span class="reload"></span></div>');
 }
