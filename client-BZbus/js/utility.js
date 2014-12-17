@@ -356,8 +356,8 @@ function initLinesAfterRead(lines)
 	mapLinesInit = new Array();
 	for(var i=0;i<lines.length;i++)
 	{
-		if (lines[i].lidname=='10A' || lines[i].lidname=='10B')
-			console.log(lines[i]);
+		//if (lines[i].lidname=='10A' || lines[i].lidname=='10B')
+			//console.log(lines[i]);
 		var linea = new Array();
 		var k = 0;
 		var codLinea = (''+lines[i]['li_nr']).replace(' ','_');
@@ -793,9 +793,9 @@ function showLinesAfterRead(lines){
 	}
 	SASABus.showLines(mapLines);
 
-	//console.log(mapLines); 
+	console.log(mapLines); 
 	$("#variants .tab-content .line").each(function(){
-		var line = $(this).find('.line-no').html();
+		var line = $(this).find('.line-no').attr('id').replace('l_','');
 		if(mapLines.containsSubStr(line+':'))
 			$(this).addClass('enabled close');
 		else
