@@ -50,7 +50,6 @@ GROUP BY rec_frt.li_nr, rec_frt.str_li_var, line_attributes.li_nr, lidname, li_r
 EOQ;
 	$res = $this->connection->prepare($selectStops);
 	$res->bindValue("city",'%'.$city.'%');
-        //$res = $this->connection->query($selectStops);
 	$res->execute();
         $lines = array();
         while ($row = $res->fetch(\PDO::FETCH_ASSOC)) {
@@ -59,7 +58,7 @@ EOQ;
         return $lines;
     }
     
-    public function getActiveLines($timeHorizon) {
+    public function getActiveLines($timeHorizon,$city) {
       
         // limit to ME lines, ATM
         $selectStops = <<<EOQ
@@ -75,11 +74,13 @@ LEFT JOIN vdv.line_attributes
 WHERE betriebstag=to_char(CURRENT_TIMESTAMP, 'YYYYMMDD')::integer
     AND CAST(CURRENT_DATE AS TIMESTAMP) AT TIME ZONE 'GMT+1' + frt_start * interval '1 seconds' > CURRENT_TIMESTAMP - interval '60 minutes'
     AND CAST(CURRENT_DATE AS TIMESTAMP) AT TIME ZONE 'GMT+1' + frt_start * interval '1 seconds' < CURRENT_TIMESTAMP + interval '$timeHorizon seconds'
-    AND rec_lid.li_kuerzel LIKE '%ME%'
+    AND rec_lid.li_kuerzel LIKE :city
 GROUP BY rec_frt.li_nr, rec_frt.str_li_var, line_attributes.li_nr, lidname, li_ri_nr
 EOQ;
         
-        $res = $this->connection->query($selectStops);
+	$res = $this->connection->prepare($selectStops);
+	$res->bindValue("city",'%'.$city.'%');
+	$res->execute();
         $lines = array();
         while ($row = $res->fetch(\PDO::FETCH_ASSOC)) {
             $lines[] = $row;

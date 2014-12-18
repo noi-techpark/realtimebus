@@ -99,10 +99,7 @@ class TimeTableDataController extends Controller {
      */
     public function fetchAllLinesAction(Request $request) {
         $callbackFunction = $request->query->get('jsonp');
-	$logger = $this->get('logger');
 	$city = $request->query->get('city');
-	$logger->info('I just got the logger');
-
         $linesFinder = new LinesFinder($this->get('doctrine')->getConnection());
         return ControllerUtils::jResponse($linesFinder->getAllLines($city), $callbackFunction);
     }
@@ -113,9 +110,10 @@ class TimeTableDataController extends Controller {
      */
     public function fetchLinesAction(Request $request) {
         $callbackFunction = $request->query->get('jsonp');
+	$city = $request->query->get('city');
         $timeHorizon = $this->container->getParameter('realtimebus.timetable.time_horizon');
         $conn = $this->get('doctrine')->getConnection();
         $linesFinder = new LinesFinder($conn);
-        return ControllerUtils::jResponse($linesFinder->getActiveLines($timeHorizon), $callbackFunction);
+        return ControllerUtils::jResponse($linesFinder->getActiveLines($timeHorizon,$city), $callbackFunction);
     }
 }
