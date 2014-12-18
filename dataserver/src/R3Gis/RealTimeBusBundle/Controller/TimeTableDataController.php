@@ -99,9 +99,12 @@ class TimeTableDataController extends Controller {
      */
     public function fetchAllLinesAction(Request $request) {
         $callbackFunction = $request->query->get('jsonp');
+	$logger = $this->get('logger');
+	$city = $request->query->get('city');
+	$logger->info('I just got the logger');
 
         $linesFinder = new LinesFinder($this->get('doctrine')->getConnection());
-        return ControllerUtils::jResponse($linesFinder->getAllLines(), $callbackFunction);
+        return ControllerUtils::jResponse($linesFinder->getAllLines($city), $callbackFunction);
     }
 
     /**

@@ -34,7 +34,7 @@ class LinesFinder {
         $this->connection = $connection;
     }
 
-    public function getAllLines() {
+    public function getAllLines($city) {
 
         // limit to ME lines, ATM
         $selectStops = <<<EOQ
@@ -45,10 +45,13 @@ LEFT JOIN vdv.rec_lid
     AND rec_frt.str_li_var=rec_lid.str_li_var
 LEFT JOIN vdv.line_attributes
     ON rec_frt.li_nr=line_attributes.li_nr
-WHERE rec_lid.li_kuerzel LIKE '%ME%'
+WHERE rec_lid.li_kuerzel LIKE :city
 GROUP BY rec_frt.li_nr, rec_frt.str_li_var, line_attributes.li_nr, lidname, li_ri_nr
 EOQ;
-        $res = $this->connection->query($selectStops);
+	$res = $this->connection->prepare($selectStops);
+	$res->bindValue("city",'%'.$city.'%');
+        //$res = $this->connection->query($selectStops);
+	$res->execute();
         $lines = array();
         while ($row = $res->fetch(\PDO::FETCH_ASSOC)) {
             $lines[] = $row;

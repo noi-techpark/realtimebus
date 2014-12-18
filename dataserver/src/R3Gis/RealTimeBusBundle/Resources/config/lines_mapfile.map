@@ -49,7 +49,7 @@ LAYER
 		"init=epsg:25832"
 	END
 	CONNECTIONTYPE POSTGIS
-	CONNECTION "user=sasabus password=sasabus dbname=sasabus host=127.0.0.1 port=5432"
+	CONNECTION "user=integreen password=integreen123 dbname=realtimebus host=127.0.0.1 port=5432"
 	DATA "the_geom FROM vdv.rec_lid USING UNIQUE li_nr USING SRID=25832"
 	PROCESSING "CLOSE_CONNECTION=DEFER"
 	DUMP TRUE
