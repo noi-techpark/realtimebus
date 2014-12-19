@@ -3,6 +3,7 @@ Proj4js.defs["EPSG:25832"] = "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs"
 var SASABus = {
 
     config: {
+	city:'ME',
         r3EndPoint: 'http://realtimebus/',
         //r3EndPoint: 'http://sasabus.ph.r3-gis/',
         //r3EndPoint: 'http://sasabus.r3-gis/',
@@ -130,7 +131,7 @@ var SASABus = {
         $.ajax({
             type: 'GET',
             crossDomain: true,
-            url: this.config.r3EndPoint + 'lines?city=ME',
+            url: this.config.r3EndPoint + 'lines?city='+this.config.city,
             dataType: 'jsonp',
             jsonp: 'jsonp',
             success: function(response, status, xhr) {
@@ -173,7 +174,7 @@ var SASABus = {
         $.ajax({
             type: 'GET',
             crossDomain: true,
-            url: this.config.r3EndPoint + 'lines/all?city=BZ',
+            url: this.config.r3EndPoint + 'lines/all?city='+this.config.city,
             dataType: 'jsonp',
             jsonp: 'jsonp',
             success: function(response, status, xhr) {
