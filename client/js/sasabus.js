@@ -4,7 +4,7 @@ var SASABus = {
 
     config: {
 	city:'ME',
-        r3EndPoint: 'http://realtimebus/',
+        r3EndPoint: 'http://realtimebus.tis.bz.it/',
         //r3EndPoint: 'http://sasabus.ph.r3-gis/',
         //r3EndPoint: 'http://sasabus.r3-gis/',
         busPopupSelector: '#busPopup',
@@ -131,7 +131,8 @@ var SASABus = {
         $.ajax({
             type: 'GET',
             crossDomain: true,
-            url: this.config.r3EndPoint + 'lines?city='+this.config.city,
+            //url: this.config.r3EndPoint + 'lines?city='+this.config.city,
+            url: this.config.r3EndPoint + 'lines',
             dataType: 'jsonp',
             jsonp: 'jsonp',
             success: function(response, status, xhr) {
@@ -168,13 +169,14 @@ var SASABus = {
     getAllLines: function(success, failure, scope) {
         scope = scope || null;
         failure = failure || function() {};
-        if(!success) return console.log('success callback is mandatory when calling getLines');
+        if(!success) return console.log('success callback is mandatory when calling getAllLines');
         //if(this.lines) return success.call(scope, this.lines);
         
         $.ajax({
             type: 'GET',
             crossDomain: true,
-            url: this.config.r3EndPoint + 'lines/all?city='+this.config.city,
+            //url: this.config.r3EndPoint + 'lines/all?city='+this.config.city,
+            url: this.config.r3EndPoint + 'lines/all',
             dataType: 'jsonp',
             jsonp: 'jsonp',
             success: function(response, status, xhr) {

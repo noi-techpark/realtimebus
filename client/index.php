@@ -22,6 +22,8 @@
     <head>
         <meta charset="utf-8" />
         <title><?php ___("meranotitle"); ?></title>
+        <link rel="icon" href="favicon.ico" type="image/x-icon"> 
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <!--[if IE]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -140,7 +142,7 @@
 	            <footer id="footer-1" class="footer">
 	                <ul class="logos">
 	                    <li class="merano"><a target="_blank" href="<?php ___('linkmerano'); ?>"><?php ___('merano'); ?></a></li>
-	                    <li class="tis"><a target="_blank" href="<?php ___('linktis'); ?>">TIS - Innovation Park</a></li>
+	                    <li class="tis"><a target="_blank" href="<?php ___('linktis'); ?>">TIS innovation park South Tyrol</a></li>
 	                    <li class="sasa"><a target="_blank" href="<?php ___('linksasa'); ?>">SASA Bus</a></li>
 	                </ul>
 	            </footer>
