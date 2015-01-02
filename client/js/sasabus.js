@@ -57,7 +57,8 @@ var SASABus = {
             visibility: true,
             tileOrigin: new OpenLayers.LonLat(602000, 5120000),
             opacity: 0.75,
-            attribution: '<a target="_blank" href ="http://opendatacommons.org/licenses/odbl/summary/">ODbL</a> Openstreetmap e comunità'
+            // attribution is added as #credits tag
+            //attribution: '<a target="_blank" href ="http://opendatacommons.org/licenses/odbl/summary/">ODbL</a> OpenStreetMap and Community'
         });
                 
         me.linesLayer = new OpenLayers.Layer.WMS('SASA Linee', me.config.r3EndPoint + 'ogc/wms', {layers: 0, transparent: true}, {visibility: false, singleTile: true});
