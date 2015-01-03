@@ -107,30 +107,30 @@
 							</ul>
 						</div>
 					</div>
-				</div>
-				<div class="panel-content-out">
-					<div class="scroll" id="scroll">
-						<div class="scroll-content">
-							<div class="panel-content">
-								<div id="variants">
-									<div class="tabbed-content">
-										<ul class="tabs">
-											<li class="button"><?php ___('urbani'); ?></li>
-											<li class="button"><?php ___('extraurbani'); ?></li>
-										</ul>
-										<span id="deselectall"> <span><?php ___('deselectall'); ?></span> </span>
-										<div class="tab-container">
-											<div class="tab-content">
-												<ul class="tick" id="urbani">
-													<li class="tick-list"></li>
-												</ul>
-											</div>
-											<div class="tab-content">
-												<ul class="tick" id="extra">
-													<li class="tick-list"></li>
-												</ul>
-											</div>
-										</div>
+					<div class="panel-content-out">
+						<div class="scroll" id="scroll">
+			            	<div class="scroll-content">
+								<div class="panel-content">
+									<div id="variants">
+					                    <div class="tabbed-content">
+					                    	<ul class="tabs">
+					                    		<li class="button"><?php ___('urbani'); ?></li>
+					                    		<li class="button"><?php ___('extraurbani'); ?></li>
+					                    	</ul>
+		<span id="deselectall"> <span><?php ___('deselectall'); ?></span> </span>
+								<div class="tab-container">
+						                    	<div class="tab-content">
+						                    		<ul class="tick" id="urbani">
+						                    			<li class="tick-list"></li>
+						                    		</ul>
+						                    	</div>
+						                    	<div class="tab-content">
+						                    		<ul class="tick" id="extra">
+						                    			<li class="tick-list"></li>
+						                    		</ul>
+						                    	</div>
+					                    	</div>
+					                    </div>
 									</div>
 								</div>
 							</div>
