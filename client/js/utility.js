@@ -466,7 +466,7 @@ function showLinesAfterRead(lines){
 	
 	$('#variants ul.child-tick').hide();
 	
-	$('#uncheckall').bind('touchstart click', function(){
+	$('#deselectall').bind('touchstart click', function(){
 		if($(this).hasClass('disabled')){
 				return
 			}else{
@@ -497,7 +497,7 @@ function showLinesAfterRead(lines){
 						}
 					}
 				});
-				$('#uncheckall').addClass('disabled');
+				$('#deselectall').addClass('disabled');
 			}
 	});
 
@@ -508,9 +508,9 @@ function showLinesAfterRead(lines){
 		{
 			$(this).find('.line').toggleClass('enabled');
 			if($('.line.enabled').length){
-				$('#uncheckall').removeClass('disabled');
+				$('#deselectall').removeClass('disabled');
 			}else{
-				$('#uncheckall').addClass('disabled');
+				$('#deselectall').addClass('disabled');
 			}
 			//console.log($(this).parent('.line').attr('class'));
 			var isEnable = $(this).find('.line').attr('class').indexOf('enabled')>=0;

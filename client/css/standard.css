@@ -130,10 +130,10 @@ a{color:#c0c0c0;text-decoration:none}
 	#variants .child-tick li span{display:block;position:absolute;top:0;left:0;width:31px;height:29px;background:url(../images/ico-check.png) 7px 8px no-repeat;border-right:1px solid #f4f4f4}
 	#variants .child-tick li.ticked span{background-position:7px -16px}
 
-#uncheckall{float:left;width:auto;padding:4px 0 4px 0;margin-bottom:6px;cursor:pointer;color:#666}
-	#uncheckall span{color:#9fa505}
-	#uncheckall.disabled{color:#d3d3d3;cursor:auto}
-	#uncheckall.disabled span{color:#d3d3d3}
+#deselectall{float:left;width:auto;padding:4px 0 4px 0;margin-bottom:6px;cursor:pointer;color:#666}
+	#deselectall span{color:#9fa505}
+	#deselectall.disabled{color:#d3d3d3;cursor:auto}
+	#deselectall.disabled span{color:#d3d3d3}
 
 .panel-content-out{width:100%;position:absolute;top:68px;left:0;bottom:90px;}
 

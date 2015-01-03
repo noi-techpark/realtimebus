@@ -116,13 +116,9 @@
 					                    	<ul class="tabs">
 					                    		<li class="button"><?php ___('urbani'); ?></li>
 					                    		<li class="button"><?php ___('extraurbani'); ?></li>
-					                    	</ul>											
-												<?php if($lang!='de') {?> 
-													<span id="uncheckall"><span><?php ___('deseleziona'); ?></span> <?php ___('tuttelelinee'); ?></span>
-												<?php } else { ?>
-													<span id="uncheckall"><?php ___('tuttelelinee'); ?> <span><?php ___('deseleziona'); ?></span></span>
-												<?php } ?>
-												<div class="tab-container">
+					                    	</ul>
+		<span id="deselectall"> <span><?php ___('deselectall'); ?></span> </span>
+								<div class="tab-container">
 						                    	<div class="tab-content">
 						                    		<ul class="tick" id="urbani">
 						                    			<li class="tick-list"></li>
