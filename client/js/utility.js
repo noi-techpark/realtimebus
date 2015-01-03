@@ -662,7 +662,8 @@ function showLinesAfterRead(lines){
 	// ---- Map Panel   ----------------------------------------------------------------------------------------------------------
 	
 		
-	$('#main span.btn-toggle').click(function(){
+	//$('#main span.btn-toggle').click(function(){
+	$('span.btn-toggle').click(function(){
 		if($(this).hasClass('open')){
 			$('div.panel').animate({
 				'left'	:	'-375px'

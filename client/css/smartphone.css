@@ -5,6 +5,7 @@ div.olMap{width:100%;height:100%}
 
 .panel .header{width:100%;height:43px;padding:0;background:#434343;border-bottom:0}
 .panel .header .aux{margin:0 auto;width:92%;position:relative;height:43px}
+
 .panel .header .btn-toggle{display:none}
 
 #logo{top:10px;left:0;background:url(../images/logo-small.gif) 0 0 no-repeat;width:194px;height:23px}
@@ -78,13 +79,6 @@ div.olMap{width:100%;height:100%}
 .footer{display:none}
 
 
-#zoomButtons{top:auto;bottom:29px;right:10px}
-
-#serverTime{z-index:5000;height:32px;width:45px;bottom:29px;left:52px;right:auto;padding:0 0 0 0;font-weight:bold;font-size:0.75em;position:absolute;text-align:center;background:#fff;z-index:999;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;color:#bdbfbc;text-transform:uppercase;border:0;box-shadow:0 0 2px 0 #000;/*border:1px solid #90928f;box-shadow:0 0 -2px 0 #000;*/-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";filter:alpha(opacity=90);opacity:0.9}
-	#serverTime span{font-size:0.75em;color:#8a8a8a;margin:0 0 3px 0;padding:4px 0 0 0;display:block;width:100%}
-	#serverTime .reload{color:#6a6a68;font-size:1.35em;padding:0}
-
-
 #stopPopup,#busPopup{width:260px}
 #stopPopup table,#busPopup table{width:260px}
 #stopPopup .bus{padding-left:40px;background:#fbfbfb url(../images/ico-bus.png) 13px -473px no-repeat}
@@ -113,6 +107,10 @@ div.olMap{width:100%;height:100%}
 	#busPopup .c-213{background-position:208px -473px}
 	#busPopup .c-215{background-position:208px -526px}
 	#busPopup .c-231{background-position:208px -578px}
-	
-#zoomToMyPosition{box-shadow:0 0 2px 0 #000;z-index:1400;position:absolute;bottom:29px;left:10px;width:32px;height:32px;display:block;cursor:pointer;background: #fff url(../images/ico-locate.png) center center no-repeat;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;opacity:0.9}
+
+#serverTime{display:none}
+
+#zoomButtons{top:auto;bottom:70px;right:5px}
+
+#zoomToMyPosition{right:5px}
 
