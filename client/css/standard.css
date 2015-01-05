@@ -32,6 +32,10 @@ a{color:#c0c0c0;text-decoration:none}
 
 /* ----------- STRUCTURE --------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
+.header-mobile{display:none}
+#logo-mobile{display:none}
+.beta-mobile{display:none}
+
 .panel{color:#bbbbbb;box-shadow:-15px 0px 15px 10px #aeaeae;width:375px;height:100%;position:absolute;top:0;left:0;background:#fafafa;z-index:1000}
 .header{border-bottom:1px solid #eae9e9;position:relative;background:#fff;width:100%;float:left;padding:35px 0 0 0;height:62px}
 #logo{position:absolute;top:35px;left:24px;width:324px;height:41px;display:block;background:url(../images/logo.gif) 0 0 no-repeat;text-indent:-9999px;font-size:0;line-height:0}
@@ -46,11 +50,14 @@ a{color:#c0c0c0;text-decoration:none}
 	.language-switcher li a{font-weight:normal;font-size:0.91em;color:#969696;text-transform:uppercase;text-align:center;width:25px;height:15px;padding-top:6px;display:block}
 	.language-switcher li a:hover{background:#f5f5f5}
 
-.btn-toggle{display:block;width:21px;height:28px;position:absolute;right:0;top:54px;background:url(../images/ico-arrow.png) 6px 7px no-repeat;cursor:pointer;border-radius:2px;-webkit-border-radius:3px;-moz-border-radius:3px}
+.btn-toggle{display:block;z-index:1500;width:21px;height:28px;
+	position:absolute;right:0;top:54px;
+	background:url(../images/ico-arrow.png) 6px 7px no-repeat;
+	cursor:pointer;border-radius:2px;-webkit-border-radius:3px;-moz-border-radius:3px}
 	.btn-toggle.open:hover{background-color:#f5f5f5}
 	.btn-toggle.close{background:url(../images/ico-arrow-close.png) 0 0 no-repeat;height:39px;width:32px}
 
-.main{width:100%;position:absolute;top:99px;left:0;bottom:0;z-index:0}
+.main{width:100%;position:absolute;top:99px;left:0;bottom:0}
 
 #search-container{float:left;width:100%}
 	.search-box{float:left;width:325px;padding:16px 25px 0;border-bottom:1px solid #e5e5e5;background:#f1f1f1}
@@ -148,7 +155,7 @@ a{color:#c0c0c0;text-decoration:none}
 	a#zoomInButton{border-bottom:1px solid #4e4f51;border-top-left-radius:2px;-webkit-border-top-left-radius:2px;-moz-border-top-left-radius:2px;border-top-right-radius:2px;-webkit-border-top-right-radius:2px;-moz-border-top-right-radius:2px}
 	a#zoomOutButton{bottom:0;top:auto;border-top:1px solid #636466;background-position:10px -22px;border-bottom-left-radius:2px;-webkit-border-bottom-left-radius:2px;-moz-border-bottom-left-radius:2px;border-bottom-right-radius:2px;-webkit-border-bottom-right-radius:2px;-moz-border-bottom-right-radius:2px}
 
-#zoomToMyPosition{box-shadow:0 0 2px 0 #000;z-index:1400;
+#zoomToMyPosition{box-shadow:0 0 2px 0 #000;z-index:1000;
 	position:absolute;bottom:30px;right:20px;
 	display:block;
 	width:32px;height:32px;
