@@ -5,9 +5,11 @@ div.olMap{width:100%;height:100%}
 .header-mobile{display:block;position:absolute;left:0px;top:0px;width:100%;height:43px;padding:0;background:#434343;border-bottom:0;box-shadow:0 0 0;z-index:1500}
 #logo-mobile{display:block;position:absolute;top:10px;left:5px;background:url(../images/logo-small.gif) 0 0 no-repeat;width:194px;height:23px;text-indent:-9999px;font-size:0;line-height:0}
 .beta-mobile{display:block;position:absolute;top:11px;left:205px;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;width:36px;height:20px;background:url(../images/ico-beta.gif) 0 0 no-repeat;font-size:0;line-height:0;text-indent:-9999px}
-.mobile-menu-btn{display:block;position:absolute;top:11px;right:10px;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;width:36px;height:20px;background:url(../images/ico-beta.gif) 0 0 no-repeat;font-size:0;line-height:0;text-indent:-9999px}
+.mobile-menu-btn{display:block;position:absolute;top:11px;right:5px;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;width:36px;height:20px;background:url(../images/ico-menu.png) 0 0 no-repeat;font-size:0;line-height:0;text-indent:-9999px}
 
-.panel{top:43px;left:auto;right:0px;width:375px;height:400px;box-shadow:0 0 0;z-index:1000}
+/*.panel{top:43px;left:auto;right:0px;width:375px;height:400px;box-shadow:0 0 0;z-index:1000}
+*/
+.panel{top:43px;left:auto;right:0px;bottom:0px;width:375px;height:auto;box-shadow:0 0 0;z-index:1000}
 .btn-toggle{display:none}
 
 .panel .header{display:none;width:100%;height:43px;padding:0;background:#434343;border-bottom:0}
@@ -56,71 +58,4 @@ div.olMap{width:100%;height:100%}
 #zoomButtons{top:auto;bottom:70px;right:5px}
 #zoomToMyPosition{right:5px}
 
-/* PO: main-menu is never used in index.php - is this some useless code copied from somewhere?
-
-.main-menu{position:absolute;top:0;right:0;width:33px;height:43px}
-.main-menu .menu-button{position:absolute;right:0;top:0;width:33px;height:43px;cursor:pointer;background:url(../images/ico-main-menu.gif) center center no-repeat;text-indent:-9999px;font-size:0;line-height:0}
-.main-menu ul{display:none;position:absolute;top:43px;right:0;float:right;background:#2e2e2e}
-.main-menu li{width:90px;background:url(../images/ico-main-menu-items.gif) 120px 12px no-repeat;color:#999999;font-size:1.16em;padding:15px 47px 12px 14px;border-bottom:1px solid #222222;border-top:1px solid #3a3a3a;white-space:nowrap}
-.main-menu li.first{border-top:0}
-.main-menu li.last{border-bottom:0}
-
-.main-menu li.menu-search{background-position:120px -29px}
-.main-menu li.menu-about{background-position:120px -68px}
-.main-menu li.menu-settings{background-position:120px -110px}
-*/
-
-/**
-.language-switcher .aux{width:92%;margin:0 auto;padding:20px 0 0 0}
-.language-switcher label{float:left;color:#535353;font-size:1.08em;font-weight:bold;padding:6px 0 0 0;margin:0 20px 0 0}
-.language-switcher ul{float:left}
-.language-switcher ul li{float:left;display:block;margin-right:5px;font-size:1.08em}
-.language-switcher li a{height:17px;width:27px}
-.language-switcher ul li.active{border:1px solid #585858}
-.language-switcher ul li.active a{background:#585858;color:#fff;font-weight:bold}
-
-.btn-toggle{display:none}
-
-.panel .main{display:none}
-
-.panel-content-out{display:none;width:100%}
-
-.panel-mobile{display:none;position:absolute;top:0;left:0;z-index:2000;background:#fafafa}
-
-.panel-mobile .scroll{width:100%}
-.panel-mobile .scroll-content{width:100%;float:left}
-.panel-mobile .iScrollVerticalScrollbar{top:13px}
-*/
-
-/** PO deactivate
-#variants{width:100%;padding:0}
-#variants .aux{margin:0 auto;width:92%}
-#variants .tabs{padding:13px 0 0 0}
-#variants .tabs li.button{background:none;height:auto;width:47%;margin:0;padding:0;border:0;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0}
-#variants .tabs li.button.last{float:right}
-#variants .tabs li.button.active{background:none}
-#variants .tabs li span{background:#FCFCFC;height:22px;border:1px solid #EEEEEE;padding:10px 10px 0 10px;display:block;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}
-.de #variants .tabs li span{height:31px;padding-top:5px}
-#variants .tabs li.button.active span{background:#585858;border:1px solid #585858}
-#variants .tabbed-content{width:100%}
-#variants .tick{width:31%}
-#variants .tick.listCol1,
-#variants .tick.listCol2{margin-right:3.5%}
-#variants .tick li{width:100%}
-#variants .line{width:auto}
-*/
-
-/*
-.panel-header{width:100%;height:34px;padding:9px 0 0 0;background:#434343}
-.panel-header .aux{width:92%;margin:0 auto}
-.language-switcher .panel-header .aux{padding:0}
-.panel-header h2{float:left;color:#919191;font-size:1.21em;padding:7px 0 0 0}
-.panel-header .close{font-size:1.08em;font-weight:bold;display:block;color:#b3b3b3;padding:7px 17px 0 17px;height:18px;float:right;background:#5f5d5d;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px}
-
-.search-box{padding:16px 0;width:100%;float:none;height:37px}
-.search-box #search-form{background:#fff;height:35px;width:92%;margin:0 auto;float:none;border:1px solid #E6E6E6;box-shadow:0 0 19px -5px #E2E2E2 inset}
-#search-field{width:70%;float:none;border:0;box-shadow:0 0 0}
-
-.search-box.result{display:none;width:92%;float:none;margin:0 auto;background:#fafafa;border:0}
-*/
 

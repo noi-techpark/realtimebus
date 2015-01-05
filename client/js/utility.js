@@ -20,6 +20,21 @@ Array.prototype.containsSubStr = function(obj) {
 	return false;
 }
 
+// logs the styleName value of the given element
+function println(elementID, styleName) {
+	console.log(elementID + "." + styleName + ": " + 
+		window.getComputedStyle(
+			document.getElementById(elementID)
+		).getPropertyValue(styleName)
+	);
+}
+
+function isSmartPhoneMode() {
+	println("header-mobile", "display");
+
+	return window.getComputedStyle(document.getElementById("header-mobile")).getPropertyValue("display") !== "none";
+}
+
 var mapLinesInit;
 var mapLines;
 var initialTop;
@@ -106,6 +121,8 @@ $(document).ready(function() {
 	function init(varOrientationChange){
 		console.log("init()");
 
+		var smartPhoneMode = isSmartPhoneMode();
+		console.log("smartPhoneMode: " + smartPhoneMode);
 	}
 	
 	function oneTime(device){
@@ -145,7 +162,11 @@ $(document).ready(function() {
 		});
 		
 		$('a[rel=external]').attr('target','_blank');
+	}
 
+	if (isSmartPhoneMode()) {
+		// on the smartphone the menu should be closed at first
+		$('div.panel').slideToggle();
 	}
 
 });
@@ -159,7 +180,6 @@ function pad(num, size) {
 function initLinesAfterRead(lines) { 
 	console.log('initLinesAfterRead');
 	//alert(lines.toSource())
-	
 
 	// sort lines
 	lines.sort(function(a,b){
@@ -255,14 +275,13 @@ function showLinesAfterRead(lines){
 	console.log('showLinesAfterRead');
 
 	// ---- Tabs ----------------------------------------------------------------------------------------------------------
-	
-	$('.child-tick').hide();
 
+	$('.child-tick').hide();
 	$(".tab-content").hide();
 	$('#variants .tabs li:first').addClass('active');
 	$("#variants .tab-content:first").show();
 	//$("#variants .tab-content .line").append('<span class="icon" />');
-	
+
 	$('.tabbed-content').each(function(){
 		$(this).find('.tabs li').click(function(){ 
 			tabbed_content = $(this).parents('.tabbed-content');
@@ -474,7 +493,6 @@ function showLinesAfterRead(lines){
 	$(window).resize(function(){
 		panelScroll();
 	});
-	
 
 	panelScroll();
 	
