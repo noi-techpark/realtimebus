@@ -20,21 +20,6 @@ Array.prototype.containsSubStr = function(obj) {
 	return false;
 }
 
-// logs the styleName value of the given element
-function println(elementID, styleName) {
-	console.log(elementID + "." + styleName + ": " + 
-		window.getComputedStyle(
-			document.getElementById(elementID)
-		).getPropertyValue(styleName)
-	);
-}
-
-function isSmartPhoneMode() {
-	println("header-mobile", "display");
-
-	return window.getComputedStyle(document.getElementById("header-mobile")).getPropertyValue("display") !== "none";
-}
-
 var mapLinesInit;
 var mapLines;
 var initialTop;
@@ -121,8 +106,6 @@ $(document).ready(function() {
 	function init(varOrientationChange){
 		console.log("init()");
 
-		var smartPhoneMode = isSmartPhoneMode();
-		console.log("smartPhoneMode: " + smartPhoneMode);
 	}
 	
 	function oneTime(device){
@@ -162,11 +145,6 @@ $(document).ready(function() {
 		});
 		
 		$('a[rel=external]').attr('target','_blank');
-	}
-
-	if (isSmartPhoneMode()) {
-		// on the smartphone the menu should be closed at first
-		$('div.panel').slideToggle();
 	}
 
 });
@@ -493,7 +471,7 @@ function showLinesAfterRead(lines){
 	$(window).resize(function(){
 		panelScroll();
 	});
-
+	
 	panelScroll();
 	
 	if(!$('body').hasClass('lte-8')){

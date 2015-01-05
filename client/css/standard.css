@@ -155,7 +155,7 @@ a{color:#c0c0c0;text-decoration:none}
 	a#zoomInButton{border-bottom:1px solid #4e4f51;border-top-left-radius:2px;-webkit-border-top-left-radius:2px;-moz-border-top-left-radius:2px;border-top-right-radius:2px;-webkit-border-top-right-radius:2px;-moz-border-top-right-radius:2px}
 	a#zoomOutButton{bottom:0;top:auto;border-top:1px solid #636466;background-position:10px -22px;border-bottom-left-radius:2px;-webkit-border-bottom-left-radius:2px;-moz-border-bottom-left-radius:2px;border-bottom-right-radius:2px;-webkit-border-bottom-right-radius:2px;-moz-border-bottom-right-radius:2px}
 
-#zoomToMyPosition{box-shadow:0 0 2px 0 #000;z-index:1400;
+#zoomToMyPosition{box-shadow:0 0 2px 0 #000;z-index:1000;
 	position:absolute;bottom:30px;right:20px;
 	display:block;
 	width:32px;height:32px;
