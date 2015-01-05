@@ -76,11 +76,11 @@
 		<header class="header-mobile" id="header-mobile">
 			<h1 id="logo-mobile">Merano real time bus</h1>
 			<span class="beta-mobile">Beta version</span>
-			<span class="mobile-menu-btn">Menu</span>
+			<span class="mobile-menu-btn" id="mobile-menu-btn">Menu</span>
 		</header>
 
             
-		<div class="panel">
+		<div class="panel" id="panel">
 			<header class="header" id="header">
 				<h1 id="logo">Merano real time bus</h1>
 				<span class="beta">Beta version</span>
@@ -92,7 +92,7 @@
 					</ul>
 				</nav>
 			</header>
-			<span class="btn-toggle open first"></span>
+			<span class="btn-toggle open first" id="btn-toggle"></span>
 			<main class="main" id="main">
 				<div id="search-container">
 					<div class="search-box">     			
