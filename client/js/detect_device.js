@@ -20,13 +20,15 @@ function detectDevice(){
 	if(!deviceName){
 		deviceName = 'desktop';
 		deviceCat = 'desktop';  
-	} else {
+	} 
+	else {
 		if(windowMin < 672){ //cambiare valore?
 			deviceCat = 'smartphone';
 		} else {
 			deviceCat = 'tablet';
 		}
 	}
+
 	var deviceRatio = window.devicePixelRatio;
 	var device = new Array(deviceCat,deviceName,windowMin,windowMax,orientation,deviceRatio); // deviceCat 0 - deviceName 1 - windowMin 2 - windowMax 3 - orientation 4 - deviceRatio 5
 	return device;
