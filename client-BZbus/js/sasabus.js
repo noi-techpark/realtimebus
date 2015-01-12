@@ -4,7 +4,7 @@ var SASABus = {
 
     config: {
 	city:'BZ',
-        r3EndPoint: 'http://realtimebus/',
+        r3EndPoint: 'http://realtimebus.tis.bz.it/',
         //r3EndPoint: 'http://sasabus.ph.r3-gis/',
         //r3EndPoint: 'http://sasabus.r3-gis/',
         busPopupSelector: '#busPopup',

@@ -43,7 +43,7 @@ author: Madeincima.it
 	
 	/* ----------- RESET DEFAULT STYLES ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
 	
-	html{-webkit-text-size-adjust:100%;font-size:62.5%;height:100%}body{font-family:Arial,sans-serif;font-size:1.4em;line-height:1;padding:0;margin:0;width:100%;line-height:140%}div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:1em;vertical-align:baseline;background:transparent}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}a{margin:0;padding:0;vertical-align:baseline;background:transparent}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}input,select{vertical-align:middle}
+	html{-webkit-text-size-adjust:100%;font-size:62.5%;height:100%}body{font-family:Arial,sans-serif;font-size:1.4em;line-height:1;padding:0;margin:0;width:100%;line-height:140%;height:100%;}div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:1em;vertical-align:baseline;background:transparent}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}nav ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}a{margin:0;padding:0;vertical-align:baseline;background:transparent}ins{background-color:#ff9;color:#000;text-decoration:none}mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}del{text-decoration:line-through}abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}table{border-collapse:collapse;border-spacing:0}hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}input,select{vertical-align:middle}
 	
 	
 	/* ----------- COMMON CLASSES ----------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -80,7 +80,7 @@ author: Madeincima.it
 		.lang a{color:#fff;border:0;padding:.4em .65em;display:block}
 	
 	.main{float:left;width:100%;padding:1.5em 0 1em 0;width:100%;position:relative;z-index:0}
-	.main.main-map{overflow:hidden;height:702px;padding:0}
+	.main.main-map{overflow:hidden;height:100%;padding:0}
 	.main-map a{border:0;color:#c0c0c0}
 	.main-map img{max-width:none}
 	
@@ -186,7 +186,7 @@ author: Madeincima.it
 		.iScrollVerticalScrollbar.hidden{display:none}
 		.iScrollIndicator{background:#bfbfbf;width:5px;position:absolute;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px}
 	
-	#map{max-height:715px;height:800px;overflow:hidden}
+	#map{overflow:hidden}
 		#map .olControlAttribution{bottom:5px;right:200px;color:#646464;font-size:.7em;line-height:110%}
 		#credits{display:block;position:absolute;bottom:0;right:0;background:#fff;opacity:.9;padding:5px 10px;font-size:.8em;z-index:1000;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;color:#646464;line-height:100%}
 		#credits a{color:#e06e0c}
