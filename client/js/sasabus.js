@@ -3,8 +3,8 @@ Proj4js.defs["EPSG:25832"] = "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs"
 var SASABus = {
 
     config: {
-	city:'ME',
-        r3EndPoint: 'http://realtimebus.tis.bz.it/',
+	city:'',
+        r3EndPoint: 'http://realtimebus/',
         //r3EndPoint: 'http://sasabus.ph.r3-gis/',
         //r3EndPoint: 'http://sasabus.r3-gis/',
         busPopupSelector: '#busPopup',
@@ -73,7 +73,7 @@ var SASABus = {
         
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
-            externalGraphic: this.config.r3EndPoint + 'images/pin.png'
+            externalGraphic: '../images/pin.png'
         });
         me.locationLayer = new OpenLayers.Layer.Vector('Geolocation layer', {
             styleMap: styleMap
@@ -243,7 +243,7 @@ var SASABus = {
         
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 12,
-            externalGraphic: this.config.r3EndPoint + 'images/${hexcolor2}.png'
+            externalGraphic: '../images/${hexcolor2}.png'
         });
         
         

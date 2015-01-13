@@ -4,7 +4,7 @@ var SASABus = {
 
     config: {
 	city:'BZ',
-        r3EndPoint: 'http://realtimebus/',
+        r3EndPoint: 'http://realtimebus.tis.bz.it/',
         //r3EndPoint: 'http://sasabus.ph.r3-gis/',
         //r3EndPoint: 'http://sasabus.r3-gis/',
         busPopupSelector: '#busPopup',
@@ -72,7 +72,7 @@ var SASABus = {
         
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
-            externalGraphic: this.config.r3EndPoint + 'images/pin.png'
+            externalGraphic: '../images/pin.png'
         });
         me.locationLayer = new OpenLayers.Layer.Vector('Geolocation layer', {
             styleMap: styleMap
@@ -243,7 +243,7 @@ var SASABus = {
         
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 12,
-            externalGraphic: this.config.r3EndPoint + 'images/${hexcolor2}.png'
+            externalGraphic: '../images/${hexcolor2}.png'
         });
         
         
@@ -491,7 +491,7 @@ var SASABus = {
         //calcola posizione dialog
         pixel.x = pixel.x - this.config.pinToDialogDistance; //distanza tra punta grafica e dialog
         pixel.y = (pixel.y - $(popupSelector).height() - this.config.pinHeight - this.config.yOffset); // sottrae alla y l'altezza del dialog e l'altezza della punta grafica
-        
+        pixel.y = pixel.y-$('body').scrollTop()+$('#header').outerHeight();//consider header height and scroll from top 
         dialogWidth = $(popupSelector).width() + 10;
         dialogRightX = pixel.x + dialogWidth;
         
