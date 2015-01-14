@@ -179,7 +179,7 @@ a{color:#c0c0c0;text-decoration:none}
 	.ui-dialog-titlebar .ui-state-default .ui-icon{background:none}
 
 #stopPopup,#busPopup{z-index:1;position:relative;padding:10px 0 0 0;color:#505050;overflow:visible}
-	#stopPopup h2,#busPopup h2{font-size:1.2em;padding:1px 15px 10px 15px;margin:0 0 4px 0;line-height:120%;border-bottom:1px solid #eee}
+	#stopPopup h2,.pophead{font-size:1.2em;padding:1px 15px 10px 15px;margin:0 0 4px 0;line-height:120%;border-bottom:1px solid #eee}
 	#busPopup h2{padding-top:10px}
 	#stopPopup table,#busPopup table{width:100%;}
 	#stopPopup th,#busPopup th{text-align:left;padding:6px 15px;border-bottom:1px solid #eee;}
@@ -217,9 +217,11 @@ a{color:#c0c0c0;text-decoration:none}
 	#busPopup .c-231{background-position:247px -578px}
 */
 //added by pb
-.clearfix{
-	clear:both;
 }
+.clearfix{
+	overflow:hidden;
+}
+
 .pophead h2{
 	float:left;
 }
