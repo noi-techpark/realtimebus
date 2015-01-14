@@ -4,7 +4,7 @@ var SASABus = {
 
     config: {
 	city:'',
-        r3EndPoint: 'http://realtimebus/',
+        r3EndPoint: 'http://realtimebus.tis.bz.it/',
         //r3EndPoint: 'http://sasabus.ph.r3-gis/',
         //r3EndPoint: 'http://sasabus.r3-gis/',
         busPopupSelector: '#busPopup',
@@ -73,7 +73,7 @@ var SASABus = {
         
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
-            externalGraphic: '../images/pin.png'
+            externalGraphic: 'images/pin.png'
         });
         me.locationLayer = new OpenLayers.Layer.Vector('Geolocation layer', {
             styleMap: styleMap
@@ -243,7 +243,7 @@ var SASABus = {
         
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 12,
-            externalGraphic: '../images/${hexcolor2}.png'
+            externalGraphic: 'images/${hexcolor2}.png'
         });
         
         

@@ -72,7 +72,7 @@ var SASABus = {
         
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
-            externalGraphic: '../images/pin.png'
+            externalGraphic: 'images/pin.png'
         });
         me.locationLayer = new OpenLayers.Layer.Vector('Geolocation layer', {
             styleMap: styleMap
@@ -243,7 +243,7 @@ var SASABus = {
         
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 12,
-            externalGraphic: '../images/${hexcolor2}.png'
+            externalGraphic: 'images/${hexcolor2}.png'
         });
         
         
