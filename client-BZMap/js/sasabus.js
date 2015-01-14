@@ -79,8 +79,7 @@ var SASABus = {
         });
         
         me.map.addLayers([osm, me.linesLayer, me.stopsLayer, me.positionLayer, me.locationLayer]);
-        
-	var bolzano = new OpenLayers.Bounds(676000, 5148500, 681100, 5153500);
+	var bolzano = new OpenLayers.Bounds(676861.5167280979,5153839.91033499,682581.1768155887,5148773.223194927);
         me.map.zoomToExtent(bolzano);
         //me.map.zoomToMaxExtent();
         
