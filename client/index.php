@@ -177,7 +177,7 @@
 		<div id="busPopup" style="display:none;">
 			<div class="clearfix pophead">
 				<h2 class="bus c-${lidname}"><?php ___('linea'); ?> ${lidname}</h2>
-				<img src="images/00496B.png" id="bus-pop-img">
+				<img src="" id="bus-pop-img">
 			</div>
 			<p class="noData" style="display: none;">Questo autobus non è in servizio.</p>
 			<table>

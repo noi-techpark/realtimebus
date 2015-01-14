@@ -447,9 +447,8 @@ var SASABus = {
             selector = (type == 'bus') ? this.config.busPopupSelector : this.config.stopPopupSelector,
             content = OpenLayers.String.format(contentTpl, selectedFeature.attributes),
             pixel;
-       	$(bus-pop-img).attr('src','images/'+selectedFeature.attributes.hexcolor2+'png'); 
         $(selector).empty().html(content);
-        
+       	$('#bus-pop-img').attr('src','images/'+selectedFeature.attributes.hexcolor2+'.png'); 
         if(features.length > 0) {                   
             var rows = [],
                 len = (features.length > this.config.rowsLimit) ? this.config.rowsLimit : features.length,
