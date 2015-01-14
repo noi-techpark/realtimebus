@@ -353,7 +353,6 @@ var SASABus = {
             y = feature.geometry.y,
             lonLat = new OpenLayers.LonLat(x, y),
             pixel = me.map.getPixelFromLonLat(lonLat);
-        
         if(!me.tpl.busRow) {
             var tr = $(me.config.busPopupSelector + ' table tbody tr');
             me.tpl.busRow = tr.clone().wrap('<div>').parent().html();
@@ -448,7 +447,7 @@ var SASABus = {
             selector = (type == 'bus') ? this.config.busPopupSelector : this.config.stopPopupSelector,
             content = OpenLayers.String.format(contentTpl, selectedFeature.attributes),
             pixel;
-            
+       	$(bus-pop-img).attr('src','images/'+selectedFeature.attributes.hexcolor2+'png'); 
         $(selector).empty().html(content);
         
         if(features.length > 0) {                   

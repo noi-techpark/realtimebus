@@ -190,7 +190,7 @@ a{color:#c0c0c0;text-decoration:none}
 	#stopPopup .tip,#busPopup .tip{position:absolute;bottom:-59px;left:40px;background:url(../images/bg-tip.png) 0 0 no-repeat;width:75px;height:57px}
 
 #stopPopup .bus{padding-left:40px;background:#fbfbfb url(../images/ico-bus.png) 13px -473px no-repeat}
-#busPopup .bus{padding-right:60px;background:transparent url(../images/ico-bus-big.png) right -475px no-repeat}
+#busPopup .bus{padding-right:60px;}/*background:transparent url(../images/ico-bus-big.png) right -475px no-repeat}
 	#stopPopup .c-1{background-position:13px 7px}
 	#stopPopup .c-2{background-position:13px -33px}
 	#stopPopup .c-3{background-position:13px -73px}
@@ -215,6 +215,20 @@ a{color:#c0c0c0;text-decoration:none}
 	#busPopup .c-213{background-position:247px -473px}
 	#busPopup .c-215{background-position:247px -526px}
 	#busPopup .c-231{background-position:247px -578px}
+*/
+//added by pb
+.clearfix{
+	clear:both;
+}
+.pophead h2{
+	float:left;
+}
+.pophead img{
+	float:right;
+	padding-right:10px;
+}
+
+//
 
 #credits{position:absolute;bottom:0;right:0;background:#fff;opacity:.9;padding:5px 10px;font-size:.9em;z-index:800;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;color:#646464;}
 #credits a{color:#9fa505}

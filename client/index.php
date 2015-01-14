@@ -175,7 +175,10 @@
 	        <p id="credits"><?php ___('mappe'); ?> <a href="http://www.openstreetmap.org/copyright" rel="external">OpenStreetMap</a> &amp; <a href="<?php ___('linkr3gis'); ?>" rel="external">R3 GIS</a> - <?php ___('design'); ?> <a href="<?php ___('linkmadeincima'); ?>" rel="external">Madeincima</a></p>
             
 		<div id="busPopup" style="display:none;">
-			<h2 class="bus c-${lidname}"><?php ___('linea'); ?> ${lidname}</h2>
+			<div class="clearfix pophead">
+				<h2 class="bus c-${lidname}"><?php ___('linea'); ?> ${lidname}</h2>
+				<img src="images/00496B.png" id="bus-pop-img">
+			</div>
 			<p class="noData" style="display: none;">Questo autobus non è in servizio.</p>
 			<table>
 				<thead>
