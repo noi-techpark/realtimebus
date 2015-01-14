@@ -72,7 +72,7 @@ var SASABus = {
         
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
-            externalGraphic: this.config.r3EndPoint + 'images/pin.png'
+            externalGraphic: 'images/pin.png'
         });
         me.locationLayer = new OpenLayers.Layer.Vector('Geolocation layer', {
             styleMap: styleMap
@@ -80,10 +80,7 @@ var SASABus = {
         
         me.map.addLayers([osm, me.linesLayer, me.stopsLayer, me.positionLayer, me.locationLayer]);
         
-       	/* var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000);
-        me.map.zoomToExtent(merano);
-		*/
-		var bolzano = new OpenLayers.Bounds(676000, 5148500, 681100, 5153500);
+	var bolzano = new OpenLayers.Bounds(676000, 5148500, 681100, 5153500);
         me.map.zoomToExtent(bolzano);
         //me.map.zoomToMaxExtent();
         
@@ -243,7 +240,7 @@ var SASABus = {
         
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 12,
-            externalGraphic: this.config.r3EndPoint + 'images/${hexcolor2}.png'
+            externalGraphic: 'images/${hexcolor2}.png'
         });
         
         

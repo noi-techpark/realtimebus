@@ -66,6 +66,45 @@
 	        <a href="#" id="zoomToMyPosition"></a>
 	        <p id="credits"><?php ___('mappe'); ?> <a href="<?php ___('linkr3gis'); ?>" rel="external">R3Gis</a> - <?php ___('design'); ?> <a href="<?php ___('linkmadeincima'); ?>" rel="external">Madeincima</a></p>
 	    </main>
+<div id="busPopup" style="display:none;">
+                        <h2 class="bus c-${lidname}"><?php ___('linea'); ?> ${lidname}</h2>
+                        <p class="noData" style="display: none;">Questo autobus non è in servizio.</p>
+                        <table>
+                                <thead>
+                                        <tr>
+                                                <th><?php ___('prossimefermate'); ?></th>
+                                                <th class="time"><?php ___('stimato'); ?></th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr class="${odd} ${last}">
+                                                <td>${ort_ref_ort_name}</td>
+                                                <td class="time">${time_est}</td>
+                                        </tr>
+                                </tbody>
+                        </table>
+                        <span class="tip"></span>
+                </div>
+
+                <div id="stopPopup" style="display:none;">
+                        <h2><?php ___('fermata'); ?> ${ort_ref_ort_name}</h2>
+                        <p class="noData" style="display: none;">Nelle prossime ore non sono previsti passaggi in questa fermata.</p>
+                        <table>
+                                <thead>
+                                        <tr>
+                                                <th><?php ___('arrivo'); ?></th>
+                                                <th class="time"><?php ___('stimato'); ?></th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr class="${odd} ${last}">
+                                                <td class="bus c-${lidname}"><?php ___('linea'); ?> ${lidname}</td>
+                                                <td class="time">${bus_passes_at}</td> <!-- temporaneo, non ho ancora i dati sull'orario -->
+                                        </tr>
+                                </tbody>
+                        </table>
+                        <span class="tip"></span>
+                </div>
         <script src="js/iscroll.js" type="text/javascript"></script>
         <!--[if lte IE 8]>
             <script src="scripts/PIE_IE678.js" type="text/javascript"></script>

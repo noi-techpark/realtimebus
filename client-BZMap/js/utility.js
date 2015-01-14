@@ -32,8 +32,8 @@ var initialTop;
 
 $(document).ready(function() {
 
-	console.log($(document).height());
-	console.log($(window).height());
+	//console.log($(document).height());
+	//console.log($(window).height());
 
 	$('.lang span').on('click',function(){
 		if(!$(this).hasClass('open')){
