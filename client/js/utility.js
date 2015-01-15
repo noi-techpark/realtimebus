@@ -671,15 +671,10 @@ function showPoint(element){
 }
 
 function showResults(){
-	console.log("showResults()");
-
-	$('#search-container .scroll,.search-box.result').show(0,function(){
-		var resultHeight = $('#search-container .scroll').outerHeight();
+	$('div.search-box.result').show(0,function(){
+		var resultHeight = $('div.search-box.result').outerHeight();
 		var newTop = initialTop + resultHeight;
-		if(device[0] == 'desktop'){
-			newTop = 0;	
-		}
-		$('.panel-content-out').css('top',newTop+'px');
+		$('.panel-content-out').css('top','auto');
 	});		
 }
 
