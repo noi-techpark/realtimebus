@@ -40,13 +40,6 @@ a{color:#c0c0c0;text-decoration:none}
 .header{border-bottom:1px solid #eae9e9;position:relative;background:#fff;width:100%;float:left;padding:35px 0 0 0;height:62px}
 #logo{position:absolute;top:35px;left:24px;width:324px;height:41px;display:block;background:url(../images/logo.gif) 0 0 no-repeat;text-indent:-9999px;font-size:0;line-height:0}
 
-#zoomToMyPosition{box-shadow:0 0 2px 0 #000;z-index:1400;
-	position:absolute;bottom:10px;left:500px;
-	display:block;
-	width:32px;height:32px;
-	cursor:pointer;
-	background: #fff url(../images/ico-locate.png) center center no-repeat;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;opacity:0.9}
-
 .beta{display:block;position:absolute;top:21px;left:208px;width:36px;height:20px;background:url(../images/ico-beta.gif) 0 0 no-repeat;font-size:0;line-height:0;text-indent:-9999px}
 
 .language-switcher{float:left;height:19px;position:absolute;top:20px;right:20px;cursor:pointer}
@@ -162,7 +155,18 @@ a{color:#c0c0c0;text-decoration:none}
 	a#zoomInButton{border-bottom:1px solid #4e4f51;border-top-left-radius:2px;-webkit-border-top-left-radius:2px;-moz-border-top-left-radius:2px;border-top-right-radius:2px;-webkit-border-top-right-radius:2px;-moz-border-top-right-radius:2px}
 	a#zoomOutButton{bottom:0;top:auto;border-top:1px solid #636466;background-position:10px -22px;border-bottom-left-radius:2px;-webkit-border-bottom-left-radius:2px;-moz-border-bottom-left-radius:2px;border-bottom-right-radius:2px;-webkit-border-bottom-right-radius:2px;-moz-border-bottom-right-radius:2px}
 
-#serverTime{font-weight:bold;font-size:0.9em;color:#878787;height:22px;width:91px;position:absolute;padding:9px 0 0 0;text-align:center;bottom:10px;right:-105px;background:#fff;z-index:999;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;text-transform:uppercase;border:1px solid #90928f;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";filter:alpha(opacity=90);opacity:0.9}
+#zoomToMyPosition{box-shadow:0 0 2px 0 #000;z-index:1400;
+	position:absolute;bottom:30px;right:20px;
+	display:block;
+	width:32px;height:32px;
+	cursor:pointer;
+	background: #fff url(../images/ico-locate.png) center center no-repeat;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;opacity:0.9}
+
+#serverTime{font-weight:bold;font-size:0.9em;color:#878787;height:22px;width:91px;
+	position:absolute;bottom:10px;right:-105px;
+	padding:9px 0 0 0;text-align:center;background:#fff;z-index:999;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;
+	text-transform:uppercase;border:1px solid #90928f;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+	filter:alpha(opacity=90);opacity:0.9}
 	#serverTime .reload{color:#6a6a68;font-size:1.35em;padding:0 0 0 3px}
 
 /* ----------- DIALOGUE BOXES */

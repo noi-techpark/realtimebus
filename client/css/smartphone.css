@@ -2,10 +2,15 @@
 #map-container{width:100%;position:absolute;top:43px;bottom:0;left:0;right:0}
 div.olMap{width:100%;height:100%}
 
-.header-mobile{display:block;position:absolute;left:0px;top:0px;width:100%;height:43px;padding:0;background:#434343;border-bottom:0;box-shadow:0 0 0;z-index:1500}
-#logo-mobile{display:block;position:absolute;top:10px;left:5px;background:url(../images/logo-small.gif) 0 0 no-repeat;width:194px;height:23px;text-indent:-9999px;font-size:0;line-height:0}
-.beta-mobile{display:block;position:absolute;top:11px;left:205px;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;width:36px;height:20px;background:url(../images/ico-beta.gif) 0 0 no-repeat;font-size:0;line-height:0;text-indent:-9999px}
-.mobile-menu-btn{display:block;position:absolute;top:11px;right:5px;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;width:36px;height:20px;background:url(../images/ico-menu.png) 0 0 no-repeat;font-size:0;line-height:0;text-indent:-9999px}
+.panel{width:100%;height:auto;box-shadow:0 0 0;z-index:1500}
+
+.panel .header{width:100%;height:43px;padding:0;background:#434343;border-bottom:0}
+.panel .header .aux{margin:0 auto;width:92%;position:relative;height:43px}
+
+.panel .header .btn-toggle{display:none}
+
+#logo{top:10px;left:0;background:url(../images/logo-small.gif) 0 0 no-repeat;width:194px;height:23px}
+.beta{top:11px;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px}
 
 /*.panel{top:43px;left:auto;right:0px;width:375px;height:400px;box-shadow:0 0 0;z-index:1000}
 */
@@ -22,7 +27,28 @@ div.olMap{width:100%;height:100%}
 
 #search-container{display:none}
 
-.panel-content-out{position:absolute;top:0px;left:0}
+#variants .tabbed-content{width:100%}
+
+#variants .tick{width:31%}
+#variants .tick.listCol1,
+#variants .tick.listCol2{margin-right:3.5%}
+#variants .tick li{width:100%}
+#variants .line{width:auto}
+
+.panel-header{width:100%;height:34px;padding:9px 0 0 0;background:#434343}
+.panel-header .aux{width:92%;margin:0 auto}
+.language-switcher .panel-header .aux{padding:0}
+.panel-header h2{float:left;color:#919191;font-size:1.21em;padding:7px 0 0 0}
+.panel-header .close{font-size:1.08em;font-weight:bold;display:block;color:#b3b3b3;padding:7px 17px 0 17px;height:18px;float:right;background:#5f5d5d;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px}
+
+
+.search-box{padding:16px 0;width:100%;float:none;height:37px}
+.search-box #search-form{background:#fff;height:35px;width:92%;margin:0 auto;float:none;border:1px solid #E6E6E6;box-shadow:0 0 19px -5px #E2E2E2 inset}
+#search-field{width:70%;float:none;border:0;box-shadow:0 0 0}
+
+.search-box.result{display:none;width:92%;float:none;margin:0 auto;background:#fafafa;border:0}
+
+.footer{display:none}
 
 
 #stopPopup,#busPopup{width:260px}
@@ -53,5 +79,8 @@ div.olMap{width:100%;height:100%}
 	#busPopup .c-213{background-position:208px -473px}
 	#busPopup .c-215{background-position:208px -526px}
 	#busPopup .c-231{background-position:208px -578px}
-	
-#zoomToMyPosition{box-shadow:0 0 2px 0 #000;z-index:1400;position:absolute;bottom:29px;left:10px;width:32px;height:32px;display:block;cursor:pointer;background: #fff url(../images/ico-locate.png) center center no-repeat;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;opacity:0.9}
+#serverTime{display:none}
+
+#zoomButtons{top:auto;bottom:70px;right:5px}
+
+#zoomToMyPosition{right:5px}

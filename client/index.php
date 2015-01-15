@@ -69,49 +69,43 @@
 				document.documentElement.className+=' ie10';  
 			}  
 		</script>
-	<!--<![endif]-->
-		<div class="map-container" id="map" style="width:100%;height:100%">
-		</div>
-
-		<a href="#" id="zoomToMyPosition"></a>
-
-		<header class="header-mobile" id="header-mobile">
-			<h1 id="logo-mobile">Merano real time bus</h1>
-			<span class="beta-mobile">Beta version</span>
-			<span class="mobile-menu-btn" id="mobile-menu-btn">Menu</span>
-		</header>
-
+     <!--<![endif]-->
+            <div class="map-container" id="map" style="width:100%;height:100%">
+            </div>
+	        
+            <a href="#" id="zoomToMyPosition"></a>
             
-		<div class="panel" id="panel">
-			<header class="header" id="header">
-				<h1 id="logo">Merano real time bus</h1>
-				<span class="beta">Beta version</span>
-				<nav class="language-switcher">
-					<ul>
-						<li <?php if($lang=='it') echo 'class="active"'; ?>><a href="?l=it">IT</a></li>
-						<li <?php if($lang=='de') echo 'class="active"'; ?>><a href="?l=de">DE</a></li>
-						<li <?php if($lang=='en') echo 'class="active"'; ?>><a href="?l=en">EN</a></li>
-					</ul>
-				</nav>
-			</header>
-			<span class="btn-toggle open first" id="btn-toggle"></span>
-			<main class="main" id="main">
-				<div id="search-container">
-					<div class="search-box">     			
-						<!--input type="text" id="search-field" name="search-field" value="<?php ___('camporicerca'); ?>" />
-						<a id="search-submit" href="#"><?php ___('cerca'); ?></a-->
-						<form id="search-form" action="#" method="post" role="search">
-							<input type="text" id="search-field" name="search-field" value="<?php ___('camporicerca'); ?>" />
-							<input type="submit" id="search-submit" value="<?php ___('cerca'); ?>" />
-						</form>
-					</div>
-					<div class="search-box result">
-						<span class="title"><?php ___('fermatevicine'); ?>...</span>
-						<ul id="listResults">
-							<!--<li class="result-item nearest"><a href="#">Fermata Finele</a></li>
-							<li class="result-item"><a href="#">Fermata Jaufenstr.</a></li>
-							<li class="result-item"><a href="#">Fermata Stemmerhof</a></li>-->
-						</ul>
+            <div class="panel">
+	            <header class="header" id="header">
+                    <h1 id="logo">Merano real time bus</h1>
+                    <nav class="language-switcher">
+                        <ul>
+                            <li <?php if($lang=='it') echo 'class="active"'; ?>><a href="?l=it">IT</a></li>
+                            <li <?php if($lang=='de') echo 'class="active"'; ?>><a href="?l=de">DE</a></li>
+                            <li <?php if($lang=='en') echo 'class="active"'; ?>><a href="?l=en">EN</a></li>
+                        </ul>
+                    </nav>
+                	<span class="btn-toggle open first"></span>
+                    <span class="beta">Beta version</span>
+	            </header>
+	            <main class="main main-map" id="main">
+					<div id="search-container">
+	            		<div class="search-box">     			
+						        <!--input type="text" id="search-field" name="search-field" value="<?php ___('camporicerca'); ?>" />
+						        <a id="search-submit" href="#"><?php ___('cerca'); ?></a-->
+		                	<form id="search-form" action="#" method="post" role="search">
+						        <input type="text" id="search-field" name="search-field" value="<?php ___('camporicerca'); ?>" />
+						        <input type="submit" id="search-submit" value="<?php ___('cerca'); ?>" />
+		                    </form>
+		                </div>
+						<div class="search-box result">
+							<span class="title"><?php ___('fermatevicine'); ?>...</span>
+							<ul id="listResults">
+								<!--<li class="result-item nearest"><a href="#">Fermata Finele</a></li>
+								<li class="result-item"><a href="#">Fermata Jaufenstr.</a></li>
+								<li class="result-item"><a href="#">Fermata Stemmerhof</a></li>-->
+							</ul>
+						</div>
 					</div>
 				</div>
 				<div class="panel-content-out">
@@ -215,22 +209,6 @@
 			</table>
 			<span class="tip"></span>
 		</div>
-
-            
-<<<<<<< HEAD
-		<script src="js/iscroll.js" type="text/javascript"></script>
-		<!--[if lte IE 8]>
-			<script src="scripts/PIE_IE678.js" type="text/javascript"></script>
-		<![endif]-->
-		<script src="js/jquery.easyListSplitter.js" type="text/javascript"></script>
-		<script src="js/init.js" type="text/javascript"></script>
-		<script src="js/utility.js" type="text/javascript"></script>
-		<!--[if lt IE 9]>
-			<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-		<![endif]-->
-		<!--</div>-->
-	</body>
-=======
             <div id="busPopup" style="display:none;">
 	            <h2 class="bus c-${lidname}"><?php ___('linea'); ?> ${lidname}</h2>
 	            <p class="noData" style="display: none;">Questo autobus non è in servizio.</p>
@@ -269,7 +247,6 @@
 	            </table>
 	            <span class="tip"></span>
 	        </div>
-	        <a href="#" id="zoomToMyPosition"></a>
 	        <p id="credits"><?php ___('mappe'); ?> <a href="http://www.openstreetmap.org/copyright" rel="external">OpenStreetMap</a> &amp; <a href="<?php ___('linkr3gis'); ?>" rel="external">R3 GIS</a> - <?php ___('design'); ?> <a href="<?php ___('linkmadeincima'); ?>" rel="external">Madeincima</a></p>
             
             <script src="js/iscroll.js" type="text/javascript"></script>
@@ -284,5 +261,4 @@
             <![endif]-->
         <!--</div>-->
     </body>
->>>>>>> b99c821... improved attribution to OpenStreetMap adding it to the #credits div
 </html>
