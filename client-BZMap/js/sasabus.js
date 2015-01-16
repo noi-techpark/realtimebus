@@ -8,7 +8,7 @@ var SASABus = {
         //r3EndPoint: 'http://sasabus.ph.r3-gis/',
         //r3EndPoint: 'http://sasabus.r3-gis/',
         busPopupSelector: '#busPopup',
-        stopPopupSelector: '#stopPopup',
+        stopPopupSelector: '',
         rowsLimit: 6,
         mapDivId: null,
         defaultDialogOptions: {},
