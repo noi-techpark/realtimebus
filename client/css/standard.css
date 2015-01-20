@@ -216,7 +216,6 @@ a{color:#c0c0c0;text-decoration:none}
 	#busPopup .c-215{background-position:247px -526px}
 	#busPopup .c-231{background-position:247px -578px}
 */
-//added by pb
 .clearfix{
 	overflow:hidden;
 }
@@ -226,10 +225,8 @@ a{color:#c0c0c0;text-decoration:none}
 }
 .pophead img{
 	float:right;
-	padding-right:10px;
+	padding-right:15px;
 }
-
-//
 
 #credits{position:absolute;bottom:0;right:0;background:#fff;opacity:.9;padding:5px 10px;font-size:.9em;z-index:800;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;color:#646464;}
 #credits a{color:#9fa505}
