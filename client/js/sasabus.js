@@ -50,14 +50,20 @@ var SASABus = {
         };
         me.map = new OpenLayers.Map(targetDivId, mapOptions);
 
-        var osm = new OpenLayers.Layer.TMS('OSM', 'http://tiles.r3-gis.com/mapcache/tms/',{
+        /*var osm = new OpenLayers.Layer.TMS('OSM', 'http://tiles.r3-gis.com/mapcache/tms/',{
             'layername': 'altoadige_osm@altoadige_grid',
             'type': 'png',
             visibility: true,
             tileOrigin: new OpenLayers.LonLat(602000, 5120000),
             opacity: 0.75,
             attribution: '<a target="_blank" href ="http://opendatacommons.org/licenses/odbl/summary/">ODbL</a> Openstreetmap e comunità'
-        });
+        });*/
+    var osm = new ol.layer.Tile({
+      source: new ol.source.XYZ({ 
+        url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+        attributions: [new ol.Attribution({ html: ['&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'] })]
+      })
+    })
                 
         me.linesLayer = new OpenLayers.Layer.WMS('SASA Linee', me.config.r3EndPoint + 'ogc/wms', {layers: 0, transparent: true}, {visibility: true, singleTile: true});
         
@@ -102,7 +108,7 @@ var SASABus = {
 
 	 });
 	//TODO:Add province coordinates as layer
-	/*$.get("http://localhost:8080/parkingFrontEnd/rest/get-address?location=Kurprom",function(data){
+	$.get("http://localhost:8080/parkingFrontEnd/rest/get-address?location=Passerpr",function(data){
 		var ad = JSON.parse(data);
 		console.log(ad);
 		var start = ad.AddressCandidates.candidates;
@@ -111,7 +117,7 @@ var SASABus = {
 		
                 	var ad2 = JSON.parse(data2);
 	                var end = ad2.AddressCandidates.candidates;
-			console.log(end);
+			console.log(start);
                 	var dataSet={
                         	route : {
                                 	start_point : {
@@ -151,8 +157,8 @@ var SASABus = {
 	        	me.map.addLayer(vectorLayer);
         		me.map.zoomToExtent(vectorLayer.getDataExtent());
 		});
-	} */
-	//me.map.addControl(new OpenLayers.Control.LayerSwitcher()); 
+	} 
+	me.map.addControl(new OpenLayers.Control.LayerSwitcher()); 
 
         me.map.addLayers([osm,me.linesLayer, me.stopsLayer, me.positionLayer, me.locationLayer]);
         
