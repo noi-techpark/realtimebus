@@ -1,5 +1,26 @@
 
 
+/////////////////////////////////////////////
+// for debugging
+
+// central call to print out the function name, when a function gets called
+function printFunctionCalled(functionCall) {
+	// for debugging uncommend the console.log statement!
+	//
+	//console.log(functionCall);
+}
+
+// logs the styleName value of the given element
+function println(elementID, styleName) {
+	console.log(elementID + "." + styleName + ": " + 
+		window.getComputedStyle(
+			document.getElementById(elementID)
+		).getPropertyValue(styleName)
+	);
+}
+//////////////////////////////////////////////
+
+
 Array.prototype.contains = function(obj) {
 	var i = this.length;
 	while (i--) {
@@ -20,18 +41,8 @@ Array.prototype.containsSubStr = function(obj) {
 	return false;
 }
 
-// logs the styleName value of the given element
-function println(elementID, styleName) {
-	console.log(elementID + "." + styleName + ": " + 
-		window.getComputedStyle(
-			document.getElementById(elementID)
-		).getPropertyValue(styleName)
-	);
-}
-
 function isSmartPhoneMode() {
-	println("header-mobile", "display");
-
+	//println("header-mobile", "display");
 	return window.getComputedStyle(document.getElementById("header-mobile")).getPropertyValue("display") !== "none";
 }
 
@@ -39,13 +50,10 @@ var mapLinesInit;
 var mapLines;
 var initialTop;
 
-
 $(document).ready(function() {
-	console.log("$(document).ready(function()");
+	printFunctionCalled("$(document).ready(function()");
 //	console.log($(document).height());
 //	console.log($(window).height());
-
-
 	
 	// ---- Link esterno ----------------------------------------------------------------------------------------------------------
 	$("a[href*='http://']:not([href*='"+location.hostname+"']),[href*='https://']:not([href*='"+location.hostname+"'])").attr("target","_blank");	
@@ -89,14 +97,16 @@ $(document).ready(function() {
 	}
 
 	panelScrollElement = Array();
-	
+
+/* PO: this seams not to be useful	
 	device = detectDevice();
  	
 	//if(device[0] == 'desktop'){
 	if(device[0] == 'smartphone'){
 		$('body').addClass('smartphone');
 	}
-	
+*/
+
 	init(false);
 	oneTime(device);
 
@@ -104,6 +114,7 @@ $(document).ready(function() {
 	//on orientation change
 	//----------------------	
 	function onOrientationChange(){
+		printFunctionCalled("onOrientationChange()");
 		setTimeout(function(){
 			init(true);
 		},20);
@@ -119,14 +130,11 @@ $(document).ready(function() {
 
 	// ---- Generic Stuff ----------------------------------------------------------------------------------------------------------
 	function init(varOrientationChange){
-		console.log("init()");
-
-		var smartPhoneMode = isSmartPhoneMode();
-		console.log("smartPhoneMode: " + smartPhoneMode);
+		printFunctionCalled("init("+varOrientationChange+")");
 	}
 	
 	function oneTime(device){
-		console.log('oneTime');
+		printFunctionCalled("oneTime("+device+")");
 		
 		$('#map').append('<div id="zoomButtons"><a href="#" id="zoomInButton">Zoom in</a><a href="#" id="zoomOutButton">Zoom out</a></div>');
 		
@@ -164,6 +172,10 @@ $(document).ready(function() {
 		$('a[rel=external]').attr('target','_blank');
 	}
 
+	if (isSmartPhoneMode()) {
+		// on the smartphone the menu should be closed at first
+		$('div.panel').slideUp();
+	}
 });
 
 function pad(num, size) {
@@ -173,7 +185,7 @@ function pad(num, size) {
 }
 
 function initLinesAfterRead(lines) { 
-	console.log('initLinesAfterRead');
+	printFunctionCalled("initLinesAfterRead("+lines+")");
 	//alert(lines.toSource())
 
 	// sort lines
@@ -259,7 +271,7 @@ function initLinesAfterRead(lines) {
 }
 
 function stopPropagationCustom(){
-	console.log("stopPropagationCustom()");
+	printFunctionCalled("stopPropagationCustom()");
 
 	$('input, textarea, button, a, select, .line .icon, .line .var,.child-tick li, .tabs li').off('touchstart mousedown').on('touchstart mousedown', function(e) {
 		e.stopPropagation();
@@ -267,7 +279,7 @@ function stopPropagationCustom(){
 }
 
 function showLinesAfterRead(lines){ 
-	console.log('showLinesAfterRead');
+	printFunctionCalled("showLinesAfterRead("+lines+")");
 
 	// ---- Tabs ----------------------------------------------------------------------------------------------------------
 
@@ -561,7 +573,7 @@ function showLinesAfterRead(lines){
 
 // configures the internal scroll bars in .panel around #scroll
 function panelScroll(){
-	console.log("panelScroll()");
+	printFunctionCalled("panelScroll()");
 
 	maxHeight = $('.panel-content-out').height();
 
@@ -591,7 +603,7 @@ function panelScroll(){
 }
 
 function findResults(){
-	console.log('findresults()');
+	printFunctionCalled("findResults()");
 
 	SASABus.removeAllLocations();
 	var strFind = $("#search-field").val();
@@ -604,7 +616,7 @@ function findResults(){
 }
 
 function successFind(rows){
-	console.log("successFind()");
+	printFunctionCalled("successFind(" + rows + ")");
 
 	//console.log('success');
 	//console.log(rows);
@@ -645,7 +657,7 @@ function successFind(rows){
 }
 
 function failureFind(){
-	console.log("failureFind()");
+	printFunctionCalled("failureFind()");
 
 	$('.search-box.result .title').html(lang_no_results);
 	$("#listResults").html('<li class="no-results">' + lang_no_results_text + '</li>');
@@ -653,7 +665,7 @@ function failureFind(){
 }
 
 function showPoint(element){
-	console.log("showPoint()");
+	printFunctionCalled("showPoint("+element+")");
 
 	var arrCoord = element.attr('rel').split(',');
 	//SASABus.showLocation(arrCoord[0],arrCoord[1]);
