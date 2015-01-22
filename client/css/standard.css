@@ -32,7 +32,7 @@ a{color:#c0c0c0;text-decoration:none}
 
 /* ----------- STRUCTURE --------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-.header-mobile{display:none}
+.header-mobile{display:none;height:0;}
 #logo-mobile{display:none}
 .beta-mobile{display:none}
 
