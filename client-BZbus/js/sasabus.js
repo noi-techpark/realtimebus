@@ -331,7 +331,6 @@ var SASABus = {
             var lonLat = new OpenLayers.LonLat(originalX, originalY),
                 newPixel = me.map.getPixelFromLonLat(lonLat),
                 pixel;
-            
             if(me.map.getExtent().containsLonLat(lonLat)) {
                 pixel = me.calculatePopupPosition(selector, newPixel);
                 $(selector).dialog('option', 'position', [pixel.x, pixel.y]);
@@ -450,7 +449,6 @@ var SASABus = {
             pixel;
             
         $(selector).empty().html(content);
-        
         if(features.length > 0) {                   
             var rows = [],
                 len = (features.length > this.config.rowsLimit) ? this.config.rowsLimit : features.length,
@@ -656,7 +654,6 @@ var SASABus = {
                 zoomFeature = feature;
                 var lonLat = new OpenLayers.LonLat(zoomFeature.geometry.x, zoomFeature.geometry.y);
                 me.map.moveTo(lonLat);
-                
                 me.showStopPopup(zoomFeature);
             }
         }

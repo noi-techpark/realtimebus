@@ -32,8 +32,6 @@ var initialTop;
 
 $(document).ready(function() {
 
-	console.log($(document).height());
-	console.log($(window).height());
 
 	$('.lang span').on('click',function(){
 		if(!$(this).hasClass('open')){
@@ -793,7 +791,6 @@ function showLinesAfterRead(lines){
 	}
 	SASABus.showLines(mapLines);
 
-	console.log(mapLines); 
 	$("#variants .tab-content .line").each(function(){
 		var line = $(this).find('.line-no').attr('id').replace('l_','');
 		if(mapLines.containsSubStr(line+':'))
@@ -886,7 +883,9 @@ function failureFind(){
 	showResults();
 }
 function showPoint(element){
+	console.log(element);
 	var arrCoord = element.attr('rel').split(',');
+	console.log(arrCoord);
 	//SASABus.showLocation(arrCoord[0],arrCoord[1]);
 	SASABus.zoomToStop(arrCoord[0], arrCoord[1]);
 	if($('body').hasClass('smartphone')){

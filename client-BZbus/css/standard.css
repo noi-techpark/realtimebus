@@ -95,7 +95,7 @@ author: Madeincima.it
 		.panel-content{width:100%;float:left}	
 
 	#search-container{float:left;width:100%}
-		.search-box{float:left;width:325px;padding:16px 25px 0 25px;border-bottom:1px solid #e5e5e5;background:#f1f1f1}
+		.search-box{float:left;width:325px;padding:16px 25px 0 25px;border-bottom:1px solid #e5e5e5;background:#f1f1f1;display:none;}
 		#search-form{float:left;width:100%;margin-bottom:14px;position:relative}
 		#search-field{float:left;width:306px;height:35px;padding:0 0 0 17px;margin:0;border:1px solid #e6e6e6;color:#bbbbbb;font-size:1.05em;line-height:100%;font-family:Arial, Helvetica, sans-serif;box-shadow: inset 0px 0px 19px -5px #e2e2e2}
 		#search-field:focus{box-shadow:none}
@@ -207,47 +207,16 @@ author: Madeincima.it
 		.ui-dialog-titlebar .ui-state-default .ui-icon{background:none}
 
 	#stopPopup,#busPopup{z-index:1;position:relative;padding:10px 0 0 0;color:#505050;overflow:visible}
-		#stopPopup h2,#busPopup h2{font-size:1.2em;padding:1px 15px 10px 15px;margin:0 0 4px 0;line-height:120%;border-bottom:1px solid #eee}
+		.pophead {font-size:1.2em;padding:1px 15px 10px 15px;margin:0 0 4px 0;line-height:120%;border-bottom:1px solid #eee}
 		#busPopup h2{padding-top:10px}
 		#stopPopup table,#busPopup table{width:100%;}
 		#stopPopup th,#busPopup th{text-align:left;padding:6px 15px;border-bottom:1px solid #eee;}
 		#stopPopup .time,#busPopup .time{text-align:center}
-		#stopPopup td,#busPopup td{border-bottom:1px solid #eee;background:#fbfbfb;padding:9px 15px 8px 15px;color:#505050;line-height:130%}
+		#stopPopup td,#busPopup td{border-bottom:1px solid #eee;background:#fbfbfb;padding:9px 15px 8px 15px;color:#505050;line-height:130%;vertical-align:middle;}
 		#stopPopup .odd td,#busPopup .odd td{background-color:#f7f7f7}
 		#stopPopup .last td,#busPopup .last td{border:0}
 		#stopPopup .tip,#busPopup .tip{position:absolute;bottom:-59px;left:40px;background:url(../images/bg-tip.png) 0 0 no-repeat;width:75px;height:57px}
 	
-/*
-	#stopPopup .bus{padding-left:40px;background-color:#fbfbfb;background-image:url(../images/ico-bus.png);background-position:13px -473px;background-repeat:no-repeat}
-*/
-	#stopPopup .bus{background-image:url(../images/ico-bus@2x.png) !important;background-size:20px 528px !important;background-position:13px -458px !important;background-repeat:no-repeat}
-		#stopPopup .c-1{background-position:13px 7px}
-		#stopPopup .c-2{background-position:13px -33px}
-		#stopPopup .c-3{background-position:13px -73px}
-		#stopPopup .c-4{background-position:13px -113px}
-		#stopPopup .c-6{background-position:13px -153px}
-		#stopPopup .c-146{background-position:13px -193px}
-		#stopPopup .c-200{background-position:13px -233px}
-		#stopPopup .c-211{background-position:13px -273px}
-		#stopPopup .c-212{background-position:13px -313px}
-		#stopPopup .c-213{background-position:13px -353px}
-		#stopPopup .c-215{background-position:13px -393px}
-		#stopPopup .c-231{background-position:13px -433px}
-
-	#busPopup .bus{padding-right:60px;background:transparent url(../images/ico-bus-big.png) 247px -475px no-repeat}
-		#busPopup .c-1{background-position:247px 5px}
-		#busPopup .c-2{background-position:247px -50px}
-		#busPopup .c-3{background-position:247px -103px}
-		#busPopup .c-4{background-position:247px -156px}
-		#busPopup .c-6{background-position:247px -209px}
-		#busPopup .c-146{background-position:247px -262px}
-		#busPopup .c-200{background-position:247px -314px}
-		#busPopup .c-211{background-position:247px -367px}
-		#busPopup .c-212{background-position:247px -420px}
-		#busPopup .c-213{background-position:247px -473px}
-		#busPopup .c-215{background-position:247px -526px}
-		#busPopup .c-231{background-position:247px -578px}
-
 	.aside{float:left;width:100%;background:url(../images/bg-pattern.jpg) 0 0 repeat;padding:2em 0;position:relative}
 		.aside .buttons{color:#fff;text-align:center;font-size:1.3em;margin:0 auto;width:60%;min-width:13em;max-width:340px}
 		.aside .buttons strong{display:block;font-size:1.2em;line-height:100%;font-family: 'titillium_websemibold',arial,sans-serif;font-weight:normal;margin-bottom:0.2em}
@@ -449,34 +418,6 @@ only screen and (min-resolution: 2dppx){
 
 	.result ul li a{background-image:url(../images/ico-stop@2x.gif);background-size:14px 44px}
 
-	#stopPopup .bus{background-image:url(../images/ico-bus@2x.png) !important;background-size:20px 528px !important;background-position:13px -458px !important}
-		#stopPopup .c-1{background-position:13px 7px !important}
-		#stopPopup .c-2{background-position:13px -35px !important}
-		#stopPopup .c-3{background-position:13px -77px !important}
-		#stopPopup .c-4{background-position:13px -119px !important}
-		#stopPopup .c-6{background-position:13px -162px !important}
-		#stopPopup .c-146{background-position:13px -204px !important}
-		#stopPopup .c-200{background-position:13px -246px !important}
-		#stopPopup .c-211{background-position:13px -288px !important}
-		#stopPopup .c-212{background-position:13px -331px !important}
-		#stopPopup .c-213{background-position:13px -373px !important}
-		#stopPopup .c-215{background-position:13px -416px !important}
-		#stopPopup .c-231{background-position:13px -458px !important}
-
-	#busPopup .bus{background-image:url(../images/ico-bus-big@2x.png) !important;background-size:25px 660px !important}
-		#busPopup .c-1{background-position:247px 5px}
-		#busPopup .c-2{background-position:247px -50px}
-		#busPopup .c-3{background-position:247px -103px}
-		#busPopup .c-4{background-position:247px -156px}
-		#busPopup .c-6{background-position:247px -209px}
-		#busPopup .c-146{background-position:247px -262px}
-		#busPopup .c-200{background-position:247px -314px}
-		#busPopup .c-211{background-position:247px -367px}
-		#busPopup .c-212{background-position:247px -420px}
-		#busPopup .c-213{background-position:247px -473px}
-		#busPopup .c-215{background-position:247px -526px}
-		#busPopup .c-231{background-position:247px -578px}
-
 	#variants .line .icon{background-image:url(../images/ico-tick-mask@2x.png);background-size:32px 63px}
 
 	.result span.close{background-image:url(../images/ico-result-close@2x.png);background-size:23px 23px}
@@ -515,4 +456,16 @@ only screen and (min-resolution: 2dppx){
 	h4{font-size:12pt}
 	ul{list-style-type:none;margin-left:0;padding-left:0}
 
+}
+
+.clearfix{
+        overflow:hidden;
+}
+
+.pophead h2{
+        float:left;
+}
+.pophead svg{
+        float:right;
+        padding-right:15px;
 }
