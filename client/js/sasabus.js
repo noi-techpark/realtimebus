@@ -1,9 +1,9 @@
 Proj4js.defs["EPSG:25832"] = "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs";
-
+Proj4js.defs["EPSG:3857"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs";
 var SASABus = {
 
     config: {
-        r3EndPoint: 'http://sasatest.r3-gis.com/',
+        r3EndPoint: 'http://realtimebus.tis.bz.it/',
         //r3EndPoint: 'http://sasabus.ph.r3-gis/',
         //r3EndPoint: 'http://sasabus.r3-gis/',
         busPopupSelector: '#busPopup',
@@ -50,16 +50,22 @@ var SASABus = {
         };
         me.map = new OpenLayers.Map(targetDivId, mapOptions);
 
-        var osm = new OpenLayers.Layer.TMS('OSM', 'http://tiles.r3-gis.com/mapcache/tms/',{
+        /*var osm = new OpenLayers.Layer.TMS('OSM', 'http://tiles.r3-gis.com/mapcache/tms/',{
             'layername': 'altoadige_osm@altoadige_grid',
             'type': 'png',
             visibility: true,
             tileOrigin: new OpenLayers.LonLat(602000, 5120000),
             opacity: 0.75,
             attribution: '<a target="_blank" href ="http://opendatacommons.org/licenses/odbl/summary/">ODbL</a> Openstreetmap e comunità'
-        });
+        });*/
+    var osm = new ol.layer.Tile({
+      source: new ol.source.XYZ({ 
+        url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+        attributions: [new ol.Attribution({ html: ['&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'] })]
+      })
+    })
                 
-        me.linesLayer = new OpenLayers.Layer.WMS('SASA Linee', me.config.r3EndPoint + 'ogc/wms', {layers: 0, transparent: true}, {visibility: false, singleTile: true});
+        me.linesLayer = new OpenLayers.Layer.WMS('SASA Linee', me.config.r3EndPoint + 'ogc/wms', {layers: 0, transparent: true}, {visibility: true, singleTile: true});
         
         //if(permalink) attiva le linee del permalink
         
@@ -76,8 +82,85 @@ var SASABus = {
         me.locationLayer = new OpenLayers.Layer.Vector('Geolocation layer', {
             styleMap: styleMap
         });
-        
-        me.map.addLayers([osm, me.linesLayer, me.stopsLayer, me.positionLayer, me.locationLayer]);
+                var matrixIds = new Array(15); 
+	for (var i=0; i<16; ++i) {
+		 matrixIds[i] = "GoogleMapsCompatible:" + i; 
+	} 
+        var wmts = new OpenLayers.Layer.WMTS({ 
+
+		 name: "Trails", 
+
+		 url: "http://sdi.provinz.bz.it/geoserver/gwc/service/wmts/", 
+
+		 layer: "WMTS_TRAILS_APB-PAB", 
+
+		 matrixSet: "GoogleMapsCompatible", 
+
+		 matrixIds: matrixIds, 
+
+		 format: "image/png8", 
+
+		 style: "default", 
+
+		 opacity: 0.75, 
+
+		 isBaseLayer: false 
+
+	 });
+	//TODO:Add province coordinates as layer
+	$.get("http://localhost:8080/parkingFrontEnd/rest/get-address?location=Passerpr",function(data){
+		var ad = JSON.parse(data);
+		console.log(ad);
+		var start = ad.AddressCandidates.candidates;
+		console.log(start);
+		$.get("http://localhost:8080/parkingFrontEnd/rest/get-address?location=Trauttma",function(data2){
+		
+                	var ad2 = JSON.parse(data2);
+	                var end = ad2.AddressCandidates.candidates;
+			console.log(start);
+                	var dataSet={
+                        	route : {
+                                	start_point : {
+                                        	coordinate : [ start.location.x, start.location.y ]
+	                                 },
+        	                         end_point : {
+                	                         coordinate : [ end.location.x, end.location.y ]
+                        	         },
+                                	 int_point : {
+                                        	 coordinates : [] 
+	                                 } 
+        	                 } 
+                	};
+	                var jd = JSON.stringify(dataSet); 
+        	        getPoints(jd);
+        	});
+	}); 	
+	function getPoints(jd){
+		$.post( "http://localhost:8080/parkingFrontEnd/rest/get-points",jd, function( data ) {
+			var route = JSON.parse(data);
+	    		var points = [];
+			var coordinates = route.route.path.coordinates;
+			var epsg3857=new OpenLayers.Projection("EPSG:3857");
+			var projectTo=me.map.getProjectionObject();
+			for (i in coordinates){
+				if (coordinates[i].coordinate!=undefined){
+					points.push(new OpenLayers.Geometry.Point(coordinates[i].coordinate[0],coordinates[i].coordinate[1] ).transform(epsg3857, projectTo));
+				}
+			}
+			var vectorLayer = new OpenLayers.Layer.Vector("Route");
+    
+				
+		    	var feature = new OpenLayers.Feature.Vector(
+        			new OpenLayers.Geometry.LineString(points)
+			);
+	    		vectorLayer.addFeatures(feature);
+	        	me.map.addLayer(vectorLayer);
+        		me.map.zoomToExtent(vectorLayer.getDataExtent());
+		});
+	} 
+	me.map.addControl(new OpenLayers.Control.LayerSwitcher()); 
+
+        me.map.addLayers([osm,me.linesLayer, me.stopsLayer, me.positionLayer, me.locationLayer]);
         
         var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000);
         me.map.zoomToExtent(merano);

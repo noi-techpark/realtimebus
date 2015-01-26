@@ -1,0 +1,5 @@
+_assetic:
+    resource: .
+    type: assetic
+_app:
+    resource: /home/pbertolla/git/realtimebus/server/app/config/routing_dev.yml

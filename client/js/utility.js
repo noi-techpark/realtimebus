@@ -333,7 +333,7 @@ function pad(num, size) {
 }
 
 function initLinesAfterRead(lines)
-{ 
+{
 	//alert(lines.toSource())
 	//console.log('initLinesAfterRead');
 	lines.sort(function(a,b){
@@ -343,7 +343,6 @@ function initLinesAfterRead(lines)
 	});
 	//console.log(lines);
 	// devo montare l'html 
-	
 	var htmlLineeU = new Array();
 	var htmlLineeE = new Array();
 	mapLinesInit = new Array();
@@ -412,12 +411,12 @@ function initLinesAfterRead(lines)
 	//console.log('Extra');
 	//console.log(htmlL);
 	$('#extra').html(htmlL);
-	SASABus.getLines(showLinesAfterRead);
+	SASABus.getLines(showLinesAfterRead(lines));
 }
 function showLinesAfterRead(lines)
 { 
 	//console.log('showLinesAfterRead');
-
+	
 	// ---- Tabs ----------------------------------------------------------------------------------------------------------
 	
 	$('.child-tick').hide();
@@ -482,7 +481,6 @@ function showLinesAfterRead(lines)
 							}
 							k++;
 						}
-						
 						SASABus.showLines(mapLines);
 			
 						if($('body').hasClass('smartphone')){

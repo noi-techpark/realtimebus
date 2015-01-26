@@ -1,0 +1,29 @@
+Server installation
+=======================
+
+Pre-requisits:
+------------------
+	- postgres 9.1+
+	- postgis 2.1+
+	- mapserver6+
+	- php5 / Symfony framework
+	- webserver(preferible apache2)
+	- install additional modules for apache
+		- php5-pgsql
+		- a2enmod rewrite
+		- mapscript
+Installation:
+--------------------
+	- clone git repository to your local git
+	- go to the server folder
+	- update the liferay composer and update project 
+	- deploy web as your root folder in apache rootfolder
+	- configure apache to allow htaccess files
+	- set the owner of the app folder to www-data
+	- go to src/R3Gis/RealTimeBusBundle/Resources/config/lines_mapfile.map and modify connection to db on line 52
+	- import data of buslines by filling ORT_RECORDS following the vdv-Standard
+
+Guide for Ubuntu 14.04
+---------------------------
+- apt-get install
+- install mapserver (i did it like this): sudo apt-get install cgi-mapserver mapserver-bin php5-mapscript http://gis.stackexchange.com/questions/112609/problems-while-installing-mapserver-on-ubuntu

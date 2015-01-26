@@ -12,12 +12,13 @@ li_r,li_g,li_b: colore RGB
 
 device = detectDevice();
 
-codificaLinee['1'] = 0;
+/*codificaLinee['1'] = 0;
 codificaLinee['2'] = 0;
 codificaLinee['3'] = 0;
 codificaLinee['4'] = 0;
 codificaLinee['6'] = 0;
-codificaLinee['146'] = 0;
+codificaLinee['146'] = 0;*/
+codificaLinee['1001'] = 0;
 
 codificaLinee['211'] = 1;
 codificaLinee['201'] = 1;
