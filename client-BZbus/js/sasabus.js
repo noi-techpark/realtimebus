@@ -3,7 +3,7 @@ Proj4js.defs["EPSG:25832"] = "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs"
 var SASABus = {
 
     config: {
-        r3EndPoint: 'http://sasatest.r3-gis.com/',
+        r3EndPoint: 'http://realtimebus.tis.bz.it/',
         //r3EndPoint: 'http://sasabus.ph.r3-gis/',
         //r3EndPoint: 'http://sasabus.r3-gis/',
         busPopupSelector: '#busPopup',
@@ -485,12 +485,13 @@ var SASABus = {
     calculatePopupPosition: function(popupSelector, pixel) {
         var mapPosition = $('#'+this.config.mapDivId).position(),
             maxX = mapPosition.left + $('#'+this.config.mapDivId).width(),
-            dx, dy, dialogWidth, dialogRightX;
+            dx, dy, dialogWidth, dialogRightX,
+            headerHeight = $('#header').outerHeight();;
         
         //calcola posizione dialog
         pixel.x = pixel.x - this.config.pinToDialogDistance; //distanza tra punta grafica e dialog
-        pixel.y = (pixel.y - $(popupSelector).height() - this.config.pinHeight - this.config.yOffset); // sottrae alla y l'altezza del dialog e l'altezza della punta grafica
-        
+        pixel.y = (pixel.y - $(popupSelector).height() - this.config.pinHeight); // sottrae alla y l'altezza del dialog e l'altezza della punta grafica
+
         dialogWidth = $(popupSelector).width() + 10;
         dialogRightX = pixel.x + dialogWidth;
         
@@ -510,8 +511,8 @@ var SASABus = {
             this.map.pan(dx, dy, {animate: false});
             this._dontClosePopup = false;
         }
-        
-        pixel.y = pixel.y > this.config.yOffset ? (pixel.y + this.config.yOffset) : this.config.yOffset;
+
+        pixel.y = pixel.y > 0 ? (pixel.y + headerHeight - 20) : headerHeight - 20;
         return pixel;
     },
     
