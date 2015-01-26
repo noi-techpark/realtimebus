@@ -486,7 +486,7 @@ var SASABus = {
         var mapPosition = $('#'+this.config.mapDivId).position(),
             maxX = mapPosition.left + $('#'+this.config.mapDivId).width(),
             dx, dy, dialogWidth, dialogRightX,
-            headerHeight = $('#header').outerHeight();;
+            headerHeight = $('#header').outerHeight();
         
         //calcola posizione dialog
         pixel.x = pixel.x - this.config.pinToDialogDistance; //distanza tra punta grafica e dialog
