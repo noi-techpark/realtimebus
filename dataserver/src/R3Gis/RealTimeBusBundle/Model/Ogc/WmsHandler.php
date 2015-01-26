@@ -23,6 +23,7 @@ namespace R3Gis\RealTimeBusBundle\Model\Ogc;
 
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\DBAL\Connection;
+use Exception;
 //TODO: si incazza quando faccio throw new Exception.....
 
 /**

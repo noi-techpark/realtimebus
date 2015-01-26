@@ -184,8 +184,8 @@ function pad(num, size) {
     return s;
 }
 
-function initLinesAfterRead(lines) { 
-	printFunctionCalled("initLinesAfterRead("+lines+")");
+function initLinesAfterRead(lines)
+{
 	//alert(lines.toSource())
 
 	// sort lines
@@ -194,8 +194,6 @@ function initLinesAfterRead(lines) {
 		var el2 = pad((''+b['li_nr']).replace(' ','_'),5)+b['str_li_var'].replace(' ','_');
 		return el1-el2;
 	});
-
-	// transform line data into html and put in #extra and #urbani tags
 	var htmlLineeU = new Array();
 	var htmlLineeE = new Array();
 	mapLinesInit = new Array();
@@ -325,7 +323,6 @@ function showLinesAfterRead(lines){
 							}
 							k++;
 						}
-						
 						SASABus.showLines(mapLines);
 						panelScroll();
 					}
@@ -683,5 +680,4 @@ function showResults(){
 		$('.panel-content-out').css('top','auto');
 	});		
 }
-
 
