@@ -4,7 +4,8 @@ SIZE 256 256
 MAXSIZE 4096
 RESOLUTION 72
 #FONTSET ../../fonts/fonts.list
-
+CONFIG "MS_ERRORFILE" "/home/pbertolla/ms_error.txt"
+	DEBUG 10
 WEB
 	METADATA
         # for mapserver 6.0
@@ -14,8 +15,6 @@ WEB
 		"wfs_encoding"	"UTF-8"
 		"wms_encoding"	"UTF-8"
 
-    	#"wms_onlineresource" "http://192.168.0.13/gc/author-pietro/public/services/ows.php?project=lecco&map=lecco_ubt"
-    	#"wfs_onlineresource" "http://192.168.0.13/gc/author-pietro/public/services/ows.php?project=lecco&map=lecco_ubt"
 		"wms_feature_info_mime_type"	"text/html"
 		"wfs_namespace_prefix"	"feature"
 		"wms_srs"	"EPSG:25832"
