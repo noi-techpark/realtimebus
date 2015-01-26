@@ -63,7 +63,7 @@
 	 <!--<![endif]-->
 		<header class="header" id="header">
 			<div class="aux">
-				<h1 class="logo" id="logo"><a href="#"><img src="images/logo-bz-bus.png" alt="Logo Bolzano Parking Beta" /> <span class="alt">Bolzano Bus</span></a><a href="http://www.google.com" class="beta round">Beta</a></h1>
+				<h1 class="logo" id="logo"><a href="#"><img src="images/logo-bz-bus.png" alt="Logo Bolzano Parking Beta" /> <span class="alt">Bolzano Bus</span></a><a href="#" class="beta round">Beta</a></h1>
 				<div class="lang round">
  					<span class="round"><?php echo $lang ?></span>
 					<ul class="round">
@@ -206,7 +206,7 @@
 		    	</div>	
 		    	<ul class="buttons">
 		    		<!--<li class="share-btn round"><a href="#"><strong><?php ___('condividi'); ?></strong> <?php ___('sui'); ?> <em><?php ___('social'); ?></em> <?php ___('evia'); ?> <em><?php ___('widget'); ?></em></a></li>-->
-		    		<li class="developers-btn round"><a href="#"><strong><?php ___('developer'); ?></strong> <em><?php ___('collabora'); ?></em> <?php ___('alprogetto'); ?></a></li>
+		    		<li class="developers-btn round"><a href="https://github.com/tis-innovation-park/realtimebus/tree/master/client-BZbus"><strong><?php ___('developer'); ?></strong> <em><?php ___('collabora'); ?></em> <?php ___('alprogetto'); ?></a></li>
 		    	</ul>
 		    	<!--<div class="widget-cont">
 			    	<div class="widget">
@@ -229,9 +229,9 @@
 	    	<div class="aux">
 		    	<h3><?php ___('leappdelprogetto'); ?> <strong><?php ___('bztraffic'); ?></strong></h3>
 				<ul>
-					<li class="bzparking"><a href="#"><img src="images/logo-bzparking.png" alt="BZ Parking" /></a></li>
+					<li class="bzparking"><a href="http://parking.integreen-life.bz.it/"><img src="images/logo-bzparking.png" alt="BZ Parking" /></a></li>
 					<li class="bzbus"><a href="#"><img src="images/logo-bzbus.png" alt="BZ Bus" /></a></li>
-					<li class="bztraffic"><a href="#"><img src="images/logo-bztraffic.png" alt="BZ Traffic" /></a></li>
+					<li class="bztraffic"><a href="http://traffic.bz.it/"><img src="images/logo-bztraffic.png" alt="BZ Traffic" /></a></li>
 				</ul>	
 	    	</div>
 	    </footer>
@@ -241,18 +241,18 @@
 			    	<ul>
 						<li class="eu"><a href="http://ec.europa.eu/environment/life/"></a></li>
 						<li class="ait"><a href="http://www.ait.ac.at/"></a></li>
-						<li class="integreen"><a href="http://www.integreen-life.bz.it/it/"></a></li>
 						<li class="bz"><a href="http://www.comune.bolzano.it/"></a></li>
 						<li class="tis"><a href="http://tis.bz.it/"></a></li>
+						<li class="integreen"><a href="http://www.integreen-life.bz.it/it/"></a></li>
 					</ul>
 			    </div>
 			    <div class="text">		    
-				    <p><?php ___('codice'); ?> <?php ___('licenziatosotto'); ?> <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License</a> <?php ___('pubblicatosu'); ?> <a href="https://github.com/ilvalle/parkbz">github</a><br />Powered by the <a href="http://web2py.com/">web2py</a> python web framework<br /><a href="http://twitter.github.com/bootstrap">Bootstrap</a> <?php ___('licenziatosotto'); ?> <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License v2.0</a></p>
+				    <p><?php ___('codice'); ?> <?php ___('licenziatosotto'); ?> <a href="http://www.gnu.org/licenses/agpl-3.0.html">GNU Affero General Public License</a> <?php ___('pubblicatosu'); ?> <a href="https://github.com/tis-innovation-park/realtimebus/tree/master/client-BZbus">github</a></p>
 					<p><?php ___('contatto'); ?>: project [at] integreen-life.bz.it</p>
 				</div>
 	    	</div>
 	    </footer>
-		<a href="https://github.com/ilvalle/parkbz" id="github">Fork me on GitHub</a>
+		<a href="https://github.com/tis-innovation-park/realtimebus/tree/master/client-BZbus" id="github">Fork me on GitHub</a>
         <script src="js/iscroll.js" type="text/javascript"></script>
         <!--[if lte IE 8]>
             <script src="scripts/PIE_IE678.js" type="text/javascript"></script>
