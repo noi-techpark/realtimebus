@@ -174,47 +174,54 @@
 	        <p id="credits"><?php ___('mappe'); ?> <a href="http://www.openstreetmap.org/copyright" rel="external">OpenStreetMap</a> &amp; <a href="<?php ___('linkr3gis'); ?>" rel="external">R3 GIS</a> - <?php ___('design'); ?> <a href="<?php ___('linkmadeincima'); ?>" rel="external">Madeincima</a></p>
             
 		<div id="busPopup" style="display:none;">
-			<div class="clearfix pophead">
-                               <h2 class="bus c-${lidname}"><?php ___('linea'); ?> ${lidname}</h2>
-                               <img src="" id="bus-pop-img">
-                        </div>
-			<p class="noData" style="display: none;">Questo autobus non è in servizio.</p>
-			<table>
-				<thead>
-					<tr>
-						<th><?php ___('prossimefermate'); ?></th>
-						<th class="time"><?php ___('stimato'); ?></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="${odd} ${last}">
-						<td>${ort_ref_ort_name}</td>
-						<td class="time">${time_est}</td>
-					</tr>
-				</tbody>
-			</table>
-			<span class="tip"></span>
-		</div>
+                                    <div class="clearfix pophead">
+                                        <h2 class="bus c-${lidname}"><?php ___('linea'); ?> ${lidname}</h2>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 0 48 48" width="30" class="svg" style="width: 30px;" fill="rgb(${li_r},${li_g},${li_b});">
+                                                        <path fill="rgb(${li_r},${li_g},${li_b})" d="M8 32c0 1.77.78 3.34 2 4.44v3.56c0 1.1.9 2 2 2h2c1.11 0 2-.9 2-2v-2h16v2c0 1.1.89 2 2 2h2c1.1 0 2-.9 2-2v-3.56c1.22-1.1 2-2.67 2-4.44v-20c0-7-7.16-8-16-8s-16 1-16 8v20zm7 2c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm18 0c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-12h-24v-10h24v10z"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="noData" style="display: none;">Questo autobus non è in servizio.</p>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th><?php ___('prossimefermate'); ?></th>
+                                                <th class="time"><?php ___('stimato'); ?></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="${odd} ${last}">
+                                                <td>${ort_ref_ort_name}</td>
+                                                <td class="time">${time_est}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <span class="tip"></span>
+                                </div>
+                                <div id="stopPopup" style="display:none;">
+                                    <h2><?php ___('fermata'); ?> ${ort_ref_ort_name}</h2>
+                                    <p class="noData" style="display: none;">Nelle prossime ore non sono previsti passaggi in questa fermata.</p>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th><?php ___('arrivo'); ?></th>
+                                                <th class="time"><?php ___('stimato'); ?></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="${odd} ${last}">
+                                                <td class="bus">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 48 48" width="18" class="svg" style="width: 18px; vertical-align:bottom" fill="rgb(${li_r},${li_g},${li_b});">
+                                                        <path fill="rgb(${li_r},${li_g},${li_b})" d="M8 32c0 1.77.78 3.34 2 4.44v3.56c0 1.1.9 2 2 2h2c1.11 0 2-.9 2-2v-2h16v2c0 1.1.89 2 2 2h2c1.1 0 2-.9 2-2v-3.56c1.22-1.1 2-2.67 2-4.44v-20c0-7-7.16-8-16-8s-16 1-16 8v20zm7 2c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm18 0c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-12h-24v-10h24v10z"></path>
+                                                        </svg>
 
-		<div id="stopPopup" style="display:none;">
-			<h2><?php ___('fermata'); ?> ${ort_ref_ort_name}</h2>
-			<p class="noData" style="display: none;">Nelle prossime ore non sono previsti passaggi in questa fermata.</p>
-			<table>
-				<thead>
-					<tr>
-						<th><?php ___('arrivo'); ?></th>
-						<th class="time"><?php ___('stimato'); ?></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="${odd} ${last}">
-						<td class="bus c-${lidname}"><?php ___('linea'); ?> ${lidname}</td>
-						<td class="time">${bus_passes_at}</td> <!-- temporaneo, non ho ancora i dati sull'orario -->
-					</tr>
-				</tbody>
-			</table>
-			<span class="tip"></span>
-		</div>
+                                                <?php ___('linea'); ?> ${lidname}
+                                                </td>
+                                                <td class="time">${bus_passes_at}</td> <!-- temporaneo, non ho ancora i dati sull'orario -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <span class="tip"></span>
+                                </div>
 
             
 		<script src="js/iscroll.js" type="text/javascript"></script>

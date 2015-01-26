@@ -132,8 +132,8 @@ var SASABus = {
         $.ajax({
             type: 'GET',
             crossDomain: true,
-            //url: this.config.r3EndPoint + 'lines?city='+this.config.city,
-            url: this.config.r3EndPoint + 'lines',
+            url: this.config.r3EndPoint + 'lines?city='+this.config.city,
+            //url: this.config.r3EndPoint + 'lines',
             dataType: 'jsonp',
             jsonp: 'jsonp',
             success: function(response, status, xhr) {

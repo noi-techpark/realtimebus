@@ -189,33 +189,7 @@ a{color:#c0c0c0;text-decoration:none}
 	#stopPopup .last td,#busPopup .last td{border:0}
 	#stopPopup .tip,#busPopup .tip{position:absolute;bottom:-59px;left:40px;background:url(../images/bg-tip.png) 0 0 no-repeat;width:75px;height:57px}
 
-#stopPopup .bus{padding-left:40px;background:#fbfbfb url(../images/ico-bus.png) 13px -473px no-repeat}
-#busPopup .bus{padding-right:60px;}/*background:transparent url(../images/ico-bus-big.png) right -475px no-repeat}
-	#stopPopup .c-1{background-position:13px 7px}
-	#stopPopup .c-2{background-position:13px -33px}
-	#stopPopup .c-3{background-position:13px -73px}
-	#stopPopup .c-4{background-position:13px -113px}
-	#stopPopup .c-6{background-position:13px -153px}
-	#stopPopup .c-146{background-position:13px -193px}
-	#stopPopup .c-200{background-position:13px -233px}
-	#stopPopup .c-211{background-position:13px -273px}
-	#stopPopup .c-212{background-position:13px -313px}
-	#stopPopup .c-213{background-position:13px -353px}
-	#stopPopup .c-215{background-position:13px -393px}
-	#stopPopup .c-231{background-position:13px -433px}
-	#busPopup .c-1{background-position:247px 5px}
-	#busPopup .c-2{background-position:247px -50px}
-	#busPopup .c-3{background-position:247px -103px}
-	#busPopup .c-4{background-position:247px -156px}
-	#busPopup .c-6{background-position:247px -209px}
-	#busPopup .c-146{background-position:247px -262px}
-	#busPopup .c-200{background-position:247px -314px}
-	#busPopup .c-211{background-position:247px -367px}
-	#busPopup .c-212{background-position:247px -420px}
-	#busPopup .c-213{background-position:247px -473px}
-	#busPopup .c-215{background-position:247px -526px}
-	#busPopup .c-231{background-position:247px -578px}
-*/
+#busPopup .bus{padding-right:60px;}
 .clearfix{
 	overflow:hidden;
 }
@@ -223,7 +197,7 @@ a{color:#c0c0c0;text-decoration:none}
 .pophead h2{
 	float:left;
 }
-.pophead img{
+.pophead svg{
 	float:right;
 	padding-right:15px;
 }
