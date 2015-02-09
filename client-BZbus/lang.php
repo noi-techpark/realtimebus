@@ -46,12 +46,14 @@
 	$vars['it_developer'] = 'Sei uno sviluppatore?';
 	$vars['it_collabora'] = 'collabora';
 	$vars['it_alprogetto'] = 'al progetto';
-	$vars['it_leappdelprogetto'] = 'Le app del progetto';
-	$vars['it_bztraffic'] = 'Bolzano Traffic';
+	$vars['it_leappdelprogetto'] = 'Le app sperimentali del';
+	$vars['it_bztraffic'] = 'Comune di Bolzano';
 	
 	$vars['it_licenziatosotto'] = 'licenziato sotto';
 	$vars['it_pubblicatosu'] = 'pubblicato su';
 	$vars['it_contatto'] = 'Contatto';
+	$vars['it_user_input'] = 'Vai al questionario!';
+	$vars['it_user_input_link'] = 'https://docs.google.com/forms/d/1qgBMiNqcWilOYJcOI4KM2YqB7Vt9nH-cACty__zCzD8/viewform';
 	
 	// Inglese
 	$vars['en_bzbustitle'] = 'Homepage | BZ Bus';
@@ -77,25 +79,27 @@
 	$vars['en_mappe'] = 'map';
 	$vars['en_design'] = 'design';
 
-	$vars['en_condividisuisocial'] = 'Condividi BZ Bus sui social';
-	$vars['en_condividi'] = 'Condividi';
-	$vars['en_sui'] = 'sui';
+	$vars['en_condividisuisocial'] = 'Share BZ Bus on social networks';
+	$vars['en_condividi'] = 'Share';
+	$vars['en_sui'] = 'on';
 	$vars['en_social'] = 'social';
-	$vars['en_evia'] = 'e via';
+	$vars['en_evia'] = 'and go';
 	$vars['en_widget'] = 'widget';
-	$vars['en_codice'] = 'Codice';
+	$vars['en_codice'] = 'Source code';
 	$vars['en_embed'] = 'Embed';
 	$vars['en_link'] = 'Link';
 	
-	$vars['en_developer'] = 'Sei uno sviluppatore?';
-	$vars['en_collabora'] = 'collabora';
-	$vars['en_alprogetto'] = 'al progetto';
-	$vars['en_leappdelprogetto'] = 'Le app del progetto';
-	$vars['en_bztraffic'] = 'Bolzano Traffic';
+	$vars['en_developer'] = 'Are you a developer?';
+	$vars['en_collabora'] = 'join';
+	$vars['en_alprogetto'] = 'the project';
+	$vars['en_leappdelprogetto'] = 'The experimental apps of the';
+	$vars['en_bztraffic'] = 'Municipality of Bolzano';
 	
-	$vars['en_licenziatosotto'] = 'licenziato sotto';
-	$vars['en_pubblicatosu'] = 'pubblicato su';
-	$vars['en_contatto'] = 'Contatto';
+	$vars['en_licenziatosotto'] = 'code licensed under the ';
+	$vars['en_pubblicatosu'] = '';
+	$vars['en_contatto'] = 'Contact';
+	$vars['en_user_input'] = 'Go to the survey!';
+	$vars['en_user_input_link'] = 'https://docs.google.com/forms/d/1qgBMiNqcWilOYJcOI4KM2YqB7Vt9nH-cACty__zCzD8/viewform';
 
 	// Tedesco
 	$vars['de_bzbustitle'] = 'Homepage | BZ Bus';
@@ -121,23 +125,25 @@
 	$vars['de_mappe'] = 'karte';
 	$vars['de_design'] = 'design';
 
-	$vars['de_condividisuisocial'] = 'Condividi BZ Bus sui social';
-	$vars['de_condividi'] = 'Condividi';
-	$vars['de_sui'] = 'sui';
+	$vars['de_condividisuisocial'] = 'Teile BZ Bus auf deine social networks';
+	$vars['de_condividi'] = 'Teile';
+	$vars['de_sui'] = 'auf';
 	$vars['de_social'] = 'social';
 	$vars['de_evia'] = 'e via';
 	$vars['de_widget'] = 'widget';
-	$vars['de_codice'] = 'Codice';
-	$vars['de_embed'] = 'Embed';
+	$vars['de_codice'] = 'Source code';
+	$vars['de_embed'] = 'Eingebettet';
 	$vars['de_link'] = 'Link';
 	
-	$vars['de_developer'] = 'Sei uno sviluppatore?';
-	$vars['de_collabora'] = 'collabora';
-	$vars['de_alprogetto'] = 'al progetto';
-	$vars['de_leappdelprogetto'] = 'Le app del progetto';
-	$vars['de_bztraffic'] = 'Bolzano Traffic';
+	$vars['de_developer'] = 'Bist du ein Entwickler?';
+	$vars['de_collabora'] = 'Mach';
+	$vars['de_alprogetto'] = 'mit';
+	$vars['de_leappdelprogetto'] = 'Die experimentellen Apps der';
+	$vars['de_bztraffic'] = 'Gemeinde Bozen';
 	
-	$vars['de_licenziatosotto'] = 'licenziato sotto';
-	$vars['de_pubblicatosu'] = 'pubblicato su';
-	$vars['de_contatto'] = 'Contatto';
+	$vars['de_licenziatosotto'] = 'lizenziert unter';
+	$vars['de_pubblicatosu'] = 'abgedruckt in';
+	$vars['de_contatto'] = 'Kontakt';
+	$vars['de_user_input'] = 'Zur Umfrage!';
+	$vars['de_user_input_link'] = 'https://docs.google.com/forms/d/1kdJ7hW-si8heRIfPdFmnRA2UmF1D2aEEapD7lHZ1yI8/viewform ';
 ?>

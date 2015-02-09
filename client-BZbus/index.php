@@ -207,6 +207,7 @@
 		    	<ul class="buttons">
 		    		<!--<li class="share-btn round"><a href="#"><strong><?php ___('condividi'); ?></strong> <?php ___('sui'); ?> <em><?php ___('social'); ?></em> <?php ___('evia'); ?> <em><?php ___('widget'); ?></em></a></li>-->
 		    		<li class="developers-btn round"><a href="https://github.com/tis-innovation-park/realtimebus/tree/master/client-BZbus"><strong><?php ___('developer'); ?></strong> <em><?php ___('collabora'); ?></em> <?php ___('alprogetto'); ?></a></li>
+		    		<li class="developers-btn round survey-btn"><a href="<?php ___('user_input_link'); ?>" target="_blank"><strong><?php ___('user_input'); ?></strong></a></li>
 		    	</ul>
 		    	<!--<div class="widget-cont">
 			    	<div class="widget">
@@ -240,10 +241,10 @@
 			    <div class="aux2">
 			    	<ul>
 						<li class="eu"><a href="http://ec.europa.eu/environment/life/"></a></li>
-						<li class="ait"><a href="http://www.ait.ac.at/"></a></li>
+						<li class="integreen"><a href="http://www.integreen-life.bz.it/it/"></a></li>
 						<li class="bz"><a href="http://www.comune.bolzano.it/"></a></li>
 						<li class="tis"><a href="http://tis.bz.it/"></a></li>
-						<li class="integreen"><a href="http://www.integreen-life.bz.it/it/"></a></li>
+						<li class="ait"><a href="http://www.ait.ac.at/"></a></li>
 					</ul>
 			    </div>
 			    <div class="text">		    

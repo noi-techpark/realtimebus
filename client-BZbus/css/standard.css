@@ -223,7 +223,10 @@ author: Madeincima.it
 		.aside .buttons a{display:block;color:#fff;border:0;padding:.8em 0 .9em 0;white-space:nowrap}
 		.aside .buttons em{font-style:normal;font-family: 'titillium_webbold',arial,sans-serif}
 		.share-btn{background:#0a99d4;text-shadow:1px 1px 1px #065b7e;display:none}
-		.developers-btn{background:#76c419;text-shadow:1px 1px 1px #3e6f03}
+		.developers-btn{background:#76c419;text-shadow:1px 1px 1px #3e6f03;min-height:76px;vertical-align:middle;margin:10px 20px}
+		.developers-btn a {height:100%}
+		.survey-btn{background:#e06e0c}
+		.survey-btn strong{line-height:41px !important;}
 		.widget-cont{display:none}
 	
 	.addthisbox{margin-bottom:2em}
