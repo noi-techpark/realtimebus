@@ -230,7 +230,7 @@
 	    	<div class="aux">
 		    	<h3><?php ___('leappdelprogetto'); ?> <strong><?php ___('bztraffic'); ?></strong></h3>
 				<ul>
-					<li class="bzparking"><a href="http://parking.integreen-life.bz.it/"><img src="images/logo-bzparking.png" alt="BZ Parking" /></a></li>
+					<li class="bzparking"><a href="http://parking.bz.it/"><img src="images/logo-bzparking.png" alt="BZ Parking" /></a></li>
 					<li class="bzbus"><a href="#"><img src="images/logo-bzbus.png" alt="BZ Bus" /></a></li>
 					<li class="bztraffic"><a href="http://traffic.bz.it/"><img src="images/logo-bztraffic.png" alt="BZ Traffic" /></a></li>
 				</ul>	

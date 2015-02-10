@@ -490,6 +490,7 @@ var SASABus = {
         //calcola posizione dialog
         pixel.x = pixel.x - this.config.pinToDialogDistance; //distanza tra punta grafica e dialog
         pixel.y = (pixel.y - $(popupSelector).height() - this.config.pinHeight); // sottrae alla y l'altezza del dialog e l'altezza della punta grafica
+	pixel.y = pixel.y-$('body').scrollTop(); //considers scrolling
         dialogWidth = $(popupSelector).width() + 10;
         dialogRightX = pixel.x + dialogWidth;
         
