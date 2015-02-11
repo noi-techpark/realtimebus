@@ -1,6 +1,9 @@
 Proj4js.defs["EPSG:25832"] = "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs";
 Proj4js.defs["EPSG:3857"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs";
-Proj4js.defs["EPSG:900913"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
+//Proj4js.defs["EPSG:900913"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
+
+var defaultProjection = new OpenLayers.Projection('EPSG:3857');
+var epsg25832 = new OpenLayers.Projection('EPSG:25832');
 var SASABus = {
 
     config: {
@@ -37,8 +40,6 @@ var SASABus = {
     
     init: function(targetDivId) {
         var me = this;
-        var defaultProjection = new OpenLayers.Projection('EPSG:3857');
-	var epsg25832 = new OpenLayers.Projection('EPSG:25832');
         //$("<style type='text/css'> .clickable-icon{cursor:hand;} </style>").appendTo("head");
         
         me.config.mapDivId = targetDivId;
@@ -48,20 +49,21 @@ var SASABus = {
             controls: [new OpenLayers.Control.Attribution(), new OpenLayers.Control.Navigation()],
 	    fractionalZoom: false,
 	    units:'m',
+            resolutions:[156543.033928041,78271.51696402048,39135.75848201023,19567.87924100512,9783.93962050256,4891.96981025128,2445.98490512564,1222.99245256282,611.49622628141,305.7481131407048,152.8740565703525,76.43702828517624,38.21851414258813,19.10925707129406,9.554628535647032,4.777314267823516,2.388657133911758,1.194328566955879,0.5971642834779395,0.29858214173896974,0.14929107086948487]
+
         };
         me.map = new OpenLayers.Map(targetDivId, mapOptions);
         me.map.addControl(new OpenLayers.Control.LayerSwitcher({'ascending':false}));
 
         var topoMap = new OpenLayers.Layer.TMS('TOPOMAP', 'http://sdi.provincia.bz.it/geoserver/gwc/service/tms/',{
-            'layername': 'cache_of2011', 
+            'layername': 'WMTS_OF2011_APB-PAB', 
             'type': 'png8',
             visibility: true,
             opacity: 0.75,
             attribution: '',
-	    tileOrigin:new OpenLayers.LonLat(590000.0,5114000.0).transform(epsg25832,defaultProjection),
-	    serverResolutions:[447.99999999999994,223.99999999999997,111.99999999999999,55.99999999999999,27.999999999999996,13.999999999999998,6.999999999999999,2.8,1.4,0.7,0.35,0.175]
-        }); 
-        me.linesLayer = new OpenLayers.Layer.WMS('SASA Linee', me.config.r3EndPoint + 'ogc/wms', {layers: 0, transparent: true,srs:epsg25832.getCode()}, {projection:epsg25832,visibility: true, singleTile: true});
+
+        });
+        me.linesLayer = new OpenLayers.Layer.WMS('SASA Linee', me.config.r3EndPoint + 'ogc/wms', {layers: 0, transparent: true,isBaseLayer:false}, {projection:defaultProjection,visibility: true, singleTile: true});
         //if(permalink) attiva le linee del permalink
         
         // if(permalink) map.zoomToExtent(extentDelPermalink);
@@ -78,7 +80,7 @@ var SASABus = {
             styleMap: styleMap
         });
 
-        me.map.addLayers([topoMap]);
+        me.map.addLayers([topoMap,me.positionLayer,me.stopsLayer,me.linesLayer]);
         
         var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000).transform(epsg25832,defaultProjection);
         me.map.zoomToExtent(merano);
@@ -224,8 +226,11 @@ var SASABus = {
                 url: this.config.r3EndPoint + "stops",
                 callbackKey: "jsonp"
             }),
+	    preFeatureInsert: function(feature) {
+                feature.geometry.transform(epsg25832,defaultProjection);
+            },
             styleMap: styleMap,
-            minScale: 10000,
+            minScale:10000,
             visibility: false
         });
 /*         stopsLayer.events.register('featuresadded', null, function() {
@@ -250,6 +255,9 @@ var SASABus = {
                 url: this.config.r3EndPoint + "positions", //TODO: modificare il nome del callback, renderlo più breve
                 callbackKey: "jsonp"
             }),
+	    preFeatureInsert: function(feature) {
+           	feature.geometry.transform(epsg25832,defaultProjection);
+            },
             styleMap: styleMap
         });
 
