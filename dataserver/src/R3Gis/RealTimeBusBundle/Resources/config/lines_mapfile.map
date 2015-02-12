@@ -17,7 +17,7 @@ WEB
 
 		"wms_feature_info_mime_type"	"text/html"
 		"wfs_namespace_prefix"	"feature"
-		"wms_srs"	"EPSG:25832"
+		"wms_srs"	"EPSG:25832 EPSG:3857"
 	
 
 	END
