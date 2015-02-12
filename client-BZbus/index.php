@@ -43,6 +43,18 @@
 		</script>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+	<link rel="apple-touch-icon" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/images/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/images/favicons/apple-touch-icon-76x76.png">
+	<link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/images/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/images/favicons/manifest.json">
+	<link rel="shortcut icon" href="/images/favicons/favicon.ico">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="msapplication-config" content="/images/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
 	</head>
 <!--[if IE 8]>
     <body class="lte-8 ie-8 map-body">
