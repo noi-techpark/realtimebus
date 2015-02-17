@@ -53,7 +53,6 @@ var SASABus = {
 
         };
         me.map = new OpenLayers.Map(targetDivId, mapOptions);
-        me.map.addControl(new OpenLayers.Control.LayerSwitcher({'ascending':false}));
 
         var topoMap = new OpenLayers.Layer.TMS('topo', 'http://sdi.provincia.bz.it/geoserver/gwc/service/tms/',{
             'layername': 'WMTS_OF2011_APB-PAB', 
@@ -130,6 +129,16 @@ var SASABus = {
                 me.zoomToCurrentPosition();
             });
             me.stopsLayer.setVisibility(true);
+	    $('#switcheroo a').click(function(event){
+		if (me.map.baseLayer == osm){
+			me.map.setBaseLayer(topoMap);
+			$('#switcheroo img').attr('src','images/osmmap.png');
+		}
+		else{
+			me.map.setBaseLayer(osm);
+			$('#switcheroo img').attr('src','images/topomap.png');
+		}
+	    });
         }, 2500);
     },
     
