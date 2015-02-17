@@ -1,6 +1,6 @@
 Proj4js.defs["EPSG:25832"] = "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs";
 Proj4js.defs["EPSG:3857"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs";
-//Proj4js.defs["EPSG:900913"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
+Proj4js.defs["EPSG:900913"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
 
 var defaultProjection = new OpenLayers.Projection('EPSG:3857');
 var epsg25832 = new OpenLayers.Projection('EPSG:25832');
@@ -53,16 +53,37 @@ var SASABus = {
 
         };
         me.map = new OpenLayers.Map(targetDivId, mapOptions);
-        me.map.addControl(new OpenLayers.Control.LayerSwitcher({'ascending':false}));
 
-        var topoMap = new OpenLayers.Layer.TMS('TOPOMAP', 'http://sdi.provincia.bz.it/geoserver/gwc/service/tms/',{
+        var topoMap = new OpenLayers.Layer.TMS('topo', 'http://sdi.provincia.bz.it/geoserver/gwc/service/tms/',{
             'layername': 'WMTS_OF2011_APB-PAB', 
             'type': 'png8',
             visibility: true,
             opacity: 0.75,
             attribution: '',
+	    numZoomLevels: 18
 
         });
+	function osm_getTileURL(bounds) {
+            var res = me.map.getResolution();
+            var x = Math.round((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
+            var y = Math.round((this.maxExtent.top - bounds.top) / (res * this.tileSize.h));
+            var z = this.map.getZoom();
+            var limit = Math.pow(2, z);
+
+            if (y < 0 || y >= limit) {
+                return OpenLayers.Util.getImagesLocation() + "404.png";
+            } else {
+                x = ((x % limit) + limit) % limit;
+                return this.url + z + "/" + x + "/" + y + "." + this.type;
+            }
+        }
+        var osm = new OpenLayers.Layer.TMS(
+                "OSM",
+                "http://otile1.mqcdn.com/tiles/1.0.0/map/",
+                { type: 'png', getURL: osm_getTileURL,
+                  maxResolution: 156543.0339, projection: defaultProjection, numZoomLevels: 19
+                }
+        ); 
         me.linesLayer = new OpenLayers.Layer.WMS('SASA Linee', me.config.r3EndPoint + 'ogc/wms', {layers: 0, transparent: true,isBaseLayer:false}, {projection:defaultProjection,visibility: true, singleTile: true});
         //if(permalink) attiva le linee del permalink
         
@@ -80,7 +101,7 @@ var SASABus = {
             styleMap: styleMap
         });
 
-        me.map.addLayers([topoMap,me.positionLayer,me.stopsLayer,me.linesLayer]);
+        me.map.addLayers([osm,topoMap,me.positionLayer,me.stopsLayer,me.linesLayer]);
         
         var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000).transform(epsg25832,defaultProjection);
         me.map.zoomToExtent(merano);
@@ -108,6 +129,16 @@ var SASABus = {
                 me.zoomToCurrentPosition();
             });
             me.stopsLayer.setVisibility(true);
+	    $('#switcheroo a').click(function(event){
+		if (me.map.baseLayer == osm){
+			me.map.setBaseLayer(topoMap);
+			$('#switcheroo img').attr('src','images/osmmap.png');
+		}
+		else{
+			me.map.setBaseLayer(osm);
+			$('#switcheroo img').attr('src','images/topomap.png');
+		}
+	    });
         }, 2500);
     },
     

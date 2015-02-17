@@ -305,3 +305,21 @@ a{color:#c0c0c0;text-decoration:none}
 	table td,table th{text-align:center;border:1px solid #ccc;padding:10px;font-size:12pt}
 
 } /* END MEDIA PRINT*/	
+
+#switcheroo{
+	height: 91px;
+	width: 91px;
+	position: absolute;
+	bottom: 50px;
+	right: -105px;
+	padding: 0;
+	background: #fff;
+	z-index: 999;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px solid #90928f;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+	filter: alpha(opacity=90);
+	opacity: 0.9;	
+}
