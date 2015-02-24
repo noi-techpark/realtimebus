@@ -175,6 +175,7 @@ $(document).ready(function() {
 	if (isSmartPhoneMode()) {
 		// on the smartphone the menu should be closed at first
 		$('div.panel').slideUp();
+		
 	}
 });
 

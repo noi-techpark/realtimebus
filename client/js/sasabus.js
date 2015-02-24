@@ -101,7 +101,7 @@ var SASABus = {
             styleMap: styleMap
         });
 
-        me.map.addLayers([osm,topoMap,me.positionLayer,me.stopsLayer,me.linesLayer]);
+        me.map.addLayers([osm,topoMap,me.positionLayer,me.stopsLayer,me.linesLayer,me.locationLayer]);
         
         var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000).transform(epsg25832,defaultProjection);
         me.map.zoomToExtent(merano);

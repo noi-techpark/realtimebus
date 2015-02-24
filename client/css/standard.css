@@ -307,11 +307,11 @@ a{color:#c0c0c0;text-decoration:none}
 } /* END MEDIA PRINT*/	
 
 #switcheroo{
-	height: 91px;
-	width: 91px;
+	height: 98px;
+	width: 98px;
 	position: absolute;
-	bottom: 50px;
-	right: -105px;
+	bottom: 30px;
+	right: 70px;
 	padding: 0;
 	background: #fff;
 	z-index: 999;

@@ -170,9 +170,9 @@
 					</div>
 				</div>
 			</footer>
-			<div id="switcheroo">
-				<a title="switch map" href="javascript:void(0)"><img src="images/topomap.png" alt="switch map"  style="width:100%"/></a>
-			</div>
+		</div>
+		<div id="switcheroo">
+			<a title="switch map" href="javascript:void(0)"><img src="images/topomap.png" alt="switch map"  style="width:100%"/></a>
 		</div>
 	        <p id="credits"><?php ___('mappe'); ?> <a href="http://www.openstreetmap.org/copyright" rel="external">OpenStreetMap</a> &amp; <a href="<?php ___('linkr3gis'); ?>" rel="external">R3 GIS</a> - <?php ___('design'); ?> <a href="<?php ___('linkmadeincima'); ?>" rel="external">Madeincima</a></p>
             
