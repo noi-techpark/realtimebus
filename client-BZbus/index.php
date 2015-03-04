@@ -186,7 +186,8 @@
 	            </div>
 	        </div>
 	        <a href="#" id="zoomToMyPosition"></a>
-	        <p id="credits"><?php ___('mappe'); ?> <a href="<?php ___('linkr3gis'); ?>" rel="external">R3Gis</a> - <?php ___('design'); ?> <a href="<?php ___('linkmadeincima'); ?>" rel="external">Madeincima</a></p>
+                <p id="credits"><?php ___('mappe'); ?> <a href="http://www.openstreetmap.org/copyright" rel="external">OpenStreetMap</a> &amp; <a href="<?php ___('linkr3gis'); ?>" rel="external">R3 GIS</a> - <?php ___('design'); ?> <a href="<?php ___('linkmadeincima'); ?>" rel="external">Madeincima</a></p>
+
 	    </main>
 	    <aside id="aside" class="aside">
 		    <div class="aux">
