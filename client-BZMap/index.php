@@ -64,7 +64,7 @@
 	    <main id="main" class="main main-map">
 	        <div class="map-container" id="map" style="width:100%;height:100%;"></div>
 	        <a href="#" id="zoomToMyPosition"></a>
-	        <p id="credits"><?php ___('mappe'); ?> <a href="<?php ___('linkr3gis'); ?>" rel="external">R3Gis</a> - <?php ___('design'); ?> <a href="<?php ___('linkmadeincima'); ?>" rel="external">Madeincima</a></p>
+	        <p id="credits"><?php ___('mappe'); ?> <a href="http://www.openstreetmap.org/copyright" rel="external" target="_blank">OpenStreetMap</a> & <a href="<?php ___('linkr3gis'); ?>" rel="external">R3Gis</a> - <?php ___('design'); ?> <a href="<?php ___('linkmadeincima'); ?>" rel="external">Madeincima</a></p>
 	    </main>
 <div id="busPopup" style="display:none;">
 	<div class="clearfix pophead">
