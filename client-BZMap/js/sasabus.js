@@ -1,9 +1,13 @@
 Proj4js.defs["EPSG:25832"] = "+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs";
+Proj4js.defs["EPSG:3857"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext  +no_defs";
+Proj4js.defs["EPSG:900913"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
 
+var defaultProjection = new OpenLayers.Projection('EPSG:3857');
+var epsg25832 = new OpenLayers.Projection('EPSG:25832');
 var SASABus = {
 
     config: {
-	city:'BZ',
+	city:'',
         r3EndPoint: 'http://realtimebus.tis.bz.it/',
         //r3EndPoint: 'http://sasabus.ph.r3-gis/',
         //r3EndPoint: 'http://sasabus.r3-gis/',
@@ -36,32 +40,51 @@ var SASABus = {
     
     init: function(targetDivId) {
         var me = this;
-        
         //$("<style type='text/css'> .clickable-icon{cursor:hand;} </style>").appendTo("head");
         
         me.config.mapDivId = targetDivId;
         
         var mapOptions = {
-            projection: new OpenLayers.Projection("EPSG:25832"),
-            maxExtent: new OpenLayers.Bounds(650000, 5135000, 700000, 5185000),
+            projection: defaultProjection,
             controls: [new OpenLayers.Control.Attribution(), new OpenLayers.Control.Navigation()],
-            resolutions: [264.5831904584105,176.38879363894034,88.19439681947017,35.27775872778806,17.63887936389403,8.819439681947015,3.527775872778806,1.763887936389403,0.7055551745557613,0.35277758727788067,0.17638879363894033,0.07055551745557613,0.035277758727788065,0.017638879363894033],
-            fractionalZoom: false,
-            units: 'm'
+	    fractionalZoom: false,
+	    units:'m',
+            resolutions:[156543.033928041,78271.51696402048,39135.75848201023,19567.87924100512,9783.93962050256,4891.96981025128,2445.98490512564,1222.99245256282,611.49622628141,305.7481131407048,152.8740565703525,76.43702828517624,38.21851414258813,19.10925707129406,9.554628535647032,4.777314267823516,2.388657133911758,1.194328566955879,0.5971642834779395,0.29858214173896974,0.14929107086948487]
+
         };
         me.map = new OpenLayers.Map(targetDivId, mapOptions);
 
-        var osm = new OpenLayers.Layer.TMS('OSM', 'http://tiles.r3-gis.com/mapcache/tms/',{
-            'layername': 'altoadige_osm@altoadige_grid',
-            'type': 'png',
+        var topoMap = new OpenLayers.Layer.TMS('topo', 'http://sdi.provincia.bz.it/geoserver/gwc/service/tms/',{
+            'layername': 'WMTS_OF2011_APB-PAB', 
+            'type': 'png8',
             visibility: true,
-            tileOrigin: new OpenLayers.LonLat(602000, 5120000),
             opacity: 0.75,
-            attribution: '<a target="_blank" href ="http://opendatacommons.org/licenses/odbl/summary/">ODbL</a> Openstreetmap e comunità'
+            attribution: '',
+	    numZoomLevels: 18
+
         });
-                
-        me.linesLayer = new OpenLayers.Layer.WMS('SASA Linee', me.config.r3EndPoint + 'ogc/wms', {layers: 0, transparent: true}, {visibility: false, singleTile: true});
-        
+	function osm_getTileURL(bounds) {
+            var res = me.map.getResolution();
+            var x = Math.round((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
+            var y = Math.round((this.maxExtent.top - bounds.top) / (res * this.tileSize.h));
+            var z = this.map.getZoom();
+            var limit = Math.pow(2, z);
+
+            if (y < 0 || y >= limit) {
+                return OpenLayers.Util.getImagesLocation() + "404.png";
+            } else {
+                x = ((x % limit) + limit) % limit;
+                return this.url + z + "/" + x + "/" + y + "." + this.type;
+            }
+        }
+        var osm = new OpenLayers.Layer.TMS(
+                "OSM",
+                "http://otile1.mqcdn.com/tiles/1.0.0/map/",
+                { type: 'png', getURL: osm_getTileURL,
+                  maxResolution: 156543.0339, projection: defaultProjection, numZoomLevels: 19
+                }
+        ); 
+        me.linesLayer = new OpenLayers.Layer.WMS('SASA Linee', me.config.r3EndPoint + 'ogc/wms', {layers: 0, transparent: true,isBaseLayer:false}, {projection:defaultProjection,visibility: true, singleTile: true});
         //if(permalink) attiva le linee del permalink
         
         // if(permalink) map.zoomToExtent(extentDelPermalink);
@@ -77,12 +100,11 @@ var SASABus = {
         me.locationLayer = new OpenLayers.Layer.Vector('Geolocation layer', {
             styleMap: styleMap
         });
+
+        me.map.addLayers([osm,topoMap,me.positionLayer,me.stopsLayer,me.linesLayer]);
         
-        me.map.addLayers([osm, me.linesLayer, me.stopsLayer, me.positionLayer, me.locationLayer]);
-	var bolzano = new OpenLayers.Bounds(676861.5167280979,5153839.91033499,682581.1768155887,5148773.223194927);
-        me.map.zoomToExtent(bolzano);
-        //me.map.zoomToMaxExtent();
-        
+        var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000).transform(epsg25832,defaultProjection);
+        me.map.zoomToExtent(merano);
         var control = new OpenLayers.Control.SelectFeature([me.positionLayer, me.stopsLayer]);
         control.events.register('beforefeaturehighlighted', me, me.handleSelectedFeature);
         me.map.addControl(control);
@@ -107,6 +129,16 @@ var SASABus = {
                 me.zoomToCurrentPosition();
             });
             me.stopsLayer.setVisibility(true);
+	    $('#switcheroo a').click(function(event){
+		if (me.map.baseLayer == osm){
+			me.map.setBaseLayer(topoMap);
+			$('#switcheroo img').attr('src','images/osmmap.png');
+		}
+		else{
+			me.map.setBaseLayer(osm);
+			$('#switcheroo img').attr('src','images/topomap.png');
+		}
+	    });
         }, 2500);
     },
     
@@ -131,6 +163,7 @@ var SASABus = {
             type: 'GET',
             crossDomain: true,
             url: this.config.r3EndPoint + 'lines?city='+this.config.city,
+            //url: this.config.r3EndPoint + 'lines',
             dataType: 'jsonp',
             jsonp: 'jsonp',
             success: function(response, status, xhr) {
@@ -167,13 +200,14 @@ var SASABus = {
     getAllLines: function(success, failure, scope) {
         scope = scope || null;
         failure = failure || function() {};
-        if(!success) return console.log('success callback is mandatory when calling getLines');
+        if(!success) return console.log('success callback is mandatory when calling getAllLines');
         //if(this.lines) return success.call(scope, this.lines);
         
         $.ajax({
             type: 'GET',
             crossDomain: true,
-            url: this.config.r3EndPoint + 'lines/all?city='+this.config.city,
+            //url: this.config.r3EndPoint + 'lines/all?city='+this.config.city,
+            url: this.config.r3EndPoint + 'lines/all',
             dataType: 'jsonp',
             jsonp: 'jsonp',
             success: function(response, status, xhr) {
@@ -223,8 +257,11 @@ var SASABus = {
                 url: this.config.r3EndPoint + "stops",
                 callbackKey: "jsonp"
             }),
+	    preFeatureInsert: function(feature) {
+                feature.geometry.transform(epsg25832,defaultProjection);
+            },
             styleMap: styleMap,
-            minScale: 10000,
+            minScale:10000,
             visibility: false
         });
 /*         stopsLayer.events.register('featuresadded', null, function() {
@@ -249,6 +286,9 @@ var SASABus = {
                 url: this.config.r3EndPoint + "positions", //TODO: modificare il nome del callback, renderlo più breve
                 callbackKey: "jsonp"
             }),
+	    preFeatureInsert: function(feature) {
+           	feature.geometry.transform(epsg25832,defaultProjection);
+            },
             styleMap: styleMap
         });
 
@@ -349,7 +389,6 @@ var SASABus = {
             y = feature.geometry.y,
             lonLat = new OpenLayers.LonLat(x, y),
             pixel = me.map.getPixelFromLonLat(lonLat);
-        
         if(!me.tpl.busRow) {
             var tr = $(me.config.busPopupSelector + ' table tbody tr');
             me.tpl.busRow = tr.clone().wrap('<div>').parent().html();
@@ -444,9 +483,8 @@ var SASABus = {
             selector = (type == 'bus') ? this.config.busPopupSelector : this.config.stopPopupSelector,
             content = OpenLayers.String.format(contentTpl, selectedFeature.attributes),
             pixel;
-            
         $(selector).empty().html(content);
-        
+       	$('#bus-pop-img').attr('src','images/'+selectedFeature.attributes.hexcolor2+'.png'); 
         if(features.length > 0) {                   
             var rows = [],
                 len = (features.length > this.config.rowsLimit) ? this.config.rowsLimit : features.length,
@@ -486,9 +524,9 @@ var SASABus = {
         
         //calcola posizione dialog
         pixel.x = pixel.x - this.config.pinToDialogDistance; //distanza tra punta grafica e dialog
-        pixel.y = (pixel.y - $(popupSelector).height() - this.config.pinHeight - this.config.yOffset); // sottrae alla y l'altezza del dialog e l'altezza della punta grafica
-        
-        dialogWidth = $(popupSelector).width() + 10;
+        pixel.y = (pixel.y - $(popupSelector).height() - this.config.pinHeight); // sottrae alla y l'altezza del dialog e l'altezza della punta grafica
+        pixel.y = pixel.y-$('body').scrollTop(); //considers scrolling
+	dialogWidth = $(popupSelector).width() + 10;
         dialogRightX = pixel.x + dialogWidth;
         
         if(pixel.y < 0) {
@@ -507,8 +545,6 @@ var SASABus = {
             this.map.pan(dx, dy, {animate: false});
             this._dontClosePopup = false;
         }
-        
-        pixel.y = pixel.y > this.config.yOffset ? (pixel.y + this.config.yOffset) : this.config.yOffset;
         return pixel;
     },
     
@@ -566,7 +602,7 @@ var SASABus = {
         if(!features4326) return console.log('errore nel parsing...');
         var features = [];
         for(var i = 0; i < features4326.length; i++) {
-            var geometry = features4326[i].geometry.transform(new OpenLayers.Projection('EPSG:4326'), new OpenLayers.Projection('EPSG:25832'));
+            var geometry = features4326[i].geometry.transform(new OpenLayers.Projection('EPSG:4326'),defaultProjection);
             features.push(new OpenLayers.Feature.Vector(geometry, features4326[i].attributes));
         }
         this.testLayer.removeAllFeatures();
@@ -612,7 +648,7 @@ var SASABus = {
                     var row = response[i];
                     if(row.srid) {
                         var lonLat = new OpenLayers.LonLat(row.lon, row.lat);
-                        lonLat.transform(new OpenLayers.Projection(row.srid), new OpenLayers.Projection('EPSG:25832'));
+                        lonLat.transform(new OpenLayers.Projection(row.srid), defaultProjection);
                         row.lon = lonLat.lon;
                         row.lat = lonLat.lat;
                     }
