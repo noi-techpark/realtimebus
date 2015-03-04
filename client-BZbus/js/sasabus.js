@@ -99,9 +99,10 @@ var SASABus = {
             styleMap: styleMap
         });
 
-        me.map.addLayers([osm,topoMap,me.positionLayer,me.stopsLayer,me.linesLayer]);
-        
-        var bolzano = new OpenLayers.Bounds(676861.5167280979,5153839.91033499,682581.1768155887,5148773.223194927).transform(epsg25832,defaultProjection); 
+        me.map.addLayers([osm,topoMap,me.positionLayer,me.stopsLayer,me.linesLayer,me.locationLayer]);
+        var bolzano = new OpenLayers.Bounds(1260000,5855200,1262000,5864000);
+
+	console.log(bolzano); 
         me.map.zoomToExtent(bolzano);
         var control = new OpenLayers.Control.SelectFeature([me.positionLayer, me.stopsLayer]);
         control.events.register('beforefeaturehighlighted', me, me.handleSelectedFeature);
