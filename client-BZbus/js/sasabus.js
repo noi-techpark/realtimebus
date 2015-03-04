@@ -101,8 +101,8 @@ var SASABus = {
 
         me.map.addLayers([osm,topoMap,me.positionLayer,me.stopsLayer,me.linesLayer]);
         
-        var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000).transform(epsg25832,defaultProjection);
-        me.map.zoomToExtent(merano);
+        var bolzano = new OpenLayers.Bounds(676861.5167280979,5153839.91033499,682581.1768155887,5148773.223194927).transform(epsg25832,defaultProjection); 
+        me.map.zoomToExtent(bolzano);
         var control = new OpenLayers.Control.SelectFeature([me.positionLayer, me.stopsLayer]);
         control.events.register('beforefeaturehighlighted', me, me.handleSelectedFeature);
         me.map.addControl(control);
