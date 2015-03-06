@@ -100,8 +100,26 @@ var SASABus = {
         me.locationLayer = new OpenLayers.Layer.Vector('Geolocation layer', {
             styleMap: styleMap
         });
+        me.map.addLayers([osm,topoMap]);
+	var kmls = ['Algunder_Waalweg','Brunnenweg','Gilfpromenade','Maiser_Waalweg','Passeggiata_Lungo_Passirio','Sissiweg','Sommerpromenade','Tappeiner','Winterpromenade'];
+	$.each(kmls,function( index,value ) {
+	var route = new OpenLayers.Layer.Vector("KML", {
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.HTTP({
+                url: "kml/"+value+".kml",
+                format: new OpenLayers.Format.KML({
+                    extractStyles: true, 
+                    extractAttributes: true,
+                    maxDepth: 2
+                })
+            }),
+	    preFeatureInsert: function(feature) {
+                feature.geometry.transform(new OpenLayers.Projection("EPSG:4326"),defaultProjection);
+            }
 
-        me.map.addLayers([osm,topoMap,me.positionLayer,me.stopsLayer,me.linesLayer,me.locationLayer]);
+        });
+		me.map.addLayer(route);
+	});
         
         var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000).transform(epsg25832,defaultProjection);
         me.map.zoomToExtent(merano);
@@ -139,6 +157,7 @@ var SASABus = {
 			$('#switcheroo img').attr('src','images/topomap.png');
 		}
 	    });
+
         }, 2500);
     },
     
