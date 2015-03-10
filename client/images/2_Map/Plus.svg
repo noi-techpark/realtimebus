@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="200px"
+	 height="200px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
+<g id="Ebene_1">
+	<g>
+		<g>
+			<g>
+				<circle fill="#5C6369" cx="100" cy="96.204" r="30.5"/>
+				<path fill="#FFFFFF" d="M100,127.704c-17.369,0-31.5-14.131-31.5-31.5s14.131-31.5,31.5-31.5s31.5,14.131,31.5,31.5
+					S117.369,127.704,100,127.704z M100,66.704c-16.267,0-29.5,13.233-29.5,29.5s13.233,29.5,29.5,29.5s29.5-13.233,29.5-29.5
+					S116.267,66.704,100,66.704z"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<rect x="97.5" y="78.493" fill="#FFFFFF" width="5" height="35.422"/>
+			</g>
+			<g>
+				<rect x="82.289" y="93.704" fill="#FFFFFF" width="35.42" height="5"/>
+			</g>
+		</g>
+	</g>
+	<rect x="-0.745" y="-65.246" fill="none" width="196.49" height="65.247"/>
+	<text transform="matrix(1 0 0 1 44.0576 -27.2461)" fill="#FFFFFF" font-family="'OpenSans'" font-size="50">MAP</text>
+</g>
+<g id="Detail">
+</g>
+</svg>
