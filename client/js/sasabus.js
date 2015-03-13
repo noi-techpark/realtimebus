@@ -4,8 +4,9 @@ Proj4js.defs["EPSG:900913"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon
 
 var defaultProjection = new OpenLayers.Projection('EPSG:3857');
 var epsg25832 = new OpenLayers.Projection('EPSG:25832');
-var SASABus = {
 
+
+var SASABus = {
     config: {
 	city:'',
         r3EndPoint: 'http://realtimebus.tis.bz.it/',
@@ -37,7 +38,22 @@ var SASABus = {
     lines: undefined,
     geolocate: undefined,
     locationLayer: undefined,
-    
+    activateSelectedThemes: function(activeThemes){
+	var me = this;
+	var layerMap = {
+		bus:[me.positionLayer,me.stopsLayer,me.linesLayer,me.locationLayer],
+		walk:[me.locationLayer]
+	}
+	$.each(me.map.getLayersBy('isBaseLayer',false),function(index,object){
+		console.log(object);
+		me.map.removeLayer(object);
+	});
+	$.each([activeThemes],function(index,objects){
+		if (layerMap[objects[index]] != undefined && layerMap[objects[index]].length>0){
+			me.map.addLayers(layerMap[objects[index]]);
+		}
+	});
+    }, 
     init: function(targetDivId) {
         var me = this;
         //$("<style type='text/css'> .clickable-icon{cursor:hand;} </style>").appendTo("head");
@@ -100,8 +116,7 @@ var SASABus = {
         me.locationLayer = new OpenLayers.Layer.Vector('Geolocation layer', {
             styleMap: styleMap
         });
-
-        me.map.addLayers([osm,topoMap,me.positionLayer,me.stopsLayer,me.linesLayer,me.locationLayer]);
+        me.map.addLayers([osm,topoMap]);
         
         var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000).transform(epsg25832,defaultProjection);
         me.map.zoomToExtent(merano);

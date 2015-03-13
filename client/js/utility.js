@@ -98,15 +98,6 @@ $(document).ready(function() {
 
 	panelScrollElement = Array();
 
-/* PO: this seams not to be useful	
-	device = detectDevice();
- 	
-	//if(device[0] == 'desktop'){
-	if(device[0] == 'smartphone'){
-		$('body').addClass('smartphone');
-	}
-*/
-
 	init(false);
 	oneTime(device);
 
@@ -122,7 +113,7 @@ $(document).ready(function() {
 	
 	//android don't support orientationchange but resize
 	var supportsOrientationChange = "onorientationchange" in window,
-    orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+        orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
 
 	$(window).bind(orientationEvent, function(){
 		onOrientationChange();
@@ -174,7 +165,7 @@ $(document).ready(function() {
 
 	if (isSmartPhoneMode()) {
 		// on the smartphone the menu should be closed at first
-		$('div.panel').slideUp();
+		//$('div.panel').slideUp();
 		
 	}
 });
@@ -267,6 +258,21 @@ function initLinesAfterRead(lines)
 	//console.log(htmlL);
 	$('#extra').html(htmlL);
 	SASABus.getLines(showLinesAfterRead(lines));
+	var subDomain = document.domain.substring(0,document.domain.indexOf('.'));
+	activateThemes('bus');
+	$( ".menu li a" ).click(function() {
+		$(this).toggleClass('active');
+		activateThemes();
+	}); 
+	function activateThemes(subdomain){
+		if (subdomain != undefined)
+			$('.menu #'+subdomain).toggleClass('active');
+		var themeArray = [];
+		$( ".menu li a.active").each(function(){
+			themeArray.push($(this).attr('id'));
+		});
+		SASABus.activateSelectedThemes(themeArray);
+	} 
 }
 
 function stopPropagationCustom(){
@@ -681,4 +687,3 @@ function showResults(){
 		$('.panel-content-out').css('top','auto');
 	});		
 }
-
