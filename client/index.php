@@ -84,14 +84,16 @@
 				</g>
 				</svg>
 			</span>
-			<img id="logo-mobile" src="images/logo.gif" alt="Merano real time bus"/>
+			<img id="logo-mobile" src="images/logo-small.gif" alt="Merano real time bus"/>
 			<span class="beta-mobile">Beta version</span>
 		</header>
 		<div class="map-container" id="map" style="width:100%;height:100%">
 		</div>
-
-		<a href="#" id="zoomToMyPosition"></a>
-
+		<div class="map-controls">
+			<a href="#" id="config"><img src="images/3_Bus/Config.svg" alt="Zoom"/></a>
+			<a href="#" id="zoomToMyPosition"><img src="images/2_Map/GPS.svg" alt="Zoom"/></a>
+			<a id="switcheroo" title="switch map" href="javascript:void(0)">EARTH</a>
+		</div>
 
             
 		<div class="panel" id="panel">
@@ -128,50 +130,6 @@
 				</a>
 				</li>
 			</ul>
-			<!--<main class="main" id="main">
-				<div id="search-container">
-					<div class="search-box">     			
-						<form id="search-form" action="#" method="post" role="search">
-							<input type="text" id="search-field" name="search-field" value="<?php ___('camporicerca'); ?>" />
-							<input type="submit" id="search-submit" value="<?php ___('cerca'); ?>" />
-						</form>
-					</div>
-					<div class="search-box result">
-						<span class="title"><?php ___('fermatevicine'); ?>...</span>
-						<ul id="listResults">
-						</ul>
-					</div>
-				</div>
-				<div class="panel-content-out">
-					<div class="scroll" id="scroll">
-						<div class="scroll-content">
-							<div class="panel-content">
-								<div id="variants">
-									<div class="tabbed-content">
-										<ul class="tabs">
-											<li class="button"><?php ___('urbani'); ?></li>
-											<li class="button"><?php ___('extraurbani'); ?></li>
-										</ul>
-										<span id="deselectall"> <span><?php ___('deselectall'); ?></span> </span>
-										<div class="tab-container">
-											<div class="tab-content">
-												<ul class="tick" id="urbani">
-													<li class="tick-list"></li>
-												</ul>
-											</div>
-											<div class="tab-content">
-												<ul class="tick" id="extra">
-													<li class="tick-list"></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</main>-->
 			<!--<footer id="footer-1" class="footer">
 				<ul class="logos">
 					<li class="merano"><a target="_blank" href="<?php ___('linkmerano'); ?>"><?php ___('merano'); ?></a></li>
@@ -196,9 +154,56 @@
 				</div>
 			</footer>-->
 		</div>
-		<div id="switcheroo">
-			<a title="switch map" href="javascript:void(0)"><img src="images/topomap.png" alt="switch map"  style="width:100%"/></a>
-		</div>
+		<div class="modal">
+			<main class="main" id="main">
+				<!--<div id="search-container">
+					<div class="search-box">     			
+						<form id="search-form" action="#" method="post" role="search">
+							<input type="text" id="search-field" name="search-field" value="<?php ___('camporicerca'); ?>" />
+							<input type="submit" id="search-submit" value="<?php ___('cerca'); ?>" />
+						</form>
+					</div>
+					<div class="search-box result">
+						<span class="title"><?php ___('fermatevicine'); ?>...</span>
+						<ul id="listResults">
+						</ul>
+					</div>
+				</div>-->
+				<div class="panel-content-out">
+					<div class="scroll-content">
+						<div class="panel-content">
+							<div class="filters">
+								<p><a href="#">Städtische Linien</a></p>
+								<p><a href="#">Auserstädtische Linien</a></p>	
+								<span id="deselectall"> <span><?php ___('deselectall'); ?></span> </span>
+							</div>
+							<div id="variants">
+								<div class="scroll" id="scroll">
+									<div class="tabbed-content">
+									<!--<ul class="tabs">
+										<li class="button"><?php ___('urbani'); ?></li>
+										<li class="button"><?php ___('extraurbani'); ?></li>
+									</ul>-->
+										<div class="tab-container">
+											<div class="tab-content">
+												<ul class="tick" id="urbani">
+													<li class="tick-list"></li>
+												</ul>
+											</div>
+											<div class="tab-content">
+												<ul class="tick" id="extra">
+													<li class="tick-list"></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div> 
 	        <p id="credits"><?php ___('mappe'); ?> <a href="http://www.openstreetmap.org/copyright" rel="external">OpenStreetMap</a> &amp; <a href="<?php ___('linkr3gis'); ?>" rel="external">R3 GIS</a> - <?php ___('design'); ?> <a href="<?php ___('linkmadeincima'); ?>" rel="external">Madeincima</a></p>
             
 		<div id="busPopup" style="display:none;">

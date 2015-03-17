@@ -240,10 +240,8 @@ function initLinesAfterRead(lines)
 				htmlL += htmlLineeU[i][0]+htmlLineeU[i][1]+htmlLineeU[i][2]+htmlLineeU[i][3]+htmlLineeU[i][4]+htmlLineeU[i][5]+htmlLineeU[i][6];
 		}
 	}
-	$('#urbani').html(htmlL);
 	//console.log('Urbane');
 	//console.log(htmlL);
-	htmlL = '';
 	for(var i=0;i<htmlLineeE.length;i++)
 	{
 		if(typeof htmlLineeE[i] != 'undefined')
@@ -256,7 +254,7 @@ function initLinesAfterRead(lines)
 	}
 	//console.log('Extra');
 	//console.log(htmlL);
-	$('#extra').html(htmlL);
+	$('#urbani').html(htmlL);
 	SASABus.getLines(showLinesAfterRead(lines));
 	var subDomain = document.domain.substring(0,document.domain.indexOf('.'));
 	activateThemes('bus');

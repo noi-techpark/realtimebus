@@ -45,7 +45,6 @@ var SASABus = {
 		walk:[me.locationLayer]
 	}
 	$.each(me.map.getLayersBy('isBaseLayer',false),function(index,object){
-		console.log(object);
 		me.map.removeLayer(object);
 	});
 	$.each([activeThemes],function(index,objects){
@@ -144,14 +143,14 @@ var SASABus = {
                 me.zoomToCurrentPosition();
             });
             me.stopsLayer.setVisibility(true);
-	    $('#switcheroo a').click(function(event){
+	    $('#switcheroo').click(function(event){
 		if (me.map.baseLayer == osm){
 			me.map.setBaseLayer(topoMap);
-			$('#switcheroo img').attr('src','images/osmmap.png');
+			$('#switcheroo').text('OSM');
 		}
 		else{
 			me.map.setBaseLayer(osm);
-			$('#switcheroo img').attr('src','images/topomap.png');
+			$('#switcheroo').text('EARTH');
 		}
 	    });
         }, 2500);
