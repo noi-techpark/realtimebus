@@ -154,7 +154,7 @@
 				</div>
 			</footer>-->
 		</div>
-		<div class="modal">
+		<div class="hidden modal">
 			<main class="main" id="main">
 				<!--<div id="search-container">
 					<div class="search-box">     			
@@ -172,10 +172,13 @@
 				<div class="panel-content-out">
 					<div class="scroll-content">
 						<div class="panel-content">
-							<div class="filters">
-								<p><a href="#">Städtische Linien</a></p>
-								<p><a href="#">Auserstädtische Linien</a></p>	
-								<span id="deselectall"> <span><?php ___('deselectall'); ?></span> </span>
+							<div class="filters-container clearfix">
+								<div class="filters">
+									<p><a href="#">Städtische Linien</a></p>
+									<p><a href="#">Auserstädtische Linien</a></p>	
+									<span id="deselectall"> <span><?php ___('deselectall'); ?></span> </span>
+								</div>
+								<a href="#" id="close"><img src="images/3_Bus/Close.svg" alt="close"/></a>
 							</div>
 							<div id="variants">
 								<div class="scroll" id="scroll">

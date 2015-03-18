@@ -29,9 +29,6 @@ div.olMap{width:100%;height:100%;position:absolute}
 
 #serverTime{display:none}
 
-.clearfix{
-        overflow:hidden;
-}
 
 .pophead h2{
         float:left;
@@ -43,6 +40,31 @@ div.olMap{width:100%;height:100%;position:absolute}
 #zoomToMyPosition{
 	display:block;
 }
-.map-controls{
+#zoomButtons{
+	width:10%;
+        top: 17%;
+
+}
+.map-controls,#zoomButtons{
 	right:5px;
+	z-index:1000;
+}
+#config,#zoomToMyPosition{
+width:40%;
+}
+#switcheroo{
+        margin-right:4%;
+        margin-top:10px;
+        font-size:100%;
+        line-height:105%;
+        height:100%;
+        padding: 8px;
+        max-width:42%;
+}
+
+ul.menu{
+	width:100%;
+}
+#close{
+	width:15%;
 }

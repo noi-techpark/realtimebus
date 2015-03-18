@@ -111,6 +111,9 @@ $(document).ready(function() {
 		},20);
 	}
 	
+	$('#config,#close').click(function(){
+		$('.modal').toggleClass('hidden');
+	});
 	//android don't support orientationchange but resize
 	var supportsOrientationChange = "onorientationchange" in window,
         orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
@@ -123,11 +126,11 @@ $(document).ready(function() {
 	function init(varOrientationChange){
 		printFunctionCalled("init("+varOrientationChange+")");
 	}
-	
+		
 	function oneTime(device){
 		printFunctionCalled("oneTime("+device+")");
 		
-		$('#map').append('<div id="zoomButtons"><a href="#" id="zoomInButton">Zoom in</a><a href="#" id="zoomOutButton">Zoom out</a></div>');
+		$('#map').append('<div id="zoomButtons"><a href="#" id="zoomInButton"><img src="images/2_Map/Plus.svg" alt="Zoom in"/></a><a href="#" id="zoomOutButton"><img src="images/2_Map/Minus.svg" alt="Zoom out"/></a></div>');
 		
 		SASABus.init('map');
 		SASABus.getAllLines(initLinesAfterRead);

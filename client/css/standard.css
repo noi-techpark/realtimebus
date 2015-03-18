@@ -36,7 +36,7 @@ a{color:#c0c0c0;text-decoration:none}
 #logo-mobile{display:none}
 .beta-mobile{display:none}
 
-.panel{color:#bbbbbb;box-shadow:-15px 0px 15px 10px #aeaeae;width:375px;height:100%;position:absolute;top:0;left:0;background:#fafafa;z-index:1000}
+.panel{color:#bbbbbb;box-shadow:-15px 0px 15px 10px #aeaeae;width:21%;height:100%;position:relative;background:#fafafa;z-index:1000;float:left;}
 .header{border-bottom:1px solid #eae9e9;position:relative;background:#fff;width:100%;float:left;padding:35px 0 0 0;height:62px}
 #logo{position:absolute;top:35px;left:24px;width:324px;height:41px;display:block;background:url(../images/logo.gif) 0 0 no-repeat;text-indent:-9999px;font-size:0;line-height:0}
 
@@ -141,7 +141,7 @@ a{color:#c0c0c0;text-decoration:none}
 	#deselectall.disabled{color:#d3d3d3;cursor:auto}
 	#deselectall.disabled span{color:#d3d3d3}
 
-.panel-content-out{width:100%;position:absolute;top:68px;left:0;bottom:90px;}
+.panel-content-out{width:100%;position:absolute;top:0;left:0;bottom:90px;}
 
 .panel .scroll{/*max-height:500px;*/overflow:hidden;position:relative;width:375px;float:left;padding:0 0}
 	.panel .scroll-content{float:left;padding:0 0 0 0;width:375px;-webkit-transform: translateZ(0);-moz-transform: translateZ(0);-ms-transform: translateZ(0);-o-transform: translateZ(0);transform: translateZ(0);-webkit-touch-callout: none;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;-webkit-text-size-adjust: none;-moz-text-size-adjust: none;-ms-text-size-adjust: none;-o-text-size-adjust: none;text-size-adjust: none} 
@@ -149,36 +149,43 @@ a{color:#c0c0c0;text-decoration:none}
 	.iScrollVerticalScrollbar.hidden{display:none}
 	.iScrollIndicator{background:#bfbfbf;width:5px;position:absolute;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px}
 
-#zoomButtons{width:31px;position:absolute;top:20px;right:20px;z-index:1000}
-	#zoomButtons a{width:31px;float:left;height:31px;text-indent:-9999px;background-size:cover;padding:4px;}
-	a#zoomInButton{background-image:url(../images/2_Map/Plus.svg);margin-bottom:10px;}
-	a#zoomOutButton{bottom:0;top:auto;background-image:url(../images/2_Map/Minus.svg);}
+#zoomButtons{width:100px;position:absolute;top:20px;right:20px;z-index:1000}
+	#zoomButtons a{width:100%;float:left;height:100%;text-indent:-9999px;}
+	a#zoomInButton{margin-bottom:10px;}
+	a#zoomOutButton{bottom:0;top:auto;}
+	#zoomButtons a img{display:block;width:100%;}
 
 .map-controls{
 	position:absolute;bottom:25px;right:15px;clear:both;
+	width:30%;
+        z-index:1000;
 }
 #zoomToMyPosition{
-	display:none;
 	float:right;
+	clear:right;
 }
 .map-controls a{
 	display:block;
 }
 #config{
-	text-align:right;
+	float:right;
+	width:100px;
 }
-#zoomToMyPosition img,#config img{z-index:1000;
-	width:60px;
-	height:60px;
+#zoomToMyPosition{
+	width:100px;
+}
+#zoomToMyPosition img,#config img,#close img{z-index:1000;
+	width:100%;
 	cursor:pointer;
-	margin:5px;
 }
 #switcheroo{
+        margin-top:20px;
+        font-size:30px;
+        font-weight:bold;
+        line-height:34px;
+        padding: 15px;
 	float:right;
-	margin:15px;
-	font-size:16px;
-	font-weight:bold;
-	line-height:22px;
+	margin-right:4%;
 	-webkit-border-radius: 13px;
 	-moz-border-radius: 13px;
 	border-radius: 13px;
@@ -187,7 +194,7 @@ a{color:#c0c0c0;text-decoration:none}
 	color:#fff;
 	display:block;
 	height:100%;
-	padding: 10px;
+	max-width:42%;
 }
 #serverTime{font-weight:bold;font-size:0.9em;color:#878787;height:22px;width:91px;
 	position:absolute;bottom:10px;right:-105px;
@@ -343,6 +350,9 @@ a{color:#c0c0c0;text-decoration:none}
     clear: both;
   }
 }
+.menu {
+	width:100px;
+}
 .menu a svg{fill:#fff;background-color:#c7c7c7;}
 .menu a:hover{
 	opacity:0.8;
@@ -371,15 +381,31 @@ a{color:#c0c0c0;text-decoration:none}
 	z-index:3000;
 	position:relative;
 }
-.filters{
+.filters-container{
 	position:relative;
 	z-index:5000;
-	background-color: #e3e3e3;
+	background-color: #fff;
 	padding:20px;
-	width:150%;
+}
+.filters,#close{
+	float:left;
 }
 .filters a{
 	color: #000;
 	font-size:1.2em;
 	line-height:1.5em;
+}
+.hidden{
+	display:none;
+}
+#close{
+        display:block;
+        width:100px;
+	float:right;
+}
+
+.map-container{
+	position:absolute;
+	left:0;
+	top:0;
 }
