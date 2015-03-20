@@ -41,17 +41,19 @@ var SASABus = {
     activateSelectedThemes: function(activeThemes){
 	var me = this;
 	var layerMap = {
+		walk:[me.wegeStartPointsLayer],
 		bus:[me.positionLayer,me.stopsLayer,me.linesLayer,me.locationLayer],
-		walk:[me.locationLayer]
 	}
 	$.each(me.map.getLayersBy('isBaseLayer',false),function(index,object){
 		me.map.removeLayer(object);
 	});
-	$.each([activeThemes],function(index,objects){
-		if (layerMap[objects[index]] != undefined && layerMap[objects[index]].length>0){
-			me.map.addLayers(layerMap[objects[index]]);
+	var activeLayers=[];
+	$.each(activeThemes,function(index,object){
+		if (object != undefined && object.length>0){
+			activeLayers=activeLayers.concat(layerMap[object]);
 		}
 	});
+	me.map.addLayers(activeLayers);
     }, 
     init: function(targetDivId) {
         var me = this;
@@ -64,11 +66,11 @@ var SASABus = {
             controls: [new OpenLayers.Control.Attribution(), new OpenLayers.Control.Navigation()],
 	    fractionalZoom: false,
 	    units:'m',
-            resolutions:[156543.033928041,78271.51696402048,39135.75848201023,19567.87924100512,9783.93962050256,4891.96981025128,2445.98490512564,1222.99245256282,611.49622628141,305.7481131407048,152.8740565703525,76.43702828517624,38.21851414258813,19.10925707129406,9.554628535647032,4.777314267823516,2.388657133911758,1.194328566955879,0.5971642834779395,0.29858214173896974,0.14929107086948487]
+            resolutions:[156543.033928041,78271.51696402048,39135.75848201023,19567.87924100512,9783.93962050256,4891.96981025128,2445.98490512564,1222.99245256282,611.49622628141,305.7481131407048,152.8740565703525,76.43702828517624,38.21851414258813,19.10925707129406,9.554628535647032,4.777314267823516,2.388657133911758,1.194328566955879,0.5971642834779395,0.29858214173896974,0.14929107086948487],
 
         };
         me.map = new OpenLayers.Map(targetDivId, mapOptions);
-
+	console.log(me.map);
         var topoMap = new OpenLayers.Layer.TMS('topo', 'http://sdi.provincia.bz.it/geoserver/gwc/service/tms/',{
             'layername': 'WMTS_OF2011_APB-PAB', 
             'type': 'png8',
@@ -106,8 +108,8 @@ var SASABus = {
         // else...
         
         me.stopsLayer = me.getStopsLayer();
+	me.wegeStartPointsLayer = me.getWegeStartPoints(); 
         me.positionLayer = me.getBusPositionLayer();
-        
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
             externalGraphic: 'images/pin.png'
@@ -119,11 +121,10 @@ var SASABus = {
         
         var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000).transform(epsg25832,defaultProjection);
         me.map.zoomToExtent(merano);
-        var control = new OpenLayers.Control.SelectFeature([me.positionLayer, me.stopsLayer]);
+        var control = new OpenLayers.Control.SelectFeature([me.wegeStartPointsLayer]);
         control.events.register('beforefeaturehighlighted', me, me.handleSelectedFeature);
         me.map.addControl(control);
         control.activate();
-        
         me.showLines(['all']);
         
         setTimeout(function() {
@@ -170,7 +171,7 @@ var SASABus = {
         var me = this;
         scope = scope || null;
         failure = failure || function() {};
-        if(!success) return console.log('success callback is mandatory when calling getLines');
+        if(!success) return console.log('');
         if(this.lines) return success.call(scope, this.lines);
         
         $.ajax({
@@ -284,7 +285,21 @@ var SASABus = {
         }); */
         return stopsLayer;
     },
-    
+    getWegeStartPoints: function(){
+        var styleMap = new OpenLayers.StyleMap({
+            pointRadius: 20,
+            externalGraphic: 'images/4_Piedi/Pin.svg'
+        });
+	var positionsLayer = new OpenLayers.Layer.Vector("wegestartLayer", {
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.Script({
+                url: "http://localhost:8080/apiedi/startPoints"
+            }),
+            styleMap: styleMap
+        });
+	return positionsLayer;
+
+    }, 
     getBusPositionLayer: function() {
         var me = this;
         
@@ -363,12 +378,15 @@ var SASABus = {
     
     handleSelectedFeature: function(event) {
         var feature = event.feature;
-        
+       console.log("event???"); 
         if(feature.layer.name == 'stopsLayer') {
             this.showStopPopup(feature);
         } else if(feature.layer.name == 'positionLayer') {
             this.showBusPopup(feature);
-        }
+        } else if(feature.layer.name == 'wegestartLayer'){
+		console.log("got it");
+	}
+	
     },
     
     bindPopupToMapMove: function(selector, originalX, originalY) {
