@@ -111,8 +111,16 @@ $(document).ready(function() {
 		},20);
 	}
 	
-	$('#config,#close').click(function(){
-		$('.modal').toggleClass('hidden');
+	$('.config').click(function(element){
+		var theme = $(this).attr('id');
+		theme = theme.substring(0,theme.indexOf('-'));
+		if (theme == 'walk')
+			SASABus.getRoutes();
+		$('.' + theme).show();
+		
+	});
+	$('.close-modal').click(function(element){
+		$('.modal').hide();
 	});
 	//android don't support orientationchange but resize
 	var supportsOrientationChange = "onorientationchange" in window,
@@ -130,7 +138,7 @@ $(document).ready(function() {
 	function oneTime(device){
 		printFunctionCalled("oneTime("+device+")");
 		
-		$('#map').append('<div id="zoomButtons"><a href="#" id="zoomInButton"><img src="images/2_Map/Plus.svg" alt="Zoom in"/></a><a href="#" id="zoomOutButton"><img src="images/2_Map/Minus.svg" alt="Zoom out"/></a></div>');
+		$('.map-controls').before('<div id="zoomButtons"><a href="#" id="zoomInButton"><img src="images/2_Map/Plus.svg" alt="Zoom in"/></a><a href="#" id="zoomOutButton"><img src="images/2_Map/Minus.svg" alt="Zoom out"/></a></div>');
 		
 		SASABus.init('map');
 		SASABus.getAllLines(initLinesAfterRead);
@@ -205,7 +213,7 @@ function initLinesAfterRead(lines)
 		var color = 'rgb('+lines[i].li_r+','+lines[i].li_g+','+lines[i].li_b+') ';
 		if(typeof htmlLineeU[codLinea] == 'undefined' && typeof htmlLineeE[codLinea] == 'undefined')
 		{
-			linea[k++] = '<li class="tick-list"><p class="line l-'+codLinea+'"><strong class="line-no" id="l_'+codLinea+'">'+nomeLinea+'</strong><span class="icon" style="background-color:'+color+'" />';
+			linea[k++] = '<li class="tick-list"></strong><p class="line l-'+codLinea+'"><span class="circle" style="background-color:'+color+'" /><strong class="line-no" id="l_'+codLinea+'">'+nomeLinea+'</strong><p/>';
 			linea[k++] = '';
 			linea[k++] = '</p>';
 			linea[k++] = '<ul class="child-tick">';
@@ -260,14 +268,16 @@ function initLinesAfterRead(lines)
 	$('#urbani').html(htmlL);
 	SASABus.getLines(showLinesAfterRead(lines));
 	var subDomain = document.domain.substring(0,document.domain.indexOf('.'));
+	//activateThemes(subDomain);
 	activateThemes('bus');
 	$( ".menu li a" ).click(function() {
 		$(this).toggleClass('active');
 		activateThemes();
 	}); 
 	function activateThemes(subdomain){
-		if (subdomain != undefined)
+		if (subdomain != undefined){
 			$('.menu #'+subdomain).toggleClass('active');
+		}
 		var themeArray = [];
 		$( ".menu li a.active").each(function(){
 			themeArray.push($(this).attr('id'));
@@ -453,14 +463,6 @@ function showLinesAfterRead(lines){
 		}
 	});
 
-	// ---- easyListSplitter ----------------------------------------------------------------------------------------------------------
-	$('#variants .tab-content').each(function(){
-		$(this).find('ul.tick').easyListSplitter({ 
-				colNumber: 3,
-				direction: 'horizontal'
-		});
-	});
-	
 	
 	// ---- PreFilled   ----------------------------------------------------------------------------------------------------------			
 	$.fn.preFilled = function() {

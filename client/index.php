@@ -32,6 +32,7 @@
 		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
 		<link href="css/standard.css" rel="stylesheet" media="screen,projection,print" type="text/css" />
 		<link href="css/smartphone.css" media="only screen and (max-width: 671px)" rel="stylesheet" /> <!-- max-device-width: 671px -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 		<!--<link href="css/smartphoneLandscape.css" media="only screen and (max-width: 671px) and (orientation: landscape)" rel="stylesheet" /> --> <!-- max-device-width: 671px -->
 		<!-- media="only screen and (orientation: landscape) -->
 		<script src="js/detect_device.js" type="text/javascript"></script>
@@ -40,9 +41,17 @@
 		<script src="js/OpenLayers/proj4js.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js" type="text/javascript"></script>
 		<script src="js/sasabus.js"></script>
-		<script> var txtVariante = '<?php ___("varianti"); ?>';</script>
 
+		<script> var txtVariante = '';</script>
+		<script type="text/javascript" src="https://www.google.com/jsapi?autoload={
+	            'modules':[{
+        	      'name':'visualization',
+	              'version':'1',
+        	      'packages':['corechart']
+            	     }]}"
+	        ></script>
 		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
 		<style>
 			.ui-dialog {z-index:1000;}
@@ -90,30 +99,30 @@
 		<div class="map-container" id="map" style="width:100%;height:100%">
 		</div>
 		<div class="map-controls">
-			<a href="#" id="config"><img src="images/3_Bus/Config.svg" alt="Zoom"/></a>
+			<a href="#" class="config" id="bus-c"><img src="images/3_Bus/Config.svg" alt="Zoom"/></a>
+			<a href="#" class="config" id="walk-c"><img src="images/4_Piedi/Config.svg" alt="Zoom"/></a>
 			<a href="#" id="zoomToMyPosition"><img src="images/2_Map/GPS.svg" alt="Zoom"/></a>
 			<a id="switcheroo" title="switch map" href="javascript:void(0)">EARTH</a>
 		</div>
 
             
+		<header class="header" id="header">
+			<h1 id="logo">Merano real time bus</h1>
+			<span class="beta">Beta version</span>
+			<nav class="language-switcher">
+				<ul>
+					<li <?php if($lang=='it') echo 'class="active"'; ?>><a href="?l=it">IT</a></li>
+					<li <?php if($lang=='de') echo 'class="active"'; ?>><a href="?l=de">DE</a></li>
+					<li <?php if($lang=='en') echo 'class="active"'; ?>><a href="?l=en">EN</a></li>
+				</ul>
+			</nav>
+		</header>
 		<div class="panel" id="panel">
-			<header class="header" id="header">
-				<h1 id="logo">Merano real time bus</h1>
-				<span class="beta">Beta version</span>
-				<nav class="language-switcher">
-					<ul>
-						<li <?php if($lang=='it') echo 'class="active"'; ?>><a href="?l=it">IT</a></li>
-						<li <?php if($lang=='de') echo 'class="active"'; ?>><a href="?l=de">DE</a></li>
-						<li <?php if($lang=='en') echo 'class="active"'; ?>><a href="?l=en">EN</a></li>
-					</ul>
-				</nav>
-			</header>
-			<span class="btn-toggle open first" id="btn-toggle"></span>
+			<!--<span class="btn-toggle open first" id="btn-toggle"></span>-->
 			<ul class="menu">
 				<li>
 				<a href="javascript:void(0)" class="bus" id="bus">
 					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="100%" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
-
 						<g>
 							<path fill-rule="evenodd" clip-rule="evenodd" d="M86.957,77.193h26.086v-2.898H86.957V77.193z M86.957,72.846h26.086   c0.797,0,1.45,0.652,1.45,1.449v2.898c0,0.797-0.653,1.449-1.45,1.449H86.957c-0.797,0-1.449-0.652-1.449-1.449v-2.898   C85.508,73.498,86.16,72.846,86.957,72.846z M79.712,113.424c-1.595,0-2.899,1.306-2.899,2.898s1.305,2.898,2.899,2.898   c1.593,0,2.897-1.306,2.897-2.898S81.305,113.424,79.712,113.424z M79.712,120.67c-2.406,0-4.348-1.941-4.348-4.348   s1.941-4.348,4.348-4.348c2.405,0,4.348,1.941,4.348,4.348S82.117,120.67,79.712,120.67z M120.289,113.424   c-1.593,0-2.898,1.306-2.898,2.898s1.306,2.898,2.898,2.898c1.594,0,2.899-1.306,2.899-2.898S121.883,113.424,120.289,113.424z    M120.289,120.67c-2.406,0-4.348-1.941-4.348-4.348s1.941-4.348,4.348-4.348s4.348,1.941,4.348,4.348   S122.695,120.67,120.289,120.67z M133.332,87.338c0-0.797-0.652-1.449-1.448-1.449h-1.45v14.492h1.45   c0.796,0,1.448-0.652,1.448-1.449V87.338z M127.536,106.178H72.465v11.594c0,3.203,2.594,5.797,5.797,5.797h10.146h23.187h10.145   c3.203,0,5.798-2.594,5.798-5.797V106.178z M127.536,81.541H72.465v23.188h55.071V81.541z M127.536,77.193   c0-3.203-2.595-5.797-5.798-5.797H78.262c-3.203,0-5.797,2.594-5.797,5.797v2.898h55.071V77.193z M79.712,132.988   c0,1.203,0.97,2.174,2.174,2.174h1.448c1.203,0,2.174-0.971,2.174-2.174v-6.521h-5.796V132.988z M114.493,132.988   c0,1.203,0.97,2.174,2.174,2.174h1.448c1.203,0,2.174-0.971,2.174-2.174v-6.521h-5.796V132.988z M69.566,85.889h-1.449   c-0.797,0-1.448,0.652-1.448,1.449v11.594c0,0.797,0.651,1.449,1.448,1.449h1.449V85.889z M132.607,101.83h-2.174v15.941   c0,4.304-3.145,7.854-7.245,8.551v6.666c0,2.797-2.276,5.072-5.073,5.072h-1.448c-2.797,0-5.073-2.275-5.073-5.072v-6.521H88.407   v6.521c0,2.797-2.276,5.072-5.073,5.072h-1.448c-2.797,0-5.073-2.275-5.073-5.072v-6.666c-4.102-0.696-7.246-4.247-7.246-8.551   V101.83h-2.174c-1.203,0-2.174-0.971-2.174-2.174V86.613c0-1.203,0.971-2.174,2.174-2.174h2.174v-7.246   c0-4.798,3.898-8.695,8.695-8.695h43.477c4.797,0,8.695,3.897,8.695,8.695v7.246h2.174c1.203,0,2.174,0.971,2.174,2.174v13.043   C134.781,100.859,133.811,101.83,132.607,101.83z"></path>
 						</g>
@@ -154,39 +163,22 @@
 				</div>
 			</footer>-->
 		</div>
-		<div class="hidden modal">
+		<div class="hidden modal bus">
 			<main class="main" id="main">
-				<!--<div id="search-container">
-					<div class="search-box">     			
-						<form id="search-form" action="#" method="post" role="search">
-							<input type="text" id="search-field" name="search-field" value="<?php ___('camporicerca'); ?>" />
-							<input type="submit" id="search-submit" value="<?php ___('cerca'); ?>" />
-						</form>
-					</div>
-					<div class="search-box result">
-						<span class="title"><?php ___('fermatevicine'); ?>...</span>
-						<ul id="listResults">
-						</ul>
-					</div>
-				</div>-->
 				<div class="panel-content-out">
 					<div class="scroll-content">
 						<div class="panel-content">
-							<div class="filters-container clearfix">
-								<div class="filters">
-									<p><a href="#">Städtische Linien</a></p>
-									<p><a href="#">Auserstädtische Linien</a></p>	
-									<span id="deselectall"> <span><?php ___('deselectall'); ?></span> </span>
-								</div>
-								<a href="#" id="close"><img src="images/3_Bus/Close.svg" alt="close"/></a>
-							</div>
 							<div id="variants">
 								<div class="scroll" id="scroll">
 									<div class="tabbed-content">
-									<!--<ul class="tabs">
-										<li class="button"><?php ___('urbani'); ?></li>
-										<li class="button"><?php ___('extraurbani'); ?></li>
-									</ul>-->
+										<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>
+										<div class="filters-container clearfix">
+											<div class="filters">
+												<p><a href="#">Städtische Linien</a></p>
+												<p><a href="#">Auserstädtische Linien</a></p>	
+												<span id="deselectall"> <span><?php ___('deselectall'); ?></span> </span>
+											</div>
+										</div>
 										<div class="tab-container">
 											<div class="tab-content">
 												<ul class="tick" id="urbani">
@@ -206,15 +198,51 @@
 					</div>
 				</div>
 			</main>
+		</div>
+
+		<!---apiedi part -->
+                <div class="hidden modal walk-route">
+			<div class="walk-container">
+	                	<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>
+				<div class="title">
+				</div>
+				<div class="metadata clearfix">
+					<div class="time"></div>
+					<div class="distance"></div>
+					<div class="drop"></div>
+					<div class="kcal"></div>
+				</div>
+				<div class="chartContainer">
+					<div id="highChart"></div>
+				</div>
+			</div>
+				
+		</div>
+
+                <div class="hidden modal walk">
+			<div class="walk-container">
+	                	<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>
+				<div class="main-config">
+					<a>Themenwege</a>
+					<a>Wanderwege</a>
+					<a>Gehzeit</a>
+				</div>
+				<ul class="routes-list">
+				<ul>
+			</div> 
 		</div> 
 	        <p id="credits"><?php ___('mappe'); ?> <a href="http://www.openstreetmap.org/copyright" rel="external">OpenStreetMap</a> &amp; <a href="<?php ___('linkr3gis'); ?>" rel="external">R3 GIS</a> - <?php ___('design'); ?> <a href="<?php ___('linkmadeincima'); ?>" rel="external">Madeincima</a></p>
-            
-		<div id="busPopup" style="display:none;">
+           
+		<div  class="hidden modal bus-position" >
+		<div class="modal-container"> 
+	        <a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>
+		<div id="busPopup">
                                     <div class="clearfix pophead">
                                         <h2 class="bus c-${lidname}"><?php ___('linea'); ?> ${lidname}</h2>
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 0 48 48" width="30" class="svg" style="width: 30px;" fill="rgb(${li_r},${li_g},${li_b});">
-                                                        <path fill="rgb(${li_r},${li_g},${li_b})" d="M8 32c0 1.77.78 3.34 2 4.44v3.56c0 1.1.9 2 2 2h2c1.11 0 2-.9 2-2v-2h16v2c0 1.1.89 2 2 2h2c1.1 0 2-.9 2-2v-3.56c1.22-1.1 2-2.67 2-4.44v-20c0-7-7.16-8-16-8s-16 1-16 8v20zm7 2c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm18 0c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-12h-24v-10h24v10z"></path>
-                                        </svg>
+					<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" version="1.1" x="0px" y="0px" width="30" viewBox="0 0 69.563004 69.561996" enable-background="new 0 0 200 200" xml:space="preserve">
+						<g transform="translate(-65.219,-68.498)" fill="rgb(${li_r},${li_g},${li_b})">
+							<path clip-rule="evenodd" d="m 86.957,77.193 h 26.086 V 74.295 H 86.957 v 2.898 z m 0,-4.347 h 26.086 c 0.797,0 1.45,0.652 1.45,1.449 v 2.898 c 0,0.797 -0.653,1.449 -1.45,1.449 H 86.957 c -0.797,0 -1.449,-0.652 -1.449,-1.449 v -2.898 c 0,-0.797 0.652,-1.449 1.449,-1.449 z m -7.245,40.578 c -1.595,0 -2.899,1.306 -2.899,2.898 0,1.592 1.305,2.898 2.899,2.898 1.593,0 2.897,-1.306 2.897,-2.898 0,-1.592 -1.304,-2.898 -2.897,-2.898 z m 0,7.246 c -2.406,0 -4.348,-1.941 -4.348,-4.348 0,-2.407 1.941,-4.348 4.348,-4.348 2.405,0 4.348,1.941 4.348,4.348 0,2.407 -1.943,4.348 -4.348,4.348 z m 40.577,-7.246 c -1.593,0 -2.898,1.306 -2.898,2.898 0,1.592 1.306,2.898 2.898,2.898 1.594,0 2.899,-1.306 2.899,-2.898 0,-1.592 -1.305,-2.898 -2.899,-2.898 z m 0,7.246 c -2.406,0 -4.348,-1.941 -4.348,-4.348 0,-2.407 1.941,-4.348 4.348,-4.348 2.407,0 4.348,1.941 4.348,4.348 0,2.407 -1.942,4.348 -4.348,4.348 z m 13.043,-33.332 c 0,-0.797 -0.652,-1.449 -1.448,-1.449 h -1.45 v 14.492 h 1.45 c 0.796,0 1.448,-0.652 1.448,-1.449 V 87.338 z m -5.796,18.84 H 72.465 v 11.594 c 0,3.203 2.594,5.797 5.797,5.797 h 10.146 23.187 10.145 c 3.203,0 5.798,-2.594 5.798,-5.797 v -11.594 z m 0,-24.637 H 72.465 v 23.188 h 55.071 V 81.541 z m 0,-4.348 c 0,-3.203 -2.595,-5.797 -5.798,-5.797 H 78.262 c -3.203,0 -5.797,2.594 -5.797,5.797 v 2.898 h 55.071 v -2.898 z m -47.824,55.795 c 0,1.203 0.97,2.174 2.174,2.174 h 1.448 c 1.203,0 2.174,-0.971 2.174,-2.174 v -6.521 h -5.796 v 6.521 z m 34.781,0 c 0,1.203 0.97,2.174 2.174,2.174 h 1.448 c 1.203,0 2.174,-0.971 2.174,-2.174 v -6.521 h -5.796 v 6.521 z M 69.566,85.889 h -1.449 c -0.797,0 -1.448,0.652 -1.448,1.449 v 11.594 c 0,0.797 0.651,1.449 1.448,1.449 h 1.449 V 85.889 z m 63.041,15.941 h -2.174 v 15.941 c 0,4.304 -3.145,7.854 -7.245,8.551 v 6.666 c 0,2.797 -2.276,5.072 -5.073,5.072 h -1.448 c -2.797,0 -5.073,-2.275 -5.073,-5.072 v -6.521 H 88.407 v 6.521 c 0,2.797 -2.276,5.072 -5.073,5.072 h -1.448 c -2.797,0 -5.073,-2.275 -5.073,-5.072 v -6.666 c -4.102,-0.696 -7.246,-4.247 -7.246,-8.551 V 101.83 h -2.174 c -1.203,0 -2.174,-0.971 -2.174,-2.174 V 86.613 c 0,-1.203 0.971,-2.174 2.174,-2.174 h 2.174 v -7.246 c 0,-4.798 3.898,-8.695 8.695,-8.695 h 43.477 c 4.797,0 8.695,3.897 8.695,8.695 v 7.246 h 2.174 c 1.203,0 2.174,0.971 2.174,2.174 v 13.043 c -0.001,1.203 -0.971,2.174 -2.175,2.174 z" id="path5" connector-curvature="0"></path>												</g>
+					</svg>
                                     </div>
                                     <p class="noData" style="display: none;">Questo autobus non è in servizio.</p>
                                     <table>
@@ -231,9 +259,13 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <span class="tip"></span>
                                 </div>
-                                <div id="stopPopup" style="display:none;">
+			</div>
+		</div>
+		<div  class="hidden modal stop-position" >
+			<div class="modal-container"> 
+			        <a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>
+                                <div id="stopPopup">
                                     <h2><?php ___('fermata'); ?> ${ort_ref_ort_name}</h2>
                                     <p class="noData" style="display: none;">Nelle prossime ore non sono previsti passaggi in questa fermata.</p>
                                     <table>
@@ -246,10 +278,11 @@
                                         <tbody>
                                             <tr class="${odd} ${last}">
                                                 <td class="bus">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 48 48" width="18" class="svg" style="width: 18px; vertical-align:bottom" fill="rgb(${li_r},${li_g},${li_b});">
-                                                        <path fill="rgb(${li_r},${li_g},${li_b})" d="M8 32c0 1.77.78 3.34 2 4.44v3.56c0 1.1.9 2 2 2h2c1.11 0 2-.9 2-2v-2h16v2c0 1.1.89 2 2 2h2c1.1 0 2-.9 2-2v-3.56c1.22-1.1 2-2.67 2-4.44v-20c0-7-7.16-8-16-8s-16 1-16 8v20zm7 2c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm18 0c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-12h-24v-10h24v10z"></path>
-                                                        </svg>
-
+							<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" version="1.1" x="0px" y="0px" width="18" viewBox="0 0 69.563004 69.561996" enable-background="new 0 0 200 200" xml:space="preserve">
+                        	        	                <g transform="translate(-65.219,-68.498)" fill="rgb(${li_r},${li_g},${li_b})">
+                	                                        <path clip-rule="evenodd" d="m 86.957,77.193 h 26.086 V 74.295 H 86.957 v 2.898 z m 0,-4.347 h 26.086 c 0.797,0 1.45,0.652 1.45,1.449 v 2.898 c 0,0.797 -0.653,1.449 -1.45,1.449 H 86.957 c -0.797,0 -1.449,-0.652 -1.449,-1.449 v -2.898 c 0,-0.797 0.652,-1.449 1.449,-1.449 z m -7.245,40.578 c -1.595,0 -2.899,1.306 -2.899,2.898 0,1.592 1.305,2.898 2.899,2.898 1.593,0 2.897,-1.306 2.897,-2.898 0,-1.592 -1.304,-2.898 -2.897,-2.898 z m 0,7.246 c -2.406,0 -4.348,-1.941 -4.348,-4.348 0,-2.407 1.941,-4.348 4.348,-4.348 2.405,0 4.348,1.941 4.348,4.348 0,2.407 -1.943,4.348 -4.348,4.348 z m 40.577,-7.246 c -1.593,0 -2.898,1.306 -2.898,2.898 0,1.592 1.306,2.898 2.898,2.898 1.594,0 2.899,-1.306 2.899,-2.898 0,-1.592 -1.305,-2.898 -2.899,-2.898 z m 0,7.246 c -2.406,0 -4.348,-1.941 -4.348,-4.348 0,-2.407 1.941,-4.348 4.348,-4.348 2.407,0 4.348,1.941 4.348,4.348 0,2.407 -1.942,4.348 -4.348,4.348 z m 13.043,-33.332 c 0,-0.797 -0.652,-1.449 -1.448,-1.449 h -1.45 v 14.492 h 1.45 c 0.796,0 1.448,-0.652 1.448,-1.449 V 87.338 z m -5.796,18.84 H 72.465 v 11.594 c 0,3.203 2.594,5.797 5.797,5.797 h 10.146 23.187 10.145 c 3.203,0 5.798,-2.594 5.798,-5.797 v -11.594 z m 0,-24.637 H 72.465 v 23.188 h 55.071 V 81.541 z m 0,-4.348 c 0,-3.203 -2.595,-5.797 -5.798,-5.797 H 78.262 c -3.203,0 -5.797,2.594 -5.797,5.797 v 2.898 h 55.071 v -2.898 z m -47.824,55.795 c 0,1.203 0.97,2.174 2.174,2.174 h 1.448 c 1.203,0 2.174,-0.971 2.174,-2.174 v -6.521 h -5.796 v 6.521 z m 34.781,0 c 0,1.203 0.97,2.174 2.174,2.174 h 1.448 c 1.203,0 2.174,-0.971 2.174,-2.174 v -6.521 h -5.796 v 6.521 z M 69.566,85.889 h -1.449 c -0.797,0 -1.448,0.652 -1.448,1.449 v 11.594 c 0,0.797 0.651,1.449 1.448,1.449 h 1.449 V 85.889 z m 63.041,15.941 h -2.174 v 15.941 c 0,4.304 -3.145,7.854 -7.245,8.551 v 6.666 c 0,2.797 -2.276,5.072 -5.073,5.072 h -1.448 c -2.797,0 -5.073,-2.275 -5.073,-5.072 v -6.521 H 88.407 v 6.521 c 0,2.797 -2.276,5.072 -5.073,5.072 h -1.448 c -2.797,0 -5.073,-2.275 -5.073,-5.072 v -6.666 c -4.102,-0.696 -7.246,-4.247 -7.246,-8.551 V 101.83 h -2.174 c -1.203,0 -2.174,-0.971 -2.174,-2.174 V 86.613 c 0,-1.203 0.971,-2.174 2.174,-2.174 h 2.174 v -7.246 c 0,-4.798 3.898,-8.695 8.695,-8.695 h 43.477 c 4.797,0 8.695,3.897 8.695,8.695 v 7.246 h 2.174 c 1.203,0 2.174,0.971 2.174,2.174 v 13.043 c -0.001,1.203 -0.971,2.174 -2.175,2.174 z" id="path5" connector-curvature="0"></path>                                                                                            </g>
+		                                        </svg>
+	
                                                 <?php ___('linea'); ?> ${lidname}
                                                 </td>
                                                 <td class="time">${bus_passes_at}</td> <!-- temporaneo, non ho ancora i dati sull'orario -->
@@ -258,12 +291,13 @@
                                     </table>
                                     <span class="tip"></span>
                                 </div>
+			</div>
+		</div>
 
 		<script src="js/iscroll.js" type="text/javascript"></script>
 		<!--[if lte IE 8]>
 			<script src="scripts/PIE_IE678.js" type="text/javascript"></script>
 		<![endif]-->
-		<script src="js/jquery.easyListSplitter.js" type="text/javascript"></script>
 		<script src="js/init.js" type="text/javascript"></script>
 		<script src="js/utility.js" type="text/javascript"></script>
 		<!--[if lt IE 9]>

@@ -1,25 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="200px"
-	 height="200px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
-<g id="Ebene_1">
-</g>
-<g id="Detail">
-	<g>
-		<g>
-			<path fill="#D35400" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" d="M104.197,48.121
-				c29.922,0,54.176,24.256,54.176,54.178c0,29.918-24.254,54.176-54.176,54.176c-29.92,0-54.176-24.258-54.176-54.176
-				C50.021,72.376,74.277,48.121,104.197,48.121z"/>
-		</g>
-	</g>
-	<g>
-		<polygon fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" points="113.221,74.361 107.813,72.615 
-			105.193,80.724 99.205,80.781 95.545,73.626 86.007,78.507 89.667,85.662 86.119,90.486 78.008,87.865 74.515,98.681 
-			82.625,101.3 82.681,107.289 75.527,110.949 80.407,120.488 87.562,116.828 92.386,120.376 89.766,128.486 95.173,130.234 
-			100.58,131.98 103.2,123.869 109.189,123.814 112.85,130.968 122.388,126.085 118.728,118.933 122.275,114.109 130.387,116.728 
-			133.88,105.914 125.77,103.292 125.714,97.304 132.867,93.644 127.987,84.105 120.833,87.767 116.008,84.218 118.628,76.107 		"/>
-		<circle fill="none" stroke="#FFFFFF" stroke-width="3" stroke-miterlimit="10" cx="104.197" cy="102.297" r="5.682"/>
-	</g>
-</g>
-</svg>
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   x="0px"
+   y="0px"
+   width="110.34375"
+   height="110.34375"
+   viewBox="0 0 110.34375 110.34375"
+   enable-background="new 0 0 200 200"
+   xml:space="preserve"
+   id="svg2"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="Config.svg"><metadata
+     id="metadata22"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+     id="defs20" /><sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     id="namedview18"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="1.18"
+     inkscape:cx="50.96875"
+     inkscape:cy="57.46875"
+     inkscape:window-x="1665"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" /><g
+     id="Ebene_1"
+     transform="translate(-49.03125,-47.125)" /><g
+     id="Detail"
+     transform="translate(-49.03125,-47.125)"><g
+       id="g6"><g
+         id="g8"><path
+           stroke-miterlimit="10"
+           d="m 104.197,48.121 c 29.922,0 54.176,24.256 54.176,54.178 0,29.918 -24.254,54.176 -54.176,54.176 -29.92,0 -54.176,-24.258 -54.176,-54.176 0,-29.923 24.256,-54.178 54.176,-54.178 z"
+           id="path10"
+           inkscape:connector-curvature="0"
+           style="fill:#d35400;stroke:#ffffff;stroke-width:2;stroke-miterlimit:10" /></g></g><g
+       id="g12"><polygon
+         stroke-miterlimit="10"
+         points="99.205,80.781 95.545,73.626 86.007,78.507 89.667,85.662 86.119,90.486 78.008,87.865 74.515,98.681 82.625,101.3 82.681,107.289 75.527,110.949 80.407,120.488 87.562,116.828 92.386,120.376 89.766,128.486 95.173,130.234 100.58,131.98 103.2,123.869 109.189,123.814 112.85,130.968 122.388,126.085 118.728,118.933 122.275,114.109 130.387,116.728 133.88,105.914 125.77,103.292 125.714,97.304 132.867,93.644 127.987,84.105 120.833,87.767 116.008,84.218 118.628,76.107 113.221,74.361 107.813,72.615 105.193,80.724 "
+         id="polygon14"
+         style="fill:none;stroke:#ffffff;stroke-width:3;stroke-miterlimit:10" /><circle
+         stroke-miterlimit="10"
+         cx="104.197"
+         cy="102.297"
+         r="5.6820002"
+         id="circle16"
+         sodipodi:cx="104.197"
+         sodipodi:cy="102.297"
+         sodipodi:rx="5.6820002"
+         sodipodi:ry="5.6820002"
+         style="fill:none;stroke:#ffffff;stroke-width:3;stroke-miterlimit:10"
+         d="m 109.879,102.297 c 0,3.13808 -2.54392,5.682 -5.682,5.682 -3.13808,0 -5.682002,-2.54392 -5.682002,-5.682 0,-3.138085 2.543922,-5.682003 5.682002,-5.682003 3.13808,0 5.682,2.543918 5.682,5.682003 z" /></g></g></svg>

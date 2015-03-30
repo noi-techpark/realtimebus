@@ -10,8 +10,7 @@ var SASABus = {
     config: {
 	city:'',
         r3EndPoint: 'http://realtimebus.tis.bz.it/',
-        //r3EndPoint: 'http://sasabus.ph.r3-gis/',
-        //r3EndPoint: 'http://sasabus.r3-gis/',
+	apiediEndPoint:'http://apiedi.tis.bz.it/apiedi/',
         busPopupSelector: '#busPopup',
         stopPopupSelector: '#stopPopup',
         rowsLimit: 6,
@@ -42,18 +41,35 @@ var SASABus = {
 	var me = this;
 	var layerMap = {
 		walk:[me.wegeStartPointsLayer],
-		bus:[me.positionLayer,me.stopsLayer,me.linesLayer,me.locationLayer],
+		bus:[me.linesLayer,me.positionLayer,me.stopsLayer],
 	}
-	$.each(me.map.getLayersBy('isBaseLayer',false),function(index,object){
-		me.map.removeLayer(object);
-	});
-	var activeLayers=[];
-	$.each(activeThemes,function(index,object){
-		if (object != undefined && object.length>0){
-			activeLayers=activeLayers.concat(layerMap[object]);
+	$.each(layerMap,function(key,value){
+		if ($.inArray(key,activeThemes) == -1){
+			$.each(value,function(index,object){
+				if (me.map.getLayer(object.id) != null){
+					object.setVisibility(false);
+				}
+			});
 		}
 	});
-	me.map.addLayers(activeLayers);
+	var activeLayers=[];
+	activeLayers.push(me.locationLayer);
+	$('.config').hide();
+	$.each(activeThemes,function(index,object){
+		$('#'+object+'-c').show();
+		if (object != undefined && object.length>0){
+			activeLayers = activeLayers.concat(layerMap[object]);
+		}
+	});
+	$.each(activeLayers,function(index,object){
+		if (me.map.getLayer(object.id) == null)
+			me.map.addLayer(object);
+		else
+			object.setVisibility(true);
+	});
+        var control = new OpenLayers.Control.SelectFeature([me.wegeStartPointsLayer,me.positionLayer,me.stopsLayer]);
+        me.map.addControl(control);
+        control.activate();
     }, 
     init: function(targetDivId) {
         var me = this;
@@ -70,7 +86,6 @@ var SASABus = {
 
         };
         me.map = new OpenLayers.Map(targetDivId, mapOptions);
-	console.log(me.map);
         var topoMap = new OpenLayers.Layer.TMS('topo', 'http://sdi.provincia.bz.it/geoserver/gwc/service/tms/',{
             'layername': 'WMTS_OF2011_APB-PAB', 
             'type': 'png8',
@@ -118,13 +133,10 @@ var SASABus = {
             styleMap: styleMap
         });
         me.map.addLayers([osm,topoMap]);
+
         
         var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000).transform(epsg25832,defaultProjection);
         me.map.zoomToExtent(merano);
-        var control = new OpenLayers.Control.SelectFeature([me.wegeStartPointsLayer]);
-        control.events.register('beforefeaturehighlighted', me, me.handleSelectedFeature);
-        me.map.addControl(control);
-        control.activate();
         me.showLines(['all']);
         
         setTimeout(function() {
@@ -154,19 +166,109 @@ var SASABus = {
 			$('#switcheroo').text('EARTH');
 		}
 	    });
+
         }, 2500);
     },
     
-    setDialogWidth: function(width) {
-        this.config.defaultDialogOptions.width = width;
-        if(this.tpl.busRow) {
-            $(this.config.busPopupSelector).dialog('option', 'width', width);
-        }
-        if(this.tpl.stopRow) {
-            $(this.config.stopPopupSelector).dialog('option', 'width', width);
-        }
+    addKMLLayer : function (layer){
+		var me = this;
+        	var styleMap = new OpenLayers.StyleMap({
+        	    strokeColor: '#d35400',
+	            strokeWidth: 6,
+        	    
+	        });
+		var route = new OpenLayers.Layer.Vector("KML", {
+	        	strategies: [new OpenLayers.Strategy.Fixed()],
+	        	protocol: new OpenLayers.Protocol.HTTP({
+        	        	url: "kml/"+layer+".kml",
+	                	format: new OpenLayers.Format.KML({
+        	        	extractStyles: true, 
+                	 	extractAttributes: true,
+                 		maxDepth: 2
+	                	})
+            		}),
+		    	preFeatureInsert: function(feature) {
+        	    		feature.geometry.transform(new OpenLayers.Projection("EPSG:4326"),defaultProjection);
+            		},
+			styleMap: styleMap
+			
+        	});
+		me.map.addLayer(route);
+		me.map.setLayerIndex(route,1);
     },
-    
+    getRoutes : function(){
+	function displayRoutesList(routes){
+		var list = '';
+		$.each(routes,function(index,value){
+			list+='<li>';
+			list+='<h4>'+value.displayName+'</h4>';
+			list+='<div class="metadata clearfix">';
+			list+='<div class="time">'+moment.duration(value.data.route.time,'seconds').humanize()+'</div>';
+			list+='<div class="distance">'+(Math.round(value.data.route.time)/1000).toString().replace('.',',')+'km </div>';
+			list+='<div class="drop">'+Math.round(value.data.route.pos_altitude_difference)+'hm </div>';
+			list+='<div class="kcal"> 500 </div>';
+			list+='</div>';
+			list+='</li>';
+		});
+		$(".walk .routes-list").html(list);	
+	}
+	$.ajax({
+            type: 'GET',
+            crossDomain: true,
+            url: this.config.apiediEndPoint+"/get-routes",
+            dataType: 'json',
+            success: function(response, status, xhr) {
+		displayRoutesList(response);
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });	
+    },	
+    getRouteProfile : function(route){
+	function drawRouteProfile(obj){
+	        var chart = new google.visualization.LineChart(document.getElementById('highChart'));
+		var options = {
+	          title: 'Höhenprofil',
+        	  curveType: 'function',
+	          legend: { position: 'bottom' },
+		  width:'100%',
+	          height: '100%',
+        	};
+		var dataArray =[['Distance','Höhenmeter']];
+		$.each(obj.data.route.altitude_profile,function(index,value){
+			var valueArray = [];
+			valueArray[0] = value.distance;
+			valueArray[1] = value.altitude;
+			dataArray.push(valueArray);
+		});
+			
+		var data = google.visualization.arrayToDataTable(dataArray);
+		chart.draw(data,options);	
+	}
+	function displayRouteMetaData(obj){
+		$('.walk-route .title').html("<h3>"+obj.displayName+"</h3>");
+		$('.walk-route .metadata .time').text('~ '+moment.duration(obj.data.route.time,'seconds').humanize());
+		$('.walk-route .metadata .distance').text('~ '+(Math.round(obj.data.route.time)/1000).toString().replace('.',',') +' km');
+		$('.walk-route .metadata .drop').text('~ '+Math.round(obj.data.route.pos_altitude_difference) +' hm');
+		$('.walk-route .metadata .kcal').text('~ 500 kCal');
+		drawRouteProfile(obj);
+		$('.walk-route').show();
+		google.setOnLoadCallback(drawRouteProfile(obj));
+	};
+	$.ajax({
+            type: 'GET',
+            crossDomain: true,
+            url: this.config.apiediEndPoint+"/get-route?route="+route,
+            dataType: 'json',
+            success: function(response, status, xhr) {
+		displayRouteMetaData(response);
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });	
+    },
     getLines: function(success, failure, scope) {
         var me = this;
         scope = scope || null;
@@ -260,6 +362,7 @@ var SASABus = {
     },
     
     getStopsLayer: function() {
+	var me =this;
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 6,
             strokeColor: '#000000',
@@ -279,26 +382,34 @@ var SASABus = {
             minScale:10000,
             visibility: false
         });
-/*         stopsLayer.events.register('featuresadded', null, function() {
-            console.log('add class...', $('circle[id^="OpenLayers.Geometry.Point"]').length);
-            $('circle[id^="OpenLayers.Geometry.Point"]').addClass('clickable-icon');
-        }); */
+	stopsLayer.events.on({
+                "featureselected":function(e){
+                        me.showStopPopup(e.feature);
+                }
+        });
         return stopsLayer;
     },
     getWegeStartPoints: function(){
+	var me=this;
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
             externalGraphic: 'images/4_Piedi/Pin.svg'
         });
-	var positionsLayer = new OpenLayers.Layer.Vector("wegestartLayer", {
+	var positionsLayer = new OpenLayers.Layer.Vector("wegeStartPointsLayer", {
             strategies: [new OpenLayers.Strategy.Fixed()],
             protocol: new OpenLayers.Protocol.Script({
-                url: "http://localhost:8080/apiedi/startPoints"
+                url: this.config.apiediEndPoint+"/startPoints"
             }),
-            styleMap: styleMap
+            styleMap: styleMap,
         });
+	positionsLayer.events.on({
+		"featureselected":function(e){
+			var route = e.feature.attributes['name'];
+			me.addKMLLayer(route);
+			me.getRouteProfile(route);
+		}
+	});
 	return positionsLayer;
-
     }, 
     getBusPositionLayer: function() {
         var me = this;
@@ -320,6 +431,12 @@ var SASABus = {
             },
             styleMap: styleMap
         });
+	positionsLayer.events.on({
+                "featureselected":function(e){
+                        me.showBusPopup(e.feature);
+                }
+        });
+
 
         positionsLayer.events.register('loadend', positionsLayer, function(e) {
 /* NON UTILIZZATO... ci serve?
@@ -377,42 +494,17 @@ var SASABus = {
     },
     
     handleSelectedFeature: function(event) {
+	var me =this;
         var feature = event.feature;
-       console.log("event???"); 
+	console.log("click");
         if(feature.layer.name == 'stopsLayer') {
             this.showStopPopup(feature);
-        } else if(feature.layer.name == 'positionLayer') {
-            this.showBusPopup(feature);
         } else if(feature.layer.name == 'wegestartLayer'){
-		console.log("got it");
+		var route = feature.attributes['name'];
+		me.addKMLLayer(route);
+		me.getRouteProfile(route);
 	}
 	
-    },
-    
-    bindPopupToMapMove: function(selector, originalX, originalY) {
-        var me = this;
-        
-        me.movePopupOnMapMoveFunction = function() {
-            if(me._dontClosePopup) return;
-            return $(selector).dialog('close');
-/*          questa era una prova per far chiudere il popup solo quando il punto esce dalla mappa, ma non funziona molto bene...   */
-            var lonLat = new OpenLayers.LonLat(originalX, originalY),
-                newPixel = me.map.getPixelFromLonLat(lonLat),
-                pixel;
-            
-            if(me.map.getExtent().containsLonLat(lonLat)) {
-                pixel = me.calculatePopupPosition(selector, newPixel);
-                $(selector).dialog('option', 'position', [pixel.x, pixel.y]);
-            } else {
-                $(selector).dialog('close');
-            } 
-        };
-
-        me.map.events.register('moveend', me, me.movePopupOnMapMoveFunction);
-    },
-    
-    unbindPopupToMapMove: function() {
-        this.map.events.unregister('moveend', this, this.movePopupOnMapMoveFunction);
     },
     
     showBusPopup: function(feature) {
@@ -426,19 +518,7 @@ var SASABus = {
             me.tpl.busRow = tr.clone().wrap('<div>').parent().html();
             tr.remove();
             me.tpl.busContent = $(me.config.busPopupSelector).html();
-            $(me.config.busPopupSelector).dialog($.extend(true, {}, me.config.defaultDialogOptions, {
-                autoOpen: false,
-                open: function() {
-                    me.bindPopupToMapMove(me.config.busPopupSelector);
-                },
-                close: function() {
-                    me.unbindPopupToMapMove();
-                }
-            }));
         }
-        $(me.config.busPopupSelector).dialog('close');
-        if($(me.config.stopPopupSelector).is('dialog')) $(me.config.stopPopupSelector).dialog('close');
-        
         var url = me.config.r3EndPoint + feature.attributes.frt_fid + '/stops';
         
         $.ajax({
@@ -452,7 +532,7 @@ var SASABus = {
                     return me.alert('System Error');
                 }
                 
-                me.showTplPopup('bus', feature, response.features, pixel);
+                me.showTplPopup('bus', feature, response.features, pixel,'.bus-position');
 
             },
             error: function() {
@@ -473,18 +553,7 @@ var SASABus = {
             me.tpl.stopRow = tr.clone().wrap('<div>').parent().html();
             tr.remove();
             me.tpl.stopContent = $(me.config.stopPopupSelector).html();
-            $(me.config.stopPopupSelector).dialog($.extend(true, {}, me.config.defaultDialogOptions, {
-                autoOpen: false,
-                open: function() {
-                    me.bindPopupToMapMove(me.config.stopPopupSelector);
-                },
-                close: function() {
-                    me.unbindPopupToMapMove();
-                }
-            }));
         }
-        if($(me.config.busPopupSelector).is('dialog')) $(me.config.busPopupSelector).dialog('close');
-        $(me.config.stopPopupSelector).dialog('close');
         
         var url = me.config.r3EndPoint + feature.attributes.ort_nr + '.' + feature.attributes.onr_typ_nr + '/buses';
         
@@ -498,8 +567,7 @@ var SASABus = {
                 if(!response || typeof(response) != 'object' || typeof(response.length) == 'undefined') {
                     return me.alert('System Error');
                 }
-                
-                return me.showTplPopup('stop', feature, response, pixel);
+                return me.showTplPopup('stop', feature, response, pixel,'.stop-position');
             },
             error: function() {
                 return me.alert('System Error');
@@ -509,7 +577,7 @@ var SASABus = {
         return false;
     },
     
-    showTplPopup: function(type, selectedFeature, features, position) {
+    showTplPopup: function(type, selectedFeature, features, position, type_id) {
         var contentTpl = (type == 'bus') ? this.tpl.busContent : this.tpl.stopContent,
             rowTpl = (type == 'bus') ? this.tpl.busRow : this.tpl.stopRow,
             selector = (type == 'bus') ? this.config.busPopupSelector : this.config.stopPopupSelector,
@@ -539,48 +607,10 @@ var SASABus = {
             $(selector + ' .noData').show();                    
         }
         
-        $(selector).dialog('open').hide();
 
-        pixel = this.calculatePopupPosition(selector, position);
-
-        $(selector).dialog('option', 'position', [pixel.x, pixel.y]);
-        $(selector).show();
+        $(type_id).show();
         
-        $(selector).dialog('open');
-    },
-    
-    calculatePopupPosition: function(popupSelector, pixel) {
-        var mapPosition = $('#'+this.config.mapDivId).position(),
-            maxX = mapPosition.left + $('#'+this.config.mapDivId).width(),
-            dx, dy, dialogWidth, dialogRightX;
-        
-        //calcola posizione dialog
-        pixel.x = pixel.x - this.config.pinToDialogDistance; //distanza tra punta grafica e dialog
-        pixel.y = (pixel.y - $(popupSelector).height() - this.config.pinHeight - this.config.yOffset); // sottrae alla y l'altezza del dialog e l'altezza della punta grafica
-        pixel.y = pixel.y-$('#header-mobile').outerHeight();//consider header height and scroll from top 
-        dialogWidth = $(popupSelector).width() + 10;
-        dialogRightX = pixel.x + dialogWidth;
-        
-        if(pixel.y < 0) {
-            dy = pixel.y;
-        }
-        if(dialogRightX > (maxX - this.config.xOffset)) {
-            dx = - (maxX - dialogRightX - this.config.xOffset);
-            pixel.x -= (dialogRightX - maxX + this.config.xOffset);
-        }
-        
-        dx = dx || 0;
-        dy = dy || 0;
-
-        if(dx != 0 || dy != 0) {
-            this._dontClosePopup = true;
-            this.map.pan(dx, dy, {animate: false});
-            this._dontClosePopup = false;
-        }
-        
-        pixel.y = pixel.y > this.config.yOffset ? (pixel.y + this.config.yOffset) : this.config.yOffset;
-        return pixel;
-    },
+    }, 
     
     alert: function(msg) {
         if(typeof(SASABusAlert) == 'function') {

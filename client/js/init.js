@@ -28,7 +28,6 @@ codificaLinee['225'] = 1;
 
 if(device[0] == 'smartphone'){
 	SASABus.config.rowsLimit = 2;
-	SASABus.setDialogWidth(260);
 	SASABus.config.pinToDialogDistance 	= 48;
 	SASABus.config.pinHeight			= 40;
 	SASABus.config.yOffset				= 60;
@@ -36,6 +35,5 @@ if(device[0] == 'smartphone'){
 }
 if(device[0] == 'desktop'){
 	SASABus.config.yOffset				= 20;
-	SASABus.setDialogWidth(300);
 	$('.panel').append('<div id="serverTime"><span class="label">Time</span> <span class="reload"></span></div>');
 }
