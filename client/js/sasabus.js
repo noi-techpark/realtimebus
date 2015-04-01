@@ -10,7 +10,7 @@ var SASABus = {
     config: {
 	city:'',
         r3EndPoint: 'http://realtimebus.tis.bz.it/',
-	apiediEndPoint:'http://apiedi.tis.bz.it/apiedi/',
+	apiediEndPoint:'http://localhost:8080/apiedi/',
         busPopupSelector: '#busPopup',
         stopPopupSelector: '#stopPopup',
         rowsLimit: 6,
@@ -204,7 +204,7 @@ var SASABus = {
 			list+='<h4>'+value.displayName+'</h4>';
 			list+='<div class="metadata clearfix">';
 			list+='<div class="time">'+moment.duration(value.data.route.time,'seconds').humanize()+'</div>';
-			list+='<div class="distance">'+(Math.round(value.data.route.time)/1000).toString().replace('.',',')+'km </div>';
+			list+='<div class="distance">'+(Math.round(value.data.route.distance)/1000).toString().replace('.',',')+'km </div>';
 			list+='<div class="drop">'+Math.round(value.data.route.pos_altitude_difference)+'hm </div>';
 			list+='<div class="kcal"> 500 </div>';
 			list+='</div>';
@@ -226,6 +226,55 @@ var SASABus = {
         });	
     },	
     getRouteProfile : function(route){
+			var dataTable = {
+				cols : [ {
+					id : "distance",
+					label : "Distance",
+					type : "number"
+				},{
+					id : "asfaltocemento",
+					label : "asfaltocemento",
+					type: "number"
+				},{
+					id : "rocciaghiaia",
+					label : "rocciaghiaia",
+					type : "number"
+				},{  
+					id : "ghiaccio",
+					label : "ghiaccio",
+					type : "number"
+				},{  
+					id : "terraprato",
+					label : "terraprato",
+					type : "number"				
+				},{  
+					id : "sassolastricato",
+					label : "sassolastricato",
+					type : "number"
+				},{  
+					id : "sconosciuto",				
+					label : "sconosciuto",
+					type : "number"
+				}
+
+				],
+				rows : []
+			};
+			var options = {
+				title : "FAAA",
+				vAxis : {
+					title : "Distance"
+				},
+				hAxis : {
+					title : "Höhenmeter"
+				},						
+				isStacked: false,
+				colors:["#717171", "#c09a74","#83d0d6", "#82d04b", "#a2a2a2" , "#d0d0d0"],				
+			};
+	function drawRoutProfileAsArea(obj){
+		  var visualization = new google.visualization.AreaChart(document.getElementById('highChart'));
+	          visualization.draw(dataTable,options);	
+	}
 	function drawRouteProfile(obj){
 	        var chart = new google.visualization.LineChart(document.getElementById('highChart'));
 		var options = {
@@ -234,6 +283,18 @@ var SASABus = {
 	          legend: { position: 'bottom' },
 		  width:'100%',
 	          height: '100%',
+		  backgroundColor:'none',
+	          vAxis: {
+		    gridlines: {
+		        color: 'transparent'
+    		    }
+		  },
+	          hAxis: {
+		    gridlines: {
+		        color: 'transparent'
+    		    }
+		  },
+        	  crosshair: { orientation: 'both' }	
         	};
 		var dataArray =[['Distance','Höhenmeter']];
 		$.each(obj.data.route.altitude_profile,function(index,value){
@@ -248,10 +309,10 @@ var SASABus = {
 	}
 	function displayRouteMetaData(obj){
 		$('.walk-route .title').html("<h3>"+obj.displayName+"</h3>");
-		$('.walk-route .metadata .time').text('~ '+moment.duration(obj.data.route.time,'seconds').humanize());
-		$('.walk-route .metadata .distance').text('~ '+(Math.round(obj.data.route.time)/1000).toString().replace('.',',') +' km');
-		$('.walk-route .metadata .drop').text('~ '+Math.round(obj.data.route.pos_altitude_difference) +' hm');
-		$('.walk-route .metadata .kcal').text('~ 500 kCal');
+		$('.walk-route .metadata .time').text(moment.duration(obj.data.route.time,'seconds').humanize());
+		$('.walk-route .metadata .distance').text((Math.round(obj.data.route.distance)/1000).toString().replace('.',',') +' km');
+		$('.walk-route .metadata .drop').text(Math.round(obj.data.route.pos_altitude_difference) +' hm');
+		$('.walk-route .metadata .kcal').text('500 kCal');
 		drawRouteProfile(obj);
 		$('.walk-route').show();
 		google.setOnLoadCallback(drawRouteProfile(obj));
@@ -404,8 +465,9 @@ var SASABus = {
         });
 	positionsLayer.events.on({
 		"featureselected":function(e){
+			var kml = e.feature.attributes['kml'];
 			var route = e.feature.attributes['name'];
-			me.addKMLLayer(route);
+			me.addKMLLayer(kml);
 			me.getRouteProfile(route);
 		}
 	});
@@ -491,20 +553,6 @@ var SASABus = {
             delete this.stopsLayer.protocol.options.params;
         }
         this.stopsLayer.refresh();
-    },
-    
-    handleSelectedFeature: function(event) {
-	var me =this;
-        var feature = event.feature;
-	console.log("click");
-        if(feature.layer.name == 'stopsLayer') {
-            this.showStopPopup(feature);
-        } else if(feature.layer.name == 'wegestartLayer'){
-		var route = feature.attributes['name'];
-		me.addKMLLayer(route);
-		me.getRouteProfile(route);
-	}
-	
     },
     
     showBusPopup: function(feature) {

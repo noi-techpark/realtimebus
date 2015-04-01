@@ -324,12 +324,12 @@ function showLinesAfterRead(lines){
 		if($(this).hasClass('disabled')){
 				return
 			}else{
-				$('#variants .enabled .icon').each(function(){
-					var line = $(this).parent('.line').find('.line-no').attr('id').replace('l_','');
+				$('#variants .enabled').each(function(){
+					var line = $(this).find('.line-no').attr('id').replace('l_','');
 					var k = 0;
 					if(mapLinesInit.containsSubStr(line+':'))
 					{
-						$(this).parent('.line').toggleClass('enabled');
+						$(this).toggleClass('enabled');
 						
 						//Elimino le linee da mapLines
 						for(var i=0;i<mapLines.length;i++)
