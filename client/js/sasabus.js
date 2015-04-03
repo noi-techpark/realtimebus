@@ -233,7 +233,8 @@ var SASABus = {
 			list+='</div>';
 			list+='</li>';
 		});
-		$(".walk .routes-list").html(list);	
+		$(".walk .routes-list").html(list);
+		$(".walk").height($( window ).height()-$("#header").outerHeight());	
 	}
 	$.ajax({
             type: 'GET',
@@ -314,6 +315,7 @@ var SASABus = {
     		    }
 		  },
 	          hAxis: {
+		    ticks:'none',
 		    gridlines: {
 		        color: 'transparent'
     		    }
@@ -478,8 +480,9 @@ var SASABus = {
     getWegeStartPoints: function(){
 	var me=this;
         var styleMap = new OpenLayers.StyleMap({
-            pointRadius: 20,
-            externalGraphic: 'images/4_Piedi/Pin.svg'
+            externalGraphic: 'images/4_Piedi/Pin.svg',
+            graphicWidth: 35,
+	    graphicYOffset:-35.75
         });
 	var positionsLayer = new OpenLayers.Layer.Vector("wegeStartPointsLayer", {
             strategies: [new OpenLayers.Strategy.Fixed()],
