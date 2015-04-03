@@ -169,7 +169,27 @@ var SASABus = {
 
         }, 2500);
     },
-    
+    addRouteLayer : function(coordinates){
+	var me =this;
+	var pointList = [];
+	$.each(coordinates,function(index,value){
+		var point = new OpenLayers.Geometry.Point(value.coordinate[0],value.coordinate[1]);
+		pointList.push(point);
+	});
+	var styleMap = new OpenLayers.StyleMap({
+        	strokeColor: '#d35400',
+                strokeWidth: 6,
+        });
+	var lineFeature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString(pointList));
+	var vectorLayer = new OpenLayers.Layer.Vector("routes",{
+		styleMap:styleMap
+	});
+	vectorLayer.addFeatures([lineFeature]);
+	var layers =me.map.getLayersByName("routes");
+	if (layers.length>0)
+		me.map.removeLayer(layers[0]);
+	me.map.addLayer(vectorLayer);
+    },
     addKMLLayer : function (layer){
 		var me = this;
         	var styleMap = new OpenLayers.StyleMap({
@@ -193,6 +213,9 @@ var SASABus = {
 			styleMap: styleMap
 			
         	});
+		var kmllayers =me.map.getLayersByName("KML");
+		if (kmllayers.length>0)
+			me.map.removeLayer(kmllayers[0]);
 		me.map.addLayer(route);
 		me.map.setLayerIndex(route,1);
     },
@@ -226,6 +249,7 @@ var SASABus = {
         });	
     },	
     getRouteProfile : function(route){
+		var me = this;
 			var dataTable = {
 				cols : [ {
 					id : "distance",
@@ -324,6 +348,7 @@ var SASABus = {
             dataType: 'json',
             success: function(response, status, xhr) {
 		displayRouteMetaData(response);
+		me.addRouteLayer(response.data.route.path.coordinates);
             },
             error: function(xhr, status, error) {
                 console.log(error);
@@ -467,7 +492,6 @@ var SASABus = {
 		"featureselected":function(e){
 			var kml = e.feature.attributes['kml'];
 			var route = e.feature.attributes['name'];
-			me.addKMLLayer(kml);
 			me.getRouteProfile(route);
 		}
 	});
