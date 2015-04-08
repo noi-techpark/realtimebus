@@ -4,13 +4,12 @@ Proj4js.defs["EPSG:900913"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon
 
 var defaultProjection = new OpenLayers.Projection('EPSG:3857');
 var epsg25832 = new OpenLayers.Projection('EPSG:25832');
-
-
+moment.locale("de");
 var SASABus = {
     config: {
 	city:'',
         r3EndPoint: 'http://realtimebus.tis.bz.it/',
-	apiediEndPoint:'http://localhost:8080/apiedi/',
+	apiediEndPoint:'http://localhost:8080/apiedi',
         busPopupSelector: '#busPopup',
         stopPopupSelector: '#stopPopup',
         rowsLimit: 6,
@@ -40,7 +39,7 @@ var SASABus = {
     activateSelectedThemes: function(activeThemes){
 	var me = this;
 	var layerMap = {
-		walk:[me.wegeStartPointsLayer],
+		walk:[me.wegeStartPointsLayer,me.artPoints],
 		bus:[me.linesLayer,me.positionLayer,me.stopsLayer],
 	}
 	$.each(layerMap,function(key,value){
@@ -125,6 +124,7 @@ var SASABus = {
         me.stopsLayer = me.getStopsLayer();
 	me.wegeStartPointsLayer = me.getWegeStartPoints(); 
         me.positionLayer = me.getBusPositionLayer();
+	me.artPoints = me.getArtPoints();
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
             externalGraphic: 'images/pin.png'
@@ -135,7 +135,7 @@ var SASABus = {
         me.map.addLayers([osm,topoMap]);
 
         
-        var merano = new OpenLayers.Bounds(662500, 5167000, 667600, 5172000).transform(epsg25832,defaultProjection);
+        var merano = new OpenLayers.Bounds(662500, 5169000, 667600, 5174000).transform(epsg25832,defaultProjection);
         me.map.zoomToExtent(merano);
         me.showLines(['all']);
         
@@ -169,25 +169,28 @@ var SASABus = {
 
         }, 2500);
     },
-    addRouteLayer : function(coordinates){
-	var me =this;
+    addRouteLayer : function(route,coordinates){
+	var me = this;
 	var pointList = [];
 	$.each(coordinates,function(index,value){
 		var point = new OpenLayers.Geometry.Point(value.coordinate[0],value.coordinate[1]);
 		pointList.push(point);
 	});
-	var styleMap = new OpenLayers.StyleMap({
+	var styleMap = {
         	strokeColor: '#d35400',
                 strokeWidth: 6,
-        });
-	var lineFeature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString(pointList));
-	var vectorLayer = new OpenLayers.Layer.Vector("routes",{
-		styleMap:styleMap
-	});
+        };
+	var lineFeature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString(pointList),null,styleMap);
+	var vectorLayer = new OpenLayers.Layer.Vector("routes");
 	vectorLayer.addFeatures([lineFeature]);
+	if (route=='spurenweg')
+		vectorLayer.addFeatures([me.getSpurenEagles()]);
+	else if (route== 'merano_a_and_n')
+		vectorLayer.addFeatures([me.getArtAndNature()]);
 	var layers =me.map.getLayersByName("routes");
 	if (layers.length>0)
 		me.map.removeLayer(layers[0]);
+	//me.wegeStartPointsLayer.setVisibility(false); //to remove all start Points on route selection
 	me.map.addLayer(vectorLayer);
     },
     addKMLLayer : function (layer){
@@ -219,6 +222,58 @@ var SASABus = {
 		me.map.addLayer(route);
 		me.map.setLayerIndex(route,1);
     },
+    getArtPoints : function(){
+	var styleMap = new OpenLayers.StyleMap({
+            externalGraphic: 'images/Themenwege/parcours_bueste.svg',
+            graphicWidth: 35,
+            graphicYOffset:-35.75
+        });
+	
+        var point = new OpenLayers.Geometry.Point(1242010.4917555, 5888330.0435492);
+        var pointFeature = new OpenLayers.Feature.Vector(point, null, null);
+        var vectorLayer = new OpenLayers.Layer.Vector("artLayer",{
+                styleMap:styleMap
+        });
+        vectorLayer.addFeatures([pointFeature]);
+	return vectorLayer;
+    },
+    getSpurenEagles : function(){
+        var styleMap = {
+            externalGraphic: 'images/Themenwege/parcours_adler.svg',
+            graphicWidth: 35,
+            graphicYOffset:-35.75
+        };
+        var a1 = new OpenLayers.Geometry.Point(1242547.1976388, 5888946.4435471);
+        var a2 = new OpenLayers.Geometry.Point(1242807.5612664, 5888848.5086046);
+        var a3 = new OpenLayers.Geometry.Point(1242830.2535091, 5888830.5936761);
+        var a4 = new OpenLayers.Geometry.Point(1242940.1317373, 5888761.3226192);
+        var a5 = new OpenLayers.Geometry.Point(1243299.6246359, 5888601.2825912);
+        var a6 = new OpenLayers.Geometry.Point(1243254.2457289, 5888547.5322271);
+        var adler = new OpenLayers.Geometry.MultiPoint([a1,a2,a3,a4,a5,a6]);
+        var pointFeature = new OpenLayers.Feature.Vector(adler, null, styleMap);
+        return pointFeature;
+    },
+    getArtAndNature : function(){
+        var styleMap = {
+            externalGraphic: 'images/Themenwege/parcours_kunst.svg',
+            graphicWidth: 35,
+            graphicYOffset:-35.75
+        };
+        var a4 = new OpenLayers.Geometry.Point(1242745.4729163,5888025.5994863);
+        var a10 = new OpenLayers.Geometry.Point(1242530.8030306,5888901.4926254);
+        var a11 = new OpenLayers.Geometry.Point(1242887.9016938,5888797.5916185);
+        var a12 = new OpenLayers.Geometry.Point(1243162.2935862,5888651.4276554);
+        var a9 = new OpenLayers.Geometry.Point(1243393.9933282,5888649.0389983);
+        var a8 = new OpenLayers.Geometry.Point(1243370.1067568,5888601.2658556);
+        var a7 = new OpenLayers.Geometry.Point(1243225.5930002,5888277.602814);
+        var a6 = new OpenLayers.Geometry.Point(1242826.8587081307,5888218.633061022);
+        var a5 = new OpenLayers.Geometry.Point(1242808.7723304,5888164.1416001);
+        var a3 = new OpenLayers.Geometry.Point(1242740.6956021278,5888173.696228666);
+        var a13 = new OpenLayers.Geometry.Point(1242629.6230453,5888385.092385);
+        var aan = new OpenLayers.Geometry.MultiPoint([a3,a4,a5,a6,a7,a8,a9,a10,a11,a12]);
+        var pointFeature = new OpenLayers.Feature.Vector(aan, null, styleMap);
+        return pointFeature;
+    },
     getRoutes : function(){
 	function displayRoutesList(routes){
 		var list = '';
@@ -229,9 +284,11 @@ var SASABus = {
 			list+='<div class="time">'+moment.duration(value.data.route.time,'seconds').humanize()+'</div>';
 			list+='<div class="distance">'+(Math.round(value.data.route.distance)/1000).toString().replace('.',',')+'km </div>';
 			list+='<div class="drop">'+Math.round(value.data.route.pos_altitude_difference)+'hm </div>';
-			list+='<div class="kcal"> 500 </div>';
+			list+='<div class="kcal"> '+value.kcal+' </div>';
 			list+='</div>';
 			list+='</li>';
+		console.log(value);
+			
 		});
 		$(".walk .routes-list").html(list);
 		$(".walk").height($( window ).height()-$("#header").outerHeight());	
@@ -250,52 +307,7 @@ var SASABus = {
         });	
     },	
     getRouteProfile : function(route){
-		var me = this;
-			var dataTable = {
-				cols : [ {
-					id : "distance",
-					label : "Distance",
-					type : "number"
-				},{
-					id : "asfaltocemento",
-					label : "asfaltocemento",
-					type: "number"
-				},{
-					id : "rocciaghiaia",
-					label : "rocciaghiaia",
-					type : "number"
-				},{  
-					id : "ghiaccio",
-					label : "ghiaccio",
-					type : "number"
-				},{  
-					id : "terraprato",
-					label : "terraprato",
-					type : "number"				
-				},{  
-					id : "sassolastricato",
-					label : "sassolastricato",
-					type : "number"
-				},{  
-					id : "sconosciuto",				
-					label : "sconosciuto",
-					type : "number"
-				}
-
-				],
-				rows : []
-			};
-			var options = {
-				title : "FAAA",
-				vAxis : {
-					title : "Distance"
-				},
-				hAxis : {
-					title : "Höhenmeter"
-				},						
-				isStacked: false,
-				colors:["#717171", "#c09a74","#83d0d6", "#82d04b", "#a2a2a2" , "#d0d0d0"],				
-			};
+	var me = this;
 	function drawRoutProfileAsArea(obj){
 		  var visualization = new google.visualization.AreaChart(document.getElementById('highChart'));
 	          visualization.draw(dataTable,options);	
@@ -338,7 +350,7 @@ var SASABus = {
 		$('.walk-route .metadata .time').text(moment.duration(obj.data.route.time,'seconds').humanize());
 		$('.walk-route .metadata .distance').text((Math.round(obj.data.route.distance)/1000).toString().replace('.',',') +' km');
 		$('.walk-route .metadata .drop').text(Math.round(obj.data.route.pos_altitude_difference) +' hm');
-		$('.walk-route .metadata .kcal').text('500 kCal');
+		$('.walk-route .metadata .kcal').text(obj.kcal+' kCal');
 		drawRouteProfile(obj);
 		$('.walk-route').show();
 		google.setOnLoadCallback(drawRouteProfile(obj));
@@ -350,7 +362,7 @@ var SASABus = {
             dataType: 'json',
             success: function(response, status, xhr) {
 		displayRouteMetaData(response);
-		me.addRouteLayer(response.data.route.path.coordinates);
+		me.addRouteLayer(route,response.data.route.path.coordinates);
             },
             error: function(xhr, status, error) {
                 console.log(error);
@@ -493,9 +505,9 @@ var SASABus = {
         });
 	positionsLayer.events.on({
 		"featureselected":function(e){
-			var kml = e.feature.attributes['kml'];
+			var id = e.feature.attributes['id'];
 			var route = e.feature.attributes['name'];
-			me.getRouteProfile(route);
+			me.getRouteProfile(id);
 		}
 	});
 	return positionsLayer;
