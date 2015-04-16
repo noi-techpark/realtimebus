@@ -222,10 +222,10 @@
                 <div class="hidden modal walk">
 			<div class="walk-container">
 	                	<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>
-				<div class="main-config">
-					<a>Themenwege</a>
-					<a>Wanderwege</a>
-					<a>Gehzeit</a>
+				<div class="main-config clearfix">
+					<p>Themenwege</p><a href = "#" id="theme" class="toggler"></a>
+					<p>Wanderwege</p><a href = "#" id="hike" class="toggler"></a>
+					<p>Gehzeit</p>
 				</div>
 				<ul class="routes-list">
 				<ul>

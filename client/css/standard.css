@@ -109,10 +109,7 @@ a{color:#c0c0c0;text-decoration:none}
 	#variants .child-tick li span{display:block;position:absolute;top:0;left:0;width:31px;height:29px;background:url(../images/ico-check.png) 7px 8px no-repeat;border-right:1px solid #f4f4f4}
 	#variants .child-tick li.ticked span{background-position:7px -16px}
 
-#deselectall{width:auto;padding:4px 0 4px 0;margin-bottom:6px;cursor:pointer;color:#666}
-	#deselectall span{color:#9fa505}
-	#deselectall.disabled{color:#d3d3d3;cursor:auto}
-	#deselectall.disabled span{color:#d3d3d3}
+#deselectall{width:auto;padding:4px 0 4px 0;margin-bottom:6px;cursor:pointer;color:#9fa505}
 
 .panel-content-out{width:100%;position:absolute;top:0;left:0;bottom:90px;}
 
@@ -447,10 +444,13 @@ a{color:#c0c0c0;text-decoration:none}
 	clear:right;
 	border-bottom:1px solid #000;
 }
+.main-config p{
+	float:left;
+	clear:both;
+	margin:8px 0;
+}
 .main-config a{
-	display:block;	
 	color:#000;
-	margin:10px;
 }
 .modal-container{
 	position:absolute;
@@ -474,14 +474,31 @@ a{color:#c0c0c0;text-decoration:none}
 	overflow:auto;
 	height:80%;
 }
-.routes-list h4{
+.routes-list>a h4{
 	font-size:18px;
 	line-height:22px;
 }
-.routes-list li{
+.routes-list>a li{
 	padding:15px;
-}
-.routes-list li:nth-child(2n){
-	background-color:#fff;
 	opacity:0.7;	
+}
+.routes-list>a:nth-child(2n) li{
+	background-color:#fff;
+}
+.list-route:hover li{
+	opacity:1;
+}
+.list-route{
+	color:#000;
+}
+.toggler{
+	background-image:url('../images/4_Piedi/Active.svg');
+	background-repeat: no-repeat;
+	width:90px;
+	height:40px;
+	display:block;
+        text-indent: -9999px;
+	float:right;
+	background-size:85px 75px;
+	background-position: 0 3px;
 }

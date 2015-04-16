@@ -76,3 +76,6 @@ ul.menu{
 .modal:before{
 	width:140%;
 }
+.fullscreen{
+	width:100% !important;
+}

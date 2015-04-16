@@ -116,6 +116,7 @@ $(document).ready(function() {
 		theme = theme.substring(0,theme.indexOf('-'));
 		if (theme == 'walk')
 			SASABus.getRoutes();
+		$('.modal').hide();
 		$('.' + theme).show();
 		
 	});
@@ -322,8 +323,17 @@ function showLinesAfterRead(lines){
 	
 	$('#deselectall').bind('touchstart click', function(){
 		if($(this).hasClass('disabled')){
-				return
+				$(this).text("Deselect all lines");
+				$('#variants .line').addClass("enabled");
+				SASABus.showLines(['all']);
+				for(var i=0;i<mapLinesInit.length;i++)
+                                {
+                                        mapLines.push(mapLinesInit[i]);
+                                }
+				$('#deselectall').removeClass('disabled');
+
 			}else{
+				$(this).text("Show all lines");
 				$('#variants .enabled').each(function(){
 					var line = $(this).find('.line-no').attr('id').replace('l_','');
 					var k = 0;
@@ -502,6 +512,7 @@ function showLinesAfterRead(lines){
 	// in the header. the user can slideToggle the menu clicking it
 	$('span.mobile-menu-btn').click(function(){
 		$('div.panel').slideToggle();
+		$('.modal').toggleClass("fullscreen");
 	});
 
 	$(window).resize(function(){
