@@ -3,8 +3,22 @@ Proj4js.defs["EPSG:3857"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0
 Proj4js.defs["EPSG:900913"] = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
 
 var defaultProjection = new OpenLayers.Projection('EPSG:3857');
+var jsT= {
+	de:{
+		altitudep:'Höhenprofil',
+		altitude:'Höhenmeter'
+	},
+	it:{
+		altitudep:'Profilo altimetrico',
+		altitude:'Altitudine'
+	},
+	en:{
+		altitudep:'Altitude profile',
+		altitude:'Altitude'
+	}
+
+}
 var epsg25832 = new OpenLayers.Projection('EPSG:25832');
-moment.locale("de");
 var SASABus = {
     config: {
 	city:'',
@@ -280,19 +294,25 @@ var SASABus = {
     },
     getRoutes : function(){
 	var me =this;
-	var theme=true,hike=true;
+	var theme,hike;
 	function displayRoutesList(routes){
-		
 		var list = '';
-		$.each(routes,function(index,value){
+		hike = $("#hike").hasClass("enabled");
+		theme = $("#theme").hasClass("enabled");
+		var sortedroutes = routes.sort(function(obj1, obj2) {
+			var f = obj1.displayName[lang].toLowerCase();
+			var s = obj2.displayName[lang].toLowerCase();
+			return ((f < s) ? -1 : ((f > s) ? 1 : 0));;	
+		}); 
+		$.each(sortedroutes,function(index,value){
 			if ((theme == false && value.type=="themenweg")||(hike==false && value.type=="wanderweg"))
 				return true;
 			list+='<a href="#" title=""  id="'+value.id+'"class="list-route"><li>';
-			list+='<h4>'+value.displayName.de+'</h4>';
+			list+='<h4>'+value.displayName[lang]+'</h4>';
 			list+='<div class="metadata clearfix">';
 			list+='<div class="time">'+moment.duration(value.data,'seconds').humanize()+'</div>';
-			list+='<div class="distance">'+(Math.round(value.distance)/1000).toString().replace('.',',')+'km </div>';
-			list+='<div class="drop">'+Math.round(value.altitude)+'hm </div>';
+			list+='<div class="distance">'+(Math.round(value.distance)/1000).toString().replace('.',',')+' km </div>';
+			list+='<div class="drop">'+Math.round(value.altitude)+' hm </div>';
 			list+='<div class="kcal"> '+value.kcal+' kCal</div>';
 			list+='</div>';
 			list+='</li></a>';
@@ -311,20 +331,8 @@ var SASABus = {
             dataType: 'json',
             success: function(response, status, xhr) {
 		displayRoutesList(response);
-		$("#theme").click(function(){
-			if (theme)
-				$(this).css("background-position-y","-40px");
-			else
-				$(this).css("background-position-y","3px");
-			theme=!theme;
-			displayRoutesList(response);
-		});
-		$("#hike").click(function(){
-			if (hike)
-				$(this).css("background-position-y","-40px");
-			else
-				$(this).css("background-position-y","3px");
-			hike=!hike;
+		$(".main-config .toggler").click(function(evt){
+			$(this).toggleClass("enabled");
 			displayRoutesList(response);
 		});
             },
@@ -342,7 +350,7 @@ var SASABus = {
 	function drawRouteProfile(obj){
 	        var chart = new google.visualization.LineChart(document.getElementById('highChart'));
 		var options = {
-	          title: 'Höhenprofil',
+	          title: jsT[lang].altitudep,
         	  curveType: 'function',
 	          legend: { position: 'bottom' },
 		  width:'100%',
@@ -361,7 +369,7 @@ var SASABus = {
 		  },
         	  crosshair: { orientation: 'both' }	
         	};
-		var dataArray =[['Distance','Höhenmeter']];
+		var dataArray =[['Distance',jsT[lang].altitude]];
 		$.each(obj.data.route.altitude_profile,function(index,value){
 			var valueArray = [];
 			valueArray[0] = value.distance;
@@ -373,7 +381,7 @@ var SASABus = {
 		chart.draw(data,options);	
 	}
 	function displayRouteMetaData(obj){
-		$('.walk-route .title').html("<h3>"+obj.displayName.de+"</h3>");
+		$('.walk-route .title').html("<h3>"+obj.displayName[lang]+"</h3>");
 		$('.walk-route .metadata .time').text(moment.duration(obj.data.route.time,'seconds').humanize());
 		$('.walk-route .metadata .distance').text((Math.round(obj.data.route.distance)/1000).toString().replace('.',',') +' km');
 		$('.walk-route .metadata .drop').text(Math.round(obj.data.route.pos_altitude_difference) +' hm');
@@ -519,13 +527,26 @@ var SASABus = {
     },
     getWegeStartPoints: function(){
 	var me=this;
-        var styleMap = new OpenLayers.StyleMap({
-            externalGraphic: 'images/4_Piedi/Pin.svg',
+        var styleMap = new OpenLayers.StyleMap(new OpenLayers.Style({
+            externalGraphic: '${externalGraphic}',
             graphicWidth: 35,
-	    graphicYOffset:-35.75
-        });
+	    graphicYOffset:-35.75,
+	},{
+	    context: {
+            	externalGraphic:function(feature){
+			var pin= 'images/4_Piedi/Pin.svg';
+			if (feature.cluster){
+				if (feature.cluster.length>5)
+					pin = 'images/4_Piedi/Pin_5+.png';
+				else
+					pin = 'images/4_Piedi/Pin_'+feature.cluster.length+'.png';
+			}
+			return pin;
+		}
+	    }	
+        }));
 	var positionsLayer = new OpenLayers.Layer.Vector("wegeStartPointsLayer", {
-            strategies: [new OpenLayers.Strategy.Fixed()],
+            strategies: [new OpenLayers.Strategy.Fixed(),new OpenLayers.Strategy.Cluster({distance: 40,threshold: 3})],
             protocol: new OpenLayers.Protocol.Script({
                 url: this.config.apiediEndPoint+"/startPoints"
             }),
@@ -533,9 +554,10 @@ var SASABus = {
         });
 	positionsLayer.events.on({
 		"featureselected":function(e){
-			var id = e.feature.attributes['id'];
-			var route = e.feature.attributes['name'];
-			me.getRouteProfile(id);
+			if (!e.feature.cluster){
+				var id = e.feature.attributes['id'];
+				me.getRouteProfile(id);
+			}
 		}
 	});
 	return positionsLayer;

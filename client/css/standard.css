@@ -42,7 +42,7 @@ a{color:#c0c0c0;text-decoration:none}
 
 .beta{display:block;position:absolute;top:21px;left:208px;width:36px;height:20px;background:url(../images/ico-beta.gif) 0 0 no-repeat;font-size:0;line-height:0;text-indent:-9999px}
 
-.language-switcher{float:left;height:19px;position:absolute;top:20px;right:20px;cursor:pointer}
+.language-switcher{float:right;height:19px;position:relative;margin:auto 30px;cursor:pointer}
 	.language-switcher ul{float:left;height:19px;cursor:pointer}
 	.language-switcher li{display:none;float:right;margin-left:1px;background:#fff;border:1px solid #ededed;border-radius:2px;-webkit-border-radius:3px;-moz-border-radius:3px}
 	.language-switcher li.active,
@@ -79,7 +79,7 @@ a{color:#c0c0c0;text-decoration:none}
 
 .panel-content{width:100%;float:left;}
 	
-#variants{float:left;padding:10px}
+#variants{float:left;padding:10px;width:100%;}
 	#variants .tabbed-content{float:left;width:100%;z-index:5;}
 	#variants .tabs{float:left;width:100%;margin-bottom:15px}
 	#variants .tabs li.button{float:left;height:22px;padding:10px 10px 0 10px;min-width:80px;cursor:pointer;font-size:1.08em;font-weight:bold;line-height:100%;text-align:center;color:#c7c6c6;background:#fcfcfc;border:1px solid #eeeeee;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px}
@@ -226,14 +226,13 @@ a{color:#c0c0c0;text-decoration:none}
 /* ----------- FOOTER --------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 
-.footer{width:100%;position:absolute;left:0;border-top:1px solid #ececec}
+.footer{position:relative;float:right;}
 .footer ul{float:left;width:100%;text-align:center}
 
-#footer-1{background:#f4f4f4;bottom:33px}
 #footer-2{background:#f0f0f0;bottom:0}
 
-.footer .logos{height:54px;position:relative;border-top:1px solid #fafafa}
-.footer .logos li{position:absolute}
+.footer .logos{position:relative;border-top:1px solid #fafafa;padding:12px;background-color:#f4f4f4}
+.footer .logos li{float:left;margin: 0 8px}
 .footer .logos .merano{top:14px;left:36px}
 .footer .logos .tis{top:17px;left:175px}
 .footer .logos .sasa{top:17px;right:46px}
@@ -427,8 +426,7 @@ a{color:#c0c0c0;text-decoration:none}
 }
 .chartContainer{
     position: relative;
-    padding-bottom: 100%;
-    height: 0;
+    height: auto;
     overflow:hidden;
 }
 .highChart{
@@ -439,12 +437,12 @@ a{color:#c0c0c0;text-decoration:none}
     height:100%;
 }
 .main-config{
-	margin:0 15px;
+	margin:15px;
 	padding-bottom:15px;
 	clear:right;
 	border-bottom:1px solid #000;
 }
-.main-config p{
+.main-config p,.filters p{
 	float:left;
 	clear:both;
 	margin:8px 0;
@@ -495,10 +493,60 @@ a{color:#c0c0c0;text-decoration:none}
 	background-image:url('../images/4_Piedi/Active.svg');
 	background-repeat: no-repeat;
 	width:90px;
-	height:40px;
+	height:30px;
 	display:block;
         text-indent: -9999px;
 	float:right;
-	background-size:85px 75px;
-	background-position: 0 3px;
+	background-size:85px 60px;
+	background-position: 0 -30px;
+}
+.toggler.bus{
+	background-image:url('../images/3_Bus/Select.svg');
+}
+.toggler.enabled{
+	background-position-y:3px;
+}
+.ibutton{
+	display:block;
+	position:relative;
+	height:55px;
+	background-image:url('../images/3_Bus/Button.svg');
+	background-position:0;
+	background-size:100%;
+	background-repeat:no-repeat;
+	font-size:20px;
+	margin:10px;
+	color:#000;
+	line-height:100%;
+	vertical-align:middle;
+}
+.ibutton>div{
+	padding:18px;
+}
+.about-box{
+	display:none;
+	position:absolute;
+	top:20%;
+	left:50%;
+	z-index:5000;
+	width:600px;
+}
+.about-box .about{
+	position:relative;
+	left:-50%;
+	background-color:#fff;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	padding:15px;
+}
+.about h3{
+	font-size:1.4em;
+	line-height:1.8em;
+}
+.about ul{
+	margin-top:5px;
+}
+.about ul li {
+	margin:8px 0;
 }

@@ -95,6 +95,13 @@
 			</span>
 			<img id="logo-mobile" src="images/logo-small.gif" alt="Merano real time bus"/>
 			<span class="beta-mobile">Beta version</span>
+			<!--<nav class="language-switcher mobile-switcher">
+				<ul>
+					<li <?php if($lang=='it') echo 'class="active"'; ?>><a href="?l=it">IT</a></li>
+					<li <?php if($lang=='de') echo 'class="active"'; ?>><a href="?l=de">DE</a></li>
+					<li <?php if($lang=='en') echo 'class="active"'; ?>><a href="?l=en">EN</a></li>
+				</ul>
+			</nav>-->
 		</header>
 		<div class="map-container" id="map" style="width:100%;height:100%">
 		</div>
@@ -116,6 +123,13 @@
 					<li <?php if($lang=='en') echo 'class="active"'; ?>><a href="?l=en">EN</a></li>
 				</ul>
 			</nav>
+			<div class="footer">
+				<ul class="logos">
+					<li class="merano"><a target="_blank" href="<?php ___('linkmerano'); ?>"><?php ___('merano'); ?></a></li>
+					<li class="tis"><a target="_blank" href="<?php ___('linktis'); ?>">TIS innovation park South Tyrol</a></li>
+					<li class="sasa"><a target="_blank" href="<?php ___('linksasa'); ?>">SASA Bus</a></li>
+				</ul>
+			</div>
 		</header>
 		<div class="panel" id="panel">
 			<!--<span class="btn-toggle open first" id="btn-toggle"></span>-->
@@ -171,12 +185,12 @@
 							<div id="variants">
 								<div class="scroll" id="scroll">
 									<div class="tabbed-content">
-										<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>
-										<div class="filters-container clearfix">
-											<div class="filters">
-												<p><a href="#">Städtische Linien</a></p>
-												<p><a href="#">Auserstädtische Linien</a></p>	
-												<span id="deselectall"> <span><?php ___('deselectall'); ?></span> </span>
+										<!--<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>-->
+										<div class="filters-container">
+											<div class="filters clearfix">
+												<p><?php ___('urbani');?></p><a id="urban" class="toggler bus enabled" href="#"></a>
+												<p><?php ___('extraurbani');?></p><a id="eurban" class="toggler bus enabled" href="#"></a>	
+												<p id="deselectall"> <span><?php ___('deselectall'); ?></span> </p>
 											</div>
 										</div>
 										<div class="tab-container">
@@ -203,7 +217,7 @@
 		<!---apiedi part -->
                 <div class="hidden modal walk-route">
 			<div class="walk-container">
-	                	<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>
+	                	<!--<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>-->
 				<div class="title">
 				</div>
 				<div class="metadata clearfix">
@@ -215,23 +229,23 @@
 				<div class="chartContainer">
 					<div id="highChart"></div>
 				</div>
+				<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 			</div>
 				
 		</div>
 
                 <div class="hidden modal walk">
 			<div class="walk-container">
-	                	<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>
+	                	<!--<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>-->
 				<div class="main-config clearfix">
-					<p>Themenwege</p><a href = "#" id="theme" class="toggler"></a>
-					<p>Wanderwege</p><a href = "#" id="hike" class="toggler"></a>
-					<p>Gehzeit</p>
+					<p><?php ___('themeroutes'); ?></p><a href = "#" id="theme" class="toggler enabled"></a>
+					<p><?php ___('walkroutes'); ?></p><a href = "#" id="hike" class="toggler enabled"></a>
 				</div>
 				<ul class="routes-list">
 				<ul>
 			</div> 
 		</div> 
-	        <p id="credits"><?php ___('mappe'); ?> <a href="http://www.openstreetmap.org/copyright" rel="external">OpenStreetMap</a> &amp; <a href="<?php ___('linkr3gis'); ?>" rel="external">R3 GIS</a> - <?php ___('design'); ?> <a href="<?php ___('linkmadeincima'); ?>" rel="external">Madeincima</a></p>
+	        <p id="credits"><?php ___('mappe'); ?> <a href="http://www.openstreetmap.org/copyright" rel="external">OpenStreetMap</a> - <a href="javascript:void(0)" class="about-selector">About</a></p>
            
 		<div  class="hidden modal bus-position" >
 		<div class="modal-container"> 
@@ -293,7 +307,22 @@
                                 </div>
 			</div>
 		</div>
-
+		<div class="about-box">
+			<div class="about">
+				<a href="#" class="about-selector"><img src="images/3_Bus/Close.svg" alt="close" width="15px" style="float:right"/></a>
+				<h3>Developed by</h3>
+				<ul>
+					<li><a href="http://tis.bz.it/" target="_blank">Tis innovation park</a></li>
+					<li><a href="http://www.r3-gis.com/" target="_blank">R3-GIS</a></li>
+				</ul>
+				<h3>Design</h3>
+				<ul>
+					<li><a href="http://www.madeincima.it/" target="_blank">MadeinCima</a></li>
+					<li><a href="http://www.hellcompany.eu/" target="_blank">Hell Company</a></li>
+				</ul>
+				<h3 style="text-align:center"> <a href="https://github.com/tis-innovation-park/realtimebus.git" target="_blank">Source code available on github.com</h3>
+			</div>	
+		</div>
 		<script src="js/iscroll.js" type="text/javascript"></script>
 		<!--[if lte IE 8]>
 			<script src="scripts/PIE_IE678.js" type="text/javascript"></script>

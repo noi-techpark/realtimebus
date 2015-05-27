@@ -1,17 +1,63 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="563.836px" height="130.271px" viewBox="0 0 563.836 130.271" enable-background="new 0 0 563.836 130.271"
-	 xml:space="preserve">
-<g id="Ebene_1">
-	<g>
-		<polyline fill="none" stroke="#1F2020" stroke-width="3" stroke-linejoin="bevel" stroke-miterlimit="10" points="494.543,50.935 
-			511.543,67.935 494.543,84.935 		"/>
-	</g>
-	<path fill="none" stroke="#1F2020" stroke-width="2" stroke-miterlimit="10" d="M537.725,95.579c0,2.75-2.25,5-5,5H39.439
-		c-2.75,0-5-2.25-5-5V40.291c0-2.75,2.25-5,5-5h493.285c2.75,0,5,2.25,5,5V95.579z"/>
-</g>
-<g id="Detail">
-</g>
-</svg>
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   x="0px"
+   y="0px"
+   width="505.28598"
+   height="67.287994"
+   viewBox="0 0 505.28598 67.287996"
+   enable-background="new 0 0 563.836 130.271"
+   xml:space="preserve"
+   id="svg2"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="Button.svg"><metadata
+     id="metadata16"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+     id="defs14" /><sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="640"
+     inkscape:window-height="480"
+     id="namedview12"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.51788109"
+     inkscape:cx="248.47899"
+     inkscape:cy="36.443499"
+     inkscape:window-x="2099"
+     inkscape:window-y="254"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" /><g
+     id="Ebene_1"
+     transform="translate(-33.439008,-34.291)"><g
+       id="g5"><polyline
+         stroke-miterlimit="10"
+         points="494.543,50.935     511.543,67.935 494.543,84.935   "
+         id="polyline7"
+         style="fill:none;stroke:#1f2020;stroke-width:3;stroke-linejoin:bevel;stroke-miterlimit:10" /></g><path
+       stroke-miterlimit="10"
+       d="m 537.725,95.579 c 0,2.75 -2.25,5 -5,5 H 39.439 c -2.75,0 -5,-2.25 -5,-5 V 40.291 c 0,-2.75 2.25,-5 5,-5 h 493.285 c 2.75,0 5,2.25 5,5 v 55.288 z"
+       id="path9"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#1f2020;stroke-width:2;stroke-miterlimit:10" /></g><g
+     id="Detail"
+     transform="translate(-33.439008,-34.291)" /></svg>

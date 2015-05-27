@@ -97,7 +97,7 @@ $(document).ready(function() {
 	}
 
 	panelScrollElement = Array();
-
+	moment.locale(lang);
 	init(false);
 	oneTime(device);
 
@@ -116,11 +116,16 @@ $(document).ready(function() {
 		theme = theme.substring(0,theme.indexOf('-'));
 		if (theme == 'walk')
 			SASABus.getRoutes();
-		$('.modal').hide();
-		$('.' + theme).show();
+		var isVisible= $('.' + theme+'.modal').is(':visible');
+		$('.modal:visible').hide();
+		if (!isVisible)
+			$('.' + theme+'.modal').show();
 		
 	});
-	$('.close-modal').click(function(element){
+	$('.about-selector').click(function(){
+		$('.about-box').toggle();	
+	});
+	$('.close-modal,.backtomap').click(function(element){
 		$('.modal').hide();
 	});
 	//android don't support orientationchange but resize
@@ -143,7 +148,31 @@ $(document).ready(function() {
 		
 		SASABus.init('map');
 		SASABus.getAllLines(initLinesAfterRead);
-		
+		var subDomain = document.domain.substring(0,document.domain.indexOf('.'));
+		//activateThemes(subDomain);
+		activateThemes('bus');
+		$( ".menu>li a" ).click(function() {
+			if ($(".modal:visible").length>0)
+				$(".modal:visible").hide();	
+			else{
+				$(this).toggleClass('active');
+				activateThemes();
+			}
+		}); 
+		function activateThemes(subdomain){
+			if (subdomain != undefined){
+				$('.menu #'+subdomain).toggleClass('active');
+			}
+			var themeArray = [];
+			$( ".menu>li a.active").each(function(){
+				themeArray.push($(this).attr('id'));
+			});
+			SASABus.activateSelectedThemes(themeArray);
+		} 
+		$(".filters .toggler").click(function(){
+			$(this).toggleClass("enabled");
+			SASABus.getLines(initLinesAfterRead);
+		});
 		function getReadableTime(time){
 			var a = new Date(time*1000);
 
@@ -203,8 +232,6 @@ function initLinesAfterRead(lines)
 	mapLinesInit = new Array();
 	for(var i=0;i<lines.length;i++)
 	{
-		//if (lines[i].lidname=='10A' || lines[i].lidname=='10B')
-			//console.log(lines[i]);
 		var linea = new Array();
 		var k = 0;
 		var codLinea = (''+lines[i]['li_nr']).replace(' ','_');
@@ -242,10 +269,13 @@ function initLinesAfterRead(lines)
 		mapLinesInit[i] = codLinea+':'+codVariante;
 	}
 	var htmlL = '';
+	var urbanFilter = $("#urban").hasClass("enabled");
+	var eurbanFilter = $("#eurban").hasClass("enabled");
 	for(var i=0;i<htmlLineeU.length;i++)
 	{
-		if(typeof htmlLineeU[i] != 'undefined')
+		if(typeof htmlLineeU[i] != 'undefined' && urbanFilter)
 		{
+		
 			if(htmlLineeU[i][1].length == 0)
 				htmlL += htmlLineeU[i][0]+htmlLineeU[i][2]+htmlLineeU[i][6];
 			else
@@ -256,7 +286,7 @@ function initLinesAfterRead(lines)
 	//console.log(htmlL);
 	for(var i=0;i<htmlLineeE.length;i++)
 	{
-		if(typeof htmlLineeE[i] != 'undefined')
+		if(typeof htmlLineeE[i] != 'undefined' && eurbanFilter)
 		{
 			if(htmlLineeE[i][1].length == 0)
 				htmlL += htmlLineeE[i][0]+htmlLineeE[i][2]+htmlLineeE[i][6];
@@ -268,23 +298,6 @@ function initLinesAfterRead(lines)
 	//console.log(htmlL);
 	$('#urbani').html(htmlL);
 	SASABus.getLines(showLinesAfterRead(lines));
-	var subDomain = document.domain.substring(0,document.domain.indexOf('.'));
-	//activateThemes(subDomain);
-	activateThemes('bus');
-	$( ".menu li a" ).click(function() {
-		$(this).toggleClass('active');
-		activateThemes();
-	}); 
-	function activateThemes(subdomain){
-		if (subdomain != undefined){
-			$('.menu #'+subdomain).toggleClass('active');
-		}
-		var themeArray = [];
-		$( ".menu li a.active").each(function(){
-			themeArray.push($(this).attr('id'));
-		});
-		SASABus.activateSelectedThemes(themeArray);
-	} 
 }
 
 function stopPropagationCustom(){
@@ -327,14 +340,14 @@ function showLinesAfterRead(lines){
 				$('#variants .line').addClass("enabled");
 				SASABus.showLines(['all']);
 				for(var i=0;i<mapLinesInit.length;i++)
-                                {
+                                {	
                                         mapLines.push(mapLinesInit[i]);
                                 }
 				$('#deselectall').removeClass('disabled');
 
 			}else{
 				$(this).text("Show all lines");
-				$('#variants .enabled').each(function(){
+				$('#variants .tab-container .enabled').each(function(){
 					var line = $(this).find('.line-no').attr('id').replace('l_','');
 					var k = 0;
 					if(mapLinesInit.containsSubStr(line+':'))
