@@ -33,7 +33,7 @@
 		<link href="css/standard.css" rel="stylesheet" media="screen,projection,print" type="text/css" />
 		<link href="css/smartphone.css" media="only screen and (max-width: 671px)" rel="stylesheet" /> <!-- max-device-width: 671px -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-		<!--<link href="css/smartphoneLandscape.css" media="only screen and (max-width: 671px) and (orientation: landscape)" rel="stylesheet" /> --> <!-- max-device-width: 671px -->
+		<link href="css/smartphoneLandscape.css" media="only screen and (max-width: 671px) and (orientation: landscape)" rel="stylesheet" />  <!-- max-device-width: 671px -->
 		<!-- media="only screen and (orientation: landscape) -->
 		<script src="js/detect_device.js" type="text/javascript"></script>
 		<script src="js/OpenLayers/OpenLayers.sasabus.js"></script>

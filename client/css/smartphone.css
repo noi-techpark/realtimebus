@@ -65,7 +65,7 @@ div.olMap{width:100%;height:100%;position:absolute}
         max-width:42%;
 }
 
-ul.menu{
+ul.menu,ul.menu li{
 	width:100%;
 }
 .close-modal{
