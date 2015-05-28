@@ -23,7 +23,7 @@ var SASABus = {
     config: {
 	city:'',
         r3EndPoint: 'http://realtimebus.tis.bz.it/',
-	apiediEndPoint:'http://localhost:8080/apiedi',
+	apiediEndPoint:'http://apiedi.tis.bz.it/apiedi',
         busPopupSelector: '#busPopup',
         stopPopupSelector: '#stopPopup',
         rowsLimit: 6,
@@ -330,10 +330,11 @@ var SASABus = {
             url: this.config.apiediEndPoint+"/get-routes",
             dataType: 'json',
             success: function(response, status, xhr) {
-		displayRoutesList(response);
+		displayRoutesList(response);	
 		$(".main-config .toggler").click(function(evt){
 			$(this).toggleClass("enabled");
 			displayRoutesList(response);
+			evt.stopPropagation();
 		});
             },
             error: function(xhr, status, error) {
@@ -367,7 +368,8 @@ var SASABus = {
 		        color: 'transparent'
     		    }
 		  },
-        	  crosshair: { orientation: 'both' }	
+		  colors:['#ce5400']
+			
         	};
 		var dataArray =[['Distance',jsT[lang].altitude]];
 		$.each(obj.data.route.altitude_profile,function(index,value){

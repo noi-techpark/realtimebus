@@ -249,7 +249,7 @@
            
 		<div  class="hidden modal bus-position" >
 		<div class="modal-container"> 
-	        <a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>
+	        <!--<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>-->
 		<div id="busPopup">
                                     <div class="clearfix pophead">
                                         <h2 class="bus c-${lidname}"><?php ___('linea'); ?> ${lidname}</h2>
@@ -278,7 +278,7 @@
 		</div>
 		<div  class="hidden modal stop-position" >
 			<div class="modal-container"> 
-			        <a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>
+			        <!--<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>-->
                                 <div id="stopPopup">
                                     <h2><?php ___('fermata'); ?> ${ort_ref_ort_name}</h2>
                                     <p class="noData" style="display: none;">Nelle prossime ore non sono previsti passaggi in questa fermata.</p>
