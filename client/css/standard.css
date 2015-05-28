@@ -320,6 +320,7 @@ a{color:#c0c0c0;text-decoration:none}
 }
 .menu,.menu li {
 	width:100px;
+	height:100px;
 }
 .menu a svg{fill:#fff;background-color:#c7c7c7;}
 .menu a:hover{

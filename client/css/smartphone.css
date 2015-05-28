@@ -67,6 +67,7 @@ div.olMap{width:100%;height:100%;position:absolute}
 
 ul.menu,ul.menu li{
 	width:100%;
+	height:auto;
 }
 .close-modal{
 	width:13%;
