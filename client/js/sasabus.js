@@ -87,7 +87,6 @@ var SASABus = {
     init: function(targetDivId) {
         var me = this;
         //$("<style type='text/css'> .clickable-icon{cursor:hand;} </style>").appendTo("head");
-        
         me.config.mapDivId = targetDivId;
         
         var mapOptions = {
@@ -295,11 +294,11 @@ var SASABus = {
     getRoutes : function(){
 	var me =this;
 	var theme,hike;
-	function displayRoutesList(routes){
+	function displayRoutesList(){
 		var list = '';
 		hike = $("#hike").hasClass("enabled");
 		theme = $("#theme").hasClass("enabled");
-		var sortedroutes = routes.sort(function(obj1, obj2) {
+		var sortedroutes = me.myroutes.sort(function(obj1, obj2) {
 			var f = obj1.displayName[lang].toLowerCase();
 			var s = obj2.displayName[lang].toLowerCase();
 			return ((f < s) ? -1 : ((f > s) ? 1 : 0));;	
@@ -324,23 +323,30 @@ var SASABus = {
 		 	me.getRouteProfile(id);
 		});
 	}
-	$.ajax({
-            type: 'GET',
-            crossDomain: true,
-            url: this.config.apiediEndPoint+"/get-routes",
-            dataType: 'json',
-            success: function(response, status, xhr) {
-		displayRoutesList(response);	
-		$(".main-config .toggler").click(function(evt){
-			$(this).toggleClass("enabled");
-			displayRoutesList(response);
-			evt.stopPropagation();
-		});
-            },
-            error: function(xhr, status, error) {
-                console.log(error);
-            }
-        });	
+	function loadRoutes(url){
+		$.ajax({
+	            type: 'GET',
+        	    crossDomain: true,
+	            url: url,
+        	    dataType: 'json',
+	            success: function(response, status, xhr) {
+			me.myroutes=response;
+			displayRoutesList();	
+			$(".main-config .toggler").click(function(evt){
+				$(this).toggleClass("enabled");
+				displayRoutesList();
+			});
+	            },
+        	    error: function(xhr, status, error) {
+                	console.log(error);
+	            }
+        	});	
+	}
+	var url = this.config.apiediEndPoint+"/get-routes";
+	if (me.myroutes== undefined)
+		loadRoutes(url);
+	else
+		displayRoutesList();
     },	
     getRouteProfile : function(route){
 	var me = this;
