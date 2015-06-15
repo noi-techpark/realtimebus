@@ -6,15 +6,33 @@ var defaultProjection = new OpenLayers.Projection('EPSG:3857');
 var jsT= {
 	de:{
 		altitudep:'Höhenprofil',
-		altitude:'Höhenmeter'
+		altitude:'Höhenmeter',
+		freeBikes:'Freie Fahrräder',
+		mountain_bike_adult:'Mountain bike',
+		city_bike_adult_with_gears:'City bike für Erwachsene',
+		mountain_bike_teenager:'Mountain bike für Jugendliche',
+		mountain_bike_child:'Mountain bike für Kinder',
+		city_bike_adult_without_gears:'City bike für Erwachsene'
 	},
 	it:{
 		altitudep:'Profilo altimetrico',
-		altitude:'Altitudine'
+		altitude:'Altitudine',
+		freeBikes:'Bici disponibili',
+		mountain_bike_adult:'Mountain bike',
+		city_bike_adult_with_gears:'City bike per adulti',
+		mountain_bike_teenager:'Mountain bike per adolescenti',
+		mountain_bike_child:'Mountain bike per bambini',
+		city_bike_adult_without_gears:'City bike per adulti'
 	},
 	en:{
 		altitudep:'Altitude profile',
-		altitude:'Altitude'
+		altitude:'Altitude',
+		freeBikes:'Available bikes',
+		mountain_bike_adult:'Mountain bike',
+		city_bike_adult_with_gears:'City bike for adults',
+		mountain_bike_teenager:'Mountain bike for teenager',
+		mountain_bike_child:'Mountain bike for children',
+		city_bike_adult_without_gears:'City bike for adults'
 	}
 
 }
@@ -23,7 +41,9 @@ var SASABus = {
     config: {
 	city:'',
         r3EndPoint: 'http://realtimebus.tis.bz.it/',
+	integreenEndPoint:'http://ipchannels.integreen-life.bz.it/',
 	apiediEndPoint:'http://apiedi.tis.bz.it/apiedi',
+	geoserverEndPoint:'http://mapserver.tis.bz.it:8080/geoserver/',
         busPopupSelector: '#busPopup',
         stopPopupSelector: '#stopPopup',
         rowsLimit: 6,
@@ -55,6 +75,8 @@ var SASABus = {
 	var layerMap = {
 		walk:[me.wegeStartPointsLayer,me.artPoints].concat(me.map.getLayersByName("routes")),
 		bus:[me.linesLayer,me.positionLayer,me.stopsLayer],
+		carsharing:[],
+		bikesharing:[me.bikeSharingLayer]
 	}
 	$.each(layerMap,function(key,value){				//hide all layers which are in non active Themes
 		if ($.inArray(key,activeThemes) == -1){
@@ -75,12 +97,13 @@ var SASABus = {
 		}
 	});
 	$.each(activeLayers,function(index,object){		//add Layers or set to visible if already added
-		if (me.map.getLayer(object.id) == null)
+		if (me.map.getLayer(object.id) == null){
 			me.map.addLayer(object);
+		}
 		else
 			object.setVisibility(true);
 	});
-        var control = new OpenLayers.Control.SelectFeature([me.wegeStartPointsLayer,me.positionLayer,me.stopsLayer]);//choose Layers which can be interacted with
+        var control = new OpenLayers.Control.SelectFeature([me.wegeStartPointsLayer,me.positionLayer,me.stopsLayer,me.bikeSharingLayer]);//choose Layers which can be interacted with
         me.map.addControl(control);
         control.activate();
     }, 
@@ -139,6 +162,8 @@ var SASABus = {
 	me.wegeStartPointsLayer = me.getWegeStartPoints(); 
         me.positionLayer = me.getBusPositionLayer();
 	me.artPoints = me.getArtPoints();
+        me.bikeSharingLayer = me.getBikeSharingLayer();
+
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
             externalGraphic: 'images/pin.png'
@@ -210,35 +235,6 @@ var SASABus = {
 	me.routes = layers;
 	me.map.zoomToExtent(vectorLayer.getDataExtent());
     },
-    /*addKMLLayer : function (layer){
-		var me = this;
-        	var styleMap = new OpenLayers.StyleMap({
-        	    strokeColor: '#d35400',
-	            strokeWidth: 6,
-        	    
-	        });
-		var route = new OpenLayers.Layer.Vector("KML", {
-	        	strategies: [new OpenLayers.Strategy.Fixed()],
-	        	protocol: new OpenLayers.Protocol.HTTP({
-        	        	url: "kml/"+layer+".kml",
-	                	format: new OpenLayers.Format.KML({
-        	        	extractStyles: true, 
-                	 	extractAttributes: true,
-                 		maxDepth: 2
-	                	})
-            		}),
-		    	preFeatureInsert: function(feature) {
-        	    		feature.geometry.transform(new OpenLayers.Projection("EPSG:4326"),defaultProjection);
-            		},
-			styleMap: styleMap
-			
-        	});
-		var kmllayers =me.map.getLayersByName("KML");
-		if (kmllayers.length>0)
-			me.map.removeLayer(kmllayers[0]);
-		me.map.addLayer(route);
-		me.map.setLayerIndex(route,1);
-    },*/
     getArtPoints : function(){
 	var styleMap = new OpenLayers.StyleMap({
             externalGraphic: 'images/Themenwege/parcours_bueste.svg',
@@ -569,7 +565,127 @@ var SASABus = {
 		}
 	});
 	return positionsLayer;
-    }, 
+    },
+    getBikeSharingLayer: function(){
+        var me=this;
+        var styleMap = new OpenLayers.StyleMap(new OpenLayers.Style({
+            externalGraphic: '${externalGraphic}',
+            graphicWidth: 35,
+            graphicYOffset:-35.75,
+        },{
+            context: {
+                externalGraphic:function(feature){
+                        var pin= 'images/5_Bike/marker.svg';
+			var max = feature.attributes.max_available;
+			var now = feature.attributes.value;
+			var a = now/max;
+			if (a == 0.)
+                        	pin= 'images/5_Bike/marker_red.svg';
+			else if (a >= 0.6 && a < 1)
+                        	pin= 'images/5_Bike/marker_orange.svg';
+			else if (a>=1.)
+                        	pin= 'images/5_Bike/marker_green.svg';
+                        return pin;
+                }
+            }
+        }));
+	var  params = {
+                        request:'GetFeature',
+                        typeName:'edi:Bikesharing',
+                        outputFormat:'text/javascript',
+                        format_options: 'callback: getJson'
+        };
+
+	var positionsLayer = new OpenLayers.Layer.Vector("bikeStationsLayer", {
+	        styleMap: styleMap
+        });
+	positionsLayer.events.on({
+	       	"featureselected":function(e){
+			var station = e.feature.attributes.stationcode;
+			me.getStationDetails(station);
+		}
+	});
+	$.ajax({
+		url : 'http://mapserver.tis.bz.it:8080/geoserver/wfs?'+$.param(params),
+		dataType : 'jsonp',
+		crossDomain: true,
+		jsonpCallback : 'getJson',
+		success : function(data) {
+			var features = new OpenLayers.Format.GeoJSON().read(data);
+			positionsLayer.addFeatures(features);
+		},
+		error : function() {
+			console.log('problems with data transfer');
+		}		
+	});
+	return positionsLayer;
+    },
+    getStationDetails: function(station){
+	var me = this;	
+	$.ajax({
+                url : this.config.integreenEndPoint+'/bikesharingFrontEnd/rest/get-station-details',
+	        dataType : 'json',
+               	crossDomain: true,
+	        success : function(data) {
+			for (i in data){
+				if (data[i].id == station){
+					me.getCurrentCarsharingData(data[i]);
+				}
+			}
+		}
+        });
+    },
+    getCurrentCarsharingData: function(data){
+	var me = this;
+	var currentState = {	
+	};
+	$.ajax({url:me.config.integreenEndPoint+'/bikesharingFrontEnd/rest/get-data-types?station='+data.id,success: function(datatypes){
+		getData(datatypes);
+	}});
+	function getData(types){
+		if (types.length==0){
+			displayCurrentState();
+			return;
+		}
+		var type = types.pop()[0];
+		var params ={station:data.id,name:type,seconds:300};
+		$.ajax({
+	                url : me.config.integreenEndPoint+'/bikesharingFrontEnd/rest/get-records?'+$.param(params),
+	        	dataType : 'json',
+        	      	crossDomain: true,
+		        success : function(result) {
+				currentState[type] = result[0].value;
+				getData(types);
+			}
+        	});
+	}
+	function displayCurrentState(){
+		$('.bikesharingstation .title').text(data.name);	
+		var catHtml;
+		$('.bikesharingstation .legend').empty();
+		$.each(currentState,function(key,value){
+			if (key=="number available"){
+				radialProgress(document.getElementById('totalAvailable'))
+		                .label(jsT[lang]['freeBikes'])
+                		.diameter(180)
+		                .value(currentState[key])
+				.maxValue(data.bikes[key])
+		                .render();
+			}
+			else{
+				var cat = key.replace(/\s/g,"_");
+				radialProgress(document.getElementById(cat+'-container'))
+                		.diameter(78)
+		                .value(currentState[key])
+				.maxValue(data.bikes[key])
+		                .render();
+				$('.bikesharingstation .legend').append("<li class='"+cat+"'>"+jsT[lang][cat]+"</li>");	
+			}
+		});
+		$('.modal').hide();
+               	$('.bikesharingstation').show();
+	}
+    },
     getBusPositionLayer: function() {
         var me = this;
         

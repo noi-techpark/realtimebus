@@ -40,7 +40,7 @@
 	$vars['it_infocontatti'] = 'Per informazioni sul servizio ';
 	$vars['it_mappe'] = 'mappa';
 	$vars['it_design'] = 'design';
-	$vars['it_backtomap'] = 'Mostra sulla mappa';
+	$vars['it_backtomap'] = 'Torna sulla mappa';
 	$vars['it_time'] = 'Tempo';
 	$vars['it_themeroutes'] = 'Passegiate tematiche';
 	$vars['it_walkroutes'] = 'Passegiate';
@@ -75,7 +75,7 @@
 	$vars['en_infocontatti'] = 'For info about this service ';
 	$vars['en_mappe'] = 'map';
 	$vars['en_design'] = 'design';
-	$vars['en_backtomap'] = 'Show on map';
+	$vars['en_backtomap'] = 'Back to map';
 	$vars['en_themeroutes'] = 'Theme trails';
 	$vars['en_walkroutes'] = 'Trails';
 	// Tedesco
@@ -108,7 +108,7 @@
 	$vars['de_infocontatti'] = 'F&uuml;r weitere Infos &uuml;ber den Dienst ';
 	$vars['de_mappe'] = 'karte';
 	$vars['de_design'] = 'design';
-	$vars['de_backtomap'] = 'Zeige auf Karte';
+	$vars['de_backtomap'] = 'Zurück zur Karte';
 	$vars['de_themeroutes'] = 'Themenwege';
 	$vars['de_walkroutes'] = 'Wanderwege';
 ?>

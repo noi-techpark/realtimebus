@@ -327,6 +327,8 @@ a{color:#c0c0c0;text-decoration:none}
 	opacity:0.8;
 }
 .menu a.walk.active svg{background-color:#ce5400;}
+.menu a.carsharing.active svg{background-color:#8aaa30;}
+.menu a.bikesharing.active svg{background-color:#bb392b;}
 .menu a.bus.active svg{background-color:#ee9712;}
 .modal:before{
 	content: "";
@@ -519,7 +521,8 @@ a{color:#c0c0c0;text-decoration:none}
 	margin:10px;
 	color:#000;
 	line-height:100%;
-	vertical-align:middle;
+	vertical-align:middle;	
+	clear:both;
 }
 .ibutton>div{
 	padding:18px;
@@ -550,4 +553,54 @@ a{color:#c0c0c0;text-decoration:none}
 }
 .about ul li {
 	margin:8px 0;
+}
+
+.bikesharingstation .number-available{
+	width:100%;
+}
+.bikesharingstation .number-available svg{
+	width:150px;
+	height:200px;
+}
+.bikesharingstation .bike-categorys{
+	clear:both;
+	margin:0 7px;
+}
+.bikesharingstation .bike-categorys>div svg{
+	float:left;
+}
+.bikesharingstation .bike-categorys>div svg{
+	width:55px;
+	height:55px;
+}
+.bikesharingstation .bike-categorys .legend{
+	font-size:0.8em;
+	clear:left;
+}
+.bikesharingstation .bike-categorys .legend{
+	margin-left:20px;
+}
+.bikesharingstation .bike-categorys .legend li:before{
+	content:"\26AA";
+	padding:5px;
+}
+#mountain_bike_adult-container .arc,.mountain_bike_adult:before{
+	fill:green;
+	color:green;
+}
+#city_bike_adult_with_gears-container .arc,.city_bike_adult_with_gears:before{
+	fill:yellow;
+	color:yellow;
+}
+#mountain_bike_teenager-container .arc,.mountain_bike_teenager:before{
+	fill:gray;
+	color:gray;
+}
+#mountain_bike_child-container .arc,.mountain_bike_child:before{
+	fill:orange;
+	color:orange;
+}
+#city_bike_adult_without_gears-container .arc,.city_bike_adult_without_gears:before{
+	fill:lime;
+	color:lime;
 }

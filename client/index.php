@@ -34,6 +34,7 @@
 		<link href="css/smartphone.css" media="only screen and (max-width: 671px)" rel="stylesheet" /> <!-- max-device-width: 671px -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 		<link href="css/smartphoneLandscape.css" media="only screen and (max-width: 671px) and (orientation: landscape)" rel="stylesheet" />  <!-- max-device-width: 671px -->
+		<link href="css/radialStyle.css" rel="stylesheet" />  <!-- max-device-width: 671px -->
 		<!-- media="only screen and (orientation: landscape) -->
 		<script src="js/detect_device.js" type="text/javascript"></script>
 		<script src="js/OpenLayers/OpenLayers.sasabus.js"></script>
@@ -42,6 +43,8 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js" type="text/javascript"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.js" type="text/javascript"></script>
+		<script src="js/radialProgress.js" type="text/javascript"></script>
 		<script src="js/sasabus.js"></script>
 
 		<script> var txtVariante = '';</script>
@@ -106,8 +109,16 @@
 		<div class="map-container" id="map" style="width:100%;height:100%">
 		</div>
 		<div class="map-controls">
-			<a href="#" class="config" id="bus-c"><img src="images/3_Bus/Config.svg" alt="Zoom"/></a>
-			<a href="#" class="config" id="walk-c"><img src="images/4_Piedi/Config.svg" alt="Zoom"/></a>
+			<a href="#" class="config" id="bus-c">
+				<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 110.34375 110.34375" enable-background="new 0 0 200 200" xml:space="preserve">
+					<g transform="translate(-49.03125,-47.125)" fill="#ee9712"><g><g><path stroke-miterlimit="10" d="m 104.197,48.121 c 29.922,0 54.176,24.256 54.176,54.178 0,29.918 -24.254,54.176 -54.176,54.176 -29.92,0 -54.176,-24.258 -54.176,-54.176 0,-29.923 24.256,-54.178 54.176,-54.178 z" connector-curvature="0" style=""></path></g></g>
+						<g><polygon stroke-miterlimit="10" points="99.205,80.781 95.545,73.626 86.007,78.507 89.667,85.662 86.119,90.486 78.008,87.865 74.515,98.681 82.625,101.3 82.681,107.289 75.527,110.949 80.407,120.488 87.562,116.828 92.386,120.376 89.766,128.486 95.173,130.234 100.58,131.98 103.2,123.869 109.189,123.814 112.85,130.968 122.388,126.085 118.728,118.933 122.275,114.109 130.387,116.728 133.88,105.914 125.77,103.292 125.714,97.304 132.867,93.644 127.987,84.105 120.833,87.767 116.008,84.218 118.628,76.107 113.221,74.361 107.813,72.615 105.193,80.724 " style="fill:none;stroke:#ffffff;stroke-width:3;stroke-miterlimit:10"></polygon><circle stroke-miterlimit="10" cx="104.197" cy="102.297" r="5.6820002" cx="104.197" cy="102.297" rx="5.6820002" ry="5.6820002" style="fill:none;stroke:#ffffff;stroke-width:3;stroke-miterlimit:10" d="m 109.879,102.297 c 0,3.13808 -2.54392,5.682 -5.682,5.682 -3.13808,0 -5.682002,-2.54392 -5.682002,-5.682 0,-3.138085 2.543922,-5.682003 5.682002,-5.682003 3.13808,0 5.682,2.543918 5.682,5.682003 z"></circle></g></g></svg>
+			</a>
+			<a href="#" class="config" id="walk-c">
+				<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 110.34375 110.34375" enable-background="new 0 0 200 200" xml:space="preserve">
+					<g transform="translate(-49.03125,-47.125)" fill="#ce5400"><g><g><path stroke-miterlimit="10" d="m 104.197,48.121 c 29.922,0 54.176,24.256 54.176,54.178 0,29.918 -24.254,54.176 -54.176,54.176 -29.92,0 -54.176,-24.258 -54.176,-54.176 0,-29.923 24.256,-54.178 54.176,-54.178 z" connector-curvature="0" style=""></path></g></g>
+						<g><polygon stroke-miterlimit="10" points="99.205,80.781 95.545,73.626 86.007,78.507 89.667,85.662 86.119,90.486 78.008,87.865 74.515,98.681 82.625,101.3 82.681,107.289 75.527,110.949 80.407,120.488 87.562,116.828 92.386,120.376 89.766,128.486 95.173,130.234 100.58,131.98 103.2,123.869 109.189,123.814 112.85,130.968 122.388,126.085 118.728,118.933 122.275,114.109 130.387,116.728 133.88,105.914 125.77,103.292 125.714,97.304 132.867,93.644 127.987,84.105 120.833,87.767 116.008,84.218 118.628,76.107 113.221,74.361 107.813,72.615 105.193,80.724 " style="fill:none;stroke:#ffffff;stroke-width:3;stroke-miterlimit:10"></polygon><circle stroke-miterlimit="10" cx="104.197" cy="102.297" r="5.6820002" cx="104.197" cy="102.297" rx="5.6820002" ry="5.6820002" style="fill:none;stroke:#ffffff;stroke-width:3;stroke-miterlimit:10" d="m 109.879,102.297 c 0,3.13808 -2.54392,5.682 -5.682,5.682 -3.13808,0 -5.682002,-2.54392 -5.682002,-5.682 0,-3.138085 2.543922,-5.682003 5.682002,-5.682003 3.13808,0 5.682,2.543918 5.682,5.682003 z"></circle></g></g></svg>
+			</a>
 			<a href="#" id="zoomToMyPosition"><img src="images/2_Map/GPS.svg" alt="Zoom"/></a>
 			<a id="switcheroo" title="switch map" href="javascript:void(0)">EARTH</a>
 		</div>
@@ -152,6 +163,32 @@
 					</svg>
 				</a>
 				</li>
+				<!--<li>
+				<a href="javascript:void(0)" class="carsharing" id="carsharing">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
+<g id="Ebene_1">
+	<g>
+		<path d="M117.715,104.208c-2.535,0-4.6,2.063-4.6,4.6c0,2.535,2.064,4.599,4.6,4.599c2.536,0,4.6-2.063,4.6-4.599    C122.315,106.271,120.251,104.208,117.715,104.208z M117.715,112.093c-1.812,0-3.285-1.472-3.285-3.285s1.473-3.286,3.285-3.286    c1.813,0,3.285,1.473,3.285,3.286S119.529,112.093,117.715,112.093z"></path>
+		<path d="M123.332,99.853c-1.033,0.219-2.102,0.338-3.2,0.338c-0.596,0-1.181-0.042-1.76-0.108v0.182H73.694V86.861    c0-2.759,1.668-4.993,3.719-4.993h27.636c0.177-0.909,0.441-1.784,0.77-2.628H77.413c-3.562,0-6.348,3.351-6.348,7.621v12.195    c-3.719,0.632-6.57,3.876-6.57,7.779v10.513c0,3.904,2.852,7.122,6.57,7.754v7.358c0,2.536,2.063,4.6,4.6,4.6h1.314    c2.535,0,4.599-2.063,4.599-4.6v-7.228h28.91v7.228c0,2.536,2.063,4.6,4.6,4.6h1.313c2.536,0,4.6-2.063,4.6-4.6v-7.358    c3.719-0.632,6.57-3.85,6.57-7.754v-10.513C127.571,103.803,125.845,101.173,123.332,99.853z M78.95,132.461    c0,1.091-0.881,1.971-1.971,1.971h-1.314c-1.091,0-1.971-0.88-1.971-1.971v-7.228h5.256V132.461z M110.488,122.605h-28.91H78.95    v-3.285c0-2.536,2.063-4.6,4.6-4.6h24.967c2.537,0,4.6,2.063,4.6,4.6v3.285H110.488z M118.373,132.461    c0,1.091-0.88,1.971-1.972,1.971h-1.313c-1.091,0-1.972-0.88-1.972-1.971v-7.228h5.257V132.461z M124.943,117.349    c0,2.904-2.353,5.257-5.257,5.257h-5.256v-3.942c0-2.904-2.352-5.257-5.256-5.257H82.892c-2.904,0-5.257,2.353-5.257,5.257v3.942    h-5.256c-2.904,0-5.257-2.353-5.257-5.257v-10.513c0-2.904,2.353-5.256,5.257-5.256h1.314h44.679h1.313    c2.904,0,5.257,2.352,5.257,5.256V117.349z"></path>
+		<path d="M74.35,104.208c-2.535,0-4.6,2.063-4.6,4.6c0,2.535,2.064,4.599,4.6,4.599c2.536,0,4.6-2.063,4.6-4.599    C78.95,106.271,76.886,104.208,74.35,104.208z M74.35,112.093c-1.812,0-3.285-1.472-3.285-3.285s1.473-3.286,3.285-3.286    c1.813,0,3.285,1.473,3.285,3.286S76.164,112.093,74.35,112.093z"></path>
+	</g>
+	<g>
+		<path d="M110.288,91.292l0.516,0.519h-1.48v2h3.884l1-1v-3.885h-2v1.47l-0.362-0.362c-2.806-3.787-2.409-9.143,0.936-12.486    c1.811-1.812,4.22-2.811,6.785-2.811v-2c-3.099,0-6.011,1.206-8.199,3.396C107.307,80.194,106.843,86.711,110.288,91.292z"></path>
+		<path d="M129.549,78.082l-0.515-0.519h1.48v-2h-3.886l-1,1v3.885h2v-1.472l0.363,0.363c2.806,3.788,2.409,9.144-0.935,12.486    c-1.812,1.813-4.222,2.812-6.785,2.812v2c3.098,0,6.01-1.207,8.199-3.397C132.53,89.181,132.994,82.664,129.549,78.082z"></path>
+	</g>
+</g>
+					</svg>
+				</a>
+				</li>-->
+				<li>
+					<a href="javascript:void(0)" class="bikesharing" id="bikesharing">
+						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
+							<g>
+								<path fill-rule="evenodd" clip-rule="evenodd" d="M118.709,107.366c0,0.938,0.769,1.707,1.709,1.707   c0.938,0,1.707-0.769,1.707-1.707s-0.77-1.708-1.707-1.708C119.478,105.658,118.709,106.428,118.709,107.366z M120.418,95.411   c-0.734,0-1.452,0.067-2.152,0.205l2.578,8.367c1.675,0.224,2.989,1.642,2.989,3.383c0,1.878-1.538,3.415-3.415,3.415   c-1.879,0-3.416-1.537-3.416-3.415c0-1.314,0.75-2.461,1.861-3.022l-2.529-8.199c-4.594,1.658-7.871,6.046-7.871,11.222   c0,6.609,5.344,11.955,11.955,11.955c6.609,0,11.955-5.346,11.955-11.955C132.373,100.756,127.027,95.411,120.418,95.411z    M112.492,83.505l-0.648-0.049H86.089l7.207,20.546l0.632-0.035l0.086-0.017c0.528,0,1.059,0.102,1.589,0.307l0.581,0.24   l16.633-19.967L112.492,83.505z M84.329,84.6l-6.302,10.214c3.945,2.766,6.525,7.36,6.525,12.553h5.225l0.205-0.563   c0.24-0.65,0.598-1.213,1.077-1.656l0.392-0.395L84.329,84.6z M76.217,97.715l-4.524,7.347c0.546,0.612,0.903,1.417,0.903,2.305   h8.539C81.135,103.403,79.188,99.886,76.217,97.715z M70.889,107.366c0-0.938-0.769-1.708-1.709-1.708   c-0.938,0-1.707,0.77-1.707,1.708s0.77,1.707,1.707,1.707C70.12,109.073,70.889,108.305,70.889,107.366z M69.18,95.411   c-6.609,0-11.955,5.345-11.955,11.955c0,6.609,5.346,11.955,11.955,11.955c6.027,0,10.982-4.459,11.819-10.248h-8.88   c-0.582,1.024-1.674,1.708-2.939,1.708c-1.877,0-3.415-1.537-3.415-3.415c0-1.879,1.538-3.416,3.415-3.416   c0.258,0,0.514,0.033,0.752,0.085l4.578-7.36C72.903,95.871,71.094,95.411,69.18,95.411z M93.945,110.781   c1.416,0,2.562-1.144,2.562-2.561c0-1.418-1.146-2.562-2.562-2.562c-1.418,0-2.562,1.145-2.562,2.562   C91.383,109.638,92.527,110.781,93.945,110.781z M120.418,122.736c-8.49,0-15.371-6.883-15.371-15.37   c0-6.712,4.303-12.399,10.297-14.5l-1.929-6.284l-15.85,19.246l0.256,0.496c0.309,0.615,0.479,1.247,0.479,1.896   c0,2.355-1.93,4.27-4.286,4.27c-1.794,0-3.416-1.145-4.016-2.853l-0.203-0.564h-5.348c-0.853,7.686-7.359,13.663-15.268,13.663   c-8.488,0-15.37-6.883-15.37-15.37c0-8.488,6.882-15.371,15.37-15.371c2.58,0,5.005,0.649,7.139,1.759l7.174-11.547l-1.382-4.335   l-0.821,0.238c-0.512,0.153-1.007,0.238-1.484,0.238c-3.297,0-5.397-3.159-5.62-3.519c-0.171-0.273-0.188-0.871-0.018-1.145   c0.188-0.308,0.514-0.478,0.888-0.478h14.006c0.494,0,0.938,0.343,0.992,0.805c0.066,0.493-0.309,1.144-0.736,1.245   c-0.238,0.052-2.236,0.546-4.645,1.451l-0.752,0.309l1.502,4.729h26.473l-2.048-7.207c-0.087-0.272-0.035-0.562,0.153-0.784   c0.186-0.24,0.493-0.395,0.818-0.395c2.203,0,3.178-1.314,3.178-2.611c0-0.701-0.273-1.334-0.77-1.794   c-0.599-0.564-1.452-0.872-2.408-0.872h-6.455c-0.564,0-1.008-0.377-1.008-0.854s0.443-0.854,1.008-0.854h6.455   c2.033,0,3.229,0.717,3.878,1.314c0.854,0.82,1.331,1.896,1.331,3.059c0,1.861-1.229,3.466-3.109,4.115l-0.783,0.256l4.746,15.986   l0.378,1.211c1.022-0.203,2.083-0.323,3.159-0.323c8.488,0,15.37,6.883,15.37,15.371   C135.788,115.854,128.906,122.736,120.418,122.736z"></path>
+							</g>
+						</svg>
+					</a>
+				</li>
 			</ul>
 			<!--<footer id="footer-1" class="footer">
 				<ul class="logos">
@@ -191,6 +228,7 @@
 												<p><?php ___('urbani');?></p><a id="urban" class="toggler bus enabled" href="#"></a>
 												<p><?php ___('extraurbani');?></p><a id="eurban" class="toggler bus enabled" href="#"></a>	
 												<p id="deselectall"> <span><?php ___('deselectall'); ?></span> </p>
+                        									<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 											</div>
 										</div>
 										<div class="tab-container">
@@ -216,23 +254,22 @@
 
 		<!---apiedi part -->
                 <div class="hidden modal walk-route">
-			<div class="walk-container">
-	                	<!--<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>-->
-				<div class="title">
-				</div>
-				<div class="metadata clearfix">
-					<div class="time"></div>
-					<div class="distance"></div>
-					<div class="drop"></div>
-					<div class="kcal"></div>
-				</div>
-				<div class="chartContainer">
-					<div id="highChart"></div>
-				</div>
-				<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
-			</div>
-				
-		</div>
+                       <div class="walk-container">
+                               <div class="title">
+                               </div>
+                               <div class="metadata clearfix">
+                                       <div class="time"></div>
+                                       <div class="distance"></div>
+                                       <div class="drop"></div>
+                                       <div class="kcal"></div>
+                               </div>
+                               <div class="chartContainer">
+                                       <div id="highChart"></div>
+                               </div>
+                               <a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
+                       </div>
+                               
+               </div>
 
                 <div class="hidden modal walk">
 			<div class="walk-container">
@@ -240,6 +277,7 @@
 				<div class="main-config clearfix">
 					<p><?php ___('themeroutes'); ?></p><a href = "#" id="theme" class="toggler enabled"></a>
 					<p><?php ___('walkroutes'); ?></p><a href = "#" id="hike" class="toggler enabled"></a>
+                        		<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 				</div>
 				<ul class="routes-list">
 				<ul>
@@ -274,6 +312,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                        	<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 			</div>
 		</div>
 		<div  class="hidden modal stop-position" >
@@ -305,7 +344,35 @@
                                     </table>
                                     <span class="tip"></span>
                                 </div>
+                        	<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 			</div>
+		</div>
+                <div class="hidden modal bikesharingstation">
+			<div class="walk-container">
+	                	<!--<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>-->
+				<div class="title">
+				</div>
+				<div class="number-available" id="totalAvailable">
+					<!--<svg height="300px" width="300px">
+						<g>
+						  <circle cx="150" cy="150" r="100" stroke="white" stroke-width="3" fill="transparent" />
+						  <text x="50%" y="50%" dy=".3em" fill="black" text-anchor="middle" >95</text>
+						  <path d="M200,150 h-150 a100,100 0 1,0 100,-100" fill="transparent" stroke="blue" stroke-width="7" />
+						</g>
+					</svg>-->
+				</div>
+				<div class="bike-categorys">
+					<div id="mountain_bike_adult-container"></div>
+					<div id="city_bike_adult_with_gears-container"></div>
+					<div id="mountain_bike_teenager-container" ></div>
+					<div id="mountain_bike_child-container"></div>
+					<div id="city_bike_adult_without_gears-container"></div>
+					<ul class="legend">
+					</ul>
+				</div>
+				<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
+			</div>
+				
 		</div>
 		<div class="about-box">
 			<div class="about">
