@@ -44,6 +44,7 @@
 	$vars['it_time'] = 'Tempo';
 	$vars['it_themeroutes'] = 'Passegiate tematiche';
 	$vars['it_walkroutes'] = 'Passegiate';
+	$vars['it_more'] = 'Ulteriori informazioni';
 	// Inglese
 	$vars['en_meranotitle'] = 'Merano - Real time bus';
 	$vars['en_urbani'] = 'Urban';
@@ -78,6 +79,7 @@
 	$vars['en_backtomap'] = 'Back to map';
 	$vars['en_themeroutes'] = 'Theme trails';
 	$vars['en_walkroutes'] = 'Trails';
+	$vars['en_more'] = 'Additional information';
 	// Tedesco
 	$vars['de_meranotitle'] = 'Meran - Real time bus';
 	$vars['de_urbani'] = 'St&auml;dtische Busse';
@@ -111,4 +113,6 @@
 	$vars['de_backtomap'] = 'Zurück zur Karte';
 	$vars['de_themeroutes'] = 'Themenwege';
 	$vars['de_walkroutes'] = 'Wanderwege';
+	$vars['de_more'] = 'Zusätzliche Informationen';
+	
 ?>

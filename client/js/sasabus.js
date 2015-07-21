@@ -42,8 +42,9 @@ var SASABus = {
 	city:'',
         r3EndPoint: 'http://realtimebus.tis.bz.it/',
 	integreenEndPoint:'http://ipchannels.integreen-life.bz.it/',
-	apiediEndPoint:'http://apiedi.tis.bz.it/apiedi',
-	geoserverEndPoint:'http://mapserver.tis.bz.it:8080/geoserver/',
+	//apiediEndPoint:'http://apiedi.tis.bz.it/apiedi',
+	apiediEndPoint:'http://localhost:8080/apiedi',
+	geoserverEndPoint:'http://geodata.integreen-life.bz.it/geoserver/',
         busPopupSelector: '#busPopup',
         stopPopupSelector: '#stopPopup',
         rowsLimit: 6,
@@ -103,13 +104,12 @@ var SASABus = {
 		else
 			object.setVisibility(true);
 	});
-        var control = new OpenLayers.Control.SelectFeature([me.wegeStartPointsLayer,me.positionLayer,me.stopsLayer,me.bikeSharingLayer]);//choose Layers which can be interacted with
+        var control = new OpenLayers.Control.SelectFeature([me.wegeStartPointsLayer,me.positionLayer,me.stopsLayer,me.bikeSharingLayer,me.artPoints]);//choose Layers which can be interacted with
         me.map.addControl(control);
         control.activate();
     }, 
     init: function(targetDivId) {
         var me = this;
-        //$("<style type='text/css'> .clickable-icon{cursor:hand;} </style>").appendTo("head");
         me.config.mapDivId = targetDivId;
         
         var mapOptions = {
@@ -173,7 +173,6 @@ var SASABus = {
         });
         me.map.addLayers([osm,topoMap]);
 
-        
         var merano = new OpenLayers.Bounds(662500, 5169000, 667600, 5174000).transform(epsg25832,defaultProjection);
         me.map.zoomToExtent(merano);
         me.showLines(['all']);
@@ -248,6 +247,12 @@ var SASABus = {
                 styleMap:styleMap
         });
         vectorLayer.addFeatures([pointFeature]);
+	vectorLayer.events.on({
+                "featureselected":function(e){
+			$(".modal").hide();
+                        $("#artModal").show();
+                }
+        });
 	return vectorLayer;
     },
     getSpurenEagles : function(){
@@ -387,9 +392,10 @@ var SASABus = {
 	function displayRouteMetaData(obj){
 		$('.walk-route .title').html("<h3>"+obj.displayName[lang]+"</h3>");
 		$('.walk-route .metadata .time').text(moment.duration(obj.data.route.time,'seconds').humanize());
-		$('.walk-route .metadata .distance').text((Math.round(obj.data.route.distance)/1000).toString().replace('.',',') +' km');
+		$('.walk-route .metadata .distance').text((Math.round(obj.data.route.distance)/1000).toString().replace('.',',') +' km');//obj.data.route.altitude_profile[obj.data.route.altitude_profile.length-1].distance
 		$('.walk-route .metadata .drop').text(Math.round(obj.data.route.pos_altitude_difference) +' hm');
 		$('.walk-route .metadata .kcal').text(obj.kcal+' kCal');
+		$('.walk-route p.metadata a').attr('href',obj.url);
 		drawRouteProfile(obj);
 		$('.modal').hide();
 		$('.walk-route').show();
@@ -648,13 +654,13 @@ var SASABus = {
 			return;
 		}
 		var type = types.pop()[0];
-		var params ={station:data.id,name:type,seconds:300};
+		var params ={station:data.id,name:type,seconds:600};
 		$.ajax({
 	                url : me.config.integreenEndPoint+'/bikesharingFrontEnd/rest/get-records?'+$.param(params),
 	        	dataType : 'json',
         	      	crossDomain: true,
 		        success : function(result) {
-				currentState[type] = result[0].value;
+				currentState[type] = result[result.length-1].value;
 				getData(types);
 			}
         	});
