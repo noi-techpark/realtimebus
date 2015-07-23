@@ -555,10 +555,10 @@ a{color:#c0c0c0;text-decoration:none}
 	margin:8px 0;
 }
 
-.bikesharingstation .number-available{
+.bikesharingstation .number-available,.carsharingstation .number-available{
 	width:100%;
 }
-.bikesharingstation .number-available svg{
+.bikesharingstation .number-available svg,.carsharingstation .number-available svg{
 	width:150px;
 	height:200px;
 }
