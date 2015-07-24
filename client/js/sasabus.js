@@ -74,7 +74,7 @@ var SASABus = {
     activateSelectedThemes: function(activeThemes){
 	var me = this;
 	var layerMap = {
-		walk:[me.wegeStartPointsLayer,me.artPoints].concat(me.map.getLayersByName("routes")),
+		walk:[me.wegeStartPointsLayer,me.artPoints].concat(me.map.getLayersByName("routes").concat(me.map.getLayersByName("zugang"))),
 		bus:[me.linesLayer,me.positionLayer,me.stopsLayer],
 		carsharing:[],
 		bikesharing:[me.bikeSharingLayer]
