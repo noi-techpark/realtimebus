@@ -397,8 +397,8 @@
 					<p>The Human Shapes project is a tribute to ten personalities from the past, who made a significant contribution to Merano’s cultural life during the course of their lives.<br/>
 						<a href="http://www.meran.eu/culture-tradition/monuments/human-shapes/" target="_blank"><?php ___('more'); ?></a>
 					</p>
-                        		<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 				</div>
+                        	<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 			</div>
 		</div>
 		<div class="about-box">
