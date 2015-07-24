@@ -42,8 +42,8 @@ var SASABus = {
 	city:'',
         r3EndPoint: 'http://realtimebus.tis.bz.it/',
 	integreenEndPoint:'http://ipchannels.integreen-life.bz.it/',
-	//apiediEndPoint:'http://apiedi.tis.bz.it/apiedi',
-	apiediEndPoint:'http://localhost:8080/apiedi',
+	apiediEndPoint:'http://apiedi.tis.bz.it/apiedi',
+	//apiediEndPoint:'http://localhost:8080/apiedi',
 	geoserverEndPoint:'http://geodata.integreen-life.bz.it/geoserver/',
         busPopupSelector: '#busPopup',
         stopPopupSelector: '#stopPopup',
@@ -222,17 +222,24 @@ var SASABus = {
 	var lineFeature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString(pointList),null,styleMap);
 	var vectorLayer = new OpenLayers.Layer.Vector("routes");
 	vectorLayer.addFeatures([lineFeature]);
+	var zugang = me.map.getLayersByName("zugang");
+	removeLayers(zugang);
 	if (obj.displayName.de=='Spurenweg')
 		vectorLayer.addFeatures([me.getSpurenEagles()]);
-	else if (obj.displayName.de.indexOf('Spring 2015')>0)
+	else if (obj.displayName.de.indexOf('Spring 2015')>=0)
 		vectorLayer.addFeatures([me.getArtAndNature()]);
+	else if (obj.displayName.de.indexOf('Tappeiner')>=0)
+		me.map.addLayer(me.getTappeinerZugang());
 	var layers =me.map.getLayersByName("routes");
-	if (layers.length>0)
-		me.map.removeLayer(layers[0]);
+	removeLayers(layers);
 	//me.wegeStartPointsLayer.setVisibility(false); //to remove all start Points on route selection
 	me.map.addLayer(vectorLayer);
 	me.routes = layers;
 	me.map.zoomToExtent(vectorLayer.getDataExtent());
+	function removeLayers(layers){
+		if (layers.length>0)
+			me.map.removeLayer(layers[0]);
+	}
     },
     getArtPoints : function(){
 	var styleMap = new OpenLayers.StyleMap({
@@ -270,6 +277,29 @@ var SASABus = {
         var adler = new OpenLayers.Geometry.MultiPoint([a1,a2,a3,a4,a5,a6]);
         var pointFeature = new OpenLayers.Feature.Vector(adler, null, styleMap);
         return pointFeature;
+    },
+    getTappeinerZugang : function(){
+	var me = this;
+	var zugangMap = new OpenLayers.StyleMap({
+        	strokeColor: 'orange',
+	        strokeWidth: 5,           
+        });
+        var route = new OpenLayers.Layer.Vector("zugang", {
+	        strategies: [new OpenLayers.Strategy.Fixed()],
+	        protocol: new OpenLayers.Protocol.HTTP({
+	                url: "kml/tappzu.kml",
+        	        format: new OpenLayers.Format.KML({
+	        	        extractStyles: true, 
+        	        	extractAttributes: true,
+	                	maxDepth: 2
+        	        })
+                }),
+                preFeatureInsert: function(feature) {
+	                feature.geometry.transform(new OpenLayers.Projection("EPSG:4326"),defaultProjection);
+                },
+                styleMap: zugangMap                     
+        });
+	return route;
     },
     getArtAndNature : function(){
         var styleMap = {
@@ -587,9 +617,9 @@ var SASABus = {
 			var a = now/max;
 			if (a == 0.)
                         	pin= 'images/5_Bike/marker_red.svg';
-			else if (a >= 0.6 && a < 1)
+			else if (a < 0.6 && a > 0)
                         	pin= 'images/5_Bike/marker_orange.svg';
-			else if (a>=1.)
+			else if (a>=0.6)
                         	pin= 'images/5_Bike/marker_green.svg';
                         return pin;
                 }
