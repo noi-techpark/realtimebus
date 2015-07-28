@@ -562,25 +562,21 @@ a{color:#c0c0c0;text-decoration:none}
 	width:150px;
 	height:200px;
 }
-.bikesharingstation .bike-categorys{
+.bikesharingstation .bike-categorys,.carsharingstation .car-categorys{
 	clear:both;
 	margin:0 7px;
 }
-.bikesharingstation .bike-categorys>div svg{
+.bikesharingstation .bike-categorys>div svg,.carsharingstation .car-categorys>div svg{
 	float:left;
-}
-.bikesharingstation .bike-categorys>div svg{
 	width:55px;
 	height:55px;
 }
-.bikesharingstation .bike-categorys .legend{
+.legend{
 	font-size:0.8em;
 	clear:left;
-}
-.bikesharingstation .bike-categorys .legend{
 	margin-left:20px;
 }
-.bikesharingstation .bike-categorys .legend li:before{
+.legend li:before{
 	content:"\26AA";
 	padding:5px;
 }

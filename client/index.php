@@ -383,6 +383,8 @@
 				<div class="number-available">
 				</div>
 				<div class="car-categorys">
+					<ul class="legend">
+					</ul>
 				</div>
 				<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 			</div>

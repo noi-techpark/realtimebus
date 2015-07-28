@@ -8,6 +8,7 @@ var jsT= {
 		altitudep:'Höhenprofil',
 		altitude:'Höhenmeter',
 		freeBikes:'Freie Fahrräder',
+		freeCars:'Verfügbare Autos',
 		mountain_bike_adult:'Mountain bike',
 		city_bike_adult_with_gears:'City bike für Erwachsene',
 		mountain_bike_teenager:'Mountain bike für Jugendliche',
@@ -18,6 +19,7 @@ var jsT= {
 		altitudep:'Profilo altimetrico',
 		altitude:'Altitudine',
 		freeBikes:'Bici disponibili',
+		freeCars:'Macchine disponibili',
 		mountain_bike_adult:'Mountain bike',
 		city_bike_adult_with_gears:'City bike per adulti',
 		mountain_bike_teenager:'Mountain bike per adolescenti',
@@ -28,6 +30,7 @@ var jsT= {
 		altitudep:'Altitude profile',
 		altitude:'Altitude',
 		freeBikes:'Available bikes',
+		freeCars:'Available cars',
 		mountain_bike_adult:'Mountain bike',
 		city_bike_adult_with_gears:'City bike for adults',
 		mountain_bike_teenager:'Mountain bike for teenager',
@@ -745,9 +748,10 @@ var SASABus = {
 	var me = this;
 	var currentState = {	
 	};
+	var numbersByBrand={};
 	var params ={station:data.id,name:'number available',seconds:600};
 	$.ajax({
-                url : me.config.integreenEndPoint+'/carsharingFrontEnd/rest/get-records?'+$.param(params),
+                url : me.config.integreenEndPoint+'carsharingFrontEnd/rest/get-records?'+$.param(params),
         	dataType : 'json',
        	      	crossDomain: true,
 	        success : function(result) {
@@ -756,25 +760,68 @@ var SASABus = {
 		}
     	});
 	$.ajax({
-        	url : this.config.integreenEndPoint+'/carsharingFrontEnd/rest/cars/get-station-details',
+        	url : this.config.integreenEndPoint+'carsharingFrontEnd/rest/cars/get-station-details',
 	        dataType : 'json',
                	crossDomain: true,
 	        success : function(cardetails) {
+			var cars =[];
 			$.each(cardetails,function(index,value){
-				if (value.carsharingstation == data.id){
-					console.log(value);
+				if (value.carsharingstation==data.id){
+					cars.push(value);
 				}
 			});
+			getDataOfCars(cars)
 		}
 	});
+	function getDataOfCars(cardetails){
+		if (cardetails.length==0){
+			$('.carsharingstation .car-categorys').empty();
+			$('.carsharingstation .legend').empty();
+			console.log(numbersByBrand);
+			for (brand in numbersByBrand){
+				var brandClass= brand.replace(/[^a-zA-Z0-9]/g,'_');
+				$('.carsharingstation .car-categorys').prepend("<div class='"+brandClass+"'></div>");
+				radialProgress($('.carsharingstation .car-categorys .'+brandClass)[0])
+                                 .diameter(78)
+                                 .value(numbersByBrand[brand].current)
+                                 .maxValue(numbersByBrand[brand].total)
+                                 .render();
+                        	$('.carsharingstation .legend').append("<li class=''>"+brand+"</li>");
+			}
+			return;
+		}
+		var car = cardetails.pop();
+		var params ={
+			station:car.id,
+			name:'vehicle availability',
+			seconds:10000
+		}
+		$.ajax({
+	                url : me.config.integreenEndPoint+'carsharingFrontEnd/rest/cars/get-records?'+$.param(params),
+        	        dataType : 'json',
+                	crossDomain: true,
+	                success : function(records) {
+				var record = records[records.length-1];
+				if (numbersByBrand[car.brand]==undefined){
+					numbersByBrand[car.brand]={total:0,current:0}
+				}
+				numbersByBrand[car.brand]['total']= numbersByBrand[car.brand]['total']+1;
+				console.log(record);
+				if (record!=undefined && record.value==1)
+					numbersByBrand[car.brand]['current']=numbersByBrand[car.brand]['current']+1;
+				getDataOfCars(cardetails);
+			}
+                	
+	        });
+
+	}
 	function displayCurrentState(){
 		$('.carsharingstation .title').text(data.name);	
 		var catHtml;
-		$('.carsharingstation .legend').empty();
 		$.each(currentState,function(key,value){
 			if (key=="number available"){
 				radialProgress($(".carsharingstation .number-available")[0])
-		                .label(jsT[lang]['freeBikes'])
+		                .label(jsT[lang]['freeCars'])
                 		.diameter(180)
 		                .value(currentState[key])
 				.maxValue(data.availableVehicles)
