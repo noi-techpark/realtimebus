@@ -128,7 +128,11 @@ a{color:#c0c0c0;text-decoration:none}
 .map-controls{
 	position:absolute;bottom:25px;right:15px;clear:both;
 	width:auto;
+	height:auto;
         z-index:1000;
+}
+.map-controls .global{
+	width:120px;
 }
 #zoomToMyPosition{
 	float:right;

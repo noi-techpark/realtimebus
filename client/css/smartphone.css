@@ -52,6 +52,12 @@ div.olMap{width:100%;height:100%;position:absolute}
 	right:5px;
 	z-index:1000;
 }
+.map-controls{
+	width:30%;
+}
+.map-controls .global{
+	width:auto;
+}
 .config,#zoomToMyPosition{
 	width:40%;
 }
