@@ -426,7 +426,7 @@ var SASABus = {
 		$('.walk-route .metadata .distance').text((Math.round(obj.data.route.distance)/1000).toString().replace('.',',') +' km');//obj.data.route.altitude_profile[obj.data.route.altitude_profile.length-1].distance
 		$('.walk-route .metadata .drop').text(Math.round(obj.data.route.pos_altitude_difference) +' hm');
 		$('.walk-route .metadata .kcal').text(obj.kcal+' kCal');
-		$('.walk-route p.metadata a').attr('href',obj.url);
+		$('.walk-route a.more').attr('href',obj.url);
 		drawRouteProfile(obj);
 		$('.modal').hide();
 		$('.walk-route').show();

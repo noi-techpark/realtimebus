@@ -268,7 +268,7 @@
                                <div class="chartContainer">
                                        <div id="highChart"></div>
                                </div>
-			       <a href="" class="ibutton" target="_blank"><div><?php ___('more'); ?></div></a>
+			       <a href="" class="ibutton more" target="_blank"><div><?php ___('more'); ?></div></a>
                                <a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
                        </div>
                                
