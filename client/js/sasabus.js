@@ -649,7 +649,7 @@ var SASABus = {
 		}
 	});
 	$.ajax({
-		url : this.geoserverEndPoint+'wfs?'+$.param(params),
+		url : me.config.geoserverEndPoint+'wfs?'+$.param(params),
 		dataType : 'jsonp',
 		crossDomain: true,
 		jsonpCallback : 'getJson',
