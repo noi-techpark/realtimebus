@@ -40,7 +40,7 @@
 	$vars['it_infocontatti'] = 'Per informazioni sul servizio ';
 	$vars['it_mappe'] = 'mappa';
 	$vars['it_design'] = 'design';
-	$vars['it_backtomap'] = 'Torna sulla mappa';
+	$vars['it_backtomap'] = 'Mappa';
 	$vars['it_time'] = 'Tempo';
 	$vars['it_themeroutes'] = 'Passegiate tematiche';
 	$vars['it_walkroutes'] = 'Passegiate';
@@ -76,10 +76,10 @@
 	$vars['en_infocontatti'] = 'For info about this service ';
 	$vars['en_mappe'] = 'map';
 	$vars['en_design'] = 'design';
-	$vars['en_backtomap'] = 'Back to map';
+	$vars['en_backtomap'] = 'Map';
 	$vars['en_themeroutes'] = 'Theme trails';
 	$vars['en_walkroutes'] = 'Trails';
-	$vars['en_more'] = 'Additional information';
+	$vars['en_more'] = 'More Information';
 	// Tedesco
 	$vars['de_meranotitle'] = 'Meran - Real time bus';
 	$vars['de_urbani'] = 'St&auml;dtische Busse';
@@ -110,9 +110,9 @@
 	$vars['de_infocontatti'] = 'F&uuml;r weitere Infos &uuml;ber den Dienst ';
 	$vars['de_mappe'] = 'karte';
 	$vars['de_design'] = 'design';
-	$vars['de_backtomap'] = 'Zurück zur Karte';
+	$vars['de_backtomap'] = 'Karte';
 	$vars['de_themeroutes'] = 'Themenwege';
 	$vars['de_walkroutes'] = 'Wanderwege';
-	$vars['de_more'] = 'Zusätzliche Informationen';
+	$vars['de_more'] = 'Weitere Informationen';
 	
 ?>

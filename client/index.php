@@ -266,7 +266,7 @@
                                <div class="chartContainer">
                                        <div id="highChart"></div>
                                </div>
-			       <p class="metadata"><a href="" target="_blank"><?php ___('more'); ?></a></p>
+			       <a href="" class="ibutton" target="_blank"><div><?php ___('more'); ?></div></a>
                                <a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
                        </div>
                                
@@ -382,10 +382,8 @@
 				</div> 
 				<div class="metadata">
 					<img src="images/human_shapes.jpg" alt="human shapes" width="100%"/>
-					<p>The Human Shapes project is a tribute to ten personalities from the past, who made a significant contribution to Merano’s cultural life during the course of their lives.<br/>
-						<a href="http://www.meran.eu/culture-tradition/monuments/human-shapes/" target="_blank"><?php ___('more'); ?></a>
-					</p>
 				</div>
+				<a href="http://www.meran.eu/culture-tradition/monuments/human-shapes/" class="ibutton" target="_blank"><div><?php ___('more'); ?></div></a>
                         	<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 			</div>
 		</div>

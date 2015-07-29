@@ -127,7 +127,7 @@ a{color:#c0c0c0;text-decoration:none}
 
 .map-controls{
 	position:absolute;bottom:25px;right:15px;clear:both;
-	width:30%;
+	width:auto;
         z-index:1000;
 }
 #zoomToMyPosition{

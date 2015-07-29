@@ -104,7 +104,8 @@ var SASABus = {
 		else
 			object.setVisibility(true);
 	});
-        var control = new OpenLayers.Control.SelectFeature([me.wegeStartPointsLayer,me.positionLayer,me.stopsLayer,me.bikeSharingLayer,me.artPoints]);//choose Layers which can be interacted with
+	var controlOptions={toggle:true};
+        var control = new OpenLayers.Control.SelectFeature([me.wegeStartPointsLayer,me.positionLayer,me.stopsLayer,me.bikeSharingLayer,me.artPoints],controlOptions);//choose Layers which can be interacted with
         me.map.addControl(control);
         control.activate();
     }, 
@@ -598,6 +599,12 @@ var SASABus = {
 				var id = e.feature.attributes['id'];
 				me.getRouteProfile(id);
 			}
+		},
+		"featureunselected":function(e){
+			if (!e.feature.cluster){
+				var id = e.feature.attributes['id'];
+				me.getRouteProfile(id);
+			}
 		}
 	});
 	return positionsLayer;
@@ -642,7 +649,7 @@ var SASABus = {
 		}
 	});
 	$.ajax({
-		url : 'http://mapserver.tis.bz.it:8080/geoserver/wfs?'+$.param(params),
+		url : this.geoserverEndPoint+'wfs?'+$.param(params),
 		dataType : 'jsonp',
 		crossDomain: true,
 		jsonpCallback : 'getJson',
