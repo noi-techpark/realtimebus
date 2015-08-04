@@ -13,7 +13,7 @@ var jsT= {
 		city_bike_adult_with_gears:'City bike für Erwachsene',
 		mountain_bike_teenager:'Mountain bike für Jugendliche',
 		mountain_bike_child:'Mountain bike für Kinder',
-		city_bike_adult_without_gears:'City bike für Erwachsene'
+		city_bike_adult_without_gears:'City bike für Erwachsene ohne Gangschaltung'
 	},
 	it:{
 		altitudep:'Profilo altimetrico',
@@ -24,7 +24,7 @@ var jsT= {
 		city_bike_adult_with_gears:'City bike per adulti',
 		mountain_bike_teenager:'Mountain bike per adolescenti',
 		mountain_bike_child:'Mountain bike per bambini',
-		city_bike_adult_without_gears:'City bike per adulti'
+		city_bike_adult_without_gears:'City bike per adulti senza cambio'
 	},
 	en:{
 		altitudep:'Altitude profile',
@@ -35,7 +35,7 @@ var jsT= {
 		city_bike_adult_with_gears:'City bike for adults',
 		mountain_bike_teenager:'Mountain bike for teenager',
 		mountain_bike_child:'Mountain bike for children',
-		city_bike_adult_without_gears:'City bike for adults'
+		city_bike_adult_without_gears:'City bike for adults without gears'
 	}
 
 }
@@ -777,12 +777,12 @@ var SASABus = {
 		if (cardetails.length==0){
 			$('.carsharingstation .car-categorys').empty();
 			$('.carsharingstation .legend').empty();
-			console.log(numbersByBrand);
 			for (brand in numbersByBrand){
 				var brandClass= brand.replace(/[^a-zA-Z0-9]/g,'_');
 				$('.carsharingstation .car-categorys').prepend("<div class='"+brandClass+"'></div>");
 				radialProgress($('.carsharingstation .car-categorys .'+brandClass)[0])
-                                 .diameter(78)
+                                 .diameter(76)
+				 .label(brand)
                                  .value(numbersByBrand[brand].current)
                                  .maxValue(numbersByBrand[brand].total)
                                  .render();
@@ -806,8 +806,7 @@ var SASABus = {
 					numbersByBrand[car.brand]={total:0,current:0}
 				}
 				numbersByBrand[car.brand]['total']= numbersByBrand[car.brand]['total']+1;
-				console.log(record);
-				if (record!=undefined && record.value==1)
+				if (record!=undefined && record.value==0)
 					numbersByBrand[car.brand]['current']=numbersByBrand[car.brand]['current']+1;
 				getDataOfCars(cardetails);
 			}

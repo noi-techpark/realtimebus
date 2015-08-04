@@ -568,8 +568,11 @@ a{color:#c0c0c0;text-decoration:none}
 }
 .bikesharingstation .bike-categorys>div svg,.carsharingstation .car-categorys>div svg{
 	float:left;
-	width:55px;
-	height:55px;
+	width:60px;
+	height:75px;
+}
+.car-categorys .component text{
+	font-size:0.7em;
 }
 .legend{
 	font-size:0.8em;
