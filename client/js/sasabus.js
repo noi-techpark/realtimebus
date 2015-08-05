@@ -8,31 +8,34 @@ var jsT= {
 		altitudep:'Höhenprofil',
 		altitude:'Höhenmeter',
 		freeBikes:'Freie Fahrräder',
+		freeCars:'Verfügbare Autos',
 		mountain_bike_adult:'Mountain bike',
 		city_bike_adult_with_gears:'City bike für Erwachsene',
 		mountain_bike_teenager:'Mountain bike für Jugendliche',
 		mountain_bike_child:'Mountain bike für Kinder',
-		city_bike_adult_without_gears:'City bike für Erwachsene'
+		city_bike_adult_without_gears:'City bike für Erwachsene ohne Gangschaltung'
 	},
 	it:{
 		altitudep:'Profilo altimetrico',
 		altitude:'Altitudine',
 		freeBikes:'Bici disponibili',
+		freeCars:'Macchine disponibili',
 		mountain_bike_adult:'Mountain bike',
 		city_bike_adult_with_gears:'City bike per adulti',
 		mountain_bike_teenager:'Mountain bike per adolescenti',
 		mountain_bike_child:'Mountain bike per bambini',
-		city_bike_adult_without_gears:'City bike per adulti'
+		city_bike_adult_without_gears:'City bike per adulti senza cambio'
 	},
 	en:{
 		altitudep:'Altitude profile',
 		altitude:'Altitude',
 		freeBikes:'Available bikes',
+		freeCars:'Available cars',
 		mountain_bike_adult:'Mountain bike',
 		city_bike_adult_with_gears:'City bike for adults',
 		mountain_bike_teenager:'Mountain bike for teenager',
 		mountain_bike_child:'Mountain bike for children',
-		city_bike_adult_without_gears:'City bike for adults'
+		city_bike_adult_without_gears:'City bike for adults without gears'
 	}
 
 }
@@ -76,7 +79,7 @@ var SASABus = {
 	var layerMap = {
 		walk:[me.wegeStartPointsLayer,me.artPoints].concat(me.map.getLayersByName("routes").concat(me.map.getLayersByName("zugang"))),
 		bus:[me.linesLayer,me.positionLayer,me.stopsLayer],
-		carsharing:[],
+		carsharing:[me.carSharingLayer],
 		bikesharing:[me.bikeSharingLayer]
 	}
 	$.each(layerMap,function(key,value){				//hide all layers which are in non active Themes
@@ -105,7 +108,7 @@ var SASABus = {
 			object.setVisibility(true);
 	});
 	var controlOptions={toggle:true};
-        var control = new OpenLayers.Control.SelectFeature([me.wegeStartPointsLayer,me.positionLayer,me.stopsLayer,me.bikeSharingLayer,me.artPoints],controlOptions);//choose Layers which can be interacted with
+        var control = new OpenLayers.Control.SelectFeature([me.wegeStartPointsLayer,me.positionLayer,me.stopsLayer,me.bikeSharingLayer,me.artPoints,me.carSharingLayer],controlOptions);//choose Layers which can be interacted with
         me.map.addControl(control);
         control.activate();
     }, 
@@ -164,6 +167,7 @@ var SASABus = {
         me.positionLayer = me.getBusPositionLayer();
 	me.artPoints = me.getArtPoints();
         me.bikeSharingLayer = me.getBikeSharingLayer();
+        me.carSharingLayer = me.getCarSharingLayer();
 
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
@@ -663,10 +667,79 @@ var SASABus = {
 	});
 	return positionsLayer;
     },
+    getCarSharingLayer: function(){
+        var me=this;
+        var styleMap = new OpenLayers.StyleMap(new OpenLayers.Style({
+            externalGraphic: '${externalGraphic}',
+            graphicWidth: 35,
+            graphicYOffset:-35.75,
+        },{
+            context: {
+                externalGraphic:function(feature){
+                        var pin= 'images/6_Car_sharing/marker.svg';
+			var max = feature.attributes.parking;
+			var now = feature.attributes.value;
+			var a = now/max;
+			if (a == 0.)
+                        	pin= 'images/6_Car_sharing/marker_red.svg';
+			else if (a>0 && a <= 0.6)
+                        	pin= 'images/6_Car_sharing/marker_orange.svg';
+			else if (a>=0.6)
+                        	pin= 'images/6_Car_sharing/marker_green.svg';
+                        return pin;
+                }
+            }
+        }));
+	var  params = {
+                        request:'GetFeature',
+                        typeName:'edi:Carsharing',
+                        outputFormat:'text/javascript',
+                        format_options: 'callback: carJson'
+        };
+
+	var positionsLayer = new OpenLayers.Layer.Vector("carStationsLayer", {
+	        styleMap: styleMap
+        });
+	positionsLayer.events.on({
+	       	"featureselected":function(e){
+			var station = e.feature.attributes.stationcode;
+			me.getCarStationDetails(station);
+		}
+	});
+	$.ajax({
+		url : me.config.geoserverEndPoint+'wfs?'+$.param(params),
+		dataType : 'jsonp',
+		crossDomain: true,
+		jsonpCallback : 'carJson',
+		success : function(data) {
+			var features = new OpenLayers.Format.GeoJSON().read(data);
+			positionsLayer.addFeatures(features);
+		},
+		error : function() {
+			console.log('problems with data transfer');
+		}		
+	});
+	return positionsLayer;
+    },
     getStationDetails: function(station){
 	var me = this;	
 	$.ajax({
                 url : this.config.integreenEndPoint+'/bikesharingFrontEnd/rest/get-station-details',
+	        dataType : 'json',
+               	crossDomain: true,
+	        success : function(data) {
+			for (i in data){
+				if (data[i].id == station){
+					me.getCurrentBikesharingData(data[i]);
+				}
+			}
+		}
+        });
+    },
+    getCarStationDetails: function(station){
+	var me = this;	
+	$.ajax({
+                url : this.config.integreenEndPoint+'/carsharingFrontEnd/rest/get-station-details',
 	        dataType : 'json',
                	crossDomain: true,
 	        success : function(data) {
@@ -679,6 +752,101 @@ var SASABus = {
         });
     },
     getCurrentCarsharingData: function(data){
+	var me = this;
+	var currentState = {	
+	};
+	var numbersByBrand={};
+	var params ={station:data.id,name:'number available',seconds:600};
+	$.ajax({
+                url : me.config.integreenEndPoint+'carsharingFrontEnd/rest/get-records?'+$.param(params),
+        	dataType : 'json',
+       	      	crossDomain: true,
+	        success : function(result) {
+			currentState['number available'] = result[result.length-1].value;
+			displayCurrentState();
+		}
+    	});
+	$.ajax({
+        	url : this.config.integreenEndPoint+'carsharingFrontEnd/rest/cars/get-station-details',
+	        dataType : 'json',
+               	crossDomain: true,
+	        success : function(cardetails) {
+			var cars =[];
+			$.each(cardetails,function(index,value){
+				if (value.carsharingstation==data.id){
+					cars.push(value);
+				}
+			});
+			getDataOfCars(cars)
+		}
+	});
+	function getDataOfCars(cardetails){
+		if (cardetails.length==0){
+			$('.carsharingstation .car-categorys').empty();
+			$('.carsharingstation .legend').empty();
+			for (brand in numbersByBrand){
+				var brandClass= brand.replace(/[^a-zA-Z0-9]/g,'_');
+				$('.carsharingstation .car-categorys').append("<div class='"+brandClass+"'></div>");
+				radialProgress($('.carsharingstation .car-categorys .'+brandClass)[0])
+                                 .diameter(76)
+                                 .value(numbersByBrand[brand].current)
+                                 .maxValue(numbersByBrand[brand].total)
+                                 .render();
+                        	$('.carsharingstation .legend').append("<li class='"+brandClass+"'>"+brand+"</li>");
+			}
+			return;
+		}
+		var car = cardetails.pop();
+		var params ={
+			station:car.id,
+			name:'vehicle availability',
+			seconds:10000
+		}
+		$.ajax({
+	                url : me.config.integreenEndPoint+'carsharingFrontEnd/rest/cars/get-records?'+$.param(params),
+        	        dataType : 'json',
+                	crossDomain: true,
+	                success : function(records) {
+				var record = records[records.length-1];
+				if (numbersByBrand[car.brand]==undefined){
+					numbersByBrand[car.brand]={total:0,current:0}
+				}
+				numbersByBrand[car.brand]['total']= numbersByBrand[car.brand]['total']+1;
+				if (record!=undefined && record.value==0)
+					numbersByBrand[car.brand]['current']=numbersByBrand[car.brand]['current']+1;
+				getDataOfCars(cardetails);
+			}
+                	
+	        });
+
+	}
+	function displayCurrentState(){
+		$('.carsharingstation .title').text(data.name);	
+		var catHtml;
+		$.each(currentState,function(key,value){
+			if (key=="number available"){
+				radialProgress($(".carsharingstation .number-available")[0])
+		                .label(jsT[lang]['freeCars'])
+                		.diameter(180)
+		                .value(currentState[key])
+				.maxValue(data.availableVehicles)
+		                .render();
+			}
+			else{
+				var cat = key.replace(/\s/g,"_");
+				radialProgress(document.getElementById(cat+'-container'))
+                		.diameter(78)
+		                .value(currentState[key])
+				.maxValue(data.bikes[key])
+		                .render();
+				$('.bikesharingstation .legend').append("<li class='"+cat+"'>"+jsT[lang][cat]+"</li>");	
+			}
+		});
+		$('.modal').hide();
+               	$('.carsharingstation').show();
+	}
+    },
+    getCurrentBikesharingData: function(data){
 	var me = this;
 	var currentState = {	
 	};

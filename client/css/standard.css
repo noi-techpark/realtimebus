@@ -559,48 +559,47 @@ a{color:#c0c0c0;text-decoration:none}
 	margin:8px 0;
 }
 
-.bikesharingstation .number-available{
+.bikesharingstation .number-available,.carsharingstation .number-available{
 	width:100%;
 }
-.bikesharingstation .number-available svg{
+.bikesharingstation .number-available svg,.carsharingstation .number-available svg{
 	width:150px;
 	height:200px;
 }
-.bikesharingstation .bike-categorys{
+.bikesharingstation .bike-categorys,.carsharingstation .car-categorys{
 	clear:both;
 	margin:0 7px;
 }
-.bikesharingstation .bike-categorys>div svg{
+.bikesharingstation .bike-categorys>div svg,.carsharingstation .car-categorys>div svg{
 	float:left;
+	width:60px;
+	height:60px;
 }
-.bikesharingstation .bike-categorys>div svg{
-	width:55px;
-	height:55px;
+.car-categorys .component text{
+	font-size:0.7em;
 }
-.bikesharingstation .bike-categorys .legend{
+.legend{
 	font-size:0.8em;
 	clear:left;
-}
-.bikesharingstation .bike-categorys .legend{
 	margin-left:20px;
 }
-.bikesharingstation .bike-categorys .legend li:before{
+.legend li:before{
 	content:"\26AA";
 	padding:5px;
 }
-#mountain_bike_adult-container .arc,.mountain_bike_adult:before{
+#mountain_bike_adult-container .arc,.mountain_bike_adult:before,.VW_up_:before,.VW_up_ .arc{
 	fill:green;
 	color:green;
 }
-#city_bike_adult_with_gears-container .arc,.city_bike_adult_with_gears:before{
+#city_bike_adult_with_gears-container .arc,.city_bike_adult_with_gears:before,.VW_Golf:before,.VW_Golf .arc{
 	fill:yellow;
 	color:yellow;
 }
-#mountain_bike_teenager-container .arc,.mountain_bike_teenager:before{
+#mountain_bike_teenager-container .arc,.mountain_bike_teenager:before,.VW_Caddy:before,.VW_Caddy .arc{
 	fill:gray;
 	color:gray;
 }
-#mountain_bike_child-container .arc,.mountain_bike_child:before{
+#mountain_bike_child-container .arc,.mountain_bike_child:before,.VW_up___Methan:before,.VW_up___Methan .arc{
 	fill:orange;
 	color:orange;
 }
