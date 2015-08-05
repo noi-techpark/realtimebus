@@ -779,14 +779,13 @@ var SASABus = {
 			$('.carsharingstation .legend').empty();
 			for (brand in numbersByBrand){
 				var brandClass= brand.replace(/[^a-zA-Z0-9]/g,'_');
-				$('.carsharingstation .car-categorys').prepend("<div class='"+brandClass+"'></div>");
+				$('.carsharingstation .car-categorys').append("<div class='"+brandClass+"'></div>");
 				radialProgress($('.carsharingstation .car-categorys .'+brandClass)[0])
                                  .diameter(76)
-				 .label(brand)
                                  .value(numbersByBrand[brand].current)
                                  .maxValue(numbersByBrand[brand].total)
                                  .render();
-                        	$('.carsharingstation .legend').append("<li class=''>"+brand+"</li>");
+                        	$('.carsharingstation .legend').append("<li class='"+brandClass+"'>"+brand+"</li>");
 			}
 			return;
 		}

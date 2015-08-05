@@ -377,15 +377,13 @@
 		</div>
                 <div class="hidden modal carsharingstation">
 			<div class="walk-container">
-	                	<!--<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>-->
 				<div class="title">
 				</div>
 				<div class="number-available">
 				</div>
 				<div class="car-categorys">
-					<ul class="legend">
-					</ul>
 				</div>
+				<ul class="legend"></ul>
 				<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 			</div>
 		<div>		

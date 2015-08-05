@@ -569,7 +569,7 @@ a{color:#c0c0c0;text-decoration:none}
 .bikesharingstation .bike-categorys>div svg,.carsharingstation .car-categorys>div svg{
 	float:left;
 	width:60px;
-	height:75px;
+	height:60px;
 }
 .car-categorys .component text{
 	font-size:0.7em;
@@ -583,19 +583,19 @@ a{color:#c0c0c0;text-decoration:none}
 	content:"\26AA";
 	padding:5px;
 }
-#mountain_bike_adult-container .arc,.mountain_bike_adult:before{
+#mountain_bike_adult-container .arc,.mountain_bike_adult:before,.VW_up_:before,.VW_up_ .arc{
 	fill:green;
 	color:green;
 }
-#city_bike_adult_with_gears-container .arc,.city_bike_adult_with_gears:before{
+#city_bike_adult_with_gears-container .arc,.city_bike_adult_with_gears:before,.VW_Golf:before,.VW_Golf .arc{
 	fill:yellow;
 	color:yellow;
 }
-#mountain_bike_teenager-container .arc,.mountain_bike_teenager:before{
+#mountain_bike_teenager-container .arc,.mountain_bike_teenager:before,.VW_Caddy:before,.VW_Caddy .arc{
 	fill:gray;
 	color:gray;
 }
-#mountain_bike_child-container .arc,.mountain_bike_child:before{
+#mountain_bike_child-container .arc,.mountain_bike_child:before,.VW_up___Methan:before,.VW_up___Methan .arc{
 	fill:orange;
 	color:orange;
 }
