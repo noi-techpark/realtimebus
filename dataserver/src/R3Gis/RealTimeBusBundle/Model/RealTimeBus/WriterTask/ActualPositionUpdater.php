@@ -80,7 +80,8 @@ UPDATE vdv.vehicle_position_act SET
     li_lfd_nr = {$feature['properties']['li_lfd_nr']},
     interpolation_distance = {$feature['properties']['interpolation_distance']},
     interpolation_linear_ref = {$feature['properties']['interpolation_linear_ref']},
-    the_geom  = {$feature['geometry_sql']}
+    the_geom  = {$feature['geometry_sql']},
+    vehiclecode  = {$feature['vehicleCode']}
 WHERE frt_fid=$featureId
 EOQ;
         } else {
@@ -94,7 +95,7 @@ INSERT INTO vdv.vehicle_position_act
     li_lfd_nr,
     interpolation_distance,
     interpolation_linear_ref,
-    the_geom)
+    the_geom,vehiclecode)
 VALUES (
     '{$feature['properties']['gps_date']}',
     {$feature['properties']['delay_sec']},
@@ -104,7 +105,8 @@ VALUES (
     {$feature['properties']['li_lfd_nr']},
     {$feature['properties']['interpolation_distance']},
     {$feature['properties']['interpolation_linear_ref']},
-    {$feature['geometry_sql']})
+    {$feature['geometry_sql']},
+    {$feature['vehicleCode']})
 EOQ;
         }
         $this->db->exec($mergeNewPos);
