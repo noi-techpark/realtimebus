@@ -332,6 +332,7 @@ a{color:#c0c0c0;text-decoration:none}
 }
 .menu a.walk.active svg{background-color:#ce5400;}
 .menu a.carsharing.active svg{background-color:#8aaa30;}
+.menu a.echarging.active svg{background-color:#e5e500;}
 .menu a.bikesharing.active svg{background-color:#bb392b;}
 .menu a.bus.active svg{background-color:#ee9712;}
 .modal:before{
@@ -606,4 +607,20 @@ a{color:#c0c0c0;text-decoration:none}
 #city_bike_adult_without_gears-container .arc,.city_bike_adult_without_gears:before{
 	fill:lime;
 	color:lime;
+}
+.station .content{
+	padding:5px;
+}
+.station .content h3{
+	text-align:center;
+}
+.station .plug{
+	float:left;
+}
+.station .plug svg,.station .plug p{
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+        width:75%;
+	font-size:10px;	
 }
