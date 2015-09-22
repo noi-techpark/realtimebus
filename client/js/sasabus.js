@@ -784,6 +784,7 @@ var SASABus = {
 		$('.station .title').text(details.name.replace("CU_","")+" ("+details.provider+")");
 		if (details.state != 'ACTIVE'){
 			$(".content").html('<h3>This charging station is temporary out of order </h3>');	
+			$('.modal').hide();
 			$('.station').show();
 			return;
 		}
@@ -807,6 +808,7 @@ var SASABus = {
 			+ plugDetails.maxPower +" W </p>"
 			+"</div>"
 			$('.station .content').html(html);
+			$('.modal').hide();
 			$('.station').show();
 		}
 	}
