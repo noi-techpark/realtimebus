@@ -421,14 +421,28 @@
 			<div class="about">
 				<a href="#" class="about-selector"><img src="images/3_Bus/Close.svg" alt="close" width="15px" style="float:right"/></a>
 				<h3>Developed by</h3>
-				<ul>
-					<li><a href="http://tis.bz.it/" target="_blank">Tis innovation park</a></li>
-					<li><a href="http://www.r3-gis.com/" target="_blank">R3-GIS</a></li>
+				<ul class="clearfix">
+					<li class="tis"><a href="http://tis.bz.it/" target="_blank" title="Tis innovation park"></a></li>
+					<li class="r3gis"><a href="http://www.r3-gis.com/" target="_blank" title="R3-GIS"></a></li>
 				</ul>
-				<h3>Design</h3>
-				<ul>
-					<li><a href="http://www.madeincima.it/" target="_blank">MadeinCima</a></li>
-					<li><a href="http://www.hellcompany.eu/" target="_blank">Hell Company</a></li>
+				<h3>Supported by</h3>
+				<ul class="clearfix">
+					<li class="meran"><a href="http://www.meran.eu/it/azienda-di-soggiorno/" target="_blank" title="Azienda di Soggiorno di Merano"></a></li>
+					<li class="merang"><a href="http://www.comune.merano.bz.it/" target="_blank" title="Comune di Merano"></a></li>
+					<li class="fesr"><a href="http://www.provincia.bz.it/europa/it/finanziamenti-ue/efre-rogrammzeitraum-2007-2013.asp" target="_blank" title="Fondo Europeo di Sviluppo Regionale (FESR)"></a></li>
+				</ul>
+				<h3>Designed by</h3>
+				<ul class="clearfix">
+					<li class="cima"><a href="http://www.madeincima.it/" target="_blank" title="MadeinCima"></a></li>
+					<li class="hell"><a href="http://www.hellcompany.eu/" target="_blank" title="Hell Company"></a></li>
+				</ul>
+				<h3>Data provided by</h3>
+				<ul class="clearfix">
+					<li class="sasa"><a title ="SASA" href="http://www.sasabz.it/" target="_blank"></a><h4>Public transport</h4></li>
+					<li class="province"><a href="http://www.provinz.bz.it/informatik/kartografie/Geoportal.asp" title="Autonomous province of Bolzano"target="_blank"></a><h4>Walking routes</h4></li>
+					<li class="carsharing"><a href="http://www.carsharing.bz.it/it/" target="_blank" title="CAR sharing Südtirol Altoadige"></a><h4>Carsharing</h4></li>
+					<li class="algorab"><a href="http://www.algorab.com/" target="_blank" title="Algorab"></a><h4>Bikesharing</h4></li>
+					<li class="aew"><a href="https://www.aew.eu" target="_blank" title="AEW"></a><h4>Chargestation</h4></li>
 				</ul>
 				<h3 style="text-align:center"> <a href="https://github.com/tis-innovation-park/realtimebus.git" target="_blank">Source code available on github.com</h3>
 			</div>	

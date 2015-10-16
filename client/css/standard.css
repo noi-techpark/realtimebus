@@ -557,7 +557,10 @@ a{color:#c0c0c0;text-decoration:none}
 	margin-top:5px;
 }
 .about ul li {
-	margin:8px 0;
+	margin:7px;
+	position:relative;
+	float:left;
+	width:100px;
 }
 
 .bikesharingstation .number-available,.carsharingstation .number-available{
@@ -623,4 +626,53 @@ a{color:#c0c0c0;text-decoration:none}
 	margin-right:auto;
         width:75%;
 	font-size:10px;	
+}
+.about ul li a{
+	height:50px;
+	width:100%;
+	display:block;
+	background-repeat:no-repeat;
+	background-size:contain;
+	margin:5px 0;
+	background-position:center center;
+}
+.about ul li h4{
+	text-align:center;
+	margin:10px;
+}
+.about .tis a{
+	background-image:url('../images/tis.png');
+}
+.about .r3gis a{
+	background-image:url('../images/r3gis.png');
+}
+.about .meran a{
+	background-image:url('../images/logo-small.gif');
+}
+.about .merang a{
+	background-image:url('../images/merang.png');
+}
+.about .fesr a{
+	background-image:url('../images/logoeu.png');
+}
+.about .cima a{
+	background-image:url('../images/cima.jpg');
+}
+.about .hell a{
+	background-image:url('../images/hell.png');
+}
+.about .sasa a{
+	background-image:url('../images/sasa.png');
+}
+.about .aew a{
+	background-image:url('../images/aew.jpg');
+}
+.about .province a{
+	background-image:url('../images/province.jpg');
+}
+.about .carsharing a{
+	background-image:url('../images/carsharing.png');
+}
+.about .algorab a{
+	background-image:url('../images/algorab.png');
 }
