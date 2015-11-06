@@ -166,7 +166,7 @@
 					</svg>
 				</a>
 				</li>
-				<li>
+				<!--<li>
 				<a href="javascript:void(0)" class="carsharing" id="carsharing">
 					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
 <g>
@@ -182,7 +182,7 @@
 </g>
 					</svg>
 				</a>
-				</li>
+				</li>-->
 				<li>
 					<a href="javascript:void(0)" class="bikesharing" id="bikesharing">
 						<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
@@ -192,11 +192,11 @@
 						</svg>
 					</a>
 				</li>
-				<li>
+				<!--<li>
 					<a href="javascript:void(0)" class="echarging" id="echarging">
 					<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" x="0px" y="0px" viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve" docname="Echarging.svg" ><g></g><path style="fill-opacity:1;stroke:#000000;stroke-width:4.30299234px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0" d="M 63.37848,58.439351 84.570562,109.93864 108.26028,95.032971 130.77627,142.61196 114.11203,72.055355 85.806205,93.724638 z" id="path3810" connector-curvature="0"></path></svg>
 					</a>
-				</li>
+				</li>-->
 			</ul>
 			<!--<footer id="footer-1" class="footer">
 				<ul class="logos">
