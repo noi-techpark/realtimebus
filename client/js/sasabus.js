@@ -57,6 +57,23 @@ var jsT= {
 	}
 
 }
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? undefined : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+function getPresetFromUrl(value){
+	return location.search.substring(1)===value;
+}
+var preConfigMap = {
+	p1:{
+		zoom:8,
+		longitude:1242107.3809149,
+		latitude:5889462.4783187,
+	}
+	//insert Points here
+}
 var epsg25832 = new OpenLayers.Projection('EPSG:25832');
 var SASABus = {
     config: {
@@ -134,12 +151,12 @@ var SASABus = {
     init: function(targetDivId) {
         var me = this;
         me.config.mapDivId = targetDivId;
-        
         var mapOptions = {
             projection: defaultProjection,
             controls: [new OpenLayers.Control.Attribution(), new OpenLayers.Control.Navigation()],
 	    fractionalZoom: false,
 	    units:'m',
+	    center:new OpenLayers.LonLat(1242107.3809149, 5889462.4783187),
             resolutions:[156543.033928041,78271.51696402048,39135.75848201023,19567.87924100512,9783.93962050256,4891.96981025128,2445.98490512564,1222.99245256282,611.49622628141,305.7481131407048,152.8740565703525,76.43702828517624,38.21851414258813,19.10925707129406,9.554628535647032,4.777314267823516,2.388657133911758,1.194328566955879,0.5971642834779395,0.29858214173896974,0.14929107086948487],
 
         };
@@ -197,8 +214,23 @@ var SASABus = {
         });
         me.map.addLayers([osm,topoMap]);
 
-        var merano = new OpenLayers.Bounds(662500, 5169000, 667600, 5174000).transform(epsg25832,defaultProjection);
+	var reqP = {
+		zoom:parseInt(getParameterByName('zoom')),
+		longitude:parseFloat(getParameterByName('longitude')),
+		latitude:parseFloat(getParameterByName('latitude')),
+		
+	}
+	var keys = Object.keys(preConfigMap);
+	$.each(keys,function(index,value){
+		if (getPresetFromUrl(value))
+			reqP = preConfigMap[value];
+	});
+	var merano = new OpenLayers.Bounds(662500, 5169000, 667600, 5174000).transform(epsg25832,defaultProjection);				
         me.map.zoomToExtent(merano);
+	if (reqP.longitude && reqP.latitude)
+		me.map.setCenter(new OpenLayers.LonLat(reqP.longitude,reqP.latitude));	
+	if (me.map.isValidZoomLevel(reqP.zoom))		
+		me.map.zoomTo(reqP.zoom);
         me.showLines(['all']);
         
         setTimeout(function() {
