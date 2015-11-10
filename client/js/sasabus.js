@@ -69,8 +69,8 @@ function getPresetFromUrl(value){
 var preConfigMap = {
 	p1:{
 		zoom:8,
-		longitude:1242107.3809149,
-		latitude:5889462.4783187,
+		lon:1242107.3809149,
+		lat:5889462.4783187,
 	}
 	//insert Points here
 }
@@ -128,7 +128,6 @@ var SASABus = {
 		}
 	});
 	var activeLayers=[];
-	activeLayers.push(me.locationLayer);
 	$('.config').hide();
 	$.each(activeThemes,function(index,object){		//choose Layers to activate
 		$('#'+object+'-c').show();
@@ -136,6 +135,7 @@ var SASABus = {
 			activeLayers = activeLayers.concat(layerMap[object]);
 		}
 	});
+	activeLayers.push(me.locationLayer);
 	$.each(activeLayers,function(index,object){		//add Layers or set to visible if already added
 		if (me.map.getLayer(object.id) == null){
 			me.map.addLayer(object);
@@ -147,6 +147,25 @@ var SASABus = {
         var control = new OpenLayers.Control.SelectFeature([me.wegeStartPointsLayer,me.positionLayer,me.stopsLayer,me.bikeSharingLayer,me.artPoints,me.carSharingLayer,me.echargingLayer],controlOptions);//choose Layers which can be interacted with
         me.map.addControl(control);
         control.activate();
+	var mapMousePosition = new OpenLayers.Control.MousePosition({
+        	displayProjection: defaultProjection
+	});
+	me.map.addControl(mapMousePosition);
+	var callbacks = { 
+		keydown: function(evt) {
+			if (evt.keyCode == 32) {
+				//var coords = OpenLayers.Util.getElement("OpenLayers.Control.MousePosition").innerHTML;
+      				var pixel = new OpenLayers.Pixel(mapMousePosition.lastXy.x, mapMousePosition.lastXy.y)
+				var lonLat = me.map.getLonLatFromPixel(pixel);
+				prompt("This is the position you chose:","http://bus.meran.eu/alpha/?zoom="+me.map.getZoom()+"&lon="+lonLat.lon+"&lat="+lonLat.lat);
+			}
+		}
+	};
+        var options = {};	
+	var control = new OpenLayers.Control();
+	var handler = new OpenLayers.Handler.Keyboard(control, callbacks, options);
+	handler.activate();
+	me.map.addControl(control);
     }, 
     init: function(targetDivId) {
         var me = this;
@@ -216,8 +235,8 @@ var SASABus = {
 
 	var reqP = {
 		zoom:parseInt(getParameterByName('zoom')),
-		longitude:parseFloat(getParameterByName('longitude')),
-		latitude:parseFloat(getParameterByName('latitude')),
+		lon:parseFloat(getParameterByName('lon')),
+		lat:parseFloat(getParameterByName('lat')),
 		
 	}
 	var keys = Object.keys(preConfigMap);
@@ -227,10 +246,13 @@ var SASABus = {
 	});
 	var merano = new OpenLayers.Bounds(662500, 5169000, 667600, 5174000).transform(epsg25832,defaultProjection);				
         me.map.zoomToExtent(merano);
-	if (reqP.longitude && reqP.latitude)
-		me.map.setCenter(new OpenLayers.LonLat(reqP.longitude,reqP.latitude));	
+	if (reqP.lon && reqP.lat)
+		me.map.panTo(new OpenLayers.LonLat(reqP.lon,reqP.lat));	
 	if (me.map.isValidZoomLevel(reqP.zoom))		
 		me.map.zoomTo(reqP.zoom);
+        var geometry = new OpenLayers.Geometry.Point(reqP.lon,reqP.lat);
+        var feature = new OpenLayers.Feature.Vector(geometry);
+        me.locationLayer.addFeatures([feature]);
         me.showLines(['all']);
         
         setTimeout(function() {
