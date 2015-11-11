@@ -153,11 +153,10 @@ var SASABus = {
 	me.map.addControl(mapMousePosition);
 	var callbacks = { 
 		keydown: function(evt) {
-			if (evt.keyCode == 32) {
-				//var coords = OpenLayers.Util.getElement("OpenLayers.Control.MousePosition").innerHTML;
+			if (evt.keyCode == 76 && evt.shiftKey && evt.ctrlKey) {
       				var pixel = new OpenLayers.Pixel(mapMousePosition.lastXy.x, mapMousePosition.lastXy.y)
 				var lonLat = me.map.getLonLatFromPixel(pixel);
-				prompt("This is the position you chose:","http://bus.meran.eu/alpha/?zoom="+me.map.getZoom()+"&lon="+lonLat.lon+"&lat="+lonLat.lat);
+				window.location.replace("http://bus.meran.eu/alpha/?zoom="+me.map.getZoom()+"&lon="+lonLat.lon+"&lat="+lonLat.lat);
 			}
 		}
 	};
@@ -226,7 +225,9 @@ var SASABus = {
 	me.echargingLayer = me.getEchargingLayer();
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
-            externalGraphic: 'images/pin.png'
+            externalGraphic: 'images/pin.png',
+	    graphicYOffset:-40,
+	    graphicXOffset:-20
         });
         me.locationLayer = new OpenLayers.Layer.Vector('Geolocation layer', {
             styleMap: styleMap
