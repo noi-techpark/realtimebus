@@ -47,6 +47,13 @@
 		<script src="js/radialProgress.js" type="text/javascript"></script>
 		<script src="js/integreen.js"></script>
 		<script src="js/sasabus.js"></script>
+		<script src="js/carsharing.js"></script>
+		<script src="js/bus.js"></script>
+		<script src="js/bikesharing.js"></script>
+		<script src="js/echarging.js"></script>
+		<script src="js/i18n.js"></script>
+		<script src="js/apiedi.js"></script>
+		<script src="js/moment-with-locales.min.js"></script>
 
 		<script> var txtVariante = '';</script>
 		<script type="text/javascript" src="https://www.google.com/jsapi?autoload={
@@ -389,10 +396,12 @@
 				</div>
 				<div class="number-available">
 				</div>
+				<p class="caption"></p>
 				<div class="car-categorys">
 				</div>
 				<ul class="legend"></ul>
-				<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
+				<a href="http://booking.carsharing.bz.it" target="_blank" class="clearfix ibutton" ><div><?php ___('book_car'); ?></div></a>
+				<a href="javascript:void(0)" class="clearfix backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 			</div>
 		</div>		
                 <div class="hidden modal station">

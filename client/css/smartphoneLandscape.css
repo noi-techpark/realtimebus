@@ -1,6 +1,3 @@
-.mobile-menu-btn,.panel{
-	width:10%;
-}
 
 .config, #zoomToMyPosition{
 	width:20%;
@@ -12,9 +9,6 @@
 	margin-top:auto;
 	font-size:12px;
 	padding:5px;
-}
-.modal{
-        width:90%;
 }
 .ibutton{
 	background-size:50%;

@@ -115,7 +115,7 @@ $(document).ready(function() {
 		var theme = $(this).attr('id');
 		theme = theme.substring(0,theme.indexOf('-'));
 		if (theme == 'walk')
-			SASABus.getRoutes();
+			wegeStartPointsLayer.getRoutes();
 		var isVisible= $('.' + theme+'.modal').is(':visible');
 		$('.modal:visible').hide();
 		if (!isVisible)
@@ -147,7 +147,7 @@ $(document).ready(function() {
 		$('.map-controls').before('<div id="zoomButtons"><a href="#" id="zoomInButton"><img src="images/2_Map/Plus.svg" alt="Zoom in"/></a><a href="#" id="zoomOutButton"><img src="images/2_Map/Minus.svg" alt="Zoom out"/></a></div>');
 		
 		SASABus.init('map');
-		SASABus.getAllLines(initLinesAfterRead);
+		linesLayer.getAllLines(initLinesAfterRead);
 		var subDomain = document.domain.substring(0,document.domain.indexOf('.'));
 		//activateThemes(subDomain);
 		activateThemes('bus');
@@ -171,7 +171,7 @@ $(document).ready(function() {
 		} 
 		$(".filters .toggler").click(function(){
 			$(this).toggleClass("enabled");
-			SASABus.getLines(initLinesAfterRead);
+			linesLayer.getLines(initLinesAfterRead);
 		});
 		function getReadableTime(time){
 			var a = new Date(time*1000);
@@ -297,7 +297,7 @@ function initLinesAfterRead(lines)
 	//console.log('Extra');
 	//console.log(htmlL);
 	$('#urbani').html(htmlL);
-	SASABus.getLines(showLinesAfterRead(lines));
+	linesLayer.getLines(showLinesAfterRead(lines));
 }
 
 function stopPropagationCustom(){
@@ -338,7 +338,7 @@ function showLinesAfterRead(lines){
 		if($(this).hasClass('disabled')){
 				$(this).text("Deselect all lines");
 				$('#variants .line').addClass("enabled");
-				SASABus.showLines(['all']);
+				linesLayer.showLines(['all']);
 				for(var i=0;i<mapLinesInit.length;i++)
                                 {	
                                         mapLines.push(mapLinesInit[i]);
@@ -364,7 +364,7 @@ function showLinesAfterRead(lines){
 							}
 							k++;
 						}
-						SASABus.showLines(mapLines);
+						linesLayer.showLines(mapLines);
 						panelScroll();
 					}
 				});
@@ -417,7 +417,7 @@ function showLinesAfterRead(lines){
 					//if(k>100) return;
 				}
 			}
-			SASABus.showLines(mapLines);
+			linesLayer.showLines(mapLines);
 			panelScroll();
 		}
 	});
@@ -481,7 +481,7 @@ function showLinesAfterRead(lines){
 					if(k>100) return;
 				}
 			}
-			SASABus.showLines(mapLines);
+			linesLayer.showLines(mapLines);
 			panelScroll();
 		}
 	});
@@ -587,7 +587,6 @@ function showLinesAfterRead(lines){
 		$('#v_'+codLinea+'_'+codVariante).toggleClass('ticked');
 	}
 
-	SASABus.showLines(mapLines);
 	//console.log(mapLines); 
 
 	$("#variants .tab-content .line").each(function(){
@@ -670,10 +669,6 @@ function successFind(rows){
 	}
 	$('.search-box.result .close').show();
 	$("#listResults").html(strHtml);
-	/*$("#listResults a").addClass('testing').click(function(){
-		alert('test');
-		showPoint($(this));
-	});*/
 	$("#listResults a").on('touchstart click',function(){
 		showPoint($(this));
 	});

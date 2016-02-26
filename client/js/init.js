@@ -35,5 +35,5 @@ if(device[0] == 'smartphone'){
 }
 if(device[0] == 'desktop'){
 	SASABus.config.yOffset				= 20;
-	$('.panel').append('<div id="serverTime"><span class="label">Time</span> <span class="reload"></span></div>');
+	$('#map').append('<div id="serverTime"><span class="label">Time</span> <span class="reload"></span></div>');
 }

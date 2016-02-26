@@ -171,7 +171,7 @@ a{color:#c0c0c0;text-decoration:none}
 	max-width:42%;
 }
 #serverTime{font-weight:bold;font-size:0.9em;color:#878787;height:22px;width:91px;
-	position:absolute;bottom:10px;right:-105px;
+	position:absolute;bottom:35px;right:130px;
 	padding:9px 0 0 0;text-align:center;background:#fff;z-index:999;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;
 	text-transform:uppercase;border:1px solid #90928f;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
 	filter:alpha(opacity=90);opacity:0.9}
@@ -353,7 +353,7 @@ a{color:#c0c0c0;text-decoration:none}
 .modal{
 	float:left;
 	width:350px;
-	height:100%;
+	height:88vh;
 	z-index:3000;
 	position:relative;
 }
@@ -397,6 +397,7 @@ a{color:#c0c0c0;text-decoration:none}
 	margin:0;
 	font-size:14px;
 	line-height:20px;
+	overflow:auto;
 }
 .walk-container .title{
 	text-align:center;
@@ -406,6 +407,9 @@ a{color:#c0c0c0;text-decoration:none}
 	clear:right;
 	font-size:20px;
 	line-height:24px;
+}
+.walk-container .title small{
+	font-size:0.7em;
 }
 .walk-container .metadata{
 	padding:15px;
@@ -568,16 +572,22 @@ a{color:#c0c0c0;text-decoration:none}
 }
 .bikesharingstation .number-available svg,.carsharingstation .number-available svg{
 	width:150px;
-	height:200px;
+	height:150px;
 }
 .bikesharingstation .bike-categorys,.carsharingstation .car-categorys{
 	clear:both;
-	margin:0 7px;
+	margin:0 15px;
 }
 .bikesharingstation .bike-categorys>div svg,.carsharingstation .car-categorys>div svg{
 	float:left;
 	width:60px;
 	height:60px;
+}
+.carsharingstation .caption {
+	text-align:center;
+	font-size:22px;
+	font-weight:normal;
+	margin-bottom:15px;
 }
 .car-categorys .component text{
 	font-size:0.7em;
@@ -585,25 +595,50 @@ a{color:#c0c0c0;text-decoration:none}
 .legend{
 	font-size:0.8em;
 	clear:left;
-	margin-left:20px;
+	margin-left:10px;
+	color:#fff;
+	text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
 }
-.legend li:before{
-	content:"\26AA";
+.legend li{
+	float:left;
 	padding:5px;
+	margin:5px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background-color:#4e8fff;
 }
-#mountain_bike_adult-container .arc,.mountain_bike_adult:before,.VW_up_:before,.VW_up_ .arc{
+.VW_up_{
+	background-color:green !important;
+}
+.VW_Golf{
+	background-color:#b2b200 !important;
+}
+.VW_Caddy{
+	background-color:gray !important;
+}
+.VW_up___Methan{
+	background-color:orange !important;
+}
+.VW_Golf_Variant{
+	background-color:purple !important;
+}
+#mountain_bike_adult-container .arc,.mountain_bike_adult:before,.VW_up_ .arc{
 	fill:green;
 	color:green;
 }
-#city_bike_adult_with_gears-container .arc,.city_bike_adult_with_gears:before,.VW_Golf:before,.VW_Golf .arc{
-	fill:yellow;
-	color:yellow;
+.VW_Golf_Variant .arc{
+	fill:purple;
 }
-#mountain_bike_teenager-container .arc,.mountain_bike_teenager:before,.VW_Caddy:before,.VW_Caddy .arc{
+#city_bike_adult_with_gears-container .arc,.city_bike_adult_with_gears:before,.VW_Golf .arc{
+	fill:#b2b200;
+	color:#b2b200;
+}
+#mountain_bike_teenager-container .arc,.mountain_bike_teenager:before,.VW_Caddy .arc{
 	fill:gray;
 	color:gray;
 }
-#mountain_bike_child-container .arc,.mountain_bike_child:before,.VW_up___Methan:before,.VW_up___Methan .arc{
+#mountain_bike_child-container .arc,.mountain_bike_child:before,.VW_up___Methan .arc{
 	fill:orange;
 	color:orange;
 }
