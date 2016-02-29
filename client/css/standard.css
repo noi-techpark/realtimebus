@@ -646,6 +646,18 @@ a{color:#c0c0c0;text-decoration:none}
 	fill:lime;
 	color:lime;
 }
+.carbrand a{
+	color:#fff;
+}
+.inactive{
+	background-color:#f2f2f2 !important;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;
+}
+.inactive a{
+	color:#000;
+}
 .station .content{
 	padding:5px;
 }

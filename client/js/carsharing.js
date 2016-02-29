@@ -1,13 +1,51 @@
 var carSharingLayer = {
 	isCached:true,
+	getCarBrands : function(callback){
+		integreen.getStationDetails('carsharingFrontEnd/rest/cars/',{},displayBrands);	
+		function displayBrands(data){
+			brands = {};
+			$.each(data,function(index,value){
+				brands[value.brand] = true;
+			});
+			if (callback != undefined)
+				callback(brands);
+		}
+	},
 	populate: function(){   
                 var self = this;
+		if (self.brands == undefined)
+			self.getCarBrands(self.retrieveStations);
+	},
+	retrieveStations : function(brands){
+		$('.cartypes').empty();
+		$.each(brands,function(index,value){
+			var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
+			if (!value){
+				brandClass+=' inactive'	;
+			}
+			$('.carsharing .cartypes').append('<li class="carbrand '+brandClass+'"><a href="javascript:void(0)">'+index+'</a></li>');
+		});
+		$('.carbrand').click(function(e){
+			var brand = $(this).text();
+			brands[brand] = !brands[brand];
+			carSharingLayer.retrieveStations(brands);
+		});
+		var brandreq='';
+		$.each(brands,function(index,value){
+			if (value){
+				if (brandreq != '')
+					brandreq += "\\,";
+				brandreq += '\''+index+'\'';
+			}
+		});	
 		var  params = {
-		        request:'GetFeature',
-		        typeName:'edi:Carsharing',
-		        outputFormat:'text/javascript',
-		        format_options: 'callback: carJson'
+			request:'GetFeature',
+			typeName:'edi:Carsharing',
+			outputFormat:'text/javascript',
+			format_options: 'callback: carJson'
 		};
+		if (brandreq != '')	
+			params['viewparams']='brand:'+brandreq;
 		$.ajax({
 			url : SASABus.config.geoserverEndPoint+'wfs?'+$.param(params),
 			dataType : 'jsonp',
@@ -15,12 +53,14 @@ var carSharingLayer = {
 			jsonpCallback : 'carJson',
 			success : function(data) {
 				var features = new OpenLayers.Format.GeoJSON().read(data);
-				self.layer.addFeatures(features);
+				carSharingLayer.layer.removeAllFeatures();
+				carSharingLayer.layer.addFeatures(features);
 			},
 			error : function() {
 				console.log('problems with data transfer');
 			}		
 		});
+		
                 
 	},
  	get:function(){
@@ -63,6 +103,7 @@ var carSharingLayer = {
 			}
 		});
 		function getCarsharingStation(details,current){
+			var updatedOn = moment(current['number available'].timestamp).locale(lang).format('lll');
 			radialProgress($(".carsharingstation .number-available")[0])
 				.diameter(180)
 				.value(current['number available'].value)
@@ -101,7 +142,8 @@ var carSharingLayer = {
 				                 .render();
 		        		$('.carsharingstation .legend').append("<li class='"+brandClass+"'>"+brand+"</li>");
 				}
-				$('.carsharingstation .title').text(details.name);	
+		
+				$('.carsharingstation .title').html(details.name+"<br/><small>"+updatedOn+"</small>");
 				$('.carsharingstation .caption').text(jsT[lang]['freeCars']);	
 			}
 		};

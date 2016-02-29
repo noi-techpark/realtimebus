@@ -90,17 +90,17 @@ var SASABus = {
 			});
 		}
 	});
-	//activeLayers.push(me.locationLayer);
 	$.each(activeLayers,function(index,object){		//add Layers or set to visible if already added
-		if (object== null)
+		if (object.get() == null || $.isArray(object.get()))
 			return;
-		if (me.map.getLayer(object.id) == null){
+		if (me.map.getLayer(object.get().id) == null){
 			me.map.addLayer(object.get());
 			if (object.populate)
 				object.populate();
 		}
 		object.layer.setVisibility(true);
 	});
+	me.map.addLayer(me.locationLayer);
 	var controlOptions={toggle:true};
         var control = new OpenLayers.Control.SelectFeature(me.map.getLayersByClass("OpenLayers.Layer.Vector") ,controlOptions);//choose Layers which can be interacted with
         me.map.addControl(control);
@@ -166,11 +166,6 @@ var SASABus = {
                   maxResolution: 156543.0339, projection: defaultProjection, numZoomLevels: 19
                 }
         ); 
-        //if(permalink) attiva le linee del permalink
-        
-        // if(permalink) map.zoomToExtent(extentDelPermalink);
-        // else...
-        
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
             externalGraphic: 'images/pin.png',

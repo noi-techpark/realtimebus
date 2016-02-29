@@ -116,6 +116,7 @@ $(document).ready(function() {
 		theme = theme.substring(0,theme.indexOf('-'));
 		if (theme == 'walk')
 			wegeStartPointsLayer.getRoutes();
+		  
 		var isVisible= $('.' + theme+'.modal').is(':visible');
 		$('.modal:visible').hide();
 		if (!isVisible)

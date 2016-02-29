@@ -65,7 +65,7 @@ var echargingLayer = {
         	return positionsLayer;
 
 		function displayData(details,state){		
-			var updatedOn = moment(state['number available'].timestamp).locale(lang).format('HH:mm DD/MM/YY');
+			var updatedOn = moment(state['number available'].timestamp).locale(lang).format('lll');
 			$('.station .title').html(details.name.replace("CU_","")+" ("+details.provider+")<br/><small>"+updatedOn+"</small>");
 			if (details.state != 'ACTIVE'){
 				$(".content").html('<h3>This charging station is temporary out of order </h3>');	

@@ -10,6 +10,17 @@ function mergeConfig(config){
 	}	
 }
 var integreen = {
+	getStationDetails : function(frontEnd,config,callback){
+		mergeConfig(config);
+        	$.ajax({
+                	url : defaultConfig.integreenEndPoint + frontEnd + 'get-station-details',
+	                dataType : 'json',
+        	        crossDomain: true,
+                	success : function(data) {
+                		callback(data);
+        	        }    
+	       });  
+	},
 	retrieveData: function(station,frontEnd,callback,config){
 		mergeConfig(config);
         	$.ajax({
