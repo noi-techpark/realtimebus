@@ -308,8 +308,9 @@
 			<div class="walk-container">
 	                	<!--<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>-->
 				<div class="main-config clearfix">
-					<ul class="cartypes legend">
+					<ul class="cartypes legend clearfix">
 					</ul>
+                        		<a href="javascript:void(0)" class="deselect-all" ><div><?php ___('deselectall'); ?></div></a>
                         		<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 				</div>
 			</div> 

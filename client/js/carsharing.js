@@ -7,8 +7,16 @@ var carSharingLayer = {
 			$.each(data,function(index,value){
 				brands[value.brand] = true;
 			});
+			$('.carsharing .deselect-all').click(function(){
+				$.each(brands,function(index,value){
+                	                brands[index] = false;
+					
+        	                });
+				carSharingLayer.retrieveStations(brands);
+			});
 			if (callback != undefined)
 				callback(brands);
+			
 		}
 	},
 	populate: function(){   

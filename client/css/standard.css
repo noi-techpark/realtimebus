@@ -723,3 +723,9 @@ a{color:#c0c0c0;text-decoration:none}
 .about .algorab a{
 	background-image:url('../images/algorab.png');
 }
+.main-config a.deselect-all{
+	clear:both;
+	display:block;
+	margin-left:15px;
+	color:#8aaa30;
+}
