@@ -1,13 +1,59 @@
 var echargingLayer = {
 	isCached:true,
-	populate: function(){	
+	getTypes : function(callback){
+                integreen.getStationDetails('EchargingFrontEnd/rest/plugs/',{},displayBrands);
+                function displayBrands(data){
+                        var brands = {};
+                        $.each(data,function(index,value){
+                                brands[value.plugType] = true;
+                        });
+                        $('.echarging .deselect-all').click(function(){
+                                $.each(brands,function(index,value){
+                                        brands[index] = false;
+                                });
+                                echargingLayer.retrieveStations(brands);
+                        });
+                        if (callback != undefined)
+                                callback(brands);
+
+                }
+        },
+	populate: function(){
 		var self = this;
+                if (self.brands == undefined)
+                        self.getTypes(self.retrieveStations);
+	},	
+	retrieveStations : function(brands){
+		$('.echargingtypes').empty();
+		$.each(brands,function(index,value){
+                        var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
+                        if (!value){
+                                brandClass+=' inactive' ;
+                        }
+                        $('.echarging .echargingtypes').append('<li class="echargingbrand '+brandClass+'"><a href="javascript:void(0)">'+index+'</a></li>');
+                });
+                $('.echargingbrand').click(function(e){
+                        var brand = $(this).text();
+                        brands[brand] = !brands[brand];
+                        echargingLayer.retrieveStations(brands);
+                });
+                var brandreq='';
+                $.each(brands,function(index,value){
+                        if (value){
+                                if (brandreq != '')
+                                        brandreq += "\\,";
+                                brandreq += '\''+index+'\'';
+                        }
+                });
 	        var  params = {
                         request:'GetFeature',
                         typeName:'edi:Echarging',
                         outputFormat:'text/javascript',
                         format_options: 'callback: json'
         	};
+		if (brandreq != '')
+                        params['viewparams']='brand:'+brandreq;
+
         	$.ajax({
                 	url : SASABus.config.geoserverEndPoint+'wfs?'+$.param(params),
 	                dataType : 'jsonp',
@@ -15,7 +61,8 @@ var echargingLayer = {
                 	jsonpCallback : 'json',
 	                success : function(data) {
         	                var features = new OpenLayers.Format.GeoJSON().read(data);
-                	        self.layer.addFeatures(features);
+                               	echargingLayer.layer.removeAllFeatures();
+                	        echargingLayer.layer.addFeatures(features);
 	                },
         	        error : function() {
                 	        console.log('problems with data transfer');

@@ -2,12 +2,58 @@ var bikeSharingLayer ={
 	isCached:true,
 	populate: function(){   
                 var self = this;
-		var  params = {
-                                request:'GetFeature',
-                                typeName:'edi:Bikesharing',
-                                outputFormat:'text/javascript',
-                                format_options: 'callback: getJson'
+                if (self.brands == undefined)
+                        self.getBikeBrands(self.retrieveStations);
+	},
+	getBikeBrands(callback){
+		integreen.getStationDetails('bikesharingFrontEnd/rest/bikes/',{},displayBrands);
+                function displayBrands(data){
+                        var brands = {};
+                        $.each(data,function(index,value){
+                                brands[value.type] = true;
+                        });
+                        $('.bikesharing .deselect-all').click(function(){
+                                $.each(brands,function(index,value){
+                                        brands[index] = false;
+
+                                });
+                                bikeSharingLayer.retrieveStations(brands);
+                        });
+                        if (callback != undefined)
+                                callback(brands);
+
+                }
+	},
+	retrieveStations : function(brands){
+                $('.biketypes').empty();
+                $.each(brands,function(index,value){
+                        var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
+                        if (!value){
+                                brandClass+=' inactive' ;
+                        }
+                        $('.bikesharing .biketypes').append('<li class="bikebrand '+brandClass+'"><a href="javascript:void(0)">'+index+'</a></li>');
+                });
+                $('.bikebrand').click(function(e){
+                        var brand = $(this).text();
+                        brands[brand] = !brands[brand];
+                        bikeSharingLayer.retrieveStations(brands);
+                });
+                var brandreq='';
+                $.each(brands,function(index,value){
+                        if (value){
+                                if (brandreq != '')
+                                        brandreq += "\\,";
+                                brandreq += '\''+index+'\'';
+                        }
+                });
+                var  params = {
+                        request:'GetFeature',
+                        typeName:'edi:Bikesharing',
+                        outputFormat:'text/javascript',
+                        format_options: 'callback: getJson'
                 };
+                if (brandreq != '')
+                        params['viewparams']='brand:'+brandreq;
                 $.ajax({
                         url : SASABus.config.geoserverEndPoint+'wfs?'+$.param(params),
                         dataType : 'jsonp',
@@ -15,13 +61,14 @@ var bikeSharingLayer ={
                         jsonpCallback : 'getJson',
                         success : function(data) {
                                 var features = new OpenLayers.Format.GeoJSON().read(data);
-                                self.layer.addFeatures(features);
+                                bikeSharingLayer.layer.removeAllFeatures();
+                                bikeSharingLayer.layer.addFeatures(features);
                         },
                         error : function() {
                                 console.log('problems with data transfer');
                         }
                 });
-	},
+        },
 	get: function(){
 		if (this.isCached && this.layer != undefined)
                         return this.layer;
@@ -56,75 +103,42 @@ var bikeSharingLayer ={
 		positionsLayer.events.on({
 		       	"featureselected":function(e){
 				var station = e.feature.attributes.stationcode;
-				getBikesharingDetails(station);
-			}
-		});
-		function getCurrentBikesharingData(data){
-			var me = this;
-			var currentState = {	
-			};
-			$.ajax({url:SASABus.config.integreenEndPoint+'/bikesharingFrontEnd/rest/get-data-types?station='+data.id,success: function(datatypes){
-				getData(datatypes);
-			}});
-			function getData(types){
-				if (types.length==0){
-					displayCurrentState();
-					return;
-				}
-				var type = types.pop()[0];
-				var params ={station:data.id,name:type,seconds:600};
-				$.ajax({
-					url :SASABus.config.integreenEndPoint+'/bikesharingFrontEnd/rest/get-records?'+$.param(params),
-					dataType : 'json',
-				      	crossDomain: true,
-					success : function(result) {
-						currentState[type] = result[result.length-1].value;
-						getData(types);
-					}
-				});
-			}
-			function displayCurrentState(){
-				$('.bikesharingstation .title').text(data.name);	
-				var catHtml;
-				$('.bikesharingstation .legend').empty();
-				$.each(currentState,function(key,value){
-					if (key=="number available"){
-						radialProgress(document.getElementById('totalAvailable'))
-						.label(jsT[lang]['freeBikes'])
-						.diameter(180)
-						.value(currentState[key])
-						.maxValue(data.bikes[key])
-						.render();
-					}
-					else{
-						var cat = key.replace(/\s/g,"_");
-						radialProgress(document.getElementById(cat+'-container'))
-						.diameter(78)
-						.value(currentState[key])
-						.maxValue(data.bikes[key])
-						.render();
-						$('.bikesharingstation .legend').append("<li class='"+cat+"'>"+jsT[lang][cat]+"</li>");	
-					}
-				});
 				$('.modal').hide();
 			       	$('.bikesharingstation').show();
+				integreen.retrieveData(station,"bikesharingFrontEnd/rest/",getCurrentBikesharingData);
+			}
+		});
+		function getCurrentBikesharingData(details,data){
+			$('.bikesharingstation .title').text(details.name);	
+                        integreen.getChildStationsData(details.id,"bikesharingFrontEnd/rest/bikes/",displayCurrentState);
+			function displayCurrentState(bikes){
+				if (bikes && bikes.length>0){
+					var catHtml;
+					$('.bikesharingstation .legend').empty();
+					$.each(bikes,function(key,value){
+						if (key=="number available"){
+							radialProgress(document.getElementById('totalAvailable'))
+							.label(jsT[lang]['freeBikes'])
+							.diameter(180)
+							.value(currentState[key])
+							.maxValue(data.bikes[key])
+							.render();
+						}
+						else{
+							var cat = key.replace(/\s/g,"_");
+							radialProgress(document.getElementById(cat+'-container'))
+							.diameter(78)
+							.value(currentState[key])
+							.maxValue(data.bikes[key])
+							.render();
+							$('.bikesharingstation .legend').append("<li class='"+cat+"'>"+jsT[lang][cat]+"</li>");	
+						}
+					});
+				}else{
+					$('.bikesharingstation .legend').html("<p style='color:#000'>Station out of order</p>");     
+				}
 			}
 		}
-		function getBikesharingDetails(station){
-			var me = this;	
-			$.ajax({
-				url : SASABus.config.integreenEndPoint+'/bikesharingFrontEnd/rest/get-station-details',
-				dataType : 'json',
-			       	crossDomain: true,
-				success : function(data) {
-					for (i in data){
-						if (data[i].id == station){
-							getCurrentBikesharingData(data[i]);
-						}
-					}
-				}
-			});
-		 }
 		this.layer = positionsLayer;
 		return positionsLayer;
 	}

@@ -3,14 +3,13 @@ var carSharingLayer = {
 	getCarBrands : function(callback){
 		integreen.getStationDetails('carsharingFrontEnd/rest/cars/',{},displayBrands);	
 		function displayBrands(data){
-			brands = {};
+			var brands = {};
 			$.each(data,function(index,value){
 				brands[value.brand] = true;
 			});
 			$('.carsharing .deselect-all').click(function(){
 				$.each(brands,function(index,value){
                 	                brands[index] = false;
-					
         	                });
 				carSharingLayer.retrieveStations(brands);
 			});

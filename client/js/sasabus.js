@@ -16,11 +16,40 @@ function getPresetFromUrl(value){
 }
 var preConfigMap = {
 	p1:{
-		zoom:8,
-		lon:1242107.3809149,
-		lat:5889462.4783187,
-	}
-	//insert Points here
+		zoom:18,
+		lon:1241251.0433325,
+		lat:5888918.4656567,
+	},
+	p2:{
+		zoom:18,
+		lon:1242275.7794428,
+		lat:5888727.0753039,
+	},
+	p4:{
+		zoom:18,
+		lon:1242236.3628001,
+		lat:5888148.1253312,
+	},
+	p5:{
+		zoom:18,
+		lon:1242522.4036918,
+		lat:5888480.4480549,
+	},
+	p6:{
+		zoom:18,
+		lon:1242819.1935406,
+		lat:5888359.5230875,
+	},
+	p7:{
+		zoom:18,
+		lon:1242853.828269,
+		lat:5888584.3562402,
+	},
+	p8:{
+		zoom:18,
+		lon:1242238.1510928,
+		lat:5889129.8666131,
+	},
 }
 var epsg25832 = new OpenLayers.Projection('EPSG:25832');
 var SASABus = {
