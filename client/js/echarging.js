@@ -1,7 +1,7 @@
 var echargingLayer = {
 	isCached:true,
 	getTypes : function(callback){
-                integreen.getStationDetails('EchargingFrontEnd/rest/plugs/',{},displayBrands);
+                integreen.getStationDetails('ChargeFrontEnd/rest/plugs/',{},displayBrands);
                 function displayBrands(data){
                         var brands = {};
                         $.each(data,function(index,value){
@@ -103,7 +103,7 @@ var echargingLayer = {
                 	"featureselected":function(e){
 				if (!e.feature.cluster){
         	                	var station = e.feature.attributes.stationcode;
-					integreen.retrieveData(station,"EchargingFrontEnd/rest/",displayData);
+					integreen.retrieveData(station,"ChargeFrontEnd/rest/",displayData);
 				}
 	                }
 	        });
@@ -120,7 +120,7 @@ var echargingLayer = {
 				return;
 			}
 			var html = "";
-			integreen.getChildStationsData(details.id,"EchargingFrontEnd/rest/plugs/",displayPlugs);
+			integreen.getChildStationsData(details.id,"ChargeFrontEnd/rest/plugs/",displayPlugs);
 			function displayPlugs (children){
 				$.each(children,function(index,value){
 					var plugState = value.newestRecord;

@@ -6,7 +6,7 @@ var bikeSharingLayer ={
                         self.getBikeBrands(self.retrieveStations);
 	},
 	getBikeBrands(callback){
-		integreen.getStationDetails('bikesharingFrontEnd/rest/bikes/',{},displayBrands);
+		integreen.getStationDetails('Bikesharing-frontend/rest/bikes/',{},displayBrands);
                 function displayBrands(data){
                         var brands = {};
                         $.each(data,function(index,value){
@@ -105,12 +105,12 @@ var bikeSharingLayer ={
 				var station = e.feature.attributes.stationcode;
 				$('.modal').hide();
 			       	$('.bikesharingstation').show();
-				integreen.retrieveData(station,"bikesharingFrontEnd/rest/",getCurrentBikesharingData);
+				integreen.retrieveData(station,"Bikesharing-frontend/rest/",getCurrentBikesharingData);
 			}
 		});
 		function getCurrentBikesharingData(details,data){
 			$('.bikesharingstation .title').text(details.name);	
-                        integreen.getChildStationsData(details.id,"bikesharingFrontEnd/rest/bikes/",displayCurrentState);
+                        integreen.getChildStationsData(details.id,"Bikesharing-frontend/rest/bikes/",displayCurrentState);
 			function displayCurrentState(bikes){
 				if (bikes && bikes.length>0){
 					var catHtml;
