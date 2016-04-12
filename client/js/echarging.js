@@ -5,7 +5,9 @@ var echargingLayer = {
                 function displayBrands(data){
                         var brands = {};
                         $.each(data,function(index,value){
-                                brands[value.plugType] = true;
+				$.each(value.outlets,function(i,outlet){
+                                	brands[outlet.outletTypeCode] = true;
+				});
                         });
                         $('.echarging .deselect-all').click(function(){
                                 $.each(brands,function(index,value){
@@ -111,7 +113,8 @@ var echargingLayer = {
         	return positionsLayer;
 
 		function displayData(details,state){		
-			var updatedOn = moment(state['number available'].timestamp).locale(lang).format('lll');
+			console.log(details);
+			var updatedOn = moment(state['number-available'].timestamp).locale(lang).format('lll');
 			$('.station .title').html(details.name.replace("CU_","")+" ("+details.provider+")<br/><small>"+updatedOn+"</small>");
 			if (details.state != 'ACTIVE'){
 				$(".content").html('<h3>This charging station is temporary out of order </h3>');	
@@ -120,12 +123,22 @@ var echargingLayer = {
 				return;
 			}
 			var html = "";
+			if (details.paymentInfo)
+				html += "<div><h4>Payment:</h4> <a href='" + details.paymentInfo + "' target='_blank'>" + details.paymentInfo + "</a>";
+			if (details.accessInfo)
+				html += "<h4>Access:</h4>" + details.accessInfo;
+			if (details.locationServiceInfo)
+				html += "<h4>Details:</h4>" + details.locationServiceInfo;
+			if (details.flashInfo)
+				html += "<h4>Warning:</h4>" + details.flashInfo;
+			html += "</div>";
 			integreen.getChildStationsData(details.id,"ChargeFrontEnd/rest/plugs/",displayPlugs);
 			function displayPlugs (children){
 				$.each(children,function(index,value){
+					console.log(value);
 					var plugState = value.newestRecord;
 					var plugDetails = value.detail;
-					var state = plugState['e-charging plugs availability status'].value;
+					var state = plugState['echarging-plug-status'].value;
 					if (state == 1)	
 						plugColor='#8faf30';
 					else if(state == 2 || state == 3)
@@ -133,12 +146,14 @@ var echargingLayer = {
 					else
 						plugColor = '#e81c24';
 					html += "<div class='plug' style='width:" + 100/details.capacity + "%'>" 
-					+"<img style='display:block;margin:auto' src='https://service.aewnet.eu/e-mobility/api/v2/images/outlettypes/Type2Mennekes?hexColor="+ encodeURIComponent(plugColor) +"' alt='Plug image not available'/>"
-					+"<h4 style='text-align:center;color:" + plugColor + "'>" + jsT[lang]['chargingStates'][state] + "</h4>"
-					+"<p>"+plugDetails.plugType +"<br/>"
-					+ plugDetails.minCurrent +" - "+plugDetails.maxCurrent+" A<br/>"
-					+ plugDetails.maxPower +" W </p>"
-					+"</div>"
+					+"<h4 style='text-align:center;color:" + plugColor + "'>" + jsT[lang]['chargingStates'][state] + "</h4>";
+					$.each(value.detail.outlets,function(i,outlet){
+						html += "<img style='display:block;margin:auto' src='https://service.aewnet.eu/e-mobility/api/v2/images/outlettypes/"+ outlet.outletTypeCode +"?hexColor="+ encodeURIComponent(plugColor) +"' alt='Plug image not available'/>"
+						+"<p>"+outlet.outletTypeCode +"<br/>"
+						+ outlet.minCurrent + " - " + outlet.maxCurrent+" A<br/>"
+						+ outlet.maxPower +" W </p>";
+					});
+					html += "</div>"
 				});
 				$('.station .content').html(html);
 				$('.modal').hide();

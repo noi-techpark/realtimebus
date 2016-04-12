@@ -110,10 +110,10 @@ var carSharingLayer = {
 			}
 		});
 		function getCarsharingStation(details,current){
-			var updatedOn = moment(current['number available'].timestamp).locale(lang).format('lll');
+			var updatedOn = moment(current['number-available'].timestamp).locale(lang).format('lll');
 			radialProgress($(".carsharingstation .number-available")[0])
 				.diameter(180)
-				.value(current['number available'].value)
+				.value(current['number-available'].value)
 				.maxValue(details.availableVehicles)
 				.render();
 			integreen.getChildStationsData(details.id,"carsharing-frontend/rest/cars/",displayCarsharingData);
@@ -128,7 +128,7 @@ var carSharingLayer = {
 						}
 					}
 					amountByBrand[brand].total = amountByBrand[brand].total+1;		
-					if (value.newestRecord['vehicle availability'].value == 0)
+					if (value.newestRecord['availability'].value == 0)
 						amountByBrand[brand].current=amountByBrand[brand].current +1;
 				});	
 				return amountByBrand;

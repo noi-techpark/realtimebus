@@ -56,10 +56,10 @@ var SASABus = {
     config: {
 	city:'',
         r3EndPoint: 'http://realtimebus.tis.bz.it/',
-	integreenEndPoint:'http://ipchannels.integreen-life.bz.it/',
+	integreenEndPoint:'http://test-mapserver.tis.bz.it:8080/',
 	apiediEndPoint:'http://apiedi.tis.bz.it/apiedi',
 	//apiediEndPoint:'http://localhost:8080/apiedi',
-	geoserverEndPoint:'http://geodata.integreen-life.bz.it/geoserver/',
+	geoserverEndPoint:'http://test-mapserver.tis.bz.it:8080/geoserver/',
         busPopupSelector: '#busPopup',
         stopPopupSelector: '#stopPopup',
         rowsLimit: 6,
