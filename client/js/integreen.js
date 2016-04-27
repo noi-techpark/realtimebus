@@ -1,5 +1,5 @@
 var defaultConfig = {
-	integreenEndPoint:'http://test-mapserver.tis.bz.it:8080/'
+	integreenEndPoint:'http://ipchannels.integreen-life.bz.it/'
 }
 function mergeConfig(config){
 	if (config){
