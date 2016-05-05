@@ -31,10 +31,10 @@ var echargingLayer = {
                         if (!value){
                                 brandClass+=' inactive' ;
                         }
-                        $('.echarging .echargingtypes').append('<li class="echargingbrand '+brandClass+'"><a href="javascript:void(0)">'+index+'</a></li>');
+                        $('.echarging .echargingtypes').append('<li class="echargingbrand">'+index+'<a class="statuswidget '+brandClass+'" brand="'+index+'" href="javascript:void(0)">+-</a></li>');
                 });
-                $('.echargingbrand').click(function(e){
-                        var brand = $(this).text();
+                $('.echargingbrand a').click(function(e){
+                        var brand = $(this).attr("brand");
                         brands[brand] = !brands[brand];
                         echargingLayer.retrieveStations(brands);
                 });
@@ -113,7 +113,6 @@ var echargingLayer = {
         	return positionsLayer;
 
 		function displayData(details,state){		
-			console.log(details);
 			var updatedOn = moment(state['number-available'].timestamp).locale(lang).format('lll');
 			$('.station .title').html(details.name.replace("CU_","")+" ("+details.provider+")<br/><small>"+updatedOn+"</small>");
 			if (details.state != 'ACTIVE'){
@@ -123,19 +122,21 @@ var echargingLayer = {
 				return;
 			}
 			var html = "";
-			if (details.paymentInfo)
+			html+="<div class='number-available'></div>";
+			html+="<div class='caption'>"+jsT[lang].freeCharger+"</div><hr/>";
+			/*if (details.paymentInfo)
 				html += "<div><h4>Payment:</h4> <a href='" + details.paymentInfo + "' target='_blank'>" + details.paymentInfo + "</a>";
 			if (details.accessInfo)
 				html += "<h4>Access:</h4>" + details.accessInfo;
 			if (details.locationServiceInfo)
 				html += "<h4>Details:</h4>" + details.locationServiceInfo;
 			if (details.flashInfo)
-				html += "<h4>Warning:</h4>" + details.flashInfo;
+				html += "<h4>Warning:</h4>" + details.flashInfo;*/
 			html += "</div>";
+                                html+='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>';
 			integreen.getChildStationsData(details.id,"ChargeFrontEnd/rest/plugs/",displayPlugs);
 			function displayPlugs (children){
 				$.each(children,function(index,value){
-					console.log(value);
 					var plugState = value.newestRecord;
 					var plugDetails = value.detail;
 					var state = plugState['echarging-plug-status'].value;
@@ -145,17 +146,23 @@ var echargingLayer = {
 						plugColor = '#f28e1e';
 					else
 						plugColor = '#e81c24';
-					html += "<div class='plug' style='width:" + 100/details.capacity + "%'>" 
-					+"<h4 style='text-align:center;color:" + plugColor + "'>" + jsT[lang]['chargingStates'][state] + "</h4>";
+					html += "<div class='plug clearfix'>" 
+					+"<h4><svg height='20' width='20'><circle cx='10' cy='10' r='10' fill='" + plugColor + "'></circle></svg>" + jsT[lang].charger + " "+(index+1)+"</h4>";
 					$.each(value.detail.outlets,function(i,outlet){
-						html += "<img style='display:block;margin:auto' src='https://service.aewnet.eu/e-mobility/api/v2/images/outlettypes/"+ outlet.outletTypeCode +"?hexColor="+ encodeURIComponent(plugColor) +"' alt='Plug image not available'/>"
-						+"<p>"+outlet.outletTypeCode +"<br/>"
-						+ outlet.minCurrent + " - " + outlet.maxCurrent+" A<br/>"
-						+ outlet.maxPower +" W </p>";
+						html += "<div class='clearfix outlet'><img src='https://service.aewnet.eu/e-mobility/api/v2/images/outlettypes/"+ outlet.outletTypeCode+"' alt='Plug image not available'/>"
+						+"<p>"+outlet.outletTypeCode +" | "
+						+ outlet.minCurrent + " - " + outlet.maxCurrent+" A | "
+						+ outlet.maxPower +" W </p></div>";
 					});
-					html += "</div>"
+					html += "</div><hr/>"
 				});
 				$('.station .content').html(html);
+				radialProgress($('.station .number-available')[0])
+                                                 .diameter(180)
+                                                 .value(state['number-available'].value)
+                                                 .maxValue(details.capacity)
+                                                 .render();
+
 				$('.modal').hide();
 				$('.station').show();
 			}

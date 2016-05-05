@@ -31,10 +31,10 @@ var bikeSharingLayer ={
                         if (!value){
                                 brandClass+=' inactive' ;
                         }
-                        $('.bikesharing .biketypes').append('<li class="bikebrand '+brandClass+'"><a href="javascript:void(0)">'+index+'</a></li>');
+                        $('.bikesharing .biketypes').append('<li class="bikebrand">'+index+'<a brand='+index+' href="javascript:void(0)" class="statuswidget '+brandClass+'">+-</a></li>');
                 });
-                $('.bikebrand').click(function(e){
-                        var brand = $(this).text();
+                $('.bikebrand a').click(function(e){
+                        var brand = $(this).attr("brand");
                         brands[brand] = !brands[brand];
                         bikeSharingLayer.retrieveStations(brands);
                 });

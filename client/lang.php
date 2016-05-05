@@ -13,7 +13,7 @@
 	$vars['it_meranotitle'] = 'Merano - Real time bus';
 	$vars['it_urbani'] = 'Urbani';
 	$vars['it_extraurbani'] = 'Extraurbani';
-	$vars['it_deselectall'] = 'Deseleziona tutte le linie';
+	$vars['it_deselectall'] = 'Deseleziona tutto';
 	$vars['it_varianti'] = 'Varianti';
 	$vars['it_camporicerca'] = 'Indirizzo o fermata';
 	$vars['it_servizio'] = 'Il Servizio';
@@ -50,7 +50,7 @@
 	$vars['en_meranotitle'] = 'Merano - Real time bus';
 	$vars['en_urbani'] = 'Urban';
 	$vars['en_extraurbani'] = 'Suburban';
-	$vars['en_deselectall'] = 'Deselect all lines';
+	$vars['en_deselectall'] = 'Deselect all';
 	$vars['en_varianti'] = 'Variations';
 	$vars['en_camporicerca'] = 'Address or bus stop';
 	$vars['en_servizio'] = 'About';
@@ -86,7 +86,7 @@
 	$vars['de_meranotitle'] = 'Meran - Real time bus';
 	$vars['de_urbani'] = 'St&auml;dtische Busse';
 	$vars['de_extraurbani'] = 'Au&szlig;erst&auml;dtische Busse';
-	$vars['de_deselectall'] = 'Alle Linien ausblenden';
+	$vars['de_deselectall'] = 'Alle ausblenden';
 	$vars['de_varianti'] = 'Varianten';
 	$vars['de_camporicerca'] = 'Adresse oder Haltestelle';
 	$vars['de_servizio'] = 'Der Dienst';

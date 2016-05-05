@@ -226,7 +226,7 @@ var SASABus = {
         var geometry = new OpenLayers.Geometry.Point(reqP.lon,reqP.lat);
         var feature = new OpenLayers.Feature.Vector(geometry);
         me.locationLayer.addFeatures([feature]);
-        
+       	me.routeToLocation("hi"); 
         setTimeout(function() {
             $('#zoomInButton').click(function(event) {
                 event.preventDefault();
@@ -390,7 +390,21 @@ var SASABus = {
             }
         });
     },
-    
+    routeToLocation : function(whereTo){
+	$.ajax({
+	        type: 'GET',
+        	crossDomain: true,
+		url:'http://localhost:8000/api/1.0/gosmore.php?format=geojson&flat=52.215676&flon=5.963946&tlat=52.2573&tlon=6.1799&v=foot',
+        	dataType: 'json',
+	        jsonp: 'json',
+        	success: function(response, status, xhr) {
+			console.log(response);
+	        },
+        	error: function(xhr, status, error) {
+			console.log(error);
+		}
+        });	
+    },  
     showLocation: function(lon, lat) {
         try {
             var lonLat = new OpenLayers.LonLat(lon, lat);

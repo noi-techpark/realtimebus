@@ -30,10 +30,10 @@ var carSharingLayer = {
 			if (!value){
 				brandClass+=' inactive'	;
 			}
-			$('.carsharing .cartypes').append('<li class="carbrand '+brandClass+'"><a href="javascript:void(0)">'+index+'</a></li>');
+			$('.carsharing .cartypes').append('<li>' + index + '<a href="javascript:void(0)" brand="'+index+'" class="carbrand statuswidget '+brandClass+'">+-</a></li>');
 		});
 		$('.carbrand').click(function(e){
-			var brand = $(this).text();
+			var brand = $(this).attr('brand');
 			brands[brand] = !brands[brand];
 			carSharingLayer.retrieveStations(brands);
 		});

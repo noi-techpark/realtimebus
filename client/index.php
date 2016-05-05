@@ -318,7 +318,7 @@
 			<div class="walk-container">
 	                	<!--<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>-->
 				<div class="main-config clearfix">
-					<ul class="cartypes legend clearfix">
+					<ul class="cartypes clearfix">
 					</ul>
                         		<a href="javascript:void(0)" class="deselect-all" ><div><?php ___('deselectall'); ?></div></a>
                         		<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
@@ -328,7 +328,7 @@
                 <div class="hidden modal bikesharing">
 			<div class="walk-container">
 				<div class="main-config clearfix">
-					<ul class="biketypes legend clearfix">
+					<ul class="biketypes clearfix">
 					</ul>
                         		<a href="javascript:void(0)" class="deselect-all" ><div><?php ___('deselectall'); ?></div></a>
                         		<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
@@ -338,7 +338,7 @@
                 <div class="hidden modal echarging">
 			<div class="walk-container">
 				<div class="main-config clearfix">
-					<ul class="echargingtypes legend clearfix">
+					<ul class="echargingtypes clearfix">
 					</ul>
                         		<a href="javascript:void(0)" class="deselect-all" ><div><?php ___('deselectall'); ?></div></a>
                         		<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
@@ -457,7 +457,6 @@
 				<div class="content">
 				</div>
 				<div class="legend"></div>
-				<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 			</div>
 		</div>		
 		<div class="hidden modal" id="artModal">

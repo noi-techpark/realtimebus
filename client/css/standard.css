@@ -567,10 +567,10 @@ a{color:#c0c0c0;text-decoration:none}
 	width:100px;
 }
 
-.bikesharingstation .number-available,.carsharingstation .number-available{
+.walk-container .number-available{
 	width:100%;
 }
-.bikesharingstation .number-available svg,.carsharingstation .number-available svg{
+.walk-container .number-available svg{
 	width:150px;
 	height:150px;
 }
@@ -583,7 +583,7 @@ a{color:#c0c0c0;text-decoration:none}
 	width:60px;
 	height:60px;
 }
-.carsharingstation .caption {
+.walk-container .caption {
 	text-align:center;
 	font-size:22px;
 	font-weight:normal;
@@ -646,8 +646,14 @@ a{color:#c0c0c0;text-decoration:none}
 	fill:lime;
 	color:lime;
 }
-.carbrand a{
+.statuswidget{
 	color:#fff;
+	float:right;
+	display:block;
+}
+.main-config li{
+	margin:10px;
+	padding:5px;
 }
 .inactive{
 	background-color:#f2f2f2 !important;
@@ -665,14 +671,33 @@ a{color:#c0c0c0;text-decoration:none}
 	text-align:center;
 }
 .station .plug{
-	float:left;
+	margin:15px;
 }
-.station .plug svg,.station .plug p{
+.station .plug h4{
+	font-size:1.4em;
+	text-transform:uppercase;
+	line-height:20px;
+}
+.station .plug .outlet{
+	margin-top:8px;	
+}
+.station .plug svg{
+	vertical-align:top;
+}
+.station .plug>svg,.station .plug p{
 	display:block;
 	margin-left:auto;
 	margin-right:auto;
         width:75%;
-	font-size:10px;	
+	font-size:14px;	
+	line-height:30px;
+}
+.station .plug img{
+	display:block;
+	margin:auto;
+	margin-left:5px;
+	width:30px;
+	float:left
 }
 .about ul li a{
 	height:50px;
@@ -728,4 +753,11 @@ a{color:#c0c0c0;text-decoration:none}
 	display:block;
 	margin-left:15px;
 	color:#8aaa30;
+}
+hr{
+	display:block;
+	padding:0 15px;
+	margin:15px;
+	border-bottom: 1px solid #ccc;
+	border-top: none;
 }
