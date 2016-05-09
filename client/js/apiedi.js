@@ -1,3 +1,4 @@
+var myroutes;
 var routesLayer = {
 	isCached : false,
 	get :function (){
@@ -170,18 +171,18 @@ var wegeStartPointsLayer = {
         	return vectorLayer;
     	},
 	getRoutes: function(){
-        		var theme,hike,myroutes;
+        		var theme,hike;
         		function displayRoutesList(){
         	        	var list = '';
-	                	hike = $("#hike").hasClass("enabled");
-                		theme = $("#theme").hasClass("enabled");
+	                	hike = $("#hike").hasClass("disabled");
+                		theme = $("#theme").hasClass("disabled");
                 		var sortedroutes = myroutes.sort(function(obj1, obj2) {
         	                	var f = obj1.displayName[lang].toLowerCase();
 	                        	var s = obj2.displayName[lang].toLowerCase();
 	                        	return ((f < s) ? -1 : ((f > s) ? 1 : 0));;
         	        	});
                 		$.each(sortedroutes,function(index,value){
-        	                	if ((theme == false && value.type=="themenweg")||(hike==false && value.type=="wanderweg"))
+        	                	if ((theme != false && value.type=="themenweg")||(hike != false && value.type=="wanderweg"))
 	                                	return true;
 	                        	list+='<a href="#" title=""  id="'+value.id+'"class="list-route"><li>';
         	        	        list+='<h4>'+value.displayName[lang]+'</h4>';
@@ -209,10 +210,6 @@ var wegeStartPointsLayer = {
                 			    success: function(response, status, xhr) {
 				                    myroutes = response;
 	                        		    displayRoutesList();
-                        			   $(".main-config .toggler").click(function(evt){
-                                			$(this).toggleClass("enabled");
-                        	        		displayRoutesList();
-                	        		   });
         	            	           },
 	                    		   error: function(xhr, status, error) {
                         	   		console.log(error);
@@ -220,8 +217,13 @@ var wegeStartPointsLayer = {
                 		});
         		}
 		        var url = SASABus.config.apiediEndPoint+"/get-routes";
-       			if (myroutes== undefined)
+       			if (myroutes== undefined){
+                  		$(".walk .main-config .toggler").click(function(evt){
+                         		$(this).toggleClass("disabled");
+	                        	displayRoutesList();
+        	        	});
 		                loadRoutes(url);
+			}
         		else
                 		displayRoutesList();
 	},

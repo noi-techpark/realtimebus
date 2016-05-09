@@ -171,7 +171,7 @@ $(document).ready(function() {
 			SASABus.activateSelectedThemes(themeArray);
 		} 
 		$(".filters .toggler").click(function(){
-			$(this).toggleClass("enabled");
+			$(this).toggleClass("disabled");
 			linesLayer.getLines(initLinesAfterRead);
 		});
 		function getReadableTime(time){
@@ -270,11 +270,11 @@ function initLinesAfterRead(lines)
 		mapLinesInit[i] = codLinea+':'+codVariante;
 	}
 	var htmlL = '';
-	var urbanFilter = $("#urban").hasClass("enabled");
-	var eurbanFilter = $("#eurban").hasClass("enabled");
+	var urbanFilter = $("#urban").hasClass("disabled");
+	var eurbanFilter = $("#eurban").hasClass("disabled");
 	for(var i=0;i<htmlLineeU.length;i++)
 	{
-		if(typeof htmlLineeU[i] != 'undefined' && urbanFilter)
+		if(typeof htmlLineeU[i] != 'undefined' && !urbanFilter)
 		{
 		
 			if(htmlLineeU[i][1].length == 0)
@@ -287,7 +287,7 @@ function initLinesAfterRead(lines)
 	//console.log(htmlL);
 	for(var i=0;i<htmlLineeE.length;i++)
 	{
-		if(typeof htmlLineeE[i] != 'undefined' && eurbanFilter)
+		if(typeof htmlLineeE[i] != 'undefined' && !eurbanFilter)
 		{
 			if(htmlLineeE[i][1].length == 0)
 				htmlL += htmlLineeE[i][0]+htmlLineeE[i][2]+htmlLineeE[i][6];

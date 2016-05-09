@@ -255,7 +255,7 @@ var linesLayer = {
         	    success: function(response, status, xhr) {
                 	if(!response) failure.call(scope, xhr, status, response);
 	                SASABus.lines = response;
-        	        success.call(scope, me.lines);
+        	        success.call(scope, SASABus.lines);
 	            },
         	    error: function(xhr, status, error) {
                 	failure.call(scope, xhr, status, error);

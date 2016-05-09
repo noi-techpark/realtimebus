@@ -13,10 +13,31 @@ var echargingLayer = {
                                 $.each(brands,function(index,value){
                                         brands[index] = false;
                                 });
+				$('.echargingbrand a').addClass("disabled");
                                 echargingLayer.retrieveStations(brands);
                         });
                         if (callback != undefined)
                                 callback(brands);
+			$('.echargingtypes').empty();
+			$.each(brands,function(index,value){
+        	                var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
+                	        $('.echarging .echargingtypes').append('<li class="clearfix echargingbrand">'+index+'<a brand='+index+' href="javascript:void(0)" class="toggler">'
+                        	        +'<svg width="55" height="30">'
+                                	+       '<g>'
+	                                +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#f2bf00" height="24"/>'
+        	                        +               '<circle cx="34" cy="17" r="9" fill="#f2bf00" />'
+                	                +       '</g>'
+                        	        +       'Sorry, your browser does not support inline SVG.'
+	                                + '</svg>'
+					+ '</a></li>'	
+				);
+	                });
+                	$('.echargingbrand a').click(function(e){
+                        	var brand = $(this).attr("brand");
+	                        brands[brand] = !brands[brand];
+				$(this).toggleClass("disabled");
+        	                echargingLayer.retrieveStations(brands);
+                	});
                 }
         },
 	populate: function(){
@@ -25,19 +46,6 @@ var echargingLayer = {
                         self.getTypes(self.retrieveStations);
 	},	
 	retrieveStations : function(brands){
-		$('.echargingtypes').empty();
-		$.each(brands,function(index,value){
-                        var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
-                        if (!value){
-                                brandClass+=' inactive' ;
-                        }
-                        $('.echarging .echargingtypes').append('<li class="echargingbrand">'+index+'<a class="statuswidget '+brandClass+'" brand="'+index+'" href="javascript:void(0)">+-</a></li>');
-                });
-                $('.echargingbrand a').click(function(e){
-                        var brand = $(this).attr("brand");
-                        brands[brand] = !brands[brand];
-                        echargingLayer.retrieveStations(brands);
-                });
                 var brandreq='';
                 $.each(brands,function(index,value){
                         if (value){

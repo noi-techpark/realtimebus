@@ -7,15 +7,34 @@ var carSharingLayer = {
 			$.each(data,function(index,value){
 				brands[value.brand] = true;
 			});
-			$('.carsharing .deselect-all').click(function(){
+			$('.cartypes').empty();
 				$.each(brands,function(index,value){
-                	                brands[index] = false;
+				var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
+				$('.carsharing .cartypes').append('<li class="clearfix"><p>' + index + '</p><a href="javascript:void(0)" brand="'+index+'" class="statuswidget toggler">'
+                	        +'<svg width="55" height="30">'
+                        	+	'<g>'
+	                        +       	'<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#8aaa30" height="24"/>'
+        	                +               '<circle cx="34" cy="17" r="9" fill="#8aaa30" />'
+                	        +       '</g>'
+                        	+       'Sorry, your browser does not support inline SVG.'
+	                        + '</svg>'
+				+ '</a></li>');
+			});
+			$('.carsharing .toggler').click(function(e){
+				var brand = $(this).attr('brand');
+				brands[brand] = !brands[brand];
+				$(this).toggleClass('disabled');
+				carSharingLayer.retrieveStations(brands);
+			});
+			$('.carsharing .deselect-all').click(function(){
+				$('.carsharing .toggler').addClass('disabled');
+				$.each(brands,function(index,value){
+                	        	brands[index] = false;
         	                });
 				carSharingLayer.retrieveStations(brands);
 			});
 			if (callback != undefined)
 				callback(brands);
-			
 		}
 	},
 	populate: function(){   
@@ -24,19 +43,6 @@ var carSharingLayer = {
 			self.getCarBrands(self.retrieveStations);
 	},
 	retrieveStations : function(brands){
-		$('.cartypes').empty();
-		$.each(brands,function(index,value){
-			var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
-			if (!value){
-				brandClass+=' inactive'	;
-			}
-			$('.carsharing .cartypes').append('<li>' + index + '<a href="javascript:void(0)" brand="'+index+'" class="carbrand statuswidget '+brandClass+'">+-</a></li>');
-		});
-		$('.carbrand').click(function(e){
-			var brand = $(this).attr('brand');
-			brands[brand] = !brands[brand];
-			carSharingLayer.retrieveStations(brands);
-		});
 		var brandreq='';
 		$.each(brands,function(index,value){
 			if (value){
@@ -149,7 +155,6 @@ var carSharingLayer = {
 				                 .render();
 		        		$('.carsharingstation .legend').append("<li class='"+brandClass+"'>"+brand+"</li>");
 				}
-		
 				$('.carsharingstation .title').html(details.name+"<br/><small>"+updatedOn+"</small>");
 				$('.carsharingstation .caption').text(jsT[lang]['freeCars']);	
 			}

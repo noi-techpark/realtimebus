@@ -226,7 +226,6 @@ var SASABus = {
         var geometry = new OpenLayers.Geometry.Point(reqP.lon,reqP.lat);
         var feature = new OpenLayers.Feature.Vector(geometry);
         me.locationLayer.addFeatures([feature]);
-       	me.routeToLocation("hi"); 
         setTimeout(function() {
             $('#zoomInButton').click(function(event) {
                 event.preventDefault();

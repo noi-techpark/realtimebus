@@ -12,9 +12,29 @@ var bikeSharingLayer ={
                         $.each(data,function(index,value){
                                 brands[value.type] = true;
                         });
+	                $.each(brands,function(index,value){
+        	                var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
+        	                $('.bikesharing .biketypes').append('<li class="bikebrand clearfix"><p>'+jsT[lang][index.split("-").join("_")]+'</p><a brand='+index+' href="javascript:void(0)" class="toggler">'
+				+'<svg width="55" height="30">'
+                                +       '<g>'
+                                +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#bb392b" height="24"/>'
+                                +               '<circle cx="34" cy="17" r="9" fill="#bb392b" />'
+                                +       '</g>'
+                                +       'Sorry, your browser does not support inline SVG.'
+                                + '</svg>'
+                                + '</a></li>');
+
+                	});
+                	$('.bikebrand a.toggler').click(function(e){
+                        	var brand = $(this).attr("brand");
+	                        brands[brand] = !brands[brand];
+				$(this).toggleClass("disabled");
+                	        bikeSharingLayer.retrieveStations(brands);
+	                });
                         $('.bikesharing .deselect-all').click(function(){
                                 $.each(brands,function(index,value){
                                         brands[index] = false;
+                			$('.bikebrand a.toggler').addClass("disabled");
 
                                 });
                                 bikeSharingLayer.retrieveStations(brands);
@@ -25,19 +45,6 @@ var bikeSharingLayer ={
                 }
 	},
 	retrieveStations : function(brands){
-                $('.biketypes').empty();
-                $.each(brands,function(index,value){
-                        var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
-                        if (!value){
-                                brandClass+=' inactive' ;
-                        }
-                        $('.bikesharing .biketypes').append('<li class="bikebrand">'+index+'<a brand='+index+' href="javascript:void(0)" class="statuswidget '+brandClass+'">+-</a></li>');
-                });
-                $('.bikebrand a').click(function(e){
-                        var brand = $(this).attr("brand");
-                        brands[brand] = !brands[brand];
-                        bikeSharingLayer.retrieveStations(brands);
-                });
                 var brandreq='';
                 $.each(brands,function(index,value){
                         if (value){

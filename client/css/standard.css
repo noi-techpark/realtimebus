@@ -327,12 +327,17 @@ a{color:#c0c0c0;text-decoration:none}
 	height:100px;
 }
 .menu a svg{fill:#fff;background-color:#c7c7c7;}
+.menu svg tspan{
+	font-size:22px;
+	text-anchor:middle;
+	font-weight:bold;
+}
 .menu a:hover{
 	opacity:0.8;
 }
 .menu a.walk.active svg{background-color:#ce5400;}
 .menu a.carsharing.active svg{background-color:#8aaa30;}
-.menu a.echarging.active svg{background-color:#e5e500;}
+.menu a.echarging.active svg{background-color:#f2bf00;}
 .menu a.bikesharing.active svg{background-color:#bb392b;}
 .menu a.bus.active svg{background-color:#ee9712;}
 .modal:before{
@@ -501,23 +506,6 @@ a{color:#c0c0c0;text-decoration:none}
 .list-route{
 	color:#000;
 }
-.toggler{
-	background-image:url('../images/4_Piedi/Active.svg');
-	background-repeat: no-repeat;
-	width:90px;
-	height:30px;
-	display:block;
-        text-indent: -9999px;
-	float:right;
-	background-size:85px 60px;
-	background-position: 0 -30px;
-}
-.toggler.bus{
-	background-image:url('../images/3_Bus/Select.svg');
-}
-.toggler.enabled{
-	background-position-y:3px;
-}
 .ibutton{
 	display:block;
 	position:relative;
@@ -611,11 +599,20 @@ a{color:#c0c0c0;text-decoration:none}
 .VW_up_{
 	background-color:green !important;
 }
+rect.VW_up_{
+	stroke:green !important;
+}
 .VW_Golf{
 	background-color:#b2b200 !important;
 }
+rect.VW_Golf{
+	stroke:#b2b200 !important;
+}
 .VW_Caddy{
 	background-color:gray !important;
+}
+rect.VW_Caddy{
+	stroke:gray !important;
 }
 .VW_up___Methan{
 	background-color:orange !important;
@@ -623,26 +620,49 @@ a{color:#c0c0c0;text-decoration:none}
 .VW_Golf_Variant{
 	background-color:purple !important;
 }
-#mountain_bike_adult-container .arc,.mountain_bike_adult:before,.VW_up_ .arc{
+rect.VW_Golf_Variant{
+	stroke:purple !important;
+}
+.VW_e_UP_{
+	background-color:lightblue !important;
+}
+rect.VW_e_UP_{
+	stroke:lightblue !important;
+}
+rect.VW_e_Golf_{
+	stroke:red !important;
+}
+.VW_e_Golf_{
+	background-color:red !important;
+}
+#mountain_bike_adult-container .arc,.mountain_bike_adult:before,.VW_up_ .arc,circle.VW_up_,circle.mountain_bike_adult{
 	fill:green;
 	color:green;
 }
-.VW_Golf_Variant .arc{
+.VW_Golf_Variant .arc,circle.VW_Golf_Variant{
 	fill:purple;
 }
-#city_bike_adult_with_gears-container .arc,.city_bike_adult_with_gears:before,.VW_Golf .arc{
+#city_bike_adult_with_gears-container .arc,.city_bike_adult_with_gears:before,.VW_Golf .arc,circle.VW_Golf,circle.city_bike_adult_with_gears{
 	fill:#b2b200;
 	color:#b2b200;
 }
-#mountain_bike_teenager-container .arc,.mountain_bike_teenager:before,.VW_Caddy .arc{
+#mountain_bike_teenager-container .arc,.mountain_bike_teenager:before,.VW_Caddy .arc,circle.VW_Caddy,circle.mountain_bike_teenager{
 	fill:gray;
 	color:gray;
 }
-#mountain_bike_child-container .arc,.mountain_bike_child:before,.VW_up___Methan .arc{
+.VW_e_UP_ .arc,circle.VW_e_UP_{
+	fill:lightblue;
+	color:lightblue;
+}
+.VW_e_Golf .arc,circle.VW_e_Golf_{
+	fill:red;
+	color:red;
+}
+#mountain_bike_child-container .arc,.mountain_bike_child:before,.VW_up___Methan .arc,circle.VW_up___Methan,circle.mountain_bike_child{
 	fill:orange;
 	color:orange;
 }
-#city_bike_adult_without_gears-container .arc,.city_bike_adult_without_gears:before{
+#city_bike_adult_without_gears-container .arc,.city_bike_adult_without_gears:before,circle.city_bike_adult_without_gears{
 	fill:lime;
 	color:lime;
 }
@@ -683,6 +703,7 @@ a{color:#c0c0c0;text-decoration:none}
 }
 .station .plug svg{
 	vertical-align:top;
+	margin-right:12px;
 }
 .station .plug>svg,.station .plug p{
 	display:block;
@@ -760,4 +781,22 @@ hr{
 	margin:15px;
 	border-bottom: 1px solid #ccc;
 	border-top: none;
+}
+.toggler{
+	float:right;
+}
+.toggler circle{
+	transition: all linear 0.25s;
+}
+.toggler.disabled circle{
+	cx:18;
+	fill:#e3e3e3;
+}
+.toggler rect{
+	stroke:#e3e3e3;
+	fill:white;
+	stroke-width:1;
+}
+.toggler.disabled rect{
+	stroke:#e3e3e3 !important;
 }
