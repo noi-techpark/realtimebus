@@ -17,7 +17,8 @@ var jsT= {
 			3:'Reserviert',
 			4:'Auser Dienst'
 		},
-		backtomap:'Zurück zur Karte'
+		backtomap:'Zurück zur Karte',
+		book:'Reservieren'
 	},
 	it:{
 		altitudep:'Profilo altimetrico',
@@ -37,7 +38,8 @@ var jsT= {
 			3:'Prenotato',
 			4:'Fuori servizio'
 		},
-		backtomap:'Torna alla mappa'
+		backtomap:'Torna alla mappa',
+                book:'Prenota'
 	},
 	en:{
 		altitudep:'Altitude profile',
@@ -57,7 +59,8 @@ var jsT= {
 			3:'Reserved',
 			4:'Out of order'
 		},
-		backtomap:'Back to map'
+		backtomap:'Back to map',
+                book:'Book'
 	}
 
 }

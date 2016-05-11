@@ -89,18 +89,12 @@
 		</script>
 	<!--<![endif]-->
 		<header class="header-mobile clearfix" id="header-mobile">
-			<span class="mobile-menu-btn" id="mobile-menu-btn">
+			<span class="mobile-menu-btn open" id="mobile-menu-btn">
 				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px"  viewBox="0 0 200 200" enable-background="new 0 0 200 200" xml:space="preserve">
-				<g fill="#fff">
-					<g>
-						<path d="M140.978,72.704H59.022c-1.933,0-3.5-1.567-3.5-3.5s1.567-3.5,3.5-3.5h81.956c1.933,0,3.5,1.567,3.5,3.5    S142.911,72.704,140.978,72.704z"></path>
-					</g>
-					<g>
-						<path d="M140.978,97.708H59.022c-1.933,0-3.5-1.567-3.5-3.5s1.567-3.5,3.5-3.5h81.956c1.933,0,3.5,1.567,3.5,3.5    S142.911,97.708,140.978,97.708z"></path>
-					</g>
-					<g>
-						<path d="M140.978,122.71H59.022c-1.933,0-3.5-1.567-3.5-3.5s1.567-3.5,3.5-3.5h81.956c1.933,0,3.5,1.567,3.5,3.5    S142.911,122.71,140.978,122.71z"></path>
-					</g>
+				<g style="stroke:#fff;stroke-width:5">
+					<line x1="70" y1="100" x2="130" y2="100" />
+					<line y1="70" x1="100" y2="130" x2="100" />
+					<circle fill="transparent"  r="60" cx="100" cy ="100" />
 				</g>
 				</svg>
 			</span>
@@ -502,9 +496,8 @@
 				<div class="number-available">
 				</div>
 				<p class="caption"></p>
-				<div class="car-categorys">
-				</div>
-				<ul class="legend"></ul>
+				<ul class="legend">	
+				</ul>
 				<a href="http://booking.carsharing.bz.it" target="_blank" class="clearfix ibutton" ><div><?php ___('book_car'); ?></div></a>
 				<a href="javascript:void(0)" class="clearfix backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 			</div>

@@ -117,6 +117,10 @@ var carSharingLayer = {
 		});
 		function getCarsharingStation(details,current){
 			var updatedOn = moment(current['number-available'].timestamp).locale(lang).format('lll');
+			$('.carsharingstation>.walk-container>.number-available').removeClass("free");
+                        if  (current['number-available'].value == details.availableVehicles)
+				$('.carsharingstation>.walk-container>.number-available').addClass("free");
+
 			radialProgress($(".carsharingstation .number-available")[0])
 				.diameter(180)
 				.value(current['number-available'].value)
@@ -147,13 +151,15 @@ var carSharingLayer = {
 	       			$('.carsharingstation').show();
 				for (brand in numbersByBrand){
 					var brandClass= brand.replace(/[^a-zA-Z0-9]/g,'_');
-					$('.carsharingstation .car-categorys').append("<div class='"+brandClass+"'></div>");
-					radialProgress($('.carsharingstation .car-categorys .'+brandClass)[0])
+		        		$('.carsharingstation .legend').append("<li class='car-categorys number-available clearfix'><div class='"+brandClass+"'></div><span>"+brand+"</span></li>");
+					$('.car-categorys .'+brandClass).removeClass("free");
+					if (numbersByBrand[brand].current === numbersByBrand[brand].total)
+						$('.car-categorys .' + brandClass).addClass("free");
+					radialProgress($('.car-categorys.number-available .'+brandClass)[0])
 		                		 .diameter(76)
 			                         .value(numbersByBrand[brand].current)
 				                 .maxValue(numbersByBrand[brand].total)
 				                 .render();
-		        		$('.carsharingstation .legend').append("<li class='"+brandClass+"'>"+brand+"</li>");
 				}
 				$('.carsharingstation .title').html(details.name+"<br/><small>"+updatedOn+"</small>");
 				$('.carsharingstation .caption').text(jsT[lang]['freeCars']);	

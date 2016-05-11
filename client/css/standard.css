@@ -562,14 +562,17 @@ a{color:#c0c0c0;text-decoration:none}
 	width:150px;
 	height:150px;
 }
+.walk-container .number-available .arc{
+	fill:#f28e1e;
+}
 .bikesharingstation .bike-categorys,.carsharingstation .car-categorys{
 	clear:both;
 	margin:0 15px;
 }
 .bikesharingstation .bike-categorys>div svg,.carsharingstation .car-categorys>div svg{
 	float:left;
-	width:60px;
-	height:60px;
+	width:55px;
+	height:50px;
 }
 .walk-container .caption {
 	text-align:center;
@@ -580,21 +583,19 @@ a{color:#c0c0c0;text-decoration:none}
 .car-categorys .component text{
 	font-size:0.7em;
 }
+.car-categorys{
+	line-height: 58px;
+	font-size: 15px;
+}
 .legend{
 	font-size:0.8em;
 	clear:left;
 	margin-left:10px;
-	color:#fff;
 	text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
 }
 .legend li{
-	float:left;
 	padding:5px;
 	margin:5px;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	background-color:#4e8fff;
 }
 .VW_up_{
 	background-color:green !important;
@@ -692,6 +693,11 @@ rect.VW_e_Golf_{
 }
 .station .plug{
 	margin:15px;
+	padding:12px 5px;
+	border: 1px solid #e3e3e3;
+	border-radius:2px;
+	-webkit-border-radius:2px;
+	-moz-border-radius:2px;
 }
 .station .plug h4{
 	font-size:1.4em;
@@ -711,13 +717,12 @@ rect.VW_e_Golf_{
 	margin-right:auto;
         width:75%;
 	font-size:14px;	
-	line-height:30px;
+	line-height:25px;
 }
 .station .plug img{
 	display:block;
 	margin:auto;
-	margin-left:5px;
-	width:30px;
+	width:25px;
 	float:left
 }
 .about ul li a{
@@ -799,4 +804,25 @@ hr{
 }
 .toggler.disabled rect{
 	stroke:#e3e3e3 !important;
+}
+.number-available.free .arc, .number-available .free .arc{
+	fill:#8faf30 !important;
+}
+.mobile-menu-btn svg{
+	transition: all linear 0.25s;
+}
+.mobile-menu-btn.open svg{
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+
+	transform: rotate(45deg);
+}
+.station .info{
+	margin:0 15px;
+}
+.station .info img{
+	vertical-align:middle;
+	margin-right:15px;
 }

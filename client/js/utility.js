@@ -526,6 +526,7 @@ function showLinesAfterRead(lines){
 	// in the header. the user can slideToggle the menu clicking it
 	$('span.mobile-menu-btn').click(function(){
 		$('div.panel').slideToggle();
+		$(this).toggleClass('open');
 		$('.modal').toggleClass("fullscreen");
 	});
 

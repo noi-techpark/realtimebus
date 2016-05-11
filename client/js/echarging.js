@@ -132,16 +132,14 @@ var echargingLayer = {
 			var html = "";
 			html+="<div class='number-available'></div>";
 			html+="<div class='caption'>"+jsT[lang].freeCharger+"</div><hr/>";
-			/*if (details.paymentInfo)
-				html += "<div><h4>Payment:</h4> <a href='" + details.paymentInfo + "' target='_blank'>" + details.paymentInfo + "</a>";
-			if (details.accessInfo)
-				html += "<h4>Access:</h4>" + details.accessInfo;
-			if (details.locationServiceInfo)
-				html += "<h4>Details:</h4>" + details.locationServiceInfo;
-			if (details.flashInfo)
-				html += "<h4>Warning:</h4>" + details.flashInfo;*/
+			if (details.accessInfo && !details.flashInfo)
+				html += "<div class='info'><img src='images/8_Echarging/online.svg' width='30px'/><span>Ladestation in Betrieb</span><p>" + details.accessInfo+"</p></div><hr/>";
+			else if (details.flashInfo)
+				html += "<div class='info'><img src='images/8_Echarging/maintanance.svg' width='30px'/><span>"+details.flashInfo+"</span></div>";
+			if (details.paymentInfo)
+                                html+='<div><a href="' + details.paymentInfo + '" target="_blank" class="backtomap ibutton" ><div>'+jsT[lang].book+'</div></a></div>';
 			html += "</div>";
-                                html+='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>';
+                        html+='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>';
 			integreen.getChildStationsData(details.id,"ChargeFrontEnd/rest/plugs/",displayPlugs);
 			function displayPlugs (children){
 				$.each(children,function(index,value){
@@ -162,9 +160,11 @@ var echargingLayer = {
 						+ outlet.minCurrent + " - " + outlet.maxCurrent+" A | "
 						+ outlet.maxPower +" W </p></div>";
 					});
-					html += "</div><hr/>"
+					html += "</div>"
 				});
 				$('.station .content').html(html);
+				if (state['number-available'].value == details.capacity)
+					$('.station .number-available').addClass("free");
 				radialProgress($('.station .number-available')[0])
                                                  .diameter(180)
                                                  .value(state['number-available'].value)
@@ -172,6 +172,9 @@ var echargingLayer = {
                                                  .render();
 
 				$('.modal').hide();
+				$('.station .backtomap.ibutton').click(function(){
+					$('.modal').hide();
+				});	
 				$('.station').show();
 			}
 		}
