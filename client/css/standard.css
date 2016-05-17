@@ -792,6 +792,8 @@ hr{
 }
 .toggler circle{
 	transition: all linear 0.25s;
+	-webkit-transition: all linear 0.25s;
+	-moz-transition: all linear 0.25s;
 }
 .toggler.disabled circle{
 	cx:18;

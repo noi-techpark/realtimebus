@@ -18,6 +18,9 @@ var jsT= {
 			4:'Auser Dienst'
 		},
 		backtomap:'Zurück zur Karte',
+		chargerOnline:'Ladestation in Betrieb',
+		outOfOrder:'Ladestation momentan auser Betrieb',
+		paymentInfo:'Wie bezahle ich?',
 		book:'Reservieren'
 	},
 	it:{
@@ -39,6 +42,9 @@ var jsT= {
 			4:'Fuori servizio'
 		},
 		backtomap:'Torna alla mappa',
+		chargerOnline:'Stazione di ricarica attiva',
+		outOfOrder:'Stazione fuori servizio',
+		paymentInfo:'Come posso pagare?',
                 book:'Prenota'
 	},
 	en:{
@@ -60,6 +66,9 @@ var jsT= {
 			4:'Out of order'
 		},
 		backtomap:'Back to map',
+		chargerOnline:'Chargingstation online',
+		outOfOrder:'Currently out of order',
+		paymentInfo:'Payment info',
                 book:'Book'
 	}
 
