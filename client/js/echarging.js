@@ -124,7 +124,7 @@ var echargingLayer = {
 			var updatedOn = moment(state['number-available'].timestamp).locale(lang).format('lll');
 			$('.station .title').html(details.name.replace("CU_","")+" ("+details.provider+")<br/><small>"+updatedOn+"</small>");
 			if (details.state != 'ACTIVE'){
-				$(".content").html('<h3>This charging station is temporary out of order </h3>');	
+				$(".content").html('<h3>'+jsT[lang].outOfOrder+'</h3>');	
 				$('.modal').hide();
 				$('.station').show();
 				return;
@@ -133,10 +133,12 @@ var echargingLayer = {
 			html+="<div class='number-available'></div>";
 			html+="<div class='caption'>"+jsT[lang].freeCharger+"</div><hr/>";
 			if (details.accessInfo && !details.flashInfo)
-				html += "<div class='info'><img src='images/8_Echarging/online.svg' width='30px'/><span>Ladestation in Betrieb</span><p>" + details.accessInfo+"</p></div><hr/>";
+				html += "<div class='info'><img src='images/8_Echarging/online.svg' width='30px'/><span>"+jsT[lang].chargerOnline+"</span><p>" + details.accessInfo+"</p></div><hr/>";
 			else if (details.flashInfo)
 				html += "<div class='info'><img src='images/8_Echarging/maintanance.svg' width='30px'/><span>"+details.flashInfo+"</span></div>";
 			if (details.paymentInfo)
+                                html+='<div><a href="' + details.paymentInfo + '" target="_blank" class="backtomap ibutton" ><div>'+jsT[lang].paymentInfo+'</div></a></div>';
+			if (details.reservable)
                                 html+='<div><a href="' + details.paymentInfo + '" target="_blank" class="backtomap ibutton" ><div>'+jsT[lang].book+'</div></a></div>';
 			html += "</div>";
                         html+='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>';
