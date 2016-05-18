@@ -14,7 +14,7 @@ var bikeSharingLayer ={
                         });
 	                $.each(brands,function(index,value){
         	                var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
-        	                $('.bikesharing .biketypes').append('<li class="bikebrand clearfix"><p>'+jsT[lang][index.split("-").join("_")]+'</p><a brand='+index+' href="javascript:void(0)" class="toggler">'
+        	                $('.bike .biketypes').append('<li class="bikebrand clearfix"><p>'+jsT[lang][index.split("-").join("_")]+'</p><a brand='+index+' href="javascript:void(0)" class="toggler">'
 				+'<svg width="55" height="30">'
                                 +       '<g>'
                                 +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#bb392b" height="24"/>'
@@ -31,7 +31,7 @@ var bikeSharingLayer ={
 				$(this).toggleClass("disabled");
                 	        bikeSharingLayer.retrieveStations(brands);
 	                });
-                        $('.bikesharing .deselect-all').click(function(){
+                        $('.bike .deselect-all').click(function(){
                                 $.each(brands,function(index,value){
                                         brands[index] = false;
                 			$('.bikebrand a.toggler').addClass("disabled");
