@@ -114,7 +114,7 @@ $(document).ready(function() {
 	$('.config').click(function(element){
 		var theme = $(this).attr('id');
 		theme = theme.substring(0,theme.indexOf('-'));
-		if (theme == 'walk')
+		if (theme == 'walking')
 			wegeStartPointsLayer.getRoutes();
 		  
 		var isVisible= $('.' + theme+'.modal').is(':visible');
@@ -150,8 +150,7 @@ $(document).ready(function() {
 		SASABus.init('map');
 		linesLayer.getAllLines(initLinesAfterRead);
 		var subDomain = document.domain.substring(0,document.domain.indexOf('.'));
-		//activateThemes(subDomain);
-		activateThemes('bus');
+		activateThemes(subDomain);
 		$( ".menu>li a" ).click(function() {
 			if ($(".modal:visible").length>0)
 				$(".modal:visible").hide();	
@@ -161,9 +160,10 @@ $(document).ready(function() {
 			}
 		}); 
 		function activateThemes(subdomain){
-			if (subdomain != undefined){
+			if (subdomain == 'mobility')
+				$(".menu>li a").addClass("active");
+			if (subdomain != undefined && subdomain.length>0)
 				$('.menu #'+subdomain).toggleClass('active');
-			}
 			var themeArray = [];
 			$( ".menu>li a.active").each(function(){
 				themeArray.push($(this).attr('id'));

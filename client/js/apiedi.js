@@ -194,8 +194,8 @@ var wegeStartPointsLayer = {
                 	        	list+='</div>';
 		                        list+='</li></a>';
 	        	        });
-                		$(".walk .routes-list").html(list);
-	        	        $(".walk").height($( window ).height()-$("#header").outerHeight());
+                		$(".walking .routes-list").html(list);
+	        	        $(".walking").height($( window ).height()-$("#header").outerHeight());
         		        $(".list-route").click(function(){
 	                	        var id = $(this).attr("id");
                         		wegeStartPointsLayer.getRouteProfile(id);
@@ -218,7 +218,7 @@ var wegeStartPointsLayer = {
         		}
 		        var url = SASABus.config.apiediEndPoint+"/get-routes";
        			if (myroutes== undefined){
-                  		$(".walk .main-config .toggler").click(function(evt){
+                  		$(".walking .main-config .toggler").click(function(evt){
                          		$(this).toggleClass("disabled");
 	                        	displayRoutesList();
         	        	});

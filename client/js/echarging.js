@@ -9,7 +9,7 @@ var echargingLayer = {
                                 	brands[outlet.outletTypeCode] = true;
 				});
                         });
-                        $('.echarging .deselect-all').click(function(){
+                        $('.emobility .deselect-all').click(function(){
                                 $.each(brands,function(index,value){
                                         brands[index] = false;
                                 });
@@ -21,7 +21,7 @@ var echargingLayer = {
 			$('.echargingtypes').empty();
 			$.each(brands,function(index,value){
         	                var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
-                	        $('.echarging .echargingtypes').append('<li class="clearfix echargingbrand">'+index+'<a brand='+index+' href="javascript:void(0)" class="toggler">'
+                	        $('.emobility .echargingtypes').append('<li class="clearfix echargingbrand">'+index+'<a brand='+index+' href="javascript:void(0)" class="toggler">'
                         	        +'<svg width="55" height="30">'
                                 	+       '<g>'
 	                                +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#f2bf00" height="24"/>'

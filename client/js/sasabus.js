@@ -88,11 +88,11 @@ var SASABus = {
     activateSelectedThemes: function(activeThemes){
 	var me = this;
 	var layerMap = {
-		walk:[wegeStartPointsLayer,artPoints,routesLayer,zugangLayer],
+		walking:[wegeStartPointsLayer,artPoints,routesLayer,zugangLayer],
 		bus:[linesLayer,busPositionLayer,stopsLayer],
 		carsharing:[carSharingLayer],
-		bikesharing:[bikeSharingLayer],
-		echarging:[echargingLayer]
+		bike:[bikeSharingLayer],
+		emobility:[echargingLayer]
 	}
 	$.each(layerMap,function(key,value){				//hide all layers which are in non active Themes
 		if ($.inArray(key,activeThemes) == -1){
