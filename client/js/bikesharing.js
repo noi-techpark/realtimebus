@@ -138,6 +138,7 @@ var bikeSharingLayer ={
 			}
 		});
 		function getCurrentBikesharingData(details,data){
+			console.log(data);
 			$('.bikesharingstation .title').text(details.name);	
                         integreen.getChildStationsData(details.id,"Bikesharing-frontend/rest/bikes/",displayCurrentState);
 			function displayCurrentState(bikes){
@@ -152,7 +153,7 @@ var bikeSharingLayer ={
 							radialProgress(document.getElementById('totalAvailable'))
 							.diameter(180)
 							.value(value.current)
-							.maxValue(value.total)
+							.maxValue(details.bikes['number-available'])
 							.render();
 						$('.bikesharingstation>.walk-container>.number-available').removeClass("free");
 			                        if  (value.total == value.current)
@@ -167,11 +168,11 @@ var bikeSharingLayer ={
 							radialProgress(document.getElementById(cat+'-container'))
 							.diameter(78)
 							.value(value.current)
-							.maxValue(value.total)
+							.maxValue(details.bikes[key])
 							.render();
 							$('#'+cat+'-container').next().text(jsT[lang][cat]);	
 							$('#'+cat+'-container').removeClass("free");
-					                        if  (value.current == value.total)
+					                        if  (value.current == details.bikes[key])
                                 					$('#'+cat+'-container').addClass("free");
 						}
 					});
@@ -186,7 +187,6 @@ var bikeSharingLayer ={
                                         var brand = value.detail.type;
                                         if (amountByBrand[brand] == undefined){
                                                 amountByBrand[brand]={
-                                                        total: 0,
                                                         current:0
                                                 }
 		
@@ -197,7 +197,6 @@ var bikeSharingLayer ={
 						amountByBrand['numberAvailable']['current']+=1;
 					}
                                 });
-				amountByBrand['numberAvailable']['total']=children.length;
                                 return amountByBrand;
                         }
 
