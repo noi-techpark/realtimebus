@@ -3,12 +3,23 @@ var carSharingLayer = {
 	getCarBrands : function(callback){
 		integreen.getStationDetails('carsharingFrontEnd/rest/cars/',{},displayBrands);	
 		function displayBrands(data){
-			var brands = {};
+			var brands = {
+				nothingSelected : function(){
+					var selected = true;
+					for (i in brands){
+						if (brands[i]==true)
+							selected = false;
+					}
+					return selected;
+				}
+			};
 			$.each(data,function(index,value){
 				brands[value.brand] = true;
 			});
 			$('.cartypes').empty();
 				$.each(brands,function(index,value){
+				if (typeof value == 'function')
+					return true;
 				var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
 				$('.carsharing .cartypes').append('<li class="clearfix"><p>' + index + '</p><a href="javascript:void(0)" brand="'+index+'" class="statuswidget toggler">'
                 	        +'<svg width="55" height="30">'
@@ -20,17 +31,28 @@ var carSharingLayer = {
 	                        + '</svg>'
 				+ '</a></li>');
 			});
+			var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ; 
+			$('.carsharing .deselect-all').text(statusText);
 			$('.carsharing .toggler').click(function(e){
 				var brand = $(this).attr('brand');
 				brands[brand] = !brands[brand];
 				$(this).toggleClass('disabled');
+				var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ; 
+				$('.carsharing .deselect-all').text(statusText);
 				carSharingLayer.retrieveStations(brands);
 			});
 			$('.carsharing .deselect-all').click(function(){
-				$('.carsharing .toggler').addClass('disabled');
+				var nothingSelected = brands.nothingSelected();
+				if (!nothingSelected)
+					$('.carsharing .toggler').addClass('disabled');
+				else
+					$('.carsharing .toggler').removeClass('disabled');
 				$.each(brands,function(index,value){
-                	        	brands[index] = false;
+					if (typeof(value)!='function')
+	                	        	brands[index] = nothingSelected;
         	                });
+				var statusText = !nothingSelected ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ; 
+				$('.carsharing .deselect-all').text(statusText);
 				carSharingLayer.retrieveStations(brands);
 			});
 			if (callback != undefined)
@@ -144,7 +166,7 @@ var carSharingLayer = {
 				return amountByBrand;
 			}
 			function displayCarsharingData(children){
-				var numbersByBrand = getAmountByBrand(children)
+				var numbersByBrand = getAmountByBrand(children);
 				$('.carsharingstation .car-categorys').empty();
 				$('.carsharingstation .legend').empty();
 				$('.modal').hide();

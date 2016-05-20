@@ -159,7 +159,7 @@
 			<div class="footer">
 				<ul class="logos">
 					<li class="merano"><a target="_blank" href="<?php ___('linkmerano'); ?>"><?php ___('merano'); ?></a></li>
-					<li class="tis"><a target="_blank" href="<?php ___('linktis'); ?>">TIS innovation park South Tyrol</a></li>
+					<li class="idm"><a target="_blank" href="http://idm-suedtirol.com/">IDM Südtirol / Alto Adige</a></li>
 					<li class="sasa"><a target="_blank" href="<?php ___('linksasa'); ?>">SASA Bus</a></li>
 				</ul>
 			</div>
@@ -372,7 +372,7 @@
 				<div class="main-config clearfix">
 					<ul class="cartypes clearfix">
 					</ul>
-                        		<a href="javascript:void(0)" class="deselect-all" ><div><?php ___('deselectall'); ?></div></a>
+                        		<a href="javascript:void(0)" class="deselect-all" ></div></a>
                         		<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 				</div>
 			</div> 
@@ -382,7 +382,7 @@
 				<div class="main-config clearfix">
 					<ul class="biketypes clearfix">
 					</ul>
-                        		<a href="javascript:void(0)" class="deselect-all" ><div><?php ___('deselectall'); ?></div></a>
+                        		<a href="javascript:void(0)" class="deselect-all" ></a>
                         		<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 				</div>
 			</div> 
@@ -392,12 +392,12 @@
 				<div class="main-config clearfix">
 					<ul class="echargingtypes clearfix">
 					</ul>
-                        		<a href="javascript:void(0)" class="deselect-all" ><div><?php ___('deselectall'); ?></div></a>
+                        		<a href="javascript:void(0)" class="deselect-all" ></a>
                         		<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 				</div>
 			</div> 
 		</div> 
-	        <p id="credits"><?php ___('mappe'); ?> <a href="http://www.openstreetmap.org/copyright" rel="external">OpenStreetMap</a> - <a href="javascript:void(0)" class="about-selector">About</a></p>
+	        <p id="credits"><?php ___('mappe'); ?> <a href="http://www.openstreetmap.org/copyright" rel="external">OpenStreetMap</a> - <a href="javascript:void(0)" class="about-selector">About</a> - <a href="<?php ___('feedbackform'); ?>" target="_blank">Feedback</a></p>
            
 		<div  class="hidden modal bus-position" >
 		<div class="modal-container"> 
@@ -464,24 +464,29 @@
 		</div>
                 <div class="hidden modal bikesharingstation">
 			<div class="walk-container">
-	                	<!--<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>-->
 				<div class="title">
 				</div>
 				<div class="number-available" id="totalAvailable">
-					<!--<svg height="300px" width="300px">
-						<g>
-						  <circle cx="150" cy="150" r="100" stroke="white" stroke-width="3" fill="transparent" />
-						  <text x="50%" y="50%" dy=".3em" fill="black" text-anchor="middle" >95</text>
-						  <path d="M200,150 h-150 a100,100 0 1,0 100,-100" fill="transparent" stroke="blue" stroke-width="7" />
-						</g>
-					</svg>-->
 				</div>
+				<p class="caption"></p>
 				<div class="bike-categorys">
-					<div id="mountain_bike_adult-container"></div>
-					<div id="city_bike_adult_with_gears-container"></div>
-					<div id="mountain_bike_teenager-container" ></div>
-					<div id="mountain_bike_child-container"></div>
-					<div id="city_bike_adult_without_gears-container"></div>
+					<div class="clearfix">
+						<div id="mountain_bike_adult-container" class="number-available"></div>
+						<span></span>
+					</div>
+					<div class="clearfix">
+						<div id="city_bike_adult_with_gears-container" class="number-available"></div><span></span>
+					</div>
+					<div class="clearfix">
+						<div id="mountain_bike_teenager-container" class="number-available"></div><span></span>
+					</div>
+					<div class="clearfix">
+						<div id="mountain_bike_child-container" class="number-available"></div><span></span>
+					</div>
+					<div class="clearfix">
+						<div id="city_bike_adult_without_gears-container" class="number-available"></div><span></span>
+					</div>
+					
 					<ul class="legend">
 					</ul>
 				</div>
@@ -528,14 +533,16 @@
 				<a href="#" class="about-selector"><img src="images/3_Bus/Close.svg" alt="close" width="15px" style="float:right"/></a>
 				<h3>Developed by</h3>
 				<ul class="clearfix">
-					<li class="tis"><a href="http://tis.bz.it/" target="_blank" title="Tis innovation park"></a></li>
+					<li class="idm"><a href="http://idm-suedtirol.com/" target="_blank" title="IDM Südtirol / Alto Adige"></a></li>
 					<li class="r3gis"><a href="http://www.r3-gis.com/" target="_blank" title="R3-GIS"></a></li>
 				</ul>
 				<h3>Supported by</h3>
 				<ul class="clearfix">
 					<li class="meran"><a href="http://www.meran.eu/it/azienda-di-soggiorno/" target="_blank" title="Azienda di Soggiorno di Merano"></a></li>
 					<li class="merang"><a href="http://www.comune.merano.bz.it/" target="_blank" title="Comune di Merano"></a></li>
-					<li class="fesr"><a href="http://www.provincia.bz.it/europa/it/finanziamenti-ue/efre-rogrammzeitraum-2007-2013.asp" target="_blank" title="Fondo Europeo di Sviluppo Regionale (FESR)"></a></li>
+					<li class="fesr"><a href="http://www.provincia.bz.it/europa/" target="_blank" title="Fondo Europeo di Sviluppo Regionale (FESR)"></a></li>
+					<li class="mof"><a href="http://mobility.bz.it/" target="_blank" title="Mobility of the future"></a></li>
+					<li class="gm"><a href="http://www.greenmobility.bz.it/" target="_blank" title="Green Mobility"></a></li>
 				</ul>
 				<h3>Designed by</h3>
 				<ul class="clearfix">
@@ -548,7 +555,7 @@
 					<li class="province"><a href="http://www.provinz.bz.it/informatik/kartografie/Geoportal.asp" title="Autonomous province of Bolzano"target="_blank"></a><h4>Walking routes</h4></li>
 					<li class="carsharing"><a href="http://www.carsharing.bz.it/it/" target="_blank" title="CAR sharing Südtirol Altoadige"></a><h4>Carsharing</h4></li>
 					<li class="algorab"><a href="http://www.algorab.com/" target="_blank" title="Algorab"></a><h4>Bikesharing</h4></li>
-					<li class="aew"><a href="https://www.aew.eu" target="_blank" title="AEW"></a><h4>Chargestation</h4></li>
+					<li class="aew"><a href="https://www.alperiaenergy.eu" target="_blank" title="Alperia"></a><h4>Chargestation</h4></li>
 				</ul>
 				<h3 style="text-align:center"> <a href="https://github.com/tis-innovation-park/realtimebus.git" target="_blank">Source code available on github.com</h3>
 			</div>	

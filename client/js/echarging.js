@@ -3,23 +3,45 @@ var echargingLayer = {
 	getTypes : function(callback){
                 integreen.getStationDetails('EchargingFrontEnd/rest/plugs/',{},displayBrands);
                 function displayBrands(data){
-                        var brands = {};
+                        var brands = {
+				nothingSelected : function(){
+                                        var selected = true;
+                                        for (i in brands){
+                                                if (brands[i]==true)
+                                                        selected = false;
+                                        }
+                                        return selected;
+                                }
+			};
                         $.each(data,function(index,value){
 				$.each(value.outlets,function(i,outlet){
-                                	brands[outlet.outletTypeCode] = true;
+			                if (typeof value != 'function')
+        	                        	brands[outlet.outletTypeCode] = true;
 				});
                         });
                         $('.emobility .deselect-all').click(function(){
+				var nothingSelected = brands.nothingSelected();
+                                if (!nothingSelected)
+                                        $('.emobility .toggler').addClass('disabled');
+                                else
+                                        $('.emobility .toggler').removeClass('disabled');
+
                                 $.each(brands,function(index,value){
-                                        brands[index] = false;
+	                                if (typeof value != 'function')
+        	                                brands[index] = nothingSelected;
                                 });
-				$('.echargingbrand a').addClass("disabled");
+				var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;  
+	                        $('.emobility .deselect-all').text(statusText);
                                 echargingLayer.retrieveStations(brands);
                         });
                         if (callback != undefined)
                                 callback(brands);
 			$('.echargingtypes').empty();
+			var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;  
+                        $('.emobility .deselect-all').text(statusText);
 			$.each(brands,function(index,value){
+                                if (typeof value == 'function')
+					return true;
         	                var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
                 	        $('.emobility .echargingtypes').append('<li class="clearfix echargingbrand">'+index+'<a brand='+index+' href="javascript:void(0)" class="toggler">'
                         	        +'<svg width="55" height="30">'
@@ -36,6 +58,8 @@ var echargingLayer = {
                         	var brand = $(this).attr("brand");
 	                        brands[brand] = !brands[brand];
 				$(this).toggleClass("disabled");
+				var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;  
+	                        $('.emobility .deselect-all').text(statusText);
         	                echargingLayer.retrieveStations(brands);
                 	});
                 }

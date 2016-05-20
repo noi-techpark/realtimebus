@@ -8,11 +8,22 @@ var bikeSharingLayer ={
 	getBikeBrands(callback){
 		integreen.getStationDetails('bikesharingFrontEnd/rest/bikes/',{},displayBrands);
                 function displayBrands(data){
-                        var brands = {};
+                        var brands = {
+				nothingSelected : function(){
+                                        var selected = true;
+                                        for (i in brands){
+                                                if (brands[i]==true)
+                                                        selected = false;
+                                        }
+                                        return selected;
+                                }
+			};
                         $.each(data,function(index,value){
                                 brands[value.type] = true;
                         });
 	                $.each(brands,function(index,value){
+				if (typeof value == 'function')
+                                        return true;
         	                var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
         	                $('.bike .biketypes').append('<li class="bikebrand clearfix"><p>'+jsT[lang][index.split("-").join("_")]+'</p><a brand='+index+' href="javascript:void(0)" class="toggler">'
 				+'<svg width="55" height="30">'
@@ -25,18 +36,29 @@ var bikeSharingLayer ={
                                 + '</a></li>');
 
                 	});
+			var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
+	                $('.bike .deselect-all').text(statusText);
                 	$('.bikebrand a.toggler').click(function(e){
                         	var brand = $(this).attr("brand");
 	                        brands[brand] = !brands[brand];
 				$(this).toggleClass("disabled");
+				var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
+		                $('.bike .deselect-all').text(statusText);
                 	        bikeSharingLayer.retrieveStations(brands);
 	                });
                         $('.bike .deselect-all').click(function(){
-                                $.each(brands,function(index,value){
-                                        brands[index] = false;
-                			$('.bikebrand a.toggler').addClass("disabled");
+	                        var nothingSelected = brands.nothingSelected();
+				if (!nothingSelected)
+                                        $('.bike .toggler').addClass('disabled');
+                                else
+                                        $('.bike .toggler').removeClass('disabled');
 
+                                $.each(brands,function(index,value){
+					if (typeof(value)!='function')
+	                                        brands[index] = nothingSelected;
                                 });
+				var statusText = !nothingSelected ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
+		                $('.bike .deselect-all').text(statusText);
                                 bikeSharingLayer.retrieveStations(brands);
                         });
                         if (callback != undefined)
@@ -121,30 +143,64 @@ var bikeSharingLayer ={
 			function displayCurrentState(bikes){
 				if (bikes && bikes.length>0){
 					var catHtml;
+					var bikesByBrand = getAmountByBrand(bikes);
 					$('.bikesharingstation .legend').empty();
-					$.each(bikes,function(key,value){
-						if (key=="number available"){
+					$('.bike-categorys').empty();
+					$.each(bikesByBrand,function(key,value){
+						var cat = key.split("-").join("_");
+						if (key=="numberAvailable"){
 							radialProgress(document.getElementById('totalAvailable'))
-							.label(jsT[lang]['freeBikes'])
 							.diameter(180)
-							.value(currentState[key])
-							.maxValue(data.bikes[key])
+							.value(value.current)
+							.maxValue(value.total)
 							.render();
+						$('.bikesharingstation>.walk-container>.number-available').removeClass("free");
+			                        if  (value.total == value.current)
+                        			        $('.bikesharingstation>.walk-container>.number-available').addClass("free");
 						}
 						else{
-							var cat = key.replace(/\s/g,"_");
+							var html ='<div class="clearfix">'
+		                                                +'<div id="'+cat+'-container" class="number-available"></div>'
+	                                                	+'<span></span>'
+        	                                	+'</div>';
+							$('.bike-categorys').append(html);
 							radialProgress(document.getElementById(cat+'-container'))
 							.diameter(78)
-							.value(currentState[key])
-							.maxValue(data.bikes[key])
+							.value(value.current)
+							.maxValue(value.total)
 							.render();
-							$('.bikesharingstation .legend').append("<li class='"+cat+"'>"+jsT[lang][cat]+"</li>");	
+							$('#'+cat+'-container').next().text(jsT[lang][cat]);	
+							$('#'+cat+'-container').removeClass("free");
+					                        if  (value.current == value.total)
+                                					$('#'+cat+'-container').addClass("free");
 						}
 					});
+					$('.bikesharingstation .caption').text(jsT[lang]['freeBikes']);
 				}else{
 					$('.bikesharingstation .legend').html("<p style='color:#000'>Station out of order</p>");     
 				}
 			}
+			function getAmountByBrand(children){
+                                var amountByBrand = {numberAvailable:{current:0}};
+                                $.each(children,function(index,value){
+                                        var brand = value.detail.type;
+                                        if (amountByBrand[brand] == undefined){
+                                                amountByBrand[brand]={
+                                                        total: 0,
+                                                        current:0
+                                                }
+		
+                                        }
+                                        amountByBrand[brand].total = amountByBrand[brand].total+1;
+                                        if (value.newestRecord['availability'].value == 0){
+                                                amountByBrand[brand].current=amountByBrand[brand].current +1;
+						amountByBrand['numberAvailable']['current']+=1;
+					}
+                                });
+				amountByBrand['numberAvailable']['total']=children.length;
+                                return amountByBrand;
+                        }
+
 		}
 		this.layer = positionsLayer;
 		return positionsLayer;
