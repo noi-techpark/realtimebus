@@ -238,13 +238,12 @@ a{color:#c0c0c0;text-decoration:none}
 .footer .logos{position:relative;border-top:1px solid #fafafa;padding:12px;background-color:#f4f4f4}
 .footer .logos li{float:left;margin: 0 8px}
 .footer .logos .merano{top:14px;left:36px}
-.footer .logos .tis{top:17px;left:175px}
+.footer .logos .idm{top:17px;left:175px}
 .footer .logos .sasa{top:17px;right:46px}
 .footer .logos a{display:block;text-indent:-9999px;font-size:0;line-height:0}
 .footer .logos .merano a{width:102px;height:24px;background:url(../images/logo-merano.gif) 0 0 no-repeat}
 .footer .logos .merano a:hover{background-position:0 -24px}
-.footer .logos .tis a{width:36px;height:28px;background:url(../images/logo-tis.gif) 0 0 no-repeat}
-.footer .logos .tis a:hover{background-position:0 -28px}
+.footer .logos .idm a{width:36px;height:28px;background:url(../images/idm.svg) no-repeat; background-size:cover}
 .footer .logos .sasa a{width:85px;height:26px;background:url(../images/logo-sasa.jpg) 0 0 no-repeat}
 .footer .logos .sasa a:hover{background-position:0 -26px}
 
@@ -636,37 +635,6 @@ rect.VW_e_Golf_{
 .VW_e_Golf_{
 	background-color:red !important;
 }
-#mountain_bike_adult-container .arc,.mountain_bike_adult:before,.VW_up_ .arc,circle.VW_up_,circle.mountain_bike_adult{
-	fill:green;
-	color:green;
-}
-.VW_Golf_Variant .arc,circle.VW_Golf_Variant{
-	fill:purple;
-}
-#city_bike_adult_with_gears-container .arc,.city_bike_adult_with_gears:before,.VW_Golf .arc,circle.VW_Golf,circle.city_bike_adult_with_gears{
-	fill:#b2b200;
-	color:#b2b200;
-}
-#mountain_bike_teenager-container .arc,.mountain_bike_teenager:before,.VW_Caddy .arc,circle.VW_Caddy,circle.mountain_bike_teenager{
-	fill:gray;
-	color:gray;
-}
-.VW_e_UP_ .arc,circle.VW_e_UP_{
-	fill:lightblue;
-	color:lightblue;
-}
-.VW_e_Golf .arc,circle.VW_e_Golf_{
-	fill:red;
-	color:red;
-}
-#mountain_bike_child-container .arc,.mountain_bike_child:before,.VW_up___Methan .arc,circle.VW_up___Methan,circle.mountain_bike_child{
-	fill:orange;
-	color:orange;
-}
-#city_bike_adult_without_gears-container .arc,.city_bike_adult_without_gears:before,circle.city_bike_adult_without_gears{
-	fill:lime;
-	color:lime;
-}
 .statuswidget{
 	color:#fff;
 	float:right;
@@ -738,8 +706,8 @@ rect.VW_e_Golf_{
 	text-align:center;
 	margin:10px;
 }
-.about .tis a{
-	background-image:url('../images/tis.png');
+.about .idm a{
+	background-image:url('../images/idm.svg');
 }
 .about .r3gis a{
 	background-image:url('../images/r3gis.png');
@@ -753,6 +721,12 @@ rect.VW_e_Golf_{
 .about .fesr a{
 	background-image:url('../images/logoeu.png');
 }
+.about .gm a{
+	background-image:url('../images/gm.png');
+}
+.about .mof a{
+	background-image:url('../images/mof.png');
+}
 .about .cima a{
 	background-image:url('../images/cima.jpg');
 }
@@ -763,7 +737,7 @@ rect.VW_e_Golf_{
 	background-image:url('../images/sasa.png');
 }
 .about .aew a{
-	background-image:url('../images/aew.jpg');
+	background-image:url('../images/alperia.jpg');
 }
 .about .province a{
 	background-image:url('../images/province.jpg');
@@ -827,4 +801,9 @@ hr{
 .station .info img{
 	vertical-align:middle;
 	margin-right:15px;
+}
+.bike-categorys{
+	line-height:58px;
+	white-space: nowrap;
+	font-size:0.8em;
 }
