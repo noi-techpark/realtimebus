@@ -156,13 +156,6 @@
 					<li <?php if($lang=='en') echo 'class="active"'; ?>><a href="?l=en">EN</a></li>
 				</ul>
 			</nav>
-			<div class="footer">
-				<ul class="logos">
-					<li class="merano"><a target="_blank" href="<?php ___('linkmerano'); ?>"><?php ___('merano'); ?></a></li>
-					<li class="idm"><a target="_blank" href="http://idm-suedtirol.com/">IDM Südtirol / Alto Adige</a></li>
-					<li class="sasa"><a target="_blank" href="<?php ___('linksasa'); ?>">SASA Bus</a></li>
-				</ul>
-			</div>
 		</header>
 		<div class="panel" id="panel">
 			<!--<span class="btn-toggle open first" id="btn-toggle"></span>-->
