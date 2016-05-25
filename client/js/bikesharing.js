@@ -155,9 +155,9 @@ var bikeSharingLayer ={
 							.value(value.current)
 							.maxValue(details.bikes['number-available'])
 							.render();
-						$('.bikesharingstation>.walk-container>.number-available').removeClass("free");
-			                        if  (value.total == value.current)
-                        			        $('.bikesharingstation>.walk-container>.number-available').addClass("free");
+						$('.bikesharingstation #totalAvailable').removeClass("free");
+			                        if  (details.bikes['number-available'] == value.current)
+                        			        $('.bikesharingstation #totalAvailable').addClass("free");
 						}
 						else{
 							var html ='<div class="clearfix">'
