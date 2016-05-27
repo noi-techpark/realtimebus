@@ -188,13 +188,12 @@ var SASABus = {
                 return this.url + z + "/" + x + "/" + y + "." + this.type;
             }
         }
-        var osm = new OpenLayers.Layer.TMS(
-                "OSM",
-                "http://otile1.mqcdn.com/tiles/1.0.0/map/",
-                { type: 'png', getURL: osm_getTileURL,
-                  maxResolution: 156543.0339, projection: defaultProjection, numZoomLevels: 19
-                }
-        ); 
+        var osm = new OpenLayers.Layer.OSM("MapQuest",["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png",
+   "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png",
+   "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png"],{
+		 numZoomLevels: 18,
+		 projection: defaultProjection,
+	}); 
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
             externalGraphic: 'images/pin.png',
