@@ -135,7 +135,7 @@ var bikeSharingLayer ={
 					var station = e.feature.attributes.stationcode;
 					$('.modal').hide();
 				       	$('.bikesharingstation').show();
-					integreen.retrieveData(station,"Bikesharing-frontend/rest/",getCurrentBikesharingData);
+					integreen.retrieveData(station,"bikesharingFrontEnd/rest/",getCurrentBikesharingData);
 				}
 			}
 		});
@@ -148,7 +148,7 @@ var bikeSharingLayer ={
 			var config={
 				types:[["availability","","Indicates if a vehicle is available for rental","300"]]
 			}
-                        integreen.getChildStationsData(details.id,"Bikesharing-frontend/rest/bikes/",displayCurrentState,config);
+                        integreen.getChildStationsData(details.id,"bikesharingFrontEnd/rest/bikes/",displayCurrentState,config);
 			function displayCurrentState(bikes){
 				if (bikes && bikes.length>0){
 					var catHtml;
