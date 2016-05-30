@@ -217,7 +217,9 @@ var linesLayer = {
 	get : function(){
 		if (this.isCached && this.layer != undefined)
                 	return this.layer;
-		var positionsLayer = new OpenLayers.Layer.WMS('SASA Linee', SASABus.config.r3EndPoint + 'ogc/wms', {layers: 0, transparent: true,isBaseLayer:false}, {projection:defaultProjection,visibility: true, singleTile: true});
+		console.log(SASABus.map);
+		var positionsLayer = new OpenLayers.Layer.WMS('SASA Linee', SASABus.config.r3EndPoint + 'ogc/wms', {layers: 0, transparent: true,isBaseLayer:false}, {projection:defaultProjection.projCode
+,visibility: true, singleTile: true});
 		this.layer = positionsLayer;
 	        return this.layer;
 	},

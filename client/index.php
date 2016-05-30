@@ -99,7 +99,8 @@
 				</svg>
 			</span>
 			<img id="logo-mobile" src="images/logo-small.gif" alt="Merano real time bus"/>
-			<span class="beta-mobile">Beta version</span>
+			<a href="<?php ___('feedbackform'); ?>" target="_blank" class="feedback">Feedback</a>
+			<!--<span class="beta-mobile">Beta version</span>-->
 			<!--<nav class="language-switcher mobile-switcher">
 				<ul>
 					<li <?php if($lang=='it') echo 'class="active"'; ?>><a href="?l=it">IT</a></li>
@@ -147,8 +148,8 @@
 
             
 		<header class="header" id="header">
-			<h1 id="logo">Merano real time bus</h1>
-			<span class="beta">Beta version</span>
+			<img id = "logo" src ="images/logo.gif" alt="Merano real time bus"/>
+			<a href="<?php ___('feedbackform'); ?>" target="_blank" class="feedback">Feedback</a>
 			<nav class="language-switcher">
 				<ul>
 					<li <?php if($lang=='it') echo 'class="active"'; ?>><a href="?l=it">IT</a></li>

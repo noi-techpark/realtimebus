@@ -131,22 +131,28 @@ var bikeSharingLayer ={
 		});
 		positionsLayer.events.on({
 		       	"featureselected":function(e){
-				var station = e.feature.attributes.stationcode;
-				$('.modal').hide();
-			       	$('.bikesharingstation').show();
-				integreen.retrieveData(station,"bikesharingFrontEnd/rest/",getCurrentBikesharingData);
+				if (!e.feature.cluster){
+					var station = e.feature.attributes.stationcode;
+					$('.modal').hide();
+				       	$('.bikesharingstation').show();
+					integreen.retrieveData(station,"Bikesharing-frontend/rest/",getCurrentBikesharingData);
+				}
 			}
 		});
 		function getCurrentBikesharingData(details,data){
-			console.log(data);
-			$('.bikesharingstation .title').text(details.name);	
-                        integreen.getChildStationsData(details.id,"bikesharingFrontEnd/rest/bikes/",displayCurrentState);
+			var updatedOn = moment(data['number-available'].timestamp).locale(lang).format('lll');
+			$('.bikesharingstation .title').html(details.name+"<br/><small>"+updatedOn+"</small>");
+              		$('.bikesharingstation #totalAvailable').empty();
+			$('.bikesharingstation .legend').empty();
+			$('.bike-categorys').empty();
+			var config={
+				types:[["availability","","Indicates if a vehicle is available for rental","300"]]
+			}
+                        integreen.getChildStationsData(details.id,"Bikesharing-frontend/rest/bikes/",displayCurrentState,config);
 			function displayCurrentState(bikes){
 				if (bikes && bikes.length>0){
 					var catHtml;
 					var bikesByBrand = getAmountByBrand(bikes);
-					$('.bikesharingstation .legend').empty();
-					$('.bike-categorys').empty();
 					$.each(bikesByBrand,function(key,value){
 						var cat = key.split("-").join("_");
 						if (key=="numberAvailable"){
@@ -155,9 +161,9 @@ var bikeSharingLayer ={
 							.value(value.current)
 							.maxValue(details.bikes['number-available'])
 							.render();
-						$('.bikesharingstation>.walk-container>.number-available').removeClass("free");
-			                        if  (value.total == value.current)
-                        			        $('.bikesharingstation>.walk-container>.number-available').addClass("free");
+						$('.bikesharingstation #totalAvailable').removeClass("free");
+			                        if  (details.bikes['number-available'] == value.current)
+                        			        $('.bikesharingstation #totalAvailable').addClass("free");
 						}
 						else{
 							var html ='<div class="clearfix">'

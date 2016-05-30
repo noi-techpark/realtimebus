@@ -10,33 +10,43 @@ function mergeConfig(config){
 	}	
 }
 var integreen = {
+	cache:{},	
 	getStationDetails : function(frontEnd,config,callback){
 		mergeConfig(config);
-        	$.ajax({
-                	url : defaultConfig.integreenEndPoint + frontEnd + 'get-station-details',
-	                dataType : 'json',
-        	        crossDomain: true,
-                	success : function(data) {
-                		callback(data);
-        	        }    
-	       });  
+		var cachedData = integreen.cache[frontEnd];
+		if (cachedData)
+			callback(cachedData)
+		else
+	        	$.ajax({
+        	        	url : defaultConfig.integreenEndPoint + frontEnd + 'get-station-details',
+	        	        dataType : 'json',
+        	        	crossDomain: true,
+	                	success : function(data) {
+					integreen.cache[frontEnd]=data;
+        	        		callback(data);
+        		        }    
+		       });  
 	},
 	retrieveData: function(station,frontEnd,callback,config){
 	       	this.getStationDetails(frontEnd,config,filterStation);  
 	      	function filterStation(data){
 		       	for (i in data){
 	        		if (data[i].id == station || data[i].parent == station){
-                			integreen.getCurrentData(data[i],frontEnd,callback);
+                			integreen.getCurrentData(data[i],frontEnd,callback,config);
                         	}
 			}    
 	        }
 	},	
 	getCurrentData: function(stationDetails,frontEnd,callback,config){
-		mergeConfig(config);
         	var currentState = {};
-        	$.ajax({url:defaultConfig.integreenEndPoint + frontEnd + 'get-data-types?station='+stationDetails.id,success: function(datatypes){
-                	getData(datatypes);
-	        }});
+		if (config && config.types){
+			var types = config.types.slice();
+			getData(types);
+		}
+		else
+	        	$.ajax({url:defaultConfig.integreenEndPoint + frontEnd + 'get-data-types?station='+stationDetails.id,success: function(datatypes){
+        	        	getData(datatypes);
+	        	}});
         	function getData(types){
                 	if (types.length==0){
                         	callback(stationDetails,currentState);
@@ -57,8 +67,8 @@ var integreen = {
 	        }
 	},
 	getChildStationsData : function(station,frontEnd,callback,config){
-		var children = [];
-		var dtos = [];
+	       var children = [];
+	       var dtos = [];
 	       this.getStationDetails(frontEnd,config,filterStation);  
 	       function filterStation(data){
 	       		for (i in data){
@@ -71,7 +81,7 @@ var integreen = {
 					callback(dtos);
 				var child = children.pop();
 				if (child)
-					integreen.retrieveData(child.id,frontEnd,addData);
+					integreen.retrieveData(child.id,frontEnd,addData,config);
 		       }
 		       function addData(details,newestRecord){
 				var child = {

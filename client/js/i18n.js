@@ -17,7 +17,7 @@ var jsT= {
 			3:'Reserviert',
 			4:'Auser Dienst'
 		},
-		backtomap:'Zurück zur Karte',
+		backtomap:'zur Kartenansicht',
 		chargerOnline:'Ladestation in Betrieb',
 		outOfOrder:'Ladestation momentan auser Betrieb',
 		paymentInfo:'Wie bezahle ich?',

@@ -37,12 +37,12 @@ a{color:#c0c0c0;text-decoration:none}
 .beta-mobile{display:none}
 
 .panel{color:#bbbbbb;width:auto;height:100%;position:relative;background:#fafafa;z-index:1000;float:left;}
-.header{border-bottom:1px solid #eae9e9;position:relative;background:#fff;width:100%;float:left;padding:35px 0 0 0;height:62px}
-#logo{position:absolute;top:35px;left:24px;width:324px;height:41px;display:block;background:url(../images/logo.gif) 0 0 no-repeat;text-indent:-9999px;font-size:0;line-height:0}
+.header{border-bottom:1px solid #eae9e9;position:relative;background:#fff;width:100%;float:left;padding:0;margin:0;height:8vh}
+#logo{position:relative;width:auto;height:50%;top:25%;margin:0 20px;display:inline-block;text-indent:-9999px;font-size:0;line-height:0}
 
 .beta{display:block;position:absolute;top:21px;left:208px;width:36px;height:20px;background:url(../images/ico-beta.gif) 0 0 no-repeat;font-size:0;line-height:0;text-indent:-9999px}
 
-.language-switcher{float:right;height:19px;position:relative;margin:auto 30px;cursor:pointer}
+.language-switcher{float:right;height:19px;position:relative;margin:auto 30px;cursor:pointer;margin-top: 2vh}
 	.language-switcher ul{float:left;height:19px;cursor:pointer}
 	.language-switcher li{display:none;float:right;margin-left:1px;background:#fff;border:1px solid #ededed;border-radius:2px;-webkit-border-radius:3px;-moz-border-radius:3px}
 	.language-switcher li.active,
@@ -357,7 +357,7 @@ a{color:#c0c0c0;text-decoration:none}
 .modal{
 	float:left;
 	width:350px;
-	height:88vh;
+	height:92vh;
 	z-index:3000;
 	position:relative;
 }
@@ -806,4 +806,19 @@ hr{
 	line-height:58px;
 	white-space: nowrap;
 	font-size:0.8em;
+}
+.feedback{
+	display:inline-block;
+	vertical-align:sub;
+	color:#fff;
+	background-color:#b5b911;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	padding:6px;
+	font-weight:bold;
+}
+.header-mobile .feedback{
+	margin-top: 4vh;
+	margin-left:10px;
 }

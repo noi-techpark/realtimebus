@@ -114,7 +114,7 @@
 	$vars['de_infocontatti'] = 'F&uuml;r weitere Infos &uuml;ber den Dienst ';
 	$vars['de_mappe'] = 'karte';
 	$vars['de_design'] = 'design';
-	$vars['de_backtomap'] = 'Karte';
+	$vars['de_backtomap'] = 'zur Kartenansicht';
 	$vars['de_themeroutes'] = 'Themenwege';
 	$vars['de_walkroutes'] = 'Wanderwege';
 	$vars['de_more'] = 'Weitere Informationen';

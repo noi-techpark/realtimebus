@@ -43,7 +43,7 @@ var echargingLayer = {
                                 if (typeof value == 'function')
 					return true;
         	                var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
-                	        $('.emobility .echargingtypes').append('<li class="clearfix echargingbrand">'+index+'<a brand='+index+' href="javascript:void(0)" class="toggler">'
+                	        $('.emobility .echargingtypes').append('<li class="clearfix echargingbrand"><p>'+index+'</p><a brand='+index+' href="javascript:void(0)" class="toggler">'
                         	        +'<svg width="55" height="30">'
                                 	+       '<g>'
 	                                +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#f2bf00" height="24"/>'
