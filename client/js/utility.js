@@ -174,8 +174,8 @@ $(document).ready(function() {
 			$(this).toggleClass("disabled");
 			linesLayer.getLines(initLinesAfterRead);
 		});
-		function getReadableTime(time){
-			var a = new Date(time*1000);
+		function getReadableTime(){
+			var a = new Date();
 
 			//var date = a.getDate();
 			var hour = a.getHours();
@@ -193,14 +193,10 @@ $(document).ready(function() {
 		}
 		
 		setInterval(function() {
-			SASABus.getServerTime(function(time){
-				getReadableTime(time);
-			});
+			getReadableTime();
 		}, 10 * 1000);
 		
-		SASABus.getServerTime(function(time){
-			getReadableTime(time);
-		});
+		getReadableTime();
 		
 		$('a[rel=external]').attr('target','_blank');
 	}

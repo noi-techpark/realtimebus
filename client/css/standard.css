@@ -212,7 +212,7 @@ a{color:#c0c0c0;text-decoration:none}
 #credits{position:absolute;bottom:0;right:0;background:#fff;opacity:.9;padding:5px 10px;font-size:.9em;z-index:800;border-radius:2px;-webkit-border-radius:2px;-moz-border-radius:2px;color:#646464;}
 #credits a{color:#9fa505}
 
-#map .olControlAttribution{bottom:5px;right:200px;color:#646464}
+#map .olControlAttribution,#map .olControlMousePosition{display:none}
 
 #pages{/*display:none;*/background:#585858;position:absolute;bottom:0;left:0;height:0}
 	#pages .page{display:none;line-height:170%;font-size:1.1em;padding:30px;}
