@@ -5,7 +5,7 @@ var bikeSharingLayer ={
                 if (self.brands === undefined)
                         self.getBikeBrands(self.retrieveStations);
 	},
-	getBikeBrands(callback){
+	getBikeBrands : function(callback){
 		integreen.getStationDetails('Bikesharing-frontend/rest/bikes/',{},displayBrands);
                 function displayBrands(data){
                         var brands = {
