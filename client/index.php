@@ -34,35 +34,8 @@
 		<link href="css/smartphone.css" media="only screen and (max-width: 671px)" rel="stylesheet" /> <!-- max-device-width: 671px -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 		<link href="css/smartphoneLandscape.css" media="only screen and (max-width: 671px) and (orientation: landscape)" rel="stylesheet" />  <!-- max-device-width: 671px -->
-		<link href="css/radialStyle.css" rel="stylesheet" />  <!-- max-device-width: 671px -->
-		<!-- media="only screen and (orientation: landscape) -->
-		<script src="js/detect_device.js" type="text/javascript"></script>
-		<script src="js/OpenLayers/OpenLayers.sasabus.js"></script>
-		<!--<script src="http://sasatest.r3-gis.com/js/OpenLayers/lib/OpenLayers.js"></script>-->
-		<script src="js/OpenLayers/proj4js.min.js"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js" type="text/javascript"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.js" type="text/javascript"></script>
-		<script src="js/radialProgress.js" type="text/javascript"></script>
-		<script src="js/integreen.js"></script>
-		<script src="js/sasabus.js"></script>
-		<script src="js/carsharing.js"></script>
-		<script src="js/bus.js"></script>
-		<script src="js/bikesharing.js"></script>
-		<script src="js/echarging.js"></script>
-		<script src="js/i18n.js"></script>
-		<script src="js/apiedi.js"></script>
-		<script src="js/moment-with-locales.min.js"></script>
+		<link href="css/radialStyle.css" rel="stylesheet" />
 
-		<script> var txtVariante = '';</script>
-		<script type="text/javascript" src="https://www.google.com/jsapi?autoload={
-	            'modules':[{
-        	      'name':'visualization',
-	              'version':'1',
-        	      'packages':['corechart']
-            	     }]}"
-	        ></script>
 		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
 		<style>
 			.ui-dialog {z-index:1000;}
@@ -100,14 +73,6 @@
 			</span>
 			<img id="logo-mobile" src="images/logo-small.gif" alt="Merano real time bus"/>
 			<a href="<?php ___('feedbackform'); ?>" target="_blank" class="feedback">Feedback</a>
-			<!--<span class="beta-mobile">Beta version</span>-->
-			<!--<nav class="language-switcher mobile-switcher">
-				<ul>
-					<li <?php if($lang=='it') echo 'class="active"'; ?>><a href="?l=it">IT</a></li>
-					<li <?php if($lang=='de') echo 'class="active"'; ?>><a href="?l=de">DE</a></li>
-					<li <?php if($lang=='en') echo 'class="active"'; ?>><a href="?l=en">EN</a></li>
-				</ul>
-			</nav>-->
 		</header>
 		<div class="map-container" id="map" style="width:100%;height:100%">
 		</div>
@@ -226,29 +191,6 @@
 					</a>
 				</li>
 			</ul>
-			<!--<footer id="footer-1" class="footer">
-				<ul class="logos">
-					<li class="merano"><a target="_blank" href="<?php ___('linkmerano'); ?>"><?php ___('merano'); ?></a></li>
-					<li class="tis"><a target="_blank" href="<?php ___('linktis'); ?>">TIS innovation park South Tyrol</a></li>
-					<li class="sasa"><a target="_blank" href="<?php ___('linksasa'); ?>">SASA Bus</a></li>
-				</ul>
-			</footer>-->
-			<!--<footer id="footer-2" class="footer">
-				<nav>
-					<?php ___('infocontatti'); ?><a href="mailto:info@meran.eu">info@meran.eu</a>
-				</nav>
-				<div id="pages">
-					<div id="servizio" class="page">
-						<h3><?php ___('servizio'); ?></h3>
-					</div>
-					<div id="impressum" class="page">
-						<h3><?php ___('impressum'); ?></h3>
-					</div>
-					<div id="contatti" class="page">
-						<h3><?php ___('contatti'); ?></h3>
-					</div>
-				</div>
-			</footer>-->
 		</div>
 		<div class="hidden modal bus">
 			<main class="main" id="main">
@@ -362,7 +304,6 @@
 		</div> 
                 <div class="hidden modal carsharing">
 			<div class="walk-container">
-	                	<!--<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>-->
 				<div class="main-config clearfix">
 					<ul class="cartypes clearfix">
 					</ul>
@@ -481,7 +422,7 @@
 						<div id="city_bike_adult_without_gears-container" class="number-available"></div><span></span>
 					</div>
 					
-					<ul class="legend">
+					<ul class="legend clearfix">
 					</ul>
 				</div>
 				<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
@@ -495,7 +436,7 @@
 				<div class="number-available">
 				</div>
 				<p class="caption"></p>
-				<ul class="legend">	
+				<ul class="legend clearfix">	
 				</ul>
 				<a href="http://booking.carsharing.bz.it" target="_blank" class="clearfix ibutton" ><div><?php ___('book_car'); ?></div></a>
 				<a href="javascript:void(0)" class="clearfix backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
@@ -554,15 +495,18 @@
 				<h3 style="text-align:center"> <a href="https://github.com/tis-innovation-park/realtimebus.git" target="_blank">Source code available on github.com</h3>
 			</div>	
 		</div>
-		<script src="js/iscroll.js" type="text/javascript"></script>
-		<!--[if lte IE 8]>
-			<script src="scripts/PIE_IE678.js" type="text/javascript"></script>
-		<![endif]-->
-		<script src="js/init.js" type="text/javascript"></script>
-		<script src="js/utility.js" type="text/javascript"></script>
-		<!--[if lt IE 9]>
-			<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-		<![endif]-->
-		<!--</div>-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" type="text/javascript"></script>
+		<script src="js/OpenLayers/OpenLayers.sasabus.js" type="text/javascript"></script>
+		<script src="scripts/scripts.js" type="text/javascript"></script>
+		<script> var txtVariante = '';</script>
+		<script type="text/javascript" src="https://www.google.com/jsapi?autoload={
+	            'modules':[{
+        	      'name':'visualization',
+	              'version':'1',
+        	      'packages':['corechart']
+            	     }]}"
+	        ></script>
 	</body>
 </html>
