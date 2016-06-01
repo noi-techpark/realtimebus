@@ -2,7 +2,7 @@ var bikeSharingLayer ={
 	isCached:true,
 	populate: function(){   
                 var self = this;
-                if (self.brands == undefined)
+                if (self.brands === undefined)
                         self.getBikeBrands(self.retrieveStations);
 	},
 	getBikeBrands(callback){
@@ -11,8 +11,9 @@ var bikeSharingLayer ={
                         var brands = {
 				nothingSelected : function(){
                                         var selected = true;
+          				var i;
                                         for (i in brands){
-                                                if (brands[i]==true)
+                                                if (brands[i]===true)
                                                         selected = false;
                                         }
                                         return selected;
@@ -24,16 +25,15 @@ var bikeSharingLayer ={
 	                $.each(brands,function(index,value){
 				if (typeof value == 'function')
                                         return true;
-        	                var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
-        	                $('.bike .biketypes').append('<li class="bikebrand clearfix"><p>'+jsT[lang][index.split("-").join("_")]+'</p><a brand='+index+' href="javascript:void(0)" class="toggler">'
-				+'<svg width="55" height="30">'
-                                +       '<g>'
-                                +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#bb392b" height="24"/>'
-                                +               '<circle cx="34" cy="17" r="9" fill="#bb392b" />'
-                                +       '</g>'
-                                +       'Sorry, your browser does not support inline SVG.'
-                                + '</svg>'
-                                + '</a></li>');
+        	                $('.bike .biketypes').append('<li class="bikebrand clearfix"><p>'+jsT[lang][index.split("-").join("_")]+'</p><a brand='+index+' href="javascript:void(0)" class="toggler">'+
+				'<svg width="55" height="30">'+
+                                       '<g>'+
+                                               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#bb392b" height="24"/>'+
+                                               '<circle cx="34" cy="17" r="9" fill="#bb392b" />'+
+                                       '</g>'+
+                                       'Sorry, your browser does not support inline SVG.'+
+                                '</svg>'+
+                                '</a></li>');
 
                 	});
 			var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
@@ -61,7 +61,7 @@ var bikeSharingLayer ={
 		                $('.bike .deselect-all').text(statusText);
                                 bikeSharingLayer.retrieveStations(brands);
                         });
-                        if (callback != undefined)
+                        if (callback !== undefined)
                                 callback(brands);
 
                 }
@@ -70,7 +70,7 @@ var bikeSharingLayer ={
                 var brandreq='';
                 $.each(brands,function(index,value){
                         if (value){
-                                if (brandreq != '')
+                                if (brandreq !== '')
                                         brandreq += "\\,";
                                 brandreq += '\''+index+'\'';
                         }
@@ -81,7 +81,7 @@ var bikeSharingLayer ={
                         outputFormat:'text/javascript',
                         format_options: 'callback: getJson'
                 };
-                if (brandreq != '')
+                if (brandreq !== '')
                         params['viewparams']='brand:'+brandreq;
                 $.ajax({
                         url : SASABus.config.geoserverEndPoint+'wfs?'+$.param(params),
@@ -99,7 +99,7 @@ var bikeSharingLayer ={
                 });
         },
 	get: function(){
-		if (this.isCached && this.layer != undefined)
+		if (this.isCached && this.layer !== undefined)
                         return this.layer;
 		var styleMap = new OpenLayers.StyleMap(new OpenLayers.Style({
 		    externalGraphic: '${externalGraphic}',
@@ -113,7 +113,7 @@ var bikeSharingLayer ={
 					var max = feature.attributes.max_available;
 					var now = feature.attributes.value;
 					var a = now/max;
-					if (a == 0.)
+					if (a === 0)
 		        	        	pin= 'images/5_Bike/marker_red.svg';
 					else if (a < 0.6 && a > 0)
 			                	pin= 'images/5_Bike/marker_orange.svg';
@@ -151,7 +151,6 @@ var bikeSharingLayer ={
                         integreen.getChildStationsData(details.id,"Bikesharing-frontend/rest/bikes/",displayCurrentState,config);
 			function displayCurrentState(bikes){
 				if (bikes && bikes.length>0){
-					var catHtml;
 					var bikesByBrand = getAmountByBrand(bikes);
 					$.each(bikesByBrand,function(key,value){
 						var cat = key.split("-").join("_");
@@ -191,14 +190,14 @@ var bikeSharingLayer ={
                                 var amountByBrand = {numberAvailable:{current:0}};
                                 $.each(children,function(index,value){
                                         var brand = value.detail.type;
-                                        if (amountByBrand[brand] == undefined){
+                                        if (amountByBrand[brand] === undefined){
                                                 amountByBrand[brand]={
                                                         current:0
-                                                }
+                                                };
 		
                                         }
                                         amountByBrand[brand].total = amountByBrand[brand].total+1;
-                                        if (value.newestRecord['availability'].value == 0){
+                                        if (value.newestRecord['availability'].value === 0){
                                                 amountByBrand[brand].current=amountByBrand[brand].current +1;
 						amountByBrand['numberAvailable']['current']+=1;
 					}
@@ -210,4 +209,4 @@ var bikeSharingLayer ={
 		this.layer = positionsLayer;
 		return positionsLayer;
 	}
-}
+};
