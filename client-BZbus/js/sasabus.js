@@ -28,7 +28,7 @@ var SASABus = {
         stopRow: undefined,
         stopContent: undefined
     },
-
+    updateFakeBusTimeout:undefined,
     updateBusTimeout: undefined,
     map: undefined,
     linesLayer: undefined,
@@ -90,7 +90,7 @@ var SASABus = {
         
         me.stopsLayer = me.getStopsLayer();
         me.positionLayer = me.getBusPositionLayer();
-        
+        me.fakeLayer = me.getFakeLayer();
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
             externalGraphic: 'images/pin.png'
@@ -99,10 +99,9 @@ var SASABus = {
             styleMap: styleMap
         });
 
-        me.map.addLayers([osm,topoMap,me.positionLayer,me.stopsLayer,me.linesLayer,me.locationLayer]);
+        me.map.addLayers([osm,topoMap,me.positionLayer,me.fakeLayer,me.stopsLayer,me.linesLayer,me.locationLayer]);
         var bolzano = new OpenLayers.Bounds(1260000,5855200,1262000,5864000);
 
-	console.log(bolzano); 
         me.map.zoomToExtent(bolzano);
         var control = new OpenLayers.Control.SelectFeature([me.positionLayer, me.stopsLayer]);
         control.events.register('beforefeaturehighlighted', me, me.handleSelectedFeature);
@@ -292,18 +291,6 @@ var SASABus = {
         });
 
         positionsLayer.events.register('loadend', positionsLayer, function(e) {
-/* NON UTILIZZATO... ci serve?
-            var interval = 500 * (14 - map.getZoom()) + 2000; // 11
-            if (interval < 1000) { // 2000
-                interval = 1000; // 2000
-            }
-            if (interval > 5000) {
-                interval = 5000;
-            }
-            if (timeout) {
-                window.clearTimeout(timeout);
-            } */
-            // set to 1 s
             var interval = 2500;
             
             if(me.updateBusTimeout) window.clearTimeout(me.updateBusTimeout);
@@ -314,7 +301,38 @@ var SASABus = {
         });
         return positionsLayer;
     },
-    
+    getFakeLayer : function(){
+        var me = this;
+        
+        var styleMap = new OpenLayers.StyleMap({
+            pointRadius: 12,
+            externalGraphic: 'images/${hexcolor2}.png'
+        });
+        
+        
+        var fakeLayer = new OpenLayers.Layer.Vector("fakeLayer", {
+            strategies: [new OpenLayers.Strategy.Fixed()],
+            protocol: new OpenLayers.Protocol.Script({
+                url:  "http://realtimetest.opensasa.info/positions", //TODO: modificare il nome del callback, renderlo più breve
+                callbackKey: "jsonp"
+            }),
+	    preFeatureInsert: function(feature) {
+           	feature.geometry.transform(epsg25832,defaultProjection);
+            },
+            styleMap: styleMap
+        });
+
+        fakeLayer.events.register('loadend', fakeLayer, function(e) {
+            var interval = 2500;
+            
+            if(me.updateFakeBusTimeout) window.clearTimeout(me.updateFakeBusTimeout);
+            
+            me.updateFakeBusTimeout = window.setTimeout(function() {
+                fakeLayer.refresh();
+            }, interval);
+        });
+        return fakeLayer;
+    }, 
     //es. SASABus.showLines(['211:1', '211:2', '211:3', '201:1']);
     showLines: function(lines) {
         var visibility = true;
