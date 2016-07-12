@@ -91,7 +91,7 @@ var SASABus = {
 		walking:[wegeStartPointsLayer,artPoints,routesLayer,zugangLayer],
 		bus:[linesLayer,busPositionLayer,stopsLayer],
 		carsharing:[carSharingLayer],
-		bike:[bikeSharingLayer],
+		bike:[bikeSharingLayer,osmBikeNetwork,provinceBikeNetwork],
 		emobility:[echargingLayer]
 	}
 	$.each(layerMap,function(key,value){				//hide all layers which are in non active Themes
@@ -188,9 +188,7 @@ var SASABus = {
                 return this.url + z + "/" + x + "/" + y + "." + this.type;
             }
         }
-        var osm = new OpenLayers.Layer.OSM("MapQuest",["http://otile1.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png",
-   "http://otile2.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png",
-   "http://otile3.mqcdn.com/tiles/1.0.0/map/${z}/${x}/${y}.png"],{
+        var osm = new OpenLayers.Layer.OSM("standardosm",null,{
 		 numZoomLevels: 18,
 		 projection: defaultProjection,
 	}); 
