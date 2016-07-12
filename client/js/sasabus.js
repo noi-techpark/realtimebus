@@ -91,7 +91,7 @@ var SASABus = {
 		walking:[wegeStartPointsLayer,artPoints,routesLayer,zugangLayer],
 		bus:[linesLayer,busPositionLayer,stopsLayer],
 		carsharing:[carSharingLayer],
-		bike:[bikeSharingLayer,osmBikeNetwork,provinceBikeNetwork],
+		bike:[bikeSharingLayer],
 		emobility:[echargingLayer]
 	}
 	$.each(layerMap,function(key,value){				//hide all layers which are in non active Themes
