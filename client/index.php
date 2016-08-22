@@ -99,6 +99,7 @@
 				</svg>
 			</span>
 			<img id="logo-mobile" src="images/logo-small.gif" alt="Merano real time bus"/>
+			<a href="javascript:void(0)" target="_blank" class="beta">Beta</a>
 			<a href="<?php ___('feedbackform'); ?>" target="_blank" class="feedback">Feedback</a>
 			<!--<span class="beta-mobile">Beta version</span>-->
 			<!--<nav class="language-switcher mobile-switcher">
@@ -149,6 +150,7 @@
             
 		<header class="header" id="header">
 			<img id = "logo" src ="images/logo.gif" alt="Merano real time bus"/>
+			<a href="javascript:void(0)" target="_blank" class="beta">BETA</a>
 			<a href="<?php ___('feedbackform'); ?>" target="_blank" class="feedback">Feedback</a>
 			<nav class="language-switcher">
 				<ul>
@@ -484,6 +486,7 @@
 					<ul class="legend">
 					</ul>
 				</div>
+				<a href="http://www.gemeinde.meran.bz.it/de/dienste/dienste-a-z.asp?&diensteaz_action=4&diensteaz_article_id=4605" class="backtomap ibutton" ><div>More Info</div></a>
 				<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 			</div>
 				
