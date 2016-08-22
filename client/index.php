@@ -501,7 +501,7 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" type="text/javascript"></script>
-		<script src="js/OpenLayers/OpenLayers.sasabus.js" type="text/javascript"></script>
+		<script src="js/OpenLayers.js" type="text/javascript"></script>
 		<script src="scripts/scripts.js" type="text/javascript"></script>
 		<script> var txtVariante = '';</script>
 		<script type="text/javascript" src="https://www.google.com/jsapi?autoload={
