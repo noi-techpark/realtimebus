@@ -91,7 +91,7 @@ var SASABus = {
 		walking:[wegeStartPointsLayer,artPoints,routesLayer,zugangLayer],
 		bus:[linesLayer,busPositionLayer,stopsLayer],
 		carsharing:[carSharingLayer],
-		bike:[bikeSharingLayer],
+		bike:[bikeSharingLayer,provinceBikeNetwork],
 		emobility:[echargingLayer]
 	}
 	$.each(layerMap,function(key,value){				//hide all layers which are in non active Themes
@@ -161,7 +161,6 @@ var SASABus = {
 	    fractionalZoom: false,
 	    units:'m',
 	    center:new OpenLayers.LonLat(1242107.3809149, 5889462.4783187),
-            resolutions:[156543.033928041,78271.51696402048,39135.75848201023,19567.87924100512,9783.93962050256,4891.96981025128,2445.98490512564,1222.99245256282,611.49622628141,305.7481131407048,152.8740565703525,76.43702828517624,38.21851414258813,19.10925707129406,9.554628535647032,4.777314267823516,2.388657133911758,1.194328566955879,0.5971642834779395,0.29858214173896974,0.14929107086948487],
 
         };
         me.map = new OpenLayers.Map(targetDivId, mapOptions);
@@ -171,7 +170,6 @@ var SASABus = {
             visibility: true,
             opacity: 0.75,
             attribution: '',
-	    numZoomLevels: 18
 
         });
 	function osm_getTileURL(bounds) {
