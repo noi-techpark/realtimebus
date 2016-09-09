@@ -47,6 +47,7 @@
 	$vars['it_more'] = 'Ulteriori informazioni';
 	$vars['it_book_car'] = 'Prenota una macchina';
 	$vars['it_feedbackform'] = 'https://docs.google.com/forms/d/1Us6V3D8GdiNrhNyLhrfX4rOkPAb7WG7kjAlIjWseN6E/viewform';
+        $vars['it_bikelink'] = 'http://www.comune.merano.bz.it/it/servizi/461.asp?&diensteaz_action=4&diensteaz_article_id=4605';
 	// Inglese
 	$vars['en_meranotitle'] = 'Merano - Real time bus';
 	$vars['en_urbani'] = 'Urban';
@@ -84,6 +85,7 @@
 	$vars['en_more'] = 'More Information';
 	$vars['en_book_car'] = 'Book a car';
 	$vars['en_feedbackform'] = 'https://docs.google.com/forms/d/14TqlT6UJbZWFj3LDZrWDJjUDBCM5BAYsAiRETOw0Jvo/viewform';
+        $vars['en_bikelink'] = 'http://www.comune.merano.bz.it/it/servizi/461.asp?&diensteaz_action=4&diensteaz_article_id=4605';
 	// Tedesco
 	$vars['de_meranotitle'] = 'Meran - Real time bus';
 	$vars['de_urbani'] = 'St&auml;dtische Busse';
@@ -120,5 +122,5 @@
 	$vars['de_more'] = 'Weitere Informationen';
 	$vars['de_book_car'] = 'Buche ein Fahrzeug';
 	$vars['de_feedbackform'] = 'https://docs.google.com/forms/d/1EHZb-gLlpZBSL9djwIMiOCSg0eOZmXL41c1DU4-9LfY/viewform';
-	
+	$vars['de_bikelink'] = 'http://www.gemeinde.meran.bz.it/de/dienste/dienste-a-z.asp?&diensteaz_action=4&diensteaz_article_id=4605';	
 ?>

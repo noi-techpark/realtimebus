@@ -427,7 +427,7 @@
 					<ul class="legend clearfix">
 					</ul>
 				</div>
-				<a href="http://www.gemeinde.meran.bz.it/de/dienste/dienste-a-z.asp?&diensteaz_action=4&diensteaz_article_id=4605" class="backtomap ibutton" ><div>More Info</div></a>
+				<a href="<?php ___('bikelink'); ?>" class="backtomap ibutton" ><div><?php ___('more'); ?></div></a>
 				<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 			</div>
 				
