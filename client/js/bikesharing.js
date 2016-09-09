@@ -210,3 +210,115 @@ var bikeSharingLayer ={
 		return positionsLayer;
 	}
 };
+var provinceBikeNetwork = {
+	isCached:true,
+	get : function(){
+		if (this.isCached && this.layer !== undefined)
+                        return this.layer;
+		var map = new OpenLayers.StyleMap({
+                        strokeColor: '#bb392b',
+                        strokeWidth: 2,
+			strokeDashstyle: 'longdash'
+                });
+		var positionsLayer = new OpenLayers.Layer.Vector("provinceBikeNetLayer", {
+                        strategies: [new OpenLayers.Strategy.Cluster({distance:25,threshold: 2})],
+			styleMap:map,
+			preFeatureInsert: function(feature) {
+                                feature.geometry.transform(new OpenLayers.Projection("EPSG:25832"),defaultProjection);
+                        },
+                });
+		$.ajax({
+                        url : 'export2.geojson',
+                        dataType : 'json',
+                        success : function(data) {
+                                var features = new OpenLayers.Format.GeoJSON().read(data);
+                                positionsLayer.removeAllFeatures();
+                                positionsLayer.addFeatures(features);
+                        },
+                        error : function() {
+                                console.log('problems with data transfer');
+                        }
+                });
+		this.layer = positionsLayer;
+		return positionsLayer;
+
+	},
+}
+
+var osmBikeNetwork = {
+	isCached:true,
+	get : function(){
+		if (this.isCached && this.layer !== undefined)
+                        return this.layer;
+		var map = new OpenLayers.StyleMap({
+                        strokeColor: '#000',
+                        strokeWidth: 2,
+			strokeDashstyle: 'longdash'
+                });
+		var positionsLayer = new OpenLayers.Layer.Vector("osmBikeNetLayer", {
+                        strategies: [new OpenLayers.Strategy.Cluster({distance:25,threshold: 2})],
+			styleMap:map,
+			preFeatureInsert: function(feature) {
+                                feature.geometry.transform(new OpenLayers.Projection("EPSG:4326"),defaultProjection);
+                        },
+                });
+		$.ajax({
+                        url : 'export.min.geojson',
+                        dataType : 'json',
+                        success : function(data) {
+                                var features = new OpenLayers.Format.GeoJSON().read(data);
+                                positionsLayer.removeAllFeatures();
+                                positionsLayer.addFeatures(features);
+                        },
+                        error : function() {
+                                console.log('problems with data transfer');
+                        }
+                });
+		this.layer = positionsLayer;
+		return positionsLayer;
+
+	},
+}
+var bzNetwork = {
+	isCached:true,
+	get : function(){
+		if (this.isCached && this.layer !== undefined)
+                        return this.layer;
+		var map = new OpenLayers.StyleMap({
+                        strokeColor: '#bb392b',
+                        strokeWidth: 2,
+			strokeDashstyle: 'longdash'
+                });
+		var positionsLayer = new OpenLayers.Layer.Vector("bzNetLayer", {
+        		strategies: [new OpenLayers.Strategy.Cluster({distance:25,threshold: 2})],
+			styleMap:map,
+			preFeatureInsert: function(feature) {
+                		feature.geometry.transform(new OpenLayers.Projection("EPSG:25832"),defaultProjection);
+                	},
+        	 });
+        	 var  params = {
+         		request:'GetFeature',
+        	        outputFormat:'text/javascript',
+			typeName:'p_bz-transport_network:BicycleLanes',
+                	format_options: 'callback: callme'
+	         };
+        	 $.ajax({
+         		url : "http://geoservices.retecivica.bz.it/geoserver/wfs?"+$.param(params),
+	                dataType : 'jsonp',
+        	        crossDomain: true,
+                	jsonpCallback : 'callme',
+	                success : function(data) {
+				var features = new OpenLayers.Format.GeoJSON().read(data);
+                	        btNetwork.layer.removeAllFeatures();
+                        	bzNetwork.layer.addFeatures(features);
+	                },
+        	        error : function(error,code,wtf) {
+				console.log(error);
+				console.log(wtf);
+                                console.log('problems with data transfer');
+			}
+		});
+		this.layer = positionsLayer;
+		return positionsLayer;
+	}
+}
