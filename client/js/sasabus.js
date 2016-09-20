@@ -92,7 +92,8 @@ var SASABus = {
 		bus:[linesLayer,busPositionLayer,stopsLayer],
 		carsharing:[carSharingLayer],
 		bike:[bikeSharingLayer,provinceBikeNetwork],
-		emobility:[echargingLayer]
+		emobility:[echargingLayer],
+		carpooling:[carpoolingLayer],
 	}
 	$.each(layerMap,function(key,value){				//hide all layers which are in non active Themes
 		if ($.inArray(key,activeThemes) == -1){

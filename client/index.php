@@ -51,6 +51,7 @@
 		<script src="js/bus.js"></script>
 		<script src="js/bikesharing.js"></script>
 		<script src="js/echarging.js"></script>
+		<script src="js/carpooling.js"></script>
 		<script src="js/i18n.js"></script>
 		<script src="js/apiedi.js"></script>
 		<script src="js/moment-with-locales.min.js"></script>
@@ -227,30 +228,14 @@
 					</svg>
 					</a>
 				</li>
+				<li>
+					<a href="javascript:void(0)" class="carpooling" id="carpooling">
+						<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" id="Ebene_1" x="0px" y="0px" viewBox="0 0 200 200" xml:space="preserve" version="0.48.4 r9939" width="100%" height="100%" docname="icon_charge.svg" class="svg replaced-svg"><metadata id="metadata34"><rdf:RDF><cc:Work about=""><dc:format>image/svg+xml</dc:format><dc:type resource="http://purl.org/dc/dcmitype/StillImage"></dc:type></cc:Work></rdf:RDF></metadata><defs id="defs32"></defs><sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" pageopacity="0" pageshadow="2" window-width="1855" window-height="1056" id="namedview30" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" zoom="3.337544" cx="146.3889" cy="76.720506" window-x="1665" window-y="24" window-maximized="1" current-layer="Ebene_1"></sodipodi:namedview><g id="Ebene_1_1_" transform="translate(-60.792062,78.414051)"></g><g id="g6" transform="translate(-60.792062,78.414051)"><g id="g10"><path class="st1" d="M 86.9,58.8" id="path12" connector-curvature="0" style="fill:none;stroke:#ffffff;stroke-miterlimit:10"></path><path class="st1" d="M 86.9,55.7" id="path14" connector-curvature="0" style="fill:none;stroke:#ffffff;stroke-miterlimit:10"></path></g></g><path class="st4" d="M 26.107938,137.21405" id="path22" connector-curvature="0" style="fill:none;stroke:#000000;stroke-miterlimit:10"></path><path class="st4" d="M 26.107938,134.11405" id="path24" connector-curvature="0" style="fill:none;stroke:#000000;stroke-miterlimit:10"></path><path connector-curvature="0" class="st3" d="m 79.330804,97.400045 c -1.805728,0 -3.310501,1.499981 -3.310501,3.299955 0,1.79999 1.504773,3.29997 3.310501,3.29997 1.805727,0 3.310502,-1.49998 3.310502,-3.29997 0,-1.799974 -1.404457,-3.299955 -3.310502,-3.299955 z m 0,7.799895 c -2.507956,0 -4.614638,-2.09997 -4.614638,-4.59994 0,-2.499963 2.106682,-4.599936 4.614638,-4.599936 2.507955,0 4.614638,2.099973 4.614638,4.599936 0,2.59997 -2.006364,4.59994 -4.614638,4.59994 z m 43.538106,-7.799895 c -1.80573,0 -3.3105,1.499981 -3.3105,3.299955 0,1.79999 1.50477,3.29997 3.3105,3.29997 1.80573,0 3.31051,-1.49998 3.31051,-3.29997 0,-1.799974 -1.50478,-3.299955 -3.31051,-3.299955 z m 0,7.799895 c -2.50796,0 -4.61464,-2.09997 -4.61464,-4.59994 0,-2.499963 2.10668,-4.599936 4.61464,-4.599936 2.50796,0 4.61464,2.099973 4.61464,4.599936 0,2.59997 -2.10668,4.59994 -4.61464,4.59994 z m 7.22292,-6.499913 c 0,-2.899962 -2.40764,-5.299929 -5.31687,-5.299929 h -1.30414 -44.741926 -1.304136 c -2.909229,0 -5.316866,2.399967 -5.316866,5.299929 v 10.499863 c 0,2.89996 2.407637,5.29993 5.316866,5.29993 h 5.316866 v -3.89995 c 0,-2.89996 2.407637,-5.29993 5.316865,-5.29993 h 26.383681 c 2.90924,0 5.31687,2.39997 5.31687,5.29993 v 3.89995 h 5.31687 c 2.90924,0 5.31687,-2.39997 5.31687,-5.29993 V 98.700027 z m -6.52069,-19.999736 c 0,-2.799963 -1.70541,-4.999934 -3.71178,-4.999934 H 82.440669 c -2.106682,0 -3.711775,2.199971 -3.711775,4.999934 V 92.100115 H 123.57114 V 78.700291 z M 78.728894,124.29967 c 0,1.1 0.902865,1.99999 2.006365,1.99999 h 1.304137 c 1.1035,0 2.006364,-0.89999 2.006364,-1.99999 v -7.19989 h -5.316866 v 7.19989 z m 7.92514,-9.89985 h 28.991956 2.60828 v -3.29997 c 0,-2.49997 -2.10668,-4.59993 -4.61464,-4.59993 H 88.560079 c -2.507955,0 -4.614637,2.09996 -4.614637,4.59993 v 3.29997 h 2.708592 z m 31.600236,9.89985 c 0,1.1 0.90286,1.99999 2.00637,1.99999 h 1.30413 c 1.10351,0 2.00637,-0.89999 2.00637,-1.99999 v -7.19989 h -5.31687 v 7.19989 z m 7.92515,-7.3999 v 7.3999 c 0,2.49998 -2.10669,4.59995 -4.61465,4.59995 h -1.30413 c -2.50796,0 -4.61465,-2.09997 -4.61465,-4.59995 v -7.19989 H 86.654034 v 7.19989 c 0,2.49998 -2.106683,4.59995 -4.614638,4.59995 h -1.304137 c -2.507956,0 -4.614638,-2.09997 -4.614638,-4.59995 v -7.3999 c -3.711774,-0.59999 -6.621003,-3.79995 -6.621003,-7.79988 V 98.700027 c 0,-3.899947 2.909229,-7.099905 6.621003,-7.799897 V 78.700291 c 0,-4.299943 2.80891,-7.599899 6.320048,-7.599899 h 37.318371 c 3.61146,0 6.32006,3.399955 6.32006,7.599899 V 90.90013 c 3.71177,0.599992 6.62099,3.89995 6.62099,7.799897 v 10.499863 c 0.10031,3.89993 -2.8089,7.09989 -6.52067,7.69988 z" id="path20-3" style="fill-rule:evenodd"></path><path type="arc" style="fill-opacity:1" id="path3031" cx="20.021187" cy="8.3296566" rx="3.9194915" ry="3.6016948" d="m 23.940678,8.3296566 a 3.9194915,3.6016948 0 1 1 -7.838983,0 3.9194915,3.6016948 0 1 1 7.838983,0 z" transform="matrix(1.0031822,0,0,0.99998683,69.499618,71.100392)"></path><rect style="fill-opacity:1" id="rect3065" width="6.4481668" height="8.8640366" x="86.360435" y="83.525345"></rect><path transform="matrix(1.0031822,0,0,0.99998683,90.540944,70.994453)" type="arc" style="fill-opacity:1" id="path3031-2" cx="20.021187" cy="8.3296566" rx="3.9194915" ry="3.6016948" d="m 23.940678,8.3296566 a 3.9194915,3.6016948 0 1 1 -7.838983,0 3.9194915,3.6016948 0 1 1 7.838983,0 z"></path><rect style="fill-opacity:1" id="rect3065-9" width="6.4481668" height="8.8640366" x="107.40176" y="83.419411"></rect>
+	                                        <text x="100" y="180" fill="#fff"><tspan>RIDE</tspan></text>
+					</svg>
+					</a>
+				</li>
 			</ul>
-			<!--<footer id="footer-1" class="footer">
-				<ul class="logos">
-					<li class="merano"><a target="_blank" href="<?php ___('linkmerano'); ?>"><?php ___('merano'); ?></a></li>
-					<li class="tis"><a target="_blank" href="<?php ___('linktis'); ?>">TIS innovation park South Tyrol</a></li>
-					<li class="sasa"><a target="_blank" href="<?php ___('linksasa'); ?>">SASA Bus</a></li>
-				</ul>
-			</footer>-->
-			<!--<footer id="footer-2" class="footer">
-				<nav>
-					<?php ___('infocontatti'); ?><a href="mailto:info@meran.eu">info@meran.eu</a>
-				</nav>
-				<div id="pages">
-					<div id="servizio" class="page">
-						<h3><?php ___('servizio'); ?></h3>
-					</div>
-					<div id="impressum" class="page">
-						<h3><?php ___('impressum'); ?></h3>
-					</div>
-					<div id="contatti" class="page">
-						<h3><?php ___('contatti'); ?></h3>
-					</div>
-				</div>
-			</footer>-->
 		</div>
 		<div class="hidden modal bus">
 			<main class="main" id="main">

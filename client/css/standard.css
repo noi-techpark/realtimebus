@@ -335,6 +335,7 @@ a{color:#c0c0c0;text-decoration:none}
 }
 .menu a.walk.active svg{background-color:#ce5400;}
 .menu a.carsharing.active svg{background-color:#8aaa30;}
+.menu a.carpooling.active svg{background-color:royalblue}
 .menu a.echarging.active svg{background-color:#f2bf00;}
 .menu a.bikesharing.active svg{background-color:#bb392b;}
 .menu a.bus.active svg{background-color:#ee9712;}
