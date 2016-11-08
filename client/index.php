@@ -55,15 +55,6 @@
 		<script src="js/i18n.js"></script>
 		<script src="js/apiedi.js"></script>
 		<script src="js/moment-with-locales.min.js"></script>
-
-		<script> var txtVariante = '';</script>
-		<script type="text/javascript" src="https://www.google.com/jsapi?autoload={
-	            'modules':[{
-        	      'name':'visualization',
-	              'version':'1',
-        	      'packages':['corechart']
-            	     }]}"
-	        ></script>
 		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
 		<style>
 			.ui-dialog {z-index:1000;}
@@ -102,14 +93,6 @@
 			<img id="logo-mobile" src="images/logo-small.gif" alt="Merano real time bus"/>
 			<a href="javascript:void(0)" target="_blank" class="beta">Beta</a>
 			<a href="<?php ___('feedbackform'); ?>" target="_blank" class="feedback">Feedback</a>
-			<!--<span class="beta-mobile">Beta version</span>-->
-			<!--<nav class="language-switcher mobile-switcher">
-				<ul>
-					<li <?php if($lang=='it') echo 'class="active"'; ?>><a href="?l=it">IT</a></li>
-					<li <?php if($lang=='de') echo 'class="active"'; ?>><a href="?l=de">DE</a></li>
-					<li <?php if($lang=='en') echo 'class="active"'; ?>><a href="?l=en">EN</a></li>
-				</ul>
-			</nav>-->
 		</header>
 		<div class="map-container" id="map" style="width:100%;height:100%">
 		</div>
@@ -349,7 +332,6 @@
 		</div> 
                 <div class="hidden modal carsharing">
 			<div class="walk-container">
-	                	<!--<a href="#" class="close-modal"><img src="images/3_Bus/Close.svg" alt="close"/></a>-->
 				<div class="main-config clearfix">
 					<ul class="cartypes clearfix">
 					</ul>
@@ -468,7 +450,7 @@
 						<div id="city_bike_adult_without_gears-container" class="number-available"></div><span></span>
 					</div>
 					
-					<ul class="legend">
+					<ul class="legend clearfix">
 					</ul>
 				</div>
 				<a href="<?php ___('bikelink'); ?>" class="backtomap ibutton" ><div><?php ___('more'); ?></div></a>
@@ -483,7 +465,7 @@
 				<div class="number-available">
 				</div>
 				<p class="caption"></p>
-				<ul class="legend">	
+				<ul class="legend clearfix">	
 				</ul>
 				<a href="http://booking.carsharing.bz.it" target="_blank" class="clearfix ibutton" ><div><?php ___('book_car'); ?></div></a>
 				<a href="javascript:void(0)" class="clearfix backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
@@ -542,15 +524,18 @@
 				<h3 style="text-align:center"> <a href="https://github.com/tis-innovation-park/realtimebus.git" target="_blank">Source code available on github.com</h3>
 			</div>	
 		</div>
-		<script src="js/iscroll.js" type="text/javascript"></script>
-		<!--[if lte IE 8]>
-			<script src="scripts/PIE_IE678.js" type="text/javascript"></script>
-		<![endif]-->
-		<script src="js/init.js" type="text/javascript"></script>
-		<script src="js/utility.js" type="text/javascript"></script>
-		<!--[if lt IE 9]>
-			<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-		<![endif]-->
-		<!--</div>-->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" type="text/javascript"></script>
+		<script src="js/OpenLayers/OpenLayers.sasabus.js" type="text/javascript"></script>
+		<script src="scripts/scripts.js" type="text/javascript"></script>
+		<script> var txtVariante = '';</script>
+		<script type="text/javascript" src="https://www.google.com/jsapi?autoload={
+	            'modules':[{
+        	      'name':'visualization',
+	              'version':'1',
+        	      'packages':['corechart']
+            	     }]}"
+	        ></script>
 	</body>
 </html>

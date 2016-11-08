@@ -5,8 +5,13 @@ var bikeSharingLayer ={
                 if (self.brands === undefined)
                         self.getBikeBrands(self.retrieveStations);
 	},
+<<<<<<< Updated upstream
 	getBikeBrands : function(callback){
 		integreen.getStationDetails('Bikesharing-frontend/rest/bikes/',{},displayBrands);
+=======
+  getBikeBrands : function(callback){
+		integreen.getStationDetails('bikesharingFrontEnd/rest/bikes/',{},displayBrands);
+>>>>>>> Stashed changes
                 function displayBrands(data){
                         var brands = {
 				nothingSelected : function(){
@@ -147,8 +152,13 @@ var bikeSharingLayer ={
 			$('.bike-categorys').empty();
 			var config={
 				types:[["availability","","Indicates if a vehicle is available for rental","300"]]
+<<<<<<< Updated upstream
 			}
                         integreen.getChildStationsData(details.id,"Bikesharing-frontend/rest/bikes/",displayCurrentState,config);
+=======
+			};
+                        integreen.getChildStationsData(details.id,"bikesharingFrontEnd/rest/bikes/",displayCurrentState,config);
+>>>>>>> Stashed changes
 			function displayCurrentState(bikes){
 				if (bikes && bikes.length>0){
 					var bikesByBrand = getAmountByBrand(bikes);
@@ -210,6 +220,7 @@ var bikeSharingLayer ={
 		return positionsLayer;
 	}
 };
+<<<<<<< Updated upstream
 var provinceBikeNetwork = {
 	isCached:true,
 	get : function(){
@@ -322,3 +333,5 @@ var bzNetwork = {
 		return positionsLayer;
 	}
 }
+=======
+>>>>>>> Stashed changes
