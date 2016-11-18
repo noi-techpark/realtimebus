@@ -1,7 +1,7 @@
 var carSharingLayer = {
 	isCached:true,
 	getCarBrands : function(callback){
-		integreen.getStationDetails('carsharing-frontend/rest/cars/',{},displayBrands);	
+		integreen.getStationDetails('carsharing-ws/rest/cars/',{},displayBrands);	
 		function displayBrands(data){
 			var brands = {
 				nothingSelected : function(){
@@ -133,7 +133,7 @@ var carSharingLayer = {
 	       		"featureselected":function(e){
 				if (!e.feature.cluster){
 					var station = e.feature.attributes.stationcode;
-					integreen.retrieveData(station,"carsharing-frontend/rest/",getCarsharingStation);
+					integreen.retrieveData(station,"carsharing-ws/rest/",getCarsharingStation);
 				}
 			}
 		});
@@ -148,7 +148,7 @@ var carSharingLayer = {
 				.value(current['number-available'].value)
 				.maxValue(details.availableVehicles)
 				.render();
-			integreen.getChildStationsData(details.id,"carsharing-frontend/rest/cars/",displayCarsharingData);
+			integreen.getChildStationsData(details.id,"carsharing-ws/rest/cars/",displayCarsharingData);
 			function getAmountByBrand(children){
 				var amountByBrand = {};
 				$.each(children,function(index,value){

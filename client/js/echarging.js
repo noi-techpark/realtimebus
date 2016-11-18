@@ -1,7 +1,7 @@
 var echargingLayer = {
 	isCached:true,
 	getTypes : function(callback){
-                integreen.getStationDetails('ChargeFrontEnd/rest/plugs/',{},displayBrands);
+                integreen.getStationDetails('emobility-ws/rest/plugs/',{},displayBrands);
                 function displayBrands(data){
                         var brands = {
 				nothingSelected : function(){
@@ -137,7 +137,7 @@ var echargingLayer = {
                 	"featureselected":function(e){
 				if (!e.feature.cluster){
         	                	var station = e.feature.attributes.stationcode;
-					integreen.retrieveData(station,"ChargeFrontEnd/rest/",displayData);
+					integreen.retrieveData(station,"emobility-ws/rest/",displayData);
 				}
 	                }
 	        });
@@ -166,7 +166,7 @@ var echargingLayer = {
                                 html+='<div><a href="' + details.paymentInfo + '" target="_blank" class="backtomap ibutton" ><div>'+jsT[lang].book+'</div></a></div>';
 			html += "</div>";
                         html+='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>';
-			integreen.getChildStationsData(details.id,"ChargeFrontEnd/rest/plugs/",displayPlugs);
+			integreen.getChildStationsData(details.id,"emobility-ws/rest/plugs/",displayPlugs);
 			function displayPlugs (children){
 				$.each(children,function(index,value){
 					var plugState = value.newestRecord;

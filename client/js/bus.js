@@ -22,7 +22,7 @@ var stopsLayer ={
 	            minScale:10000,
 	        }); 
         	positionLayer.events.on({
-                	"featureselected":function(e){
+                	"beforefeatureselected":function(e){
                         	showStopPopup(e.feature);
 	                }   
         	}); 
@@ -133,7 +133,7 @@ var busPositionLayer = {
 	               	styleMap: styleMap
 		});
 		positionsLayer.events.on({
-                	"featureselected":function(e){
+                	"beforefeatureselected":function(e){
 	                       	showBusPopup(e.feature);
 		        }
         	});
