@@ -44,7 +44,7 @@ var carpoolingLayer = {
                 },{
                         context: {
                                 externalGraphic:function(feature){
-	                                var pin= 'images/sasa.png';
+	                                var pin= 'images/idm.svg';
 					if (!feature.cluster){
 						if (feature.attributes.stationtype == 'Carpoolinghub')
 		                                	pin= 'images/9_Carpooling/marker.svg';
@@ -127,6 +127,7 @@ var carpoolingLayer = {
 			$('.modal').hide();
                         var html = "";
 			html += '<div class="info">'+(details.i18n[locale]?details.i18n[locale].address:'')+'</div>'; 
+			html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>About this Hub</div></a></div>';
 			html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[locale].backtomap+'</div></a><hr/></div>';
 			$('.station .content').html(html);
                         $('.station .backtomap.ibutton').click(function(){
@@ -141,9 +142,9 @@ var carpoolingLayer = {
                         var html = "";
 			html += '<div class="info"><ul>';
 			if (details.type=='A'||details.type=='E')
-				html += '<li>can drive the car</li>';
+				html += '<li>Driver</li>';
 			if (details.type=='P'||details.type=='E')
-				html += '<li>can be a passenger</li>';
+				html += '<li>Passenger</li>';
 			html += '</ul><hr/> ';
 			html += '<p style="text-align:center">'+(details.location[locale].address+'<br/>'+details.location[locale].city)+'</p>';
 			html += '<p style="text-align:center">v</p>'
@@ -154,6 +155,7 @@ var carpoolingLayer = {
 			html += '<p style="text-align:center">v</p>'
 			html += '<p style="text-align:center">'+(details.location[locale].address+'<br/>'+details.location[locale].city)+'</p>';
 			html +='</div>'; 
+			html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>Contact person</div></a></div>';
 			html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>';
 			$('.station .content').html(html);
                         $('.station .backtomap.ibutton').click(function(){
