@@ -30,14 +30,14 @@ var echargingLayer = {
 	                                if (typeof value != 'function')
         	                                brands[index] = nothingSelected;
                                 });
-				var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;  
+				var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
 	                        $('.emobility .deselect-all').text(statusText);
                                 echargingLayer.retrieveStations(brands);
                         });
                         if (callback != undefined)
                                 callback(brands);
 			$('.echargingtypes').empty();
-			var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;  
+			var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
                         $('.emobility .deselect-all').text(statusText);
 			$.each(brands,function(index,value){
                                 if (typeof value == 'function')
@@ -51,14 +51,14 @@ var echargingLayer = {
                 	                +       '</g>'
                         	        +       'Sorry, your browser does not support inline SVG.'
 	                                + '</svg>'
-					+ '</a></li>'	
+					+ '</a></li>'
 				);
 	                });
                 	$('.echargingbrand a').click(function(e){
                         	var brand = $(this).attr("brand");
 	                        brands[brand] = !brands[brand];
 				$(this).toggleClass("disabled");
-				var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;  
+				var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
 	                        $('.emobility .deselect-all').text(statusText);
         	                echargingLayer.retrieveStations(brands);
                 	});
@@ -68,7 +68,7 @@ var echargingLayer = {
 		var self = this;
                 if (self.brands == undefined)
                         self.getTypes(self.retrieveStations);
-	},	
+	},
 	retrieveStations : function(brands){
                 var brandreq='';
                 $.each(brands,function(index,value){
@@ -144,11 +144,11 @@ var echargingLayer = {
 	        this.layer = positionsLayer;
         	return positionsLayer;
 
-		function displayData(details,state){		
+		function displayData(details,state){
 			var updatedOn = moment(state['number-available'].timestamp).locale(lang).format('lll');
 			$('.station .title').html(details.name.replace("CU_","")+" ("+details.provider+")<br/><small>"+updatedOn+"</small>");
 			if (details.state != 'ACTIVE'){
-				$(".content").html('<h3>'+jsT[lang].outOfOrder+'</h3>');	
+				$(".content").html('<h3>'+jsT[lang].outOfOrder+'</h3>');
 				$('.modal').hide();
 				$('.station').show();
 				return;
@@ -172,13 +172,13 @@ var echargingLayer = {
 					var plugState = value.newestRecord;
 					var plugDetails = value.detail;
 					var state = plugState['echarging-plug-status'].value;
-					if (state == 1)	
+					if (state == 1)
 						plugColor='#8faf30';
 					else if(state == 2 || state == 3)
 						plugColor = '#f28e1e';
 					else
 						plugColor = '#e81c24';
-					html += "<div class='plug clearfix'>" 
+					html += "<div class='plug clearfix'>"
 					+"<h4><svg height='20' width='20'><circle cx='10' cy='10' r='10' fill='" + plugColor + "'></circle></svg>" + jsT[lang].charger + " "+(index+1)+"</h4>";
 					$.each(value.detail.outlets,function(i,outlet){
 						html += "<div class='clearfix outlet'><img src='https://service.aewnet.eu/e-mobility/api/v2/images/outlettypes/"+ outlet.outletTypeCode+"' alt='Plug image not available'/>"
@@ -200,7 +200,7 @@ var echargingLayer = {
 				$('.modal').hide();
 				$('.station .backtomap.ibutton').click(function(){
 					$('.modal').hide();
-				});	
+				});
 				$('.station').show();
 			}
 		}

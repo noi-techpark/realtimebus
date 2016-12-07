@@ -1,6 +1,6 @@
 var bikeSharingLayer ={
 	isCached:true,
-	populate: function(){   
+	populate: function(){
                 var self = this;
                 if (self.brands === undefined)
                         self.getBikeBrands(self.retrieveStations);
@@ -175,7 +175,7 @@ var bikeSharingLayer ={
 							.value(value.current)
 							.maxValue(details.bikes[key])
 							.render();
-							$('#'+cat+'-container').next().text(jsT[lang][cat]);	
+							$('#'+cat+'-container').next().text(jsT[lang][cat]);
 							$('#'+cat+'-container').removeClass("free");
 					                        if  (value.current == details.bikes[key])
                                 					$('#'+cat+'-container').addClass("free");
@@ -183,7 +183,7 @@ var bikeSharingLayer ={
 					});
 					$('.bikesharingstation .caption').text(jsT[lang]['freeBikes']);
 				}else{
-					$('.bikesharingstation .legend').html("<p style='color:#000'>Station out of order</p>");     
+					$('.bikesharingstation .legend').html("<p style='color:#000'>Station out of order</p>");
 				}
 			}
 			function getAmountByBrand(children){
@@ -194,7 +194,7 @@ var bikeSharingLayer ={
                                                 amountByBrand[brand]={
                                                         current:0
                                                 };
-		
+
                                         }
                                         amountByBrand[brand].total = amountByBrand[brand].total+1;
                                         if (value.newestRecord['availability'].value === 0){

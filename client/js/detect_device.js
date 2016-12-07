@@ -3,7 +3,7 @@ function detectDevice(){
 	var deviceName, windowMin, windowMax, orientation;
 	devices.forEach(function(item) { // Se non funziona in tutti i browser usare ciclo for
 		var regex = new RegExp(item,"i");
-		var deviceCheck = regex.test(navigator.userAgent.toLowerCase());		   
+		var deviceCheck = regex.test(navigator.userAgent.toLowerCase());
 		if(deviceCheck == true){
 			deviceName = item;
 		}
@@ -16,11 +16,11 @@ function detectDevice(){
 		windowMax = $(window).height();
 		windowMin = $(window).width();
 		orientation = 'portrait';
-	}		
+	}
 	if(!deviceName){
 		deviceName = 'desktop';
-		deviceCat = 'desktop';  
-	} 
+		deviceCat = 'desktop';
+	}
 	else {
 		if(windowMin < 672){ //cambiare valore?
 			deviceCat = 'smartphone';
