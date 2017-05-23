@@ -82,7 +82,7 @@ var echargingLayer = {
                         request:'GetFeature',
                         typeName:'edi:Echarging',
                         outputFormat:'text/javascript',
-                        format_options: 'callback: json'
+                        format_options: 'callback: jsonCharging'
         	};
 		if (brandreq != '')
                         params['viewparams']='brand:'+brandreq;
@@ -91,7 +91,7 @@ var echargingLayer = {
                 	url : SASABus.config.geoserverEndPoint+'wfs?'+$.param(params),
 	                dataType : 'jsonp',
         	        crossDomain: true,
-                	jsonpCallback : 'json',
+                	jsonpCallback : 'jsonCharging',
 	                success : function(data) {
         	                var features = new OpenLayers.Format.GeoJSON().read(data);
                                	echargingLayer.layer.removeAllFeatures();

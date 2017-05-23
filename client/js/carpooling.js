@@ -13,7 +13,7 @@ var carpoolingLayer = {
       request:'GetFeature',
       typeName:'edi:carpooling',
       outputFormat:'text/javascript',
-      format_options: 'callback: json'
+      format_options: 'callback: jsonCarpooling'
     };
     if (hubreq!='')
     params['viewparams']='hubs:'+hubreq+';';
@@ -23,7 +23,7 @@ var carpoolingLayer = {
       url : SASABus.config.geoserverEndPoint+'wfs?'+$.param(params),
       dataType : 'jsonp',
       crossDomain: true,
-      jsonpCallback : 'json',
+      jsonpCallback : 'jsonCarpooling',
       success : function(data) {
         var features = new OpenLayers.Format.GeoJSON().read(data);
         carpoolingLayer.layer.removeAllFeatures();
