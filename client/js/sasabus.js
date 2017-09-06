@@ -63,7 +63,7 @@ var preConfigMap = {
 	p11:{
 		zoom:17,
 		lon:1243912.0113794,
-		lat:5889700.1497033		
+		lat:5889700.1497033
 	},
 	p12:{
 		zoom:17,
@@ -90,7 +90,7 @@ var SASABus = {
         yOffset: 0,
         xOffset: 20
     },
-    
+
     tpl: {
         busRow: undefined,
         busContent: undefined,
@@ -114,9 +114,10 @@ var SASABus = {
 		bike:[bikeSharingLayer,provinceBikeNetwork],
 		emobility:[echargingLayer],
 		carpooling:[carpoolingLayer],
+    parking:[parkingLayer],
 	}
 	$.each(layerMap,function(key,value){				//hide all layers which are in non active Themes
-		if ($.inArray(key,activeThemes) == -1){
+    if ($.inArray(key,activeThemes) == -1){
 			$.each(value,function(index,object){
 				if(object.get())
 					if ($.isArray(object.get())){
@@ -142,7 +143,7 @@ var SASABus = {
 	});
 	$.each(activeLayers,function(index,object){		//add Layers or set to visible if already added
 		if (object.get() == null || $.isArray(object.get()))
-			return;
+      return;
 		if (me.map.getLayer(object.get().id) == null){
 			me.map.addLayer(object.get());
 			if (object.populate)
@@ -159,7 +160,7 @@ var SASABus = {
         	displayProjection: defaultProjection
 	});
 	me.map.addControl(mapMousePosition);
-	var callbacks = { 
+	var callbacks = {
 		keydown: function(evt) {
 			if (evt.keyCode == 76 && evt.shiftKey && evt.ctrlKey) {
       				var pixel = new OpenLayers.Pixel(mapMousePosition.lastXy.x, mapMousePosition.lastXy.y)
@@ -172,7 +173,7 @@ var SASABus = {
 	var handler = new OpenLayers.Handler.Keyboard(control, callbacks, {});
 	handler.activate();
 	me.map.addControl(control);
-    }, 
+    },
     init: function(targetDivId) {
         var me = this;
         me.config.mapDivId = targetDivId;
@@ -186,7 +187,7 @@ var SASABus = {
         };
         me.map = new OpenLayers.Map(targetDivId, mapOptions);
         var topoMap = new OpenLayers.Layer.TMS('topo', 'http://sdi.provincia.bz.it/geoserver/gwc/service/tms/',{
-            'layername': 'WMTS_OF2011_APB-PAB', 
+            'layername': 'WMTS_OF2011_APB-PAB',
             'type': 'png8',
             visibility: true,
             opacity: 0.75,
@@ -210,7 +211,7 @@ var SASABus = {
         var osm = new OpenLayers.Layer.OSM("standardosm",null,{
 		 numZoomLevels: 18,
 		 projection: defaultProjection,
-	}); 
+	});
         var styleMap = new OpenLayers.StyleMap({
             pointRadius: 20,
             externalGraphic: 'images/pin.png',
@@ -226,18 +227,18 @@ var SASABus = {
 		zoom:parseInt(getParameterByName('zoom')),
 		lon:parseFloat(getParameterByName('lon')),
 		lat:parseFloat(getParameterByName('lat')),
-		
+
 	}
 	var keys = Object.keys(preConfigMap);
 	$.each(keys,function(index,value){
 		if (getPresetFromUrl(value))
 			reqP = preConfigMap[value];
 	});
-	var merano = new OpenLayers.Bounds(662500, 5169000, 667600, 5174000).transform(epsg25832,defaultProjection);				
+	var merano = new OpenLayers.Bounds(662500, 5169000, 667600, 5174000).transform(epsg25832,defaultProjection);
         me.map.zoomToExtent(merano);
 	if (reqP.lon && reqP.lat)
-		me.map.panTo(new OpenLayers.LonLat(reqP.lon,reqP.lat));	
-	if (me.map.isValidZoomLevel(reqP.zoom))		
+		me.map.panTo(new OpenLayers.LonLat(reqP.lon,reqP.lat));
+	if (me.map.isValidZoomLevel(reqP.zoom))
 		me.map.zoomTo(reqP.zoom);
         var geometry = new OpenLayers.Geometry.Point(reqP.lon,reqP.lat);
         var feature = new OpenLayers.Feature.Vector(geometry);
@@ -250,12 +251,12 @@ var SASABus = {
             });
             $('#zoomOutButton').click(function(event) {
                 event.preventDefault();
-                
+
                 me.map.zoomOut();
             });
             $('#zoomToMyPosition').click(function(event) {
                 event.preventDefault();
-                
+
                 me.zoomToCurrentPosition();
             });
 	    $('#switcheroo').click(function(event){
@@ -271,11 +272,11 @@ var SASABus = {
 
         }, 2500);
     },
-    
+
     getServerTime: function(success, failure, scope) {
         scope = scope || null;
         failure = failure || function() {};
-        
+
         $.ajax({
             type: 'GET',
             crossDomain: true,
@@ -291,7 +292,7 @@ var SASABus = {
             }
         });
     },
-    
+
     alert: function(msg) {
         if(typeof(SASABusAlert) == 'function') {
             SASABusAlert.call(null, msg);
@@ -299,7 +300,7 @@ var SASABus = {
             alert(msg);
         }
     },
-    
+
     zoomToCurrentPosition: function() {
         if(!this.geolocate) {
             this.geolocate = new OpenLayers.Control.Geolocate({
@@ -318,7 +319,7 @@ var SASABus = {
                 if(!this.map.getExtent().containsLonLat(lonLat)) {
                     this.alert('Your position is outside this map');
                 }
-                
+
                 var geometry = new OpenLayers.Geometry.Point(e.point.x, e.point.y);
                 var feature = new OpenLayers.Feature.Vector(geometry);
                 this.locationLayer.addFeatures([feature]);
@@ -334,13 +335,13 @@ var SASABus = {
         }
         this.geolocate.activate();
     },
-    
+
     showGeoJSON: function(geojson) {
         if(!this.testLayer) {
             this.testLayer = new OpenLayers.Layer.Vector('TEST');
             this.map.addLayers([this.testLayer]);
         }
-        
+
         var format = new OpenLayers.Format.GeoJSON();
         var features4326 = format.read(geojson);
         if(!features4326) return console.log('errore nel parsing...');
@@ -353,13 +354,13 @@ var SASABus = {
         this.testLayer.addFeatures(features);
         this.map.zoomToExtent(this.testLayer.getDataExtent());
     },
-    
+
     geocode: function(params, success, failure, scope) {
         var me = this;
         scope = scope || null;
         failure = failure || function() {};
         if(!success) return console.log('success callback is mandatory when calling geocode');
-        
+
         if(typeof(params) == 'string') {
             params = {
                 source: 'both',
@@ -418,8 +419,8 @@ var SASABus = {
         	error: function(xhr, status, error) {
 			console.log(error);
 		}
-        });	
-    },  
+        });
+    },
     showLocation: function(lon, lat) {
         try {
             var lonLat = new OpenLayers.LonLat(lon, lat);
@@ -427,7 +428,7 @@ var SASABus = {
             return console.log('invalid lon lat');
         }
         if(!lonLat.lon || !lonLat.lat) return console.log('invalid lon lat');
-        
+
         this.map.setCenter(lonLat, 6);
         var geometry = new OpenLayers.Geometry.Point(lon, lat);
         var feature = new OpenLayers.Feature.Vector(geometry);
@@ -441,12 +442,12 @@ var SASABus = {
             return console.log('invalid lon lat');
         }
         if(!lonLat.lon || !lonLat.lat) return console.log('invalid lon lat');
-        
+
         var geometry = new OpenLayers.Geometry.Point(lon, lat);
         var feature = new OpenLayers.Feature.Vector(geometry);
         this.locationLayer.addFeatures([feature]);
     },
-    
+
     removeAllLocations: function() {
         this.locationLayer.removeAllFeatures();
     }

@@ -60,7 +60,7 @@ var carSharingLayer = {
 		}
 	},
 	populate: function(){
-                var self = this;
+    var self = this;
 		if (self.brands == undefined)
 			self.getCarBrands(self.retrieveStations);
 	},
@@ -108,7 +108,7 @@ var carSharingLayer = {
 		},{
 			context: {
 				externalGraphic:function(feature){
-		        		var pin= 'images/6_Car_sharing/marker.svg';
+		      var pin= 'images/6_Car_sharing/marker.svg';
 					if (!feature.cluster){
 						var max = feature.attributes.parking;
 						var now = feature.attributes.value;
@@ -170,7 +170,7 @@ var carSharingLayer = {
 				$('.carsharingstation .car-categorys').empty();
 				$('.carsharingstation .legend').empty();
 				$('.modal').hide();
-	       			$('.carsharingstation').show();
+	      $('.carsharingstation').show();
 				for (brand in numbersByBrand){
 					var brandClass= brand.replace(/[^a-zA-Z0-9]/g,'_');
 		        		$('.carsharingstation .legend').append("<li class='car-categorys number-available clearfix'><div class='"+brandClass+"'></div><span>"+brand+"</span></li>");

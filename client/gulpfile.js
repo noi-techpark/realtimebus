@@ -1,8 +1,8 @@
 var gulp = require('gulp');
-var concat = require('gulp-concat');  
-var order = require('gulp-order');  
+var concat = require('gulp-concat');
+var order = require('gulp-order');
 var minify = require('gulp-minify');
-var rename = require('gulp-rename');  
+var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var jsFiles = [
 		'js/OpenLayers/proj4js.min.js',
@@ -20,9 +20,10 @@ var jsFiles = [
 		'js/init.js',
 		'js/radialProgress.js',
 		'js/utility.js',
-];  
+		'js/parking.js'
+];
     jsDest = 'scripts';
- 
+
 gulp.task('compress', function() {
     gulp.src(jsFiles)
     .pipe(order(jsFiles, { base: './' }))

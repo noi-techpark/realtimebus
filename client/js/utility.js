@@ -12,7 +12,7 @@ function printFunctionCalled(functionCall) {
 
 // logs the styleName value of the given element
 function println(elementID, styleName) {
-	console.log(elementID + "." + styleName + ": " + 
+	console.log(elementID + "." + styleName + ": " +
 		window.getComputedStyle(
 			document.getElementById(elementID)
 		).getPropertyValue(styleName)
@@ -54,9 +54,9 @@ $(document).ready(function() {
 	printFunctionCalled("$(document).ready(function()");
 //	console.log($(document).height());
 //	console.log($(window).height());
-	
+
 	// ---- Link esterno ----------------------------------------------------------------------------------------------------------
-	$("a[href*='http://']:not([href*='"+location.hostname+"']),[href*='https://']:not([href*='"+location.hostname+"'])").attr("target","_blank");	
+	$("a[href*='http://']:not([href*='"+location.hostname+"']),[href*='https://']:not([href*='"+location.hostname+"'])").attr("target","_blank");
 
 
  	// ---- Translations --------------
@@ -70,7 +70,7 @@ $(document).ready(function() {
 	lang_menu_settings			= "Settings";
 	lang_close				= "chiudi";
 	lang_lingua				= "Lingua";
-	
+
 	if($('body').hasClass('en')){
 		lang = "en";
 		lang_no_results 		= "No results...";
@@ -103,28 +103,30 @@ $(document).ready(function() {
 
 	//----------------------
 	//on orientation change
-	//----------------------	
+	//----------------------
 	function onOrientationChange(){
 		printFunctionCalled("onOrientationChange()");
 		setTimeout(function(){
 			init(true);
 		},20);
 	}
-	
+
 	$('.config').click(function(element){
 		var theme = $(this).attr('id');
 		theme = theme.substring(0,theme.indexOf('-'));
 		if (theme == 'walking')
 			wegeStartPointsLayer.getRoutes();
-		  
+		if(theme == 'parking')
+			parkingLayer.getParkings();
+
 		var isVisible= $('.' + theme+'.modal').is(':visible');
 		$('.modal:visible').hide();
 		if (!isVisible)
 			$('.' + theme+'.modal').show();
-		
+
 	});
 	$('.about-selector').click(function(){
-		$('.about-box').toggle();	
+		$('.about-box').toggle();
 	});
 	$('.close-modal,.backtomap').click(function(element){
 		$('.modal').hide();
@@ -141,24 +143,24 @@ $(document).ready(function() {
 	function init(varOrientationChange){
 		printFunctionCalled("init("+varOrientationChange+")");
 	}
-		
+
 	function oneTime(device){
 		printFunctionCalled("oneTime("+device+")");
-		
+
 		$('.map-controls').before('<div id="zoomButtons"><a href="#" id="zoomInButton"><img src="images/2_Map/Plus.svg" alt="Zoom in"/></a><a href="#" id="zoomOutButton"><img src="images/2_Map/Minus.svg" alt="Zoom out"/></a></div>');
-		
+
 		SASABus.init('map');
 		linesLayer.getAllLines(initLinesAfterRead);
 		var subDomain = document.domain.substring(0,document.domain.indexOf('.'));
 		activateThemes(subDomain);
 		$( ".menu>li a" ).click(function() {
 			if ($(".modal:visible").length>0)
-				$(".modal:visible").hide();	
+				$(".modal:visible").hide();
 			else{
 				$(this).toggleClass('active');
 				activateThemes();
 			}
-		}); 
+		});
 		function activateThemes(subdomain){
 			if (subdomain == 'mobility')
 				$(".menu>li a").addClass("active");
@@ -169,7 +171,7 @@ $(document).ready(function() {
 				themeArray.push($(this).attr('id'));
 			});
 			SASABus.activateSelectedThemes(themeArray);
-		} 
+		}
 		$(".filters .toggler").click(function(){
 			$(this).toggleClass("disabled");
 			linesLayer.getLines(initLinesAfterRead);
@@ -191,20 +193,20 @@ $(document).ready(function() {
 
 			$('#serverTime .reload').html(time);
 		}
-		
+
 		setInterval(function() {
 			getReadableTime();
 		}, 10 * 1000);
-		
+
 		getReadableTime();
-		
+
 		$('a[rel=external]').attr('target','_blank');
 	}
 
 	if (isSmartPhoneMode()) {
 		// on the smartphone the menu should be closed at first
 		//$('div.panel').slideUp();
-		
+
 	}
 });
 
@@ -272,7 +274,7 @@ function initLinesAfterRead(lines)
 	{
 		if(typeof htmlLineeU[i] != 'undefined' && !urbanFilter)
 		{
-		
+
 			if(htmlLineeU[i][1].length == 0)
 				htmlL += htmlLineeU[i][0]+htmlLineeU[i][2]+htmlLineeU[i][6];
 			else
@@ -305,7 +307,7 @@ function stopPropagationCustom(){
 	});
 }
 
-function showLinesAfterRead(lines){ 
+function showLinesAfterRead(lines){
 	printFunctionCalled("showLinesAfterRead("+lines+")");
 
 	// ---- Tabs ----------------------------------------------------------------------------------------------------------
@@ -317,27 +319,27 @@ function showLinesAfterRead(lines){
 	//$("#variants .tab-content .line").append('<span class="icon" />');
 
 	$('.tabbed-content').each(function(){
-		$(this).find('.tabs li').click(function(){ 
+		$(this).find('.tabs li').click(function(){
 			tabbed_content = $(this).parents('.tabbed-content');
 			tabbed_content.find('.active').removeClass('active');
-			$(this).addClass('active'); 
+			$(this).addClass('active');
 			tabbed_content.find('.tab-content').hide();
-			var activeTab = $(this).index(); 
+			var activeTab = $(this).index();
 			tabbed_content.find('.tab-content').eq(activeTab).fadeIn().addClass('active');
 			panelScroll();
 		});
 	});
-	
+
 	// ---- Listing Variants ----------------------------------------------------------------------------------------------------------
 	$('#variants ul.child-tick').hide();
-	
+
 	$('#deselectall').bind('touchstart click', function(){
 		if($(this).hasClass('disabled')){
 				$(this).text("Deselect all lines");
 				$('#variants .line').addClass("enabled");
 				linesLayer.showLines(['all']);
 				for(var i=0;i<mapLinesInit.length;i++)
-                                {	
+                                {
                                         mapLines.push(mapLinesInit[i]);
                                 }
 				$('#deselectall').removeClass('disabled');
@@ -350,7 +352,7 @@ function showLinesAfterRead(lines){
 					if(mapLinesInit.containsSubStr(line+':'))
 					{
 						$(this).toggleClass('enabled');
-						
+
 						//Elimino le linee da mapLines
 						for(var i=0;i<mapLines.length;i++)
 						{
@@ -418,7 +420,7 @@ function showLinesAfterRead(lines){
 			panelScroll();
 		}
 	});
-		
+
 	$('#variants .var').click(function(){
 		$('#variants .line').addClass('close');
 		$(this).parent('.line').toggleClass('close');
@@ -431,12 +433,12 @@ function showLinesAfterRead(lines){
 			setTimeout(function(){
 				panelScroll();
 			},10);
-			
+
 		});
 	});
 
 	$('#variants .child-tick li').append('<span />');
-	
+
 	$('#variants .child-tick li').click(function(){
 		var line = $(this).parent().parent().find('.line-no').attr('id').replace('l_','');
 		var variante = $(this).attr('id').replace('v_'+line+'_','').trim();
@@ -444,7 +446,7 @@ function showLinesAfterRead(lines){
 		if(mapLinesInit.containsSubStr(line+':'+variante))
 		{
 			$(this).toggleClass('ticked');
-			
+
 			//console.log($(this).parent('.line').attr('class'));
 			var isEnable = $(this).attr('class').indexOf('ticked')>=0;
 			if(isEnable)
@@ -483,25 +485,25 @@ function showLinesAfterRead(lines){
 		}
 	});
 
-	
-	// ---- PreFilled   ----------------------------------------------------------------------------------------------------------			
+
+	// ---- PreFilled   ----------------------------------------------------------------------------------------------------------
 	$.fn.preFilled = function() {
 		$(this).focus(function(){
 			if( this.value == this.defaultValue ) {
 				this.value = "";
-			}				   
+			}
 		}).blur(function(){
 			if( !this.value.length ) {
 				this.value = this.defaultValue;
 			}
 		});
 	};
-	
+
 	$('#search-field').preFilled();
 
 
-	// ---- Map Panel   ----------------------------------------------------------------------------------------------------------	
-		
+	// ---- Map Panel   ----------------------------------------------------------------------------------------------------------
+
 	//$('#main span.btn-toggle').click(function(){
 	$('span.btn-toggle').click(function(){
 		if($(this).hasClass('open')){
@@ -530,7 +532,7 @@ function showLinesAfterRead(lines){
 		panelScroll();
 	});
 	panelScroll();
-	
+
 	if(!$('body').hasClass('lte-8')){
 		$('#scroll .iScrollIndicator').mousedown(function() {
 			$(this).addClass('grabbing');
@@ -539,13 +541,13 @@ function showLinesAfterRead(lines){
 			$(this).removeClass('grabbing');
 		});
 	};
-		
+
 	stopPropagationCustom();
-	
-	
-	
+
+
+
 	// ---- CSS PIE - Round Corners  ----------------------------------------------------------------------------------------------------------
-	
+
 	if($('body').hasClass('lte-8')){
 		$('.list-actions .btn-add').addClass('corner-type-a');
 		$('.corner-type-a').each(function(){
@@ -560,7 +562,7 @@ function showLinesAfterRead(lines){
 			});
 		}
 	}
-	
+
 	if($('body').hasClass('ie-8')){
 		if(window.PIE){
 			$('.box').each(function(){
@@ -585,7 +587,7 @@ function showLinesAfterRead(lines){
 		$('#v_'+codLinea+'_'+codVariante).toggleClass('ticked');
 	}
 
-	//console.log(mapLines); 
+	//console.log(mapLines);
 
 	$("#variants .tab-content .line").each(function(){
 		var line = $(this).find('.line-no').attr('id').replace('l_','');
@@ -594,8 +596,8 @@ function showLinesAfterRead(lines){
 		else
 			$(this).addClass('close');
 	});
-	//console.log('search-submit -> click'); 
-	$("#search-form").submit(findResults); 
+	//console.log('search-submit -> click');
+	$("#search-form").submit(findResults);
 
 }
 
@@ -605,13 +607,13 @@ function panelScroll(){
 
 	maxHeight = $('.panel-content-out').height();
 
-	// there seams to be a problem on change of orientation, 
+	// there seams to be a problem on change of orientation,
 	// the height of panel-content-out gets reported 0
 	// we ignore these intermediate calls, because they create
 	// the effect the menu gats shown without the content in the scroll
 	if (maxHeight > 0) {
 		$('.panel .scroll').css('max-height', maxHeight + 'px');
-	
+
 		if($('body').hasClass('lte-8')){
 			$('#scroll').css('overflow-y','auto');
 		}else{
@@ -655,7 +657,7 @@ function successFind(rows){
 		strHtml = '<li class="no-results">' + lang_no_results_text + '</li>';
 	}else{
 		$('.search-box.result .title').html(lang_near_stop);
-		
+
 		for(var i=0;i<rows.length;i++){
 			fermate = rows[i]['stops'];
 			for(var j=0;j<fermate.length;j++){
@@ -705,5 +707,5 @@ function showResults(){
 		var resultHeight = $('div.search-box.result').outerHeight();
 		var newTop = initialTop + resultHeight;
 		$('.panel-content-out').css('top','auto');
-	});		
+	});
 }

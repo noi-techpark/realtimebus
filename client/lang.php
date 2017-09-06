@@ -48,6 +48,8 @@
 	$vars['it_book_car'] = 'Prenota una macchina';
 	$vars['it_feedbackform'] = 'https://docs.google.com/forms/d/1Us6V3D8GdiNrhNyLhrfX4rOkPAb7WG7kjAlIjWseN6E/viewform';
 	$vars['it_bikelink'] = 'http://www.gemeinde.meran.bz.it/it/Bici_a_noleggio';
+	$vars['it_bolzano'] = 'Bolzano';
+	$vars['it_merano'] = 'Merano';
 	// Inglese
 	$vars['en_meranotitle'] = 'Merano - Real time bus';
 	$vars['en_urbani'] = 'Urban';
@@ -86,6 +88,8 @@
 	$vars['en_book_car'] = 'Book a car';
 	$vars['en_feedbackform'] = 'https://docs.google.com/forms/d/14TqlT6UJbZWFj3LDZrWDJjUDBCM5BAYsAiRETOw0Jvo/viewform';
 	$vars['en_bikelink'] = 'http://www.gemeinde.meran.bz.it/it/Bici_a_noleggio';
+	$vars['en_bolzano'] = 'Bolzano';
+	$vars['en_merano'] = 'Merano';
 	// Tedesco
 	$vars['de_meranotitle'] = 'Meran - Real time bus';
 	$vars['de_urbani'] = 'St&auml;dtische Busse';
@@ -123,5 +127,6 @@
 	$vars['de_book_car'] = 'Buche ein Fahrzeug';
 	$vars['de_feedbackform'] = 'https://docs.google.com/forms/d/1EHZb-gLlpZBSL9djwIMiOCSg0eOZmXL41c1DU4-9LfY/viewform';
 	$vars['de_bikelink'] = 'http://www.gemeinde.meran.bz.it/de/Fahrradverleih';
-	
+	$vars['de_bolzano'] = 'Bozen';
+	$vars['de_merano'] = 'Meran';
 ?>

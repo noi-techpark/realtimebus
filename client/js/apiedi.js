@@ -40,7 +40,7 @@ var artPoints = {
                         }
                 });
 		this.layer = vectorLayer;
-                return this.layer;		
+                return this.layer;
 	}
 }
 var wegeStartPointsLayer = {
@@ -89,7 +89,7 @@ var wegeStartPointsLayer = {
 	        });
 		this.layer = positionsLayer;
                 return this.layer;
-				
+
 		function getArtAndNature(){
         		var styleMap = {
             			externalGraphic: 'images/Themenwege/parcours_kunst.svg',

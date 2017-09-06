@@ -15,15 +15,15 @@ var jsT= {
 			1:'Verfügbar',
 			2:'Besetzt',
 			3:'Reserviert',
-			4:'Auser Dienst'
+			4:'Außer Dienst'
 		},
 		backtomap:'zur Kartenansicht',
 		chargerOnline:'Ladestation in Betrieb',
-		outOfOrder:'Ladestation momentan auser Betrieb',
+		outOfOrder:'Ladestation momentan außer Betrieb',
 		paymentInfo:'Wie bezahle ich?',
 		book:'Reservieren',
 		deselectAll:'Alle ausblenden',
-		selectAll:'Alle anzeigen',
+		selectAll:'Alle anzeigen'
 	},
 	it:{
 		altitudep:'Profilo altimetrico',
@@ -47,9 +47,9 @@ var jsT= {
 		chargerOnline:'Stazione di ricarica attiva',
 		outOfOrder:'Stazione fuori servizio',
 		paymentInfo:'Come posso pagare?',
+		book:'Prenota',
 		deselectAll:'Deseleziona tutti',
-		selectAll:'Seleziona tutti',
-                book:'Prenota'
+		selectAll:'Seleziona tutti'
 	},
 	en:{
 		altitudep:'Altitude profile',
@@ -73,9 +73,9 @@ var jsT= {
 		chargerOnline:'Chargingstation online',
 		outOfOrder:'Currently out of order',
 		paymentInfo:'Payment info',
+		book:'Book',
 		deselectAll:'Deselect all',
-		selectAll:'Select all',
-                book:'Book'
+		selectAll:'Select all'
 	}
 
 }

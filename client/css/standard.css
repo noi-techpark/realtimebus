@@ -1,11 +1,11 @@
 /* --------------------------------------------------
-Theme Name: 
+Theme Name:
 file: standard.css
-author: 
+author:
 ---------------------------------------------------*/
 
 
-/* ------- MEDIA SCREEN ------- */	
+/* ------- MEDIA SCREEN ------- */
 
 @media screen{
 
@@ -77,7 +77,7 @@ a{color:#c0c0c0;text-decoration:none}
 	.result span.close:hover{-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";filter:alpha(opacity=90);opacity:0.9}
 
 .panel-content{width:100%;float:left;}
-	
+
 #variants{float:left;padding:10px;width:100%;}
 	#variants .tabbed-content{float:left;width:100%;z-index:5;}
 	#variants .tabs{float:left;width:100%;margin-bottom:15px}
@@ -113,7 +113,7 @@ a{color:#c0c0c0;text-decoration:none}
 .panel-content-out{width:100%;position:absolute;top:0;left:0;bottom:90px;}
 
 .panel .scroll{/*max-height:500px;*/overflow:hidden;position:relative;width:375px;float:left;padding:0 0}
-	.panel .scroll-content{float:left;padding:0 0 0 0;width:375px;-webkit-transform: translateZ(0);-moz-transform: translateZ(0);-ms-transform: translateZ(0);-o-transform: translateZ(0);transform: translateZ(0);-webkit-touch-callout: none;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;-webkit-text-size-adjust: none;-moz-text-size-adjust: none;-ms-text-size-adjust: none;-o-text-size-adjust: none;text-size-adjust: none} 
+	.panel .scroll-content{float:left;padding:0 0 0 0;width:375px;-webkit-transform: translateZ(0);-moz-transform: translateZ(0);-ms-transform: translateZ(0);-o-transform: translateZ(0);transform: translateZ(0);-webkit-touch-callout: none;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;-webkit-text-size-adjust: none;-moz-text-size-adjust: none;-ms-text-size-adjust: none;-o-text-size-adjust: none;text-size-adjust: none}
 	.iScrollVerticalScrollbar{position:absolute;z-index:9999;width:5px;bottom:11px;top:32px;right:8px}
 	.iScrollVerticalScrollbar.hidden{display:none}
 	.iScrollIndicator{background:#bfbfbf;width:5px;position:absolute;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px}
@@ -223,7 +223,7 @@ a{color:#c0c0c0;text-decoration:none}
 	#footer-2 #pages ul{margin:0}
 	#pages .active{color:#cbde08}
 	#pages .close{position:absolute;top:16px;right:30px;background:url(../images/ico-close-page.png) 0 0 no-repeat;width:31px;height:31px;text-indent:-9999px	 }
-	#pages .close:hover{background-position:0 -31px;cursor:pointer}	
+	#pages .close:hover{background-position:0 -31px;cursor:pointer}
 
 
 /* ----------- FOOTER --------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -254,14 +254,14 @@ a{color:#c0c0c0;text-decoration:none}
 	#footer-2 li a:hover{color:#7f7f7f}
 	#footer-2 nav{padding:10px 0}
 	#footer-2 nav a:hover{color:#7f7f7f}
-	
-	
-	
+
+
+
 /* ----- IE 10 ------*/
-	
+
 .ie10 .login-panel .submit input{padding-top:6px}
-	
-} /* END MEDIA SCREEN*/	
+
+} /* END MEDIA SCREEN*/
 
 
 
@@ -271,7 +271,7 @@ a{color:#c0c0c0;text-decoration:none}
 	a, h1, h2, h3, h4, p, span, li, input, button{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 	input[type="text"], input[type="password"] { outline: none; }
 
-}	
+}
 
 
 /* ----------- MEDIA QUERIES FOR RESPONSIVE --------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -290,9 +290,9 @@ a{color:#c0c0c0;text-decoration:none}
 @media screen and (min-width: 1501px){
 }
 
-	
-/* ------- MEDIA PRINT  ------- */	
-	
+
+/* ------- MEDIA PRINT  ------- */
+
 @media print{
 
 	body{font-size:12pt}
@@ -304,11 +304,11 @@ a{color:#c0c0c0;text-decoration:none}
 	h3{font-size:13pt}
 	h4{font-size:12pt}
 	ul{list-style-type:none;margin-left:0;padding-left:0}
-	
+
 	table{border-collapse:collapse}
 	table td,table th{text-align:center;border:1px solid #ccc;padding:10px;font-size:12pt}
 
-} /* END MEDIA PRINT*/	
+} /* END MEDIA PRINT*/
 
 .clearfix() {
   &:before,
@@ -339,6 +339,7 @@ a{color:#c0c0c0;text-decoration:none}
 .menu a.echarging.active svg{background-color:#f2bf00;}
 .menu a.bikesharing.active svg{background-color:#bb392b;}
 .menu a.bus.active svg{background-color:#ee9712;}
+.menu a.parking.active svg{background-color:#66ccff;}
 .modal:before{
 	content: "";
 	position: absolute;
@@ -426,7 +427,7 @@ a{color:#c0c0c0;text-decoration:none}
 	margin:8px 0;
 	background: no-repeat left center;
 	background-size:auto 100%;
-	
+
 }
 .walk-container .metadata .time{
 	background-image:url('../images/4_Piedi/Clock.svg');
@@ -439,6 +440,12 @@ a{color:#c0c0c0;text-decoration:none}
 }
 .walk-container .metadata .kcal{
 	background-image:url('../images/4_Piedi/Kcal.svg');
+}
+.walk-container .metadata .address{
+	background-image:url('../images/7_Parking/marker.svg');
+	width:100%;
+	text-align:left;
+	padding-left: 15px;
 }
 .chartContainer{
     position: relative;
@@ -494,11 +501,30 @@ a{color:#c0c0c0;text-decoration:none}
 }
 .routes-list>a li{
 	padding:15px;
-	opacity:0.7;	
+	opacity:0.7;
 }
 .routes-list>a:nth-child(2n) li{
 	background-color:#fff;
 }
+.parking-list{
+	overflow:auto;
+	height:80%;
+}
+.parking-list>li a h4{
+	font-size:18px;
+	line-height:22px;
+}
+.parking-list>li a{
+	color: black;
+}
+.parking-list>li{
+	padding:15px;
+	opacity:0.7;
+}
+.parking-list>a:nth-child(2n) li{
+	background-color:#fff;
+}
+
 .list-route:hover li{
 	opacity:1;
 }
@@ -517,7 +543,7 @@ a{color:#c0c0c0;text-decoration:none}
 	margin:10px;
 	color:#000;
 	line-height:100%;
-	vertical-align:middle;	
+	vertical-align:middle;
 	clear:both;
 }
 .ibutton>div{
@@ -673,7 +699,7 @@ rect.VW_e_Golf_{
 	line-height:20px;
 }
 .station .plug .outlet{
-	margin-top:8px;	
+	margin-top:8px;
 }
 .station .plug svg{
 	vertical-align:top;
@@ -684,7 +710,7 @@ rect.VW_e_Golf_{
 	margin-left:auto;
 	margin-right:auto;
         width:75%;
-	font-size:14px;	
+	font-size:14px;
 	line-height:25px;
 }
 .station .plug img{
