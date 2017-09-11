@@ -119,14 +119,15 @@ var SASABus = {
 	$.each(layerMap,function(key,value){				//hide all layers which are in non active Themes
     if ($.inArray(key,activeThemes) == -1){
 			$.each(value,function(index,object){
-				if(object.get())
-					if ($.isArray(object.get())){
-						$.each(object.get(),function(index,ovalue){
+        var obj = object.get();
+				if(obj)
+					if ($.isArray(obj)){
+						$.each(obj,function(index,ovalue){
                                                 	ovalue.setVisibility(false);
 						});
 					}
-					else if (me.map.getLayer(object.get().id) != null){
-						object.get().setVisibility(false);
+					else if (me.map.getLayer(obj.id) != null){
+						obj.setVisibility(false);
 					}
 			});
 		}
@@ -142,10 +143,11 @@ var SASABus = {
 		}
 	});
 	$.each(activeLayers,function(index,object){		//add Layers or set to visible if already added
-		if (object.get() == null || $.isArray(object.get()))
+    var obj = object.get();
+		if (obj == null || $.isArray(obj))
       return;
-		if (me.map.getLayer(object.get().id) == null){
-			me.map.addLayer(object.get());
+		if (me.map.getLayer(obj.id) == null){
+			me.map.addLayer(obj);
 			if (object.populate)
 				object.populate();
 		}
@@ -269,14 +271,12 @@ var SASABus = {
 			$('#switcheroo').text('EARTH');
 		}
 	    });
-
         }, 2500);
     },
 
     getServerTime: function(success, failure, scope) {
         scope = scope || null;
         failure = failure || function() {};
-
         $.ajax({
             type: 'GET',
             crossDomain: true,

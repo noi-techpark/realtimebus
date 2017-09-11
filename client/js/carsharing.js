@@ -8,7 +8,7 @@ var carSharingLayer = {
 					var selected = true;
 					for (i in brands){
 						if (brands[i]==true)
-							selected = false;
+						selected = false;
 					}
 					return selected;
 				}
@@ -17,18 +17,18 @@ var carSharingLayer = {
 				brands[value.brand] = true;
 			});
 			$('.cartypes').empty();
-				$.each(brands,function(index,value){
+			$.each(brands,function(index,value){
 				if (typeof value == 'function')
-					return true;
+				return true;
 				var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
 				$('.carsharing .cartypes').append('<li class="clearfix"><p>' + index + '</p><a href="javascript:void(0)" brand="'+index+'" class="statuswidget toggler">'
-                	        +'<svg width="55" height="30">'
-                        	+	'<g>'
-	                        +       	'<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#8aaa30" height="24"/>'
-        	                +               '<circle cx="34" cy="17" r="9" fill="#8aaa30" />'
-                	        +       '</g>'
-                        	+       'Sorry, your browser does not support inline SVG.'
-	                        + '</svg>'
+				+'<svg width="55" height="30">'
+				+	'<g>'
+				+       	'<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#8aaa30" height="24"/>'
+				+               '<circle cx="34" cy="17" r="9" fill="#8aaa30" />'
+				+       '</g>'
+				+       'Sorry, your browser does not support inline SVG.'
+				+ '</svg>'
 				+ '</a></li>');
 			});
 			var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
@@ -44,32 +44,32 @@ var carSharingLayer = {
 			$('.carsharing .deselect-all').click(function(){
 				var nothingSelected = brands.nothingSelected();
 				if (!nothingSelected)
-					$('.carsharing .toggler').addClass('disabled');
+				$('.carsharing .toggler').addClass('disabled');
 				else
-					$('.carsharing .toggler').removeClass('disabled');
+				$('.carsharing .toggler').removeClass('disabled');
 				$.each(brands,function(index,value){
 					if (typeof(value)!='function')
-	                	        	brands[index] = nothingSelected;
-        	                });
+					brands[index] = nothingSelected;
+				});
 				var statusText = !nothingSelected ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
 				$('.carsharing .deselect-all').text(statusText);
 				carSharingLayer.retrieveStations(brands);
 			});
 			if (callback != undefined)
-				callback(brands);
+			callback(brands);
 		}
 	},
 	populate: function(){
-    var self = this;
+		var self = this;
 		if (self.brands == undefined)
-			self.getCarBrands(self.retrieveStations);
+		self.getCarBrands(self.retrieveStations);
 	},
 	retrieveStations : function(brands){
 		var brandreq='';
 		$.each(brands,function(index,value){
 			if (value){
 				if (brandreq != '')
-					brandreq += "\\,";
+				brandreq += "\\,";
 				brandreq += '\''+index+'\'';
 			}
 		});
@@ -80,7 +80,7 @@ var carSharingLayer = {
 			format_options: 'callback: carJson'
 		};
 		if (brandreq != '')
-			params['viewparams']='brand:'+brandreq;
+		params['viewparams']='brand:'+brandreq;
 		$.ajax({
 			url : SASABus.config.geoserverEndPoint+'wfs?'+$.param(params),
 			dataType : 'jsonp',
@@ -98,9 +98,9 @@ var carSharingLayer = {
 
 
 	},
- 	get:function(){
+	get:function(){
 		if (this.isCached && this.layer != undefined)
-			return this.layer;
+		return this.layer;
 		var styleMap = new OpenLayers.StyleMap(new OpenLayers.Style({
 			externalGraphic: '${externalGraphic}',
 			graphicWidth: 35,
@@ -108,19 +108,19 @@ var carSharingLayer = {
 		},{
 			context: {
 				externalGraphic:function(feature){
-		      var pin= 'images/6_Car_sharing/marker.svg';
+					var pin= 'images/6_Car_sharing/marker.svg';
 					if (!feature.cluster){
 						var max = feature.attributes.parking;
 						var now = feature.attributes.value;
 						var a = now/max;
 						if (a == 0.)
-			        			pin= 'images/6_Car_sharing/marker_red.svg';
+						pin= 'images/6_Car_sharing/marker_red.svg';
 						else if (a>0 && a <= 0.6)
-				        		pin= 'images/6_Car_sharing/marker_orange.svg';
+						pin= 'images/6_Car_sharing/marker_orange.svg';
 						else if (a>=0.6)
-				        		pin= 'images/6_Car_sharing/marker_green.svg';
+						pin= 'images/6_Car_sharing/marker_green.svg';
 					}
-				        return pin;
+					return pin;
 				}
 			}
 		}));
@@ -130,7 +130,7 @@ var carSharingLayer = {
 			styleMap: styleMap,
 		});
 		positionsLayer.events.on({
-	       		"featureselected":function(e){
+			"featureselected":function(e){
 				if (!e.feature.cluster){
 					var station = e.feature.attributes.stationcode;
 					integreen.retrieveData(station,"carsharingFrontEnd/rest/",getCarsharingStation);
@@ -140,14 +140,14 @@ var carSharingLayer = {
 		function getCarsharingStation(details,current){
 			var updatedOn = moment(current['number-available'].timestamp).locale(lang).format('lll');
 			$('.carsharingstation>.walk-container>.number-available').removeClass("free");
-                        if  (current['number-available'].value == details.availableVehicles)
-				$('.carsharingstation>.walk-container>.number-available').addClass("free");
+			if  (current['number-available'].value == details.availableVehicles)
+			$('.carsharingstation>.walk-container>.number-available').addClass("free");
 
 			radialProgress($(".carsharingstation .number-available")[0])
-				.diameter(180)
-				.value(current['number-available'].value)
-				.maxValue(details.availableVehicles)
-				.render();
+			.diameter(180)
+			.value(current['number-available'].value)
+			.maxValue(details.availableVehicles)
+			.render();
 			integreen.getChildStationsData(details.id,"carsharingFrontEnd/rest/cars/",displayCarsharingData);
 			function getAmountByBrand(children){
 				var amountByBrand = {};
@@ -161,7 +161,7 @@ var carSharingLayer = {
 					}
 					amountByBrand[brand].total = amountByBrand[brand].total+1;
 					if (value.newestRecord['availability'].value == 0)
-						amountByBrand[brand].current=amountByBrand[brand].current +1;
+					amountByBrand[brand].current=amountByBrand[brand].current +1;
 				});
 				return amountByBrand;
 			}
@@ -170,18 +170,18 @@ var carSharingLayer = {
 				$('.carsharingstation .car-categorys').empty();
 				$('.carsharingstation .legend').empty();
 				$('.modal').hide();
-	      $('.carsharingstation').show();
+				$('.carsharingstation').show();
 				for (brand in numbersByBrand){
 					var brandClass= brand.replace(/[^a-zA-Z0-9]/g,'_');
-		        		$('.carsharingstation .legend').append("<li class='car-categorys number-available clearfix'><div class='"+brandClass+"'></div><span>"+brand+"</span></li>");
+					$('.carsharingstation .legend').append("<li class='car-categorys number-available clearfix'><div class='"+brandClass+"'></div><span>"+brand+"</span></li>");
 					$('.car-categorys .'+brandClass).removeClass("free");
 					if (numbersByBrand[brand].current === numbersByBrand[brand].total)
-						$('.car-categorys .' + brandClass).addClass("free");
+					$('.car-categorys .' + brandClass).addClass("free");
 					radialProgress($('.car-categorys.number-available .'+brandClass)[0])
-		                		 .diameter(76)
-			                         .value(numbersByBrand[brand].current)
-				                 .maxValue(numbersByBrand[brand].total)
-				                 .render();
+					.diameter(76)
+					.value(numbersByBrand[brand].current)
+					.maxValue(numbersByBrand[brand].total)
+					.render();
 				}
 				$('.carsharingstation .title').html(details.name+"<br/><small>"+updatedOn+"</small>");
 				$('.carsharingstation .caption').text(jsT[lang]['freeCars']);

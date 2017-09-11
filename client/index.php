@@ -555,13 +555,12 @@ include 'lang.php';
 									<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 								</div>
 							</div>
-							<div class="hidden modal parkingLot">
+							<div class="hidden modal parkinglot-detail">
 								<div class="walk-container">
 									<div class="title">
 									</div>
 									<div class="content">
-									</div>
-									<div class="legend"></div>
+								</div>
 								</div>
 							</div>
 							<div class="about-box">

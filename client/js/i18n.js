@@ -23,7 +23,13 @@ var jsT= {
 		paymentInfo:'Wie bezahle ich?',
 		book:'Reservieren',
 		deselectAll:'Alle ausblenden',
-		selectAll:'Alle anzeigen'
+		selectAll:'Alle anzeigen',
+		availableParkingSpaces:'Freie Parkplätze',
+		capacity:'Kapazität',
+		phone:'Tel.',
+		disabledtoilet:'Behindertentoilette verfügbar',
+		disabledcapacity:'Kapazität Behindertenparkplätze',
+		operator:'Betreiber'
 	},
 	it:{
 		altitudep:'Profilo altimetrico',
@@ -49,7 +55,13 @@ var jsT= {
 		paymentInfo:'Come posso pagare?',
 		book:'Prenota',
 		deselectAll:'Deseleziona tutti',
-		selectAll:'Seleziona tutti'
+		selectAll:'Seleziona tutti',
+		availableParkingSpaces:'Parcheggi liberi',
+		capacity:'Capienza',
+		phone:'T.',
+		disabledtoilet:'Bagno per disabili disponibile',
+		disabledcapacity:'Capienza parcheggi disabili',
+		operator:'Operatore'
 	},
 	en:{
 		altitudep:'Altitude profile',
@@ -75,7 +87,13 @@ var jsT= {
 		paymentInfo:'Payment info',
 		book:'Book',
 		deselectAll:'Deselect all',
-		selectAll:'Select all'
+		selectAll:'Select all',
+		availableParkingSpaces:'Available parking spaces',
+		capacity:'Capacity',
+		phone:'Phone:',
+		disabledtoilet:'Disabled toilet available',
+		disabledcapacity:'Capacity disabled parking spaces',
+		operator:'Operator'
 	}
 
 }

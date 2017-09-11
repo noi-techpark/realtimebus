@@ -1,4 +1,7 @@
 var myparkings;
+var config = {
+  types: [["free","","","300"]]
+};
 var parkingLayer = {
   isCached: true,
   retrieveParkingLots : function(){
@@ -30,7 +33,7 @@ var parkingLayer = {
   },
   get:function(){
     if (this.isCached && this.layer != undefined)
-                        return this.layer;
+    return this.layer;
     var styleMap = new OpenLayers.StyleMap(new OpenLayers.Style({
       externalGraphic: '${externalGraphic}',
       graphicWidth: 35,
@@ -59,27 +62,53 @@ var parkingLayer = {
       strategies: [new OpenLayers.Strategy.Cluster({distance: 25,threshold: 2})],
     });
     positionsLayer.events.on({
-            "featureselected":function(e){
-  if (!e.feature.cluster){
-                      var station = e.feature.attributes.stationcode;
-    //integreen.retrieveData(station,"parking/rest/",displayData);
-    $('.modal').hide();
-    $('.parkingLot').show();
-    $('.parkingLot .title').html("Hallo");
-    $('.parkingLot .content').html('<a href="javascript:void(0)" class="backtomap ibutton"><div>'+jsT[lang].backtomap+'</div></a><hr/>');
-    $('.parkingLot .content .backtomap.ibutton').click(function(){
-      $('.modal').hide();
-    });
+      "featureselected":function(e){
+        if (!e.feature.cluster){
+          var station = e.feature.attributes.stationcode;
+          integreen.retrieveData(station,"parkingFrontEnd/rest/",parkingLayer.displayData, config);
 
-  }
-            }
+        }
+      }
     });
     this.layer = positionsLayer;
     return this.layer;
 
-    function displayData(details, state){
-
+  },
+  displayData: function(details, state){
+    var html = ''
+    $('.modal').hide();
+    var updatedOn = moment(state['free'].timestamp).locale(lang).format('lll');
+    $('.parkinglot-detail .title').html(details.name +"<br/><small>"+updatedOn+"</small>");
+    html+='<div class="number-available"></div>';
+    html+='<div class="caption">' + jsT[lang].availableParkingSpaces+'</div><hr/>';
+    html+='<div class="metadata clearfix">';
+    html+='<div class="address">'+details.mainaddress+'</div>';
+    html+='<div class="capacity">'+ jsT[lang].capacity +': ' +details.capacity+'</div>';
+    html+='<div class="phone">'+jsT[lang].phone + ' ' + details.phonenumber+'</div>';
+    if(details.disabledtoiletavailable)
+      html+='<div class="disabledtoilet">'+ jsT[lang].disabledtoilet +'</div>';
+    if(details.disabledcapacity)
+      html+='<div class="disabledcapacity">'+ jsT[lang].disabledcapacity + ': ' + details.disabledcapacity+'</div>';
+    if(details.owneroperator)
+      html+='<div class="operator">'+ jsT[lang].operator + ': ' +details.owneroperator+'</div>';
+    html+='</div>';
+    html+='<hr/><a href="javascript:void(0)" class="backtomap ibutton"><div>'+jsT[lang].backtomap+'</div></a><hr/>';
+    $('.parkinglot-detail .content').html(html);
+    $('.parkinglot-detail').show();
+    $('.parkinglot-detail .backtomap.ibutton').click(function(){
+      $('.modal').hide();
+    });
+    if (state['free'].value < details.capacity * 0.25){
+      $('.parkinglot-detail .number-available').removeClass("free");
     }
+    else{
+      $('.parkinglot-detail .number-available').addClass("free");
+    }
+    radialProgress($('.parkinglot-detail .number-available')[0])
+    .diameter(180)
+    .value(state['free'].value)
+    .maxValue(details.capacity)
+    .render();
   },
   getParkings : function(){
     function displayParkingList(){
@@ -95,20 +124,7 @@ var parkingLayer = {
       });
       $(".parking .parking-list").html(list);
       $(".parking-list li a").click(function(){
-        var id = $(this).attr("id");
-        $.each(myparkings, function(index, value){
-          if(value.id === id){
-            newList+='<li><a href="#" title="" id="'+value.id+'" class="list-parkings">';
-            newList+='<h4>'+value.name+'</h4>';
-            newList+='<div class="metadata clearfix">';
-            newList+='<div class="address">'+value.mainaddress+'</div>';
-            newList+='<div class="capacity">Capacity: '+value.capacity+'</div>';
-            newList+='<div class="phone">Phone: '+value.phonenumber+'</div>';
-            newList+='</div>';
-            newList+='</a></li>';
-          }
-        });
-        $(".parking .parking-list").html(newList);
+        integreen.retrieveData($(this).attr('id'), "parkingFrontEnd/rest/",parkingLayer.displayData, config);
       });
     }
     function loadParkings(url){
@@ -134,7 +150,7 @@ var parkingLayer = {
       });
       loadParkings(url);
     }else{
-    displayParkingList();
-  }
-},
+      displayParkingList();
+    }
+  },
 }
