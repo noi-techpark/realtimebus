@@ -97,7 +97,7 @@ var wegeStartPointsLayer = {
             			graphicYOffset:-35.75
         		};
         		var a4 = new OpenLayers.Geometry.Point(1242745.4729163,5888025.5994863);
-        		var a10 = new OpenLayers.Geometry.Point(1242530.8030306,5888901.4926254);
+						var a10 = new OpenLayers.Geometry.Point(1242530.8030306,5888901.4926254);
         		var a11 = new OpenLayers.Geometry.Point(1242887.9016938,5888797.5916185);
 		        var a12 = new OpenLayers.Geometry.Point(1243162.2935862,5888651.4276554);
 		        var a9 = new OpenLayers.Geometry.Point(1243393.9933282,5888649.0389983);

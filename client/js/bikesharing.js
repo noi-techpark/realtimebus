@@ -136,7 +136,13 @@ var bikeSharingLayer ={
 					$('.modal').hide();
 				       	$('.bikesharingstation').show();
 					integreen.retrieveData(station,"bikesharingFrontEnd/rest/",getCurrentBikesharingData);
-				}
+				}else{
+          var vectors = new OpenLayers.Layer.Vector("vector", {isBaseLayer: false});
+          vectors.addFeatures(e.feature.cluster);
+          var dataExtent = vectors.getDataExtent();
+          SASABus.map.setCenter(e.feature.geometry.bounds.centerLonLat);
+          SASABus.map.zoomToExtent(dataExtent);
+        }
 			}
 		});
 		function getCurrentBikesharingData(details,data){

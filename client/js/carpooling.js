@@ -51,6 +51,12 @@ var carpoolingLayer = {
             else
             pin= 'images/pin.png';
 
+          }else{
+            var vectors = new OpenLayers.Layer.Vector("vector", {isBaseLayer: false});
+            vectors.addFeatures(e.feature.cluster);
+            var dataExtent = vectors.getDataExtent();
+            SASABus.map.setCenter(e.feature.geometry.bounds.centerLonLat);
+            SASABus.map.zoomToExtent(dataExtent);
           }
           return pin;
         }
@@ -72,7 +78,7 @@ var carpoolingLayer = {
             integreen.retrieveData(station,"carpooling/rest/user/",displayUserData);
           }
         }else{
-          displayClusterFeatures(e.feature.cluster)
+          displayClusterFeatures(e.feature.cluster);
         }
       }
     });

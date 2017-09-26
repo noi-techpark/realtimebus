@@ -134,7 +134,13 @@ var carSharingLayer = {
 				if (!e.feature.cluster){
 					var station = e.feature.attributes.stationcode;
 					integreen.retrieveData(station,"carsharingFrontEnd/rest/",getCarsharingStation);
-				}
+				}else{
+          var vectors = new OpenLayers.Layer.Vector("vector", {isBaseLayer: false});
+          vectors.addFeatures(e.feature.cluster);
+          var dataExtent = vectors.getDataExtent();
+          SASABus.map.setCenter(e.feature.geometry.bounds.centerLonLat);
+          SASABus.map.zoomToExtent(dataExtent);
+        }
 			}
 		});
 		function getCarsharingStation(details,current){

@@ -124,7 +124,7 @@ var echargingLayer = {
 	        	                else if (a>=0.6)
         	        	                pin= 'images/8_Echarging/marker_green.svg';
 				}
-                	        return pin;
+				                	        return pin;
 	                }
         	    }
 	        }));
@@ -139,6 +139,13 @@ var echargingLayer = {
         	                	var station = e.feature.attributes.stationcode;
 					integreen.retrieveData(station,"EchargingFrontEnd/rest/",displayData);
 				}
+				else{
+          var vectors = new OpenLayers.Layer.Vector("vector", {isBaseLayer: false});
+          vectors.addFeatures(e.feature.cluster);
+          var dataExtent = vectors.getDataExtent();
+          SASABus.map.setCenter(e.feature.geometry.bounds.centerLonLat);
+          SASABus.map.zoomToExtent(dataExtent);
+        }
 	                }
 	        });
 	        this.layer = positionsLayer;
@@ -181,7 +188,7 @@ var echargingLayer = {
 					html += "<div class='plug clearfix'>"
 					+"<h4><svg height='20' width='20'><circle cx='10' cy='10' r='10' fill='" + plugColor + "'></circle></svg>" + jsT[lang].charger + " "+(index+1)+"</h4>";
 					$.each(value.detail.outlets,function(i,outlet){
-						html += "<div class='clearfix outlet'><img src='https://service.aewnet.eu/e-mobility/api/v2/images/outlettypes/"+ outlet.outletTypeCode+"' alt='Plug image not available'/>"
+						html += "<div class='clearfix outlet'><img src='http://service.aewnet.eu/e-mobility/api/v2/images/outlettypes/"+ outlet.outletTypeCode+"' alt='Plug image not available'/>"
 						+"<p>"+outlet.outletTypeCode +" | "
 						+ outlet.minCurrent + " - " + outlet.maxCurrent+" A | "
 						+ outlet.maxPower +" W </p></div>";

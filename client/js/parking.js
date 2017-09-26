@@ -67,6 +67,12 @@ var parkingLayer = {
           var station = e.feature.attributes.stationcode;
           integreen.retrieveData(station,"parkingFrontEnd/rest/",parkingLayer.displayData, config);
 
+        }else{
+          var vectors = new OpenLayers.Layer.Vector("vector", {isBaseLayer: false});
+          vectors.addFeatures(e.feature.cluster);
+          var dataExtent = vectors.getDataExtent();
+          SASABus.map.setCenter(e.feature.geometry.bounds.centerLonLat);
+          SASABus.map.zoomToExtent(dataExtent);
         }
       }
     });
@@ -115,7 +121,7 @@ var parkingLayer = {
       var list = '';
       var newList = '';
       $.each(myparkings,function(index,value){
-        list+='<li><a href="#" title="" id="'+value.id+'" class="list-parkings">';
+        list+='<li><a href="#" title="" id="'+value.id+'" class="list-parkings" data-lon="'+ value.longitude +'" data-lat="'+ value.latitude +'">';
         list+='<h4>'+value.name+'</h4>';
         list+='<div class="metadata clearfix">';
         list+='<div class="address">'+value.mainaddress+'</div>';
@@ -125,6 +131,9 @@ var parkingLayer = {
       $(".parking .parking-list").html(list);
       $(".parking-list li a").click(function(){
         integreen.retrieveData($(this).attr('id'), "parkingFrontEnd/rest/",parkingLayer.displayData, config);
+        var lonLat = new OpenLayers.LonLat($(this).attr('data-lon'), $(this).attr('data-lat')).transform(new OpenLayers.Projection('EPSG:4326'), new OpenLayers.Projection('EPSG:3857'));
+        SASABus.map.setCenter(lonLat);
+        SASABus.map.zoomToExtent(lonLat);
       });
     }
     function loadParkings(url){
