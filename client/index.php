@@ -600,7 +600,6 @@ include 'lang.php';
 								<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" type="text/javascript"></script>
 								<script src="js/OpenLayers.js" type="text/javascript"></script>
 								<script src="scripts/scripts.js" type="text/javascript"></script>
-								<script src="parking.js" type="text/javascript"></script>
 								<script> var txtVariante = '';</script>
 								<script type="text/javascript" src="https://www.google.com/jsapi?autoload={
 									'modules':[{
