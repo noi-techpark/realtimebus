@@ -36,7 +36,7 @@ a{color:#c0c0c0;text-decoration:none}
 #logo-mobile{display:none}
 .beta-mobile{display:none}
 
-.panel{color:#bbbbbb;width:auto;height:100%;position:relative;background:#fafafa;z-index:1000;float:left;}
+.panel{color:#bbbbbb;width:auto;height:92vh;position:relative;background:#fafafa;z-index:1000;float:left;overflow-y:auto;}
 .header{border-bottom:1px solid #eae9e9;position:relative;background:#fff;width:100%;float:left;padding:0;margin:0;height:8vh}
 #logo{position:relative;width:auto;height:50%;top:25%;margin:0 20px;display:inline-block;text-indent:-9999px;font-size:0;line-height:0}
 
@@ -572,31 +572,38 @@ a{color:#c0c0c0;text-decoration:none}
 .about-box{
 	display:none;
 	position:absolute;
-	top:20%;
+	top:15%;
 	left:50%;
 	z-index:5000;
 	width:600px;
+	background:transparent;
 }
 .about-box .about{
-	position:relative;
-	left:-50%;
-	background-color:#fff;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	border-radius: 8px;
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color:#fafafa;
+	opacity:0.9;
 	padding:15px;
+	padding-left:30px;
+	overflow-y:auto;
+	text-align:center;
 }
 .about h3{
 	font-size:1.4em;
 	line-height:1.8em;
+	margin-top: 1.5em;
 }
 .about ul{
 	margin-top:5px;
+	text-align: center;
 }
 .about ul li {
 	margin:7px;
 	position:relative;
-	float:left;
+	display:inline-block;
 	width:100px;
 }
 

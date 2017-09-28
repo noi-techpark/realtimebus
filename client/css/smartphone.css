@@ -100,3 +100,6 @@ ul.menu,ul.menu li{
 	height:100%;
 	width:auto;
 }
+.menu{
+	line-height: 0em;
+}
