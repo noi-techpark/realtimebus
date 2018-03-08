@@ -153,7 +153,7 @@ var echargingLayer = {
 
 		function displayData(details,state){
 			var updatedOn = moment(state['number-available'].timestamp).locale(lang).format('lll');
-			$('.station .title').html(details.name.replace("CU_","")+" ("+details.provider+")<br/><small>"+updatedOn+"</small>");
+			$('.station .title').html("<small>Station name: </small>"+details.name.replace("CU_","")+"<br/><small>Operator:</small> "+details.provider+"<br/><small>"+updatedOn+"</small>");
 			if (details.state != 'ACTIVE'){
 				$(".content").html('<h3>'+jsT[lang].outOfOrder+'</h3>');
 				$('.modal').hide();
@@ -182,7 +182,7 @@ var echargingLayer = {
 					if (state == 1)
 						plugColor='#8faf30';
 					else if(state == 2 || state == 3)
-						plugColor = '#f28e1e';
+							plugColor = '#f28e1e';
 					else
 						plugColor = '#e81c24';
 					html += "<div class='plug clearfix'>"
