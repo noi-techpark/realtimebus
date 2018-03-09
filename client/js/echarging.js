@@ -183,7 +183,9 @@ get: function(){
 		var updatedOn = moment(state['number-available'].timestamp).locale(lang).format('lll');
 		$('.station .title').html("<small>Station name: </small>"+details.name.replace("CU_","")+"<br/><small>Operator:</small> "+details.provider+"<br/><small>"+updatedOn+"</small>");
 		if (details.state != 'ACTIVE'){
-			$(".content").html('<h3>'+jsT[lang].outOfOrder+'</h3>');
+			$(".content .number-available").html('<h3>'+jsT[lang].outOfOrder+'</h3>');
+			$('.plug').hide();
+			$('.caption').hide();
 			$('.modal').hide();
 			$('.station').show();
 			return;
