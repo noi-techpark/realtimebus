@@ -165,12 +165,10 @@ get: function(){
 		var html = '<div class="info"><ul></ul></div>'
 		$('.station .content').html(html);
 		cluster.forEach(function(value,index){
-			console.log(value);
 			var id = value.id;
 			$('.station .content .info ul').append('<li><a href="javascript:void(0)" class="echargingpointd'+id+'">'+value.attributes.stationname+'</a></li>');
 
 			$('.station .content ul .echargingpointd'+id).click(function(){
-				console.log('in');
 				integreen.retrieveData(value.attributes.stationcode,"EchargingFrontEnd/rest/",displayData);
 			});
 
