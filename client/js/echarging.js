@@ -183,9 +183,10 @@ get: function(){
 		var updatedOn = moment(state['number-available'].timestamp).locale(lang).format('lll');
 		$('.station .title').html("<small>Station name: </small>"+details.name.replace("CU_","")+"<br/><small>Operator:</small> "+details.provider+"<br/><small>"+updatedOn+"</small>");
 		if (details.state != 'ACTIVE'){
-			$(".content .number-available").html('<h3>'+jsT[lang].outOfOrder+'</h3>');
-			$('.plug').hide();
-			$('.caption').hide();
+			$(".content").html('<h3>'+jsT[lang].outOfOrder+'</h3><div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>');
+			$('.station .backtomap.ibutton').click(function(){
+				$('.modal').hide();
+			});
 			$('.modal').hide();
 			$('.station').show();
 			return;
@@ -193,6 +194,8 @@ get: function(){
 		var html = "";
 		html+="<div class='number-available'></div>";
 		html+="<div class='caption'>"+jsT[lang].freeCharger+"</div><hr/>";
+		if (details.address)
+		html+='<div class="info address"><a title="Routing by Google" href="https://maps.google.com?saddr=Current+Location&mode=driving&daddr='+details.latitude+","+details.longitude+'" target="_blank">'+details.address+"</a></div>";
 		if (details.accessInfo && !details.flashInfo)
 		html += "<div class='info'><img src='images/8_Echarging/online.svg' width='30px'/><span>"+jsT[lang].chargerOnline+"</span><p>" + details.accessInfo+"</p></div><hr/>";
 		else if (details.flashInfo)

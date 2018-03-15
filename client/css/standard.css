@@ -850,10 +850,26 @@ hr{
 }
 .station .info{
 	margin:0 15px;
+	padding:12px;
 }
 .station .info img{
 	vertical-align:middle;
 	margin-right:15px;
+}
+.station .info a{
+	color: #333;
+}
+.station .address a{
+	display:block;
+	width:100%;
+	
+}
+.station .address:hover a{
+	color:#fff;
+}
+.station .address:hover{
+	background-color:#8faf30;
+	border-radius: 15px;	
 }
 .bike-categorys{
 	line-height:58px;
