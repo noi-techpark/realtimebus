@@ -171,7 +171,7 @@ get: function(){
 		"featureselected":function(e){
 			if (!e.feature.cluster){
 				var station = e.feature.attributes.stationcode;
-				integreen.retrieveData(station,"emobility/rest/",displayData);
+				integreen.retrieveData(station,"EchargingFrontEnd/rest/",displayData);
 			}
 			else{
 				var cluster = e.feature.cluster;
