@@ -1,7 +1,12 @@
 var echargingLayer = {
 	isCached:true,
 	getTypes : function(callback){
-		integreen.getStationDetails('EchargingFrontEnd/rest/plugs/',{},displayBrands);
+		var details;
+		integreen.getStationDetails('EchargingFrontEnd/rest/',{},getChargingDetails);
+		function getChargingDetails(data){
+			details = data;
+			integreen.getStationDetails('EchargingFrontEnd/rest/plugs/',{},displayBrands);
+		}
 		function displayBrands(data){
 			var brands = {
 				nothingSelected : function(){
@@ -13,11 +18,19 @@ var echargingLayer = {
 					return selected;
 				}
 			};
+			var provider = {};
+			var accessType = {};
 			$.each(data,function(index,value){
 				$.each(value.outlets,function(i,outlet){
 					if (typeof value != 'function')
 					brands[outlet.outletTypeCode] = true;
 				});
+			});
+			$.each(details,function(index,value){
+				if (value.provider)
+				provider[value.provider] = true;
+				if (value.accessType)
+				accessType[value.accessType] = true;
 			});
 			$('.emobility .deselect-all').click(function(){
 				var nothingSelected = brands.nothingSelected();
@@ -25,6 +38,8 @@ var echargingLayer = {
 				$('.emobility .toggler').addClass('disabled');
 				else
 				$('.emobility .toggler').removeClass('disabled');
+				Object.keys(accessType).forEach(function(v){accessType[v] = nothingSelected});
+				Object.keys(provider).forEach(function(v){provider[v] = nothingSelected});
 
 				$.each(brands,function(index,value){
 					if (typeof value != 'function')
@@ -32,36 +47,48 @@ var echargingLayer = {
 				});
 				var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
 				$('.emobility .deselect-all').text(statusText);
-				echargingLayer.retrieveStations(brands);
+				echargingLayer.retrieveStations(brands,provider,accessType);
 			});
 			if (callback != undefined)
-			callback(brands);
+			callback(brands,provider,accessType);
 			$('.echargingtypes').empty();
+			$('.emobility .echargingtypes').append('<li class="type-header">Plugtypes</li><hr/>');
 			var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
 			$('.emobility .deselect-all').text(statusText);
-			$.each(brands,function(index,value){
-				if (typeof value == 'function')
-				return true;
-				var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
-				$('.emobility .echargingtypes').append('<li class="clearfix echargingbrand"><p>'+index+'</p><a brand='+index+' href="javascript:void(0)" class="toggler">'
-				+'<svg width="55" height="30">'
+			var svg = '<svg width="55" height="30">'
 				+       '<g>'
 				+               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#f2bf00" height="24"/>'
 				+               '<circle cx="34" cy="17" r="9" fill="#f2bf00" />'
 				+       '</g>'
 				+       'Sorry, your browser does not support inline SVG.'
-				+ '</svg>'
-				+ '</a></li>'
-			);
-		});
-		$('.echargingbrand a').click(function(e){
-			var brand = $(this).attr("brand");
-			brands[brand] = !brands[brand];
-			$(this).toggleClass("disabled");
-			var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
-			$('.emobility .deselect-all').text(statusText);
-			echargingLayer.retrieveStations(brands);
-		});
+				+ '</svg>';
+			$.each(brands,function(index,value){
+				if (typeof value == 'function')
+				return true;
+				$('.emobility .echargingtypes').append('<li class="clearfix echargingbrand"><p>'+index+'</p><a brand='+escape(index)+' href="javascript:void(0)" class="toggler">'+ svg + '</a></li>');
+			});
+			$('.emobility .echargingtypes').append('<li class="type-header">Provider</li><hr/>');
+			$.each(provider,function(index,value){
+				console.log(index);
+				$('.emobility .echargingtypes').append('<li class="clearfix echargingbrand"><p>'+index+'</p><a brand='+escape(index)+' href="javascript:void(0)" class="toggler">'+ svg + '</a></li>');
+			});
+			$('.emobility .echargingtypes').append('<li class="type-header">AccessType</li><hr/>');
+			$.each(accessType,function(index,value){
+				$('.emobility .echargingtypes').append('<li class="clearfix echargingbrand"><p>'+index+'</p><a brand='+escape(index)+' href="javascript:void(0)" class="toggler">'+ svg + '</a></li>');
+			});
+			$('.echargingbrand a').click(function(e){
+				var brand = unescape($(this).attr("brand"));
+				if (brand in brands)
+					brands[brand] = !brands[brand];
+				else if (brand in provider)
+					provider[brand] = !provider[brand];
+				else if (brand in accessType)
+					accessType[brand] = !accessType[brand];
+				$(this).toggleClass("disabled");
+				var statusText = brands.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
+				$('.emobility .deselect-all').text(statusText);
+				echargingLayer.retrieveStations(brands,provider,accessType);
+			});
 	}
 },
 populate: function(){
@@ -69,15 +96,22 @@ populate: function(){
 	if (self.brands == undefined)
 	self.getTypes(self.retrieveStations);
 },
-retrieveStations : function(brands){
-	var brandreq='';
-	$.each(brands,function(index,value){
-		if (value){
-			if (brandreq != '')
-			brandreq += "\\,";
-			brandreq += '\''+index+'\'';
-		}
-	});
+retrieveStations : function(brands,provider,accessType){
+	function adaptToGeoserver(brands){
+		var brandreq='\'undefined\'';
+		if (brands)
+		$.each(brands,function(index,value){
+			if (value){
+				if (brandreq != '')
+				brandreq += "\\,";
+				brandreq += '\''+index+'\'';
+			}
+		});
+		return brandreq;
+	}
+	var brandreq = adaptToGeoserver(brands);
+	var providerArray = adaptToGeoserver(provider);
+	var accessTypeArray = adaptToGeoserver(accessType);
 	var  params = {
 		request:'GetFeature',
 		typeName:'edi:Echarging',
@@ -85,7 +119,7 @@ retrieveStations : function(brands){
 		format_options: 'callback: jsonCharging'
 	};
 	if (brandreq != '')
-	params['viewparams']='brand:'+brandreq;
+	params['viewparams']='brand:'+brandreq+';provider:'+providerArray+';accessTypes:'+accessTypeArray+';';
 
 	$.ajax({
 		url : SASABus.config.geoserverEndPoint+'wfs?'+$.param(params),
@@ -137,7 +171,7 @@ get: function(){
 		"featureselected":function(e){
 			if (!e.feature.cluster){
 				var station = e.feature.attributes.stationcode;
-				integreen.retrieveData(station,"EchargingFrontEnd/rest/",displayData);
+				integreen.retrieveData(station,"emobility/rest/",displayData);
 			}
 			else{
 				var cluster = e.feature.cluster;
@@ -182,7 +216,7 @@ get: function(){
 	function displayData(details,state){
 		var updatedOn = moment(state['number-available'].timestamp).locale(lang).format('lll');
 		$('.station .title').html("<small>Station name: </small>"+details.name.replace("CU_","")+"<br/><small>Operator:</small> "+details.provider+"<br/><small>"+updatedOn+"</small>");
-		if (details.state != 'ACTIVE'){
+		if (details.state == 'FAULT' || details.state == 'UNAVAILABLE'){
 			$(".content").html('<h3>'+jsT[lang].outOfOrder+'</h3><div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>');
 			$('.station .backtomap.ibutton').click(function(){
 				$('.modal').hide();
@@ -196,6 +230,10 @@ get: function(){
 		html+="<div class='caption'>"+jsT[lang].freeCharger+"</div><hr/>";
 		if (details.address)
 		html+='<div class="info address"><a title="Routing by Google" href="https://maps.google.com?saddr=Current+Location&mode=driving&daddr='+details.latitude+","+details.longitude+'" target="_blank">'+details.address+"</a></div>";
+		if (details.accessType)
+		html+='<div class="info">'+details.accessType+'</div>';
+		if (details.categories && details.categories.length>0)
+		html+='<div class="info">'+details.categories.join(', ')+'</div>';
 		if (details.accessInfo && !details.flashInfo)
 		html += "<div class='info'><img src='images/8_Echarging/online.svg' width='30px'/><span>"+jsT[lang].chargerOnline+"</span><p>" + details.accessInfo+"</p></div><hr/>";
 		else if (details.flashInfo)
