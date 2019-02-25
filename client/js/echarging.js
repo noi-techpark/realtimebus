@@ -69,7 +69,6 @@ var echargingLayer = {
 			});
 			$('.emobility .echargingtypes').append('<li class="type-header">Provider</li><hr/>');
 			$.each(provider,function(index,value){
-				console.log(index);
 				$('.emobility .echargingtypes').append('<li class="clearfix echargingbrand"><p>'+index+'</p><a brand='+escape(index)+' href="javascript:void(0)" class="toggler">'+ svg + '</a></li>');
 			});
 			$('.emobility .echargingtypes').append('<li class="type-header">AccessType</li><hr/>');
@@ -259,7 +258,7 @@ get: function(){
 				html += "<div class='plug clearfix'>"
 				+"<h4><svg height='20' width='20'><circle cx='10' cy='10' r='10' fill='" + plugColor + "'></circle></svg>" + jsT[lang].charger + " "+(index+1)+"</h4>";
 				$.each(value.detail.outlets,function(i,outlet){
-					html += "<div class='clearfix outlet'><img src='http://service.aewnet.eu/e-mobility/api/v2/images/outlettypes/"+ outlet.outletTypeCode+"' alt='Plug image not available'/>"
+					html += "<div class='clearfix outlet'><img src='https://service.aewnet.eu/e-mobility/api/v2/images/outlettypes/"+ outlet.outletTypeCode+"' alt='Plug image not available'/>"
 					+"<p>"+outlet.outletTypeCode +" | "
 					+ outlet.minCurrent + " - " + outlet.maxCurrent+" A | "
 					+ outlet.maxPower +" W </p></div>";

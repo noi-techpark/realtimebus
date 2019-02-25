@@ -75,11 +75,11 @@ var epsg25832 = new OpenLayers.Projection('EPSG:25832');
 var SASABus = {
     config: {
 	city:'',
-        r3EndPoint: 'http://realtimebus.tis.bz.it/',
+        r3EndPoint: 'https://realtimebus.sasabus.org/',
 	integreenEndPoint:'ipchannels.integreen-life.bz.it/',
-	apiediEndPoint:'http://apiedi.tis.bz.it/apiedi',
+	apiediEndPoint:'https://apiedi.testingmachine.eu',
 	//apiediEndPoint:'http://localhost:8080/apiedi',
-	geoserverEndPoint:'http://geodata.integreen-life.bz.it/geoserver/',
+	geoserverEndPoint:'https://geodata.integreen-life.bz.it/geoserver/',
         busPopupSelector: '#busPopup',
         stopPopupSelector: '#stopPopup',
         rowsLimit: 6,
@@ -167,7 +167,7 @@ var SASABus = {
 			if (evt.keyCode == 76 && evt.shiftKey && evt.ctrlKey) {
       				var pixel = new OpenLayers.Pixel(mapMousePosition.lastXy.x, mapMousePosition.lastXy.y)
 				var lonLat = me.map.getLonLatFromPixel(pixel);
-				window.location.replace("http://bus.meran.eu/alpha/?zoom="+me.map.getZoom()+"&lon="+lonLat.lon+"&lat="+lonLat.lat);
+				window.location.replace("https://bus.meran.eu/alpha/?zoom="+me.map.getZoom()+"&lon="+lonLat.lon+"&lat="+lonLat.lat);
 			}
 		}
 	};

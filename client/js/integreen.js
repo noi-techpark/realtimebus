@@ -1,5 +1,5 @@
 var defaultConfig = {
-	integreenEndPoint:'http://ipchannels.integreen-life.bz.it/'
+	integreenEndPoint:'https://ipchannels.integreen-life.bz.it/'
 }
 
 var integreen = {

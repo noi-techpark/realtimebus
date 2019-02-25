@@ -29,13 +29,13 @@ include 'lang.php';
 	<![endif]-->
 
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
 	<link href="css/standard.css" rel="stylesheet" media="screen,projection,print" type="text/css" />
 	<link href="css/smartphone.css" media="only screen and (max-width: 671px)" rel="stylesheet" /> <!-- max-device-width: 671px -->
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 	<link href="css/smartphoneLandscape.css" media="only screen and (max-width: 671px) and (orientation: landscape)" rel="stylesheet" />  <!-- max-device-width: 671px -->
 	<link href="css/radialStyle.css" rel="stylesheet" />
-	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
 	<style>
 	.ui-dialog {z-index:1000;}
 	</style>
@@ -107,7 +107,7 @@ include 'lang.php';
 					</a>
 					<a href="#" class="config" id="carpooling-c">
 						<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 110.34375 110.34375" enable-background="new 0 0 200 200" xml:space="preserve">
-							<g transform="translate(-49.03125,-47.125)" fill="royalblue"><g><g><path stroke-miterlimit="10" d="m 104.197,48.121 c 29.922,0 54.176,24.256 54.176,54.178 0,29.918 -24.254,54.176 -54.176,54.176 -29.92,0 -54.176,-24.258 -54.176,-54.176 0,-29.923 24.256,-54.178 54.176,-54.178 z" connector-curvature="0" style=""></path></g></g>
+							<g transform="translate(-49.03125,-47.125)" fill="#3192c5"><g><g><path stroke-miterlimit="10" d="m 104.197,48.121 c 29.922,0 54.176,24.256 54.176,54.178 0,29.918 -24.254,54.176 -54.176,54.176 -29.92,0 -54.176,-24.258 -54.176,-54.176 0,-29.923 24.256,-54.178 54.176,-54.178 z" connector-curvature="0" style=""></path></g></g>
 							<g><polygon stroke-miterlimit="10" points="99.205,80.781 95.545,73.626 86.007,78.507 89.667,85.662 86.119,90.486 78.008,87.865 74.515,98.681 82.625,101.3 82.681,107.289 75.527,110.949 80.407,120.488 87.562,116.828 92.386,120.376 89.766,128.486 95.173,130.234 100.58,131.98 103.2,123.869 109.189,123.814 112.85,130.968 122.388,126.085 118.728,118.933 122.275,114.109 130.387,116.728 133.88,105.914 125.77,103.292 125.714,97.304 132.867,93.644 127.987,84.105 120.833,87.767 116.008,84.218 118.628,76.107 113.221,74.361 107.813,72.615 105.193,80.724 " style="fill:none;stroke:#ffffff;stroke-width:3;stroke-miterlimit:10"></polygon><circle stroke-miterlimit="10" cx="104.197" cy="102.297" r="5.6820002" cx="104.197" cy="102.297" rx="5.6820002" ry="5.6820002" style="fill:none;stroke:#ffffff;stroke-width:3;stroke-miterlimit:10" d="m 109.879,102.297 c 0,3.13808 -2.54392,5.682 -5.682,5.682 -3.13808,0 -5.682002,-2.54392 -5.682002,-5.682 0,-3.138085 2.543922,-5.682003 5.682002,-5.682003 3.13808,0 5.682,2.543918 5.682,5.682003 z"></circle></g></g></svg>
 						</a>
 						<a href="#" class="config" id="parking-c">
@@ -551,7 +551,7 @@ include 'lang.php';
 									<div class="metadata">
 										<img src="images/human_shapes.jpg" alt="human shapes" width="100%"/>
 									</div>
-									<a href="http://www.meran.eu/culture-tradition/monuments/human-shapes/" class="ibutton" target="_blank"><div><?php ___('more'); ?></div></a>
+									<a href="https://www.merano-suedtirol.it/en/merano/active-relaxing/walking-hiking/rid-813E0A34E03345DD13AEFD1178F60DE1-p-menschenbilder.html" class="ibutton" target="_blank"><div><?php ___('more'); ?></div></a>
 									<a href="javascript:void(0)" class="backtomap ibutton" ><div><?php ___('backtomap'); ?></div></a>
 								</div>
 							</div>
@@ -595,8 +595,8 @@ include 'lang.php';
 									<h3 style="text-align:center"> <a href="https://github.com/tis-innovation-park/realtimebus.git" target="_blank">Source code available on github.com</h3>
 									</div>
 								</div>
-								<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-								<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+								<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+								<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 								<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" type="text/javascript"></script>
 								<script src="js/OpenLayers.js" type="text/javascript"></script>
 								<script src="scripts/scripts.js" type="text/javascript"></script>
@@ -608,5 +608,15 @@ include 'lang.php';
 										'packages':['corechart']
 									}]}"
 									></script>
+									<script>
+							  		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+									  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+									  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+									  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+									  ga('create', 'UA-81346533-1', 'auto');
+									  ga('send', 'pageview');
+
+							</script>
 								</body>
 								</html>
