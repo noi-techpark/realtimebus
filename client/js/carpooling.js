@@ -143,23 +143,26 @@ var carpoolingLayer = {
     }
     function displayUserData(details,state){
       var locale = details.hubI18n[lang]?lang:'it';
-      $('.station .title').html('<div style="'+ (details.gender=='M'?'color:blue':'color:pink') +'">'+details.name+'</div>');
+      var htmlTitle = '<div> <img src="images/9_Carpooling/';
+      var personType;
+      if (details.type=='A'||details.type=='E'){
+      	htmlTitle += 'driver.svg';
+        personType = 'Driver';
+
+      }
+      if (details.type=='P'||details.type=='E'){
+        htmlTitle += 'passenger.svg';
+        personType += 'Passenger';
+      }
+      htmlTitle='" style="width:150px"/><p>'+details.name+'<br/>'+personType+'</p></div>';	     
+      $('.station .title').html(htmlTitle);
       $('.modal').hide();
       var html = "";
-      html += '<div class="info"><ul>';
-      if (details.type=='A'||details.type=='E')
-      html += '<li>Driver</li>';
-      if (details.type=='P'||details.type=='E')
-      html += '<li>Passenger</li>';
-      html += '</ul><hr/> ';
-      html += '<p style="text-align:center">'+(details.location[locale].address+'<br/>'+details.location[locale].city)+'</p>';
-      html += '<p style="text-align:center">v</p>'
-      html += '<p style="text-align:center">'+(details.hubI18n[locale].address+'<br/>'+details.hubI18n[locale].city)+'</p>';
-      html += '<p style="text-align:center;background-color:royalblue;color:white;padding:15px;margin-bottom:10px;">Planned arrival at destination '+details.arrival+'</p>';
-      html += '<p style="text-align:center;background-color:royalblue;color:white;padding:15px; margin-bottom:10px;">Planned departure from hub '+details.departure+'</p>';
-      html += '<p style="text-align:center">'+(details.hubI18n[locale].address+'<br/>'+details.hubI18n[locale].city)+'</p>';
-      html += '<p style="text-align:center">v</p>'
-      html += '<p style="text-align:center">'+(details.location[locale].address+'<br/>'+details.location[locale].city)+'</p>';
+      html += '<div class="info">';
+      html += '<div><img src="images/9_Carpooling/location.svg"/><p><strong>'+details.i18n[locale].startAddressLabel+"</strong><br/>"+(details.location[locale].address +" "+ details.location[locale].city)+'</p></div>';
+      html += '<div><img src="images/9_Carpooling/hub.svg"/><p><strong>'+details.i18n[locale].destinationHubLabel+"</strong><br/>"+(details.hubI18n[locale].address+' '+details.hubI18n[locale].city)+'</p></div>';
+      html += '<div><img src="images/9_Carpooling/pendular.svg"/><strong>'+details.i18n[locale].pendularLabel+'</strong><span>'+details.pendular+'</span></div>';
+      html += '<div><img src="images/9_Carpooling/times.svg"/><p><strong>'+details.i18n[locale].arrivalTimeLabel+'</strong><span>'+details.arrival+'</span></p><p><strong>'+details.i18n[locale].departureTimeLabel+'</strong><span>'+details.departure+'</span></p></div>';
       html +='</div>';
       html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>Contact person</div></a></div>';
       html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>';

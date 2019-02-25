@@ -29,7 +29,12 @@ var jsT= {
 		phone:'Tel.',
 		disabledtoilet:'Behindertentoilette verfügbar',
 		disabledcapacity:'Kapazität Behindertenparkplätze',
-		operator:'Betreiber'
+		operator:'Betreiber',
+		startAddressLabel:'Startpunkt',
+		destinationHubLabel:'Ankuntshub',
+		pendularLabel:'Pendler',
+		arrivalTimeLabel:'Ankunft am Hub',
+		departureTimeLabel:'Rückfahrt vom Hub',
 	},
 	it:{
 		altitudep:'Profilo altimetrico',
@@ -61,7 +66,12 @@ var jsT= {
 		phone:'T.',
 		disabledtoilet:'Bagno per disabili disponibile',
 		disabledcapacity:'Capienza parcheggi disabili',
-		operator:'Operatore'
+		operator:'Operatore',
+		startAddressLabel:'Indirizzo di partenza',
+		destinationHubLabel:'Hub di destinazione',
+		pendularLabel:'Pendolare',
+		arrivalTimeLabel:'Arrivo al hub',
+		departureTimeLabel:'Partenza dal hub',
 	},
 	en:{
 		altitudep:'Altitude profile',
@@ -93,7 +103,12 @@ var jsT= {
 		phone:'Phone:',
 		disabledtoilet:'Disabled toilet available',
 		disabledcapacity:'Capacity disabled parking spaces',
-		operator:'Operator'
+		operator:'Operator',
+		startAddressLabel:'Starting point',
+		destinationHubLabel:'Destination hub',
+		pendularLabel:'Pendular',
+		arrivalTimeLabel:'Arrival to hub',
+		departureTimeLabel:'Departure from hub',
 	}
 
 }
