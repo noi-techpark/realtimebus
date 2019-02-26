@@ -93,7 +93,7 @@ var carpoolingLayer = {
         if (!hub[0].cluster){
           currentDrawnFeatures = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([feature.geometry,hub[0].geometry]));
           positionsLayer.drawFeature(currentDrawnFeatures,{
-            strokeColor: 'royalblue',
+            strokeColor: '#3192c5',
             strokeWidth: 6,
             strokeOpacity:0.7,
             strokeLinecap:'square',
@@ -110,7 +110,7 @@ var carpoolingLayer = {
       $('.station .content').html(html);
       features.forEach(function(feature,index){
         var featureHtml;
-        featureHtml ='<li style="text-align:center;padding:10px;background-color:royalblue;margin-bottom:10px">';
+        featureHtml ='<li style="text-align:center;padding:10px;background-color:#3192c5;margin-bottom:10px">';
         if (feature.attributes.stationtype=='Carpoolinghub')
         featureHtml+='<a href="javascript:void(0)" class="clusterhub'+feature.attributes.stationcode+'">HUB '+feature.attributes.name+'</a>'
         if (feature.attributes.stationtype=='CarpoolingUser')
@@ -132,7 +132,7 @@ var carpoolingLayer = {
       $('.station .title').html(details.i18n[locale].name);
       $('.modal').hide();
       var html = "";
-      html += '<div class="info">'+(details.i18n[locale]?details.i18n[locale].address:'')+'</div>';
+      html += '<div class="carpooling-info"><div><img style="width:50px;height:50px" src="images/9_Carpooling/location.svg"/><p>'+(details.i18n[locale]?details.i18n[locale].address:'')+'<br/>'+details.i18n[locale].city+'</p></div></div>';
       html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>About this Hub</div></a></div>';
       html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[locale].backtomap+'</div></a><hr/></div>';
       $('.station .content').html(html);
@@ -144,25 +144,27 @@ var carpoolingLayer = {
     function displayUserData(details,state){
       var locale = details.hubI18n[lang]?lang:'it';
       var htmlTitle = '<div> <img src="images/9_Carpooling/';
-      var personType;
+      var personType,personImg;
       if (details.type=='A'||details.type=='E'){
-      	htmlTitle += 'driver.svg';
+      	personImg = 'driver.svg';
         personType = 'Driver';
 
       }
       if (details.type=='P'||details.type=='E'){
-        htmlTitle += 'passenger.svg';
-        personType += 'Passenger';
+        personImg = 'passenger.svg';
+        personType.length==0 ? personType = 'Passenger' : personType += ' / Passenger';
       }
-      htmlTitle='" style="width:150px"/><p>'+details.name+'<br/>'+personType+'</p></div>';	     
+      htmlTitle+=personImg;
+      htmlTitle+='"/><p><strong>'+details.name+'</strong><br/>'+personType+'</p></div>';	     
       $('.station .title').html(htmlTitle);
       $('.modal').hide();
       var html = "";
-      html += '<div class="info">';
-      html += '<div><img src="images/9_Carpooling/location.svg"/><p><strong>'+details.i18n[locale].startAddressLabel+"</strong><br/>"+(details.location[locale].address +" "+ details.location[locale].city)+'</p></div>';
-      html += '<div><img src="images/9_Carpooling/hub.svg"/><p><strong>'+details.i18n[locale].destinationHubLabel+"</strong><br/>"+(details.hubI18n[locale].address+' '+details.hubI18n[locale].city)+'</p></div>';
-      html += '<div><img src="images/9_Carpooling/pendular.svg"/><strong>'+details.i18n[locale].pendularLabel+'</strong><span>'+details.pendular+'</span></div>';
-      html += '<div><img src="images/9_Carpooling/times.svg"/><p><strong>'+details.i18n[locale].arrivalTimeLabel+'</strong><span>'+details.arrival+'</span></p><p><strong>'+details.i18n[locale].departureTimeLabel+'</strong><span>'+details.departure+'</span></p></div>';
+      html += '<div class="carpooling-info">';
+      html += '<div><img src="images/9_Carpooling/location.svg"/><p><strong>'+jsT[locale].startAddressLabel+"</strong><br/>"+(details.location[locale].address +" "+ details.location[locale].city)+'</p></div>';
+      html += '<div><img src="images/Flag.svg"/><p><strong>'+jsT[locale].destinationHubLabel+"</strong><br/>"+(details.hubI18n[locale].address+' '+details.hubI18n[locale].city)+'</p></div>';
+      if (details.pendular)	
+      	html += '<div><img src="images/9_Carpooling/pendular.svg"/><strong>'+jsT[locale].pendularLabel+'</strong></div>';
+      html += '<div><img src="images/9_Carpooling/times.svg"/><div class="subflex"><strong>'+jsT[locale].arrivalTimeLabel+'</strong><strong>'+jsT[locale].departureTimeLabel+'</strong></div><div class="subflex"><div>'+details.arrival+'</div><div>'+details.departure+'</div></div></div>';
       html +='</div>';
       html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>Contact person</div></a></div>';
       html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>';
@@ -199,7 +201,6 @@ var carpoolingLayer = {
         };
       });
       $('.carpoolingtypes').empty();
-      $('.carpooling .carpoolingtypes').append('HUBS');
       $.each(hubs,function(index,value){
         if (typeof value == 'function')
         return true;
@@ -207,8 +208,8 @@ var carpoolingLayer = {
         $('.carpooling .carpoolingtypes').append('<li class="clearfix carpoolinghub"><p>'+value.name+'</p><a brand='+index+' href="javascript:void(0)" class="toggler">'
         +'<svg width="55" height="30">'
         +       '<g>'
-        +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:royalblue" height="24"/>'
-        +               '<circle cx="34" cy="17" r="9" fill="royalblue" />'
+        +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#3192c5" height="24"/>'
+        +               '<circle cx="34" cy="17" r="9" fill="#3192c5" />'
         +       '</g>'
         +       'Sorry, your browser does not support inline SVG.'
         + '</svg>'
@@ -219,8 +220,8 @@ var carpoolingLayer = {
     $('.carpooling .carpoolingtypes').append('<li class="clearfix driver"><p>Autista</p><a href="javascript:void(0)" class="toggler">'
     +'<svg width="55" height="30">'
     +       '<g>'
-    +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:royalblue" height="24"/>'
-    +               '<circle cx="34" cy="17" r="9" fill="royalblue" />'
+    +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#3192c5" height="24"/>'
+    +               '<circle cx="34" cy="17" r="9" fill="#3192c5" />'
     +       '</g>'
     +       'Sorry, your browser does not support inline SVG.'
     + '</svg>'
@@ -228,8 +229,8 @@ var carpoolingLayer = {
   ).append('<li class="clearfix passenger"><p>Passeggero</p><a href="javascript:void(0)" class="toggler">'
   +'<svg width="55" height="30">'
   +       '<g>'
-  +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:royalblue" height="24"/>'
-  +               '<circle cx="34" cy="17" r="9" fill="royalblue" />'
+  +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#3192c5" height="24"/>'
+  +               '<circle cx="34" cy="17" r="9" fill="#3192c5" />'
   +       '</g>'
   +       'Sorry, your browser does not support inline SVG.'
   + '</svg>'
