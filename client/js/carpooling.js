@@ -54,9 +54,9 @@ var carpoolingLayer = {
 
           }else{
             var vectors = new OpenLayers.Layer.Vector("vector", {isBaseLayer: false});
-            vectors.addFeatures(e.feature.cluster);
+            vectors.addFeatures(feature.cluster);
             var dataExtent = vectors.getDataExtent();
-            SASABus.map.setCenter(e.feature.geometry.bounds.centerLonLat);
+            SASABus.map.setCenter(feature.geometry.bounds.centerLonLat);
             SASABus.map.zoomToExtent(dataExtent);
           }
           return pin;
