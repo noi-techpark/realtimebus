@@ -44,13 +44,12 @@ var carpoolingLayer = {
     },{
       context: {
         externalGraphic:function(feature){
-          var pin= 'images/idm.svg';
+          var pin= 'images/9_Carpooling/hub_marker.svg';
           if (!feature.cluster){
-	    console.log(feature);
             if (feature.attributes.stationtype == 'Carpoolinghub')
             pin= 'images/9_Carpooling/hub_marker.svg';
             else
-            pin= 'images/9_Carpooling/passenger_marker.svg';
+            pin= feature.attributes.type==='A'?'images/9_Carpooling/driver_marker.svg':'images/9_Carpooling/passenger_marker.svg';
 
           }else{
             var vectors = new OpenLayers.Layer.Vector("vector", {isBaseLayer: false});
@@ -67,10 +66,10 @@ var carpoolingLayer = {
       styleMap: styleMap,
       strategies: [new OpenLayers.Strategy.Cluster({distance: 25,threshold: 2})],
     });
-    var currentDrawnFeatures;
     positionsLayer.events.on({
       "beforefeatureselected":function(e){
         if (!e.feature.cluster){
+	  redrawAllBlueFeatures(e.feature);
           var station = e.feature.attributes.stationcode;
           if (e.feature.attributes.stationtype=='Carpoolinghub')
           integreen.retrieveData(station,"carpooling/rest/hubs/",displayHubsData);
@@ -83,11 +82,44 @@ var carpoolingLayer = {
         }
       }
     });
-    function resetAllIcons(feature){
-	
-    }
     this.layer = positionsLayer;
     return positionsLayer;
+    function redrawAllBlueFeatures(feature){	
+	var features = feature.layer.features;
+	$.each(features,function(index,value){	
+          var pin = 'images/9_Carpooling/hub_marker.svg';
+          if (!value.cluster){
+            if (value.attributes.stationtype == 'Carpoolinghub')
+              pin= 'images/9_Carpooling/hub_marker.svg';
+            else
+              pin= value.attributes.type==='A'?'images/9_Carpooling/driver_marker.svg':'images/9_Carpooling/passenger_marker.svg';
+            value.style={
+            	externalGraphic:pin,
+                graphicWidth: 35,
+                graphicYOffset:-35.75
+            };
+            positionsLayer.drawFeature(value);
+          }
+	});
+    }
+    function resetAllIcons(feature){
+	var features = feature.layer.features;
+	$.each(features,function(index,value){
+		if (value.id != feature.id && value.data.stationcode != feature.data.parent){
+			var pin ="";
+            		if (value.attributes.stationtype == 'Carpoolinghub')
+		          pin= 'images/9_Carpooling/hub_off_marker.svg';
+		        else
+              		  pin= value.attributes.type==='A'?'images/9_Carpooling/driver_off_marker.svg':'images/9_Carpooling/passenger_off_marker.svg';
+			value.style={
+				externalGraphic:pin,
+				graphicWidth: 35,
+			        graphicYOffset:-35.75
+			};
+			positionsLayer.drawFeature(value);
+		}
+	});
+    }
 
     function displayClusterFeatures(features){
       $('.modal').hide();
