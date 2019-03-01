@@ -46,10 +46,11 @@ var carpoolingLayer = {
         externalGraphic:function(feature){
           var pin= 'images/idm.svg';
           if (!feature.cluster){
+	    console.log(feature);
             if (feature.attributes.stationtype == 'Carpoolinghub')
-            pin= 'images/9_Carpooling/marker.svg';
+            pin= 'images/9_Carpooling/hub_marker.svg';
             else
-            pin= 'images/pin.png';
+            pin= 'images/9_Carpooling/passenger_marker.svg';
 
           }else{
             var vectors = new OpenLayers.Layer.Vector("vector", {isBaseLayer: false});
