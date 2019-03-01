@@ -75,7 +75,7 @@ var carpoolingLayer = {
           if (e.feature.attributes.stationtype=='Carpoolinghub')
           integreen.retrieveData(station,"carpooling/rest/hubs/",displayHubsData);
           if (e.feature.attributes.stationtype=='CarpoolingUser'){
-            drawRouteToDestination(e.feature);
+            resetAllIcons(e.feature);
             integreen.retrieveData(station,"carpooling/rest/user/",displayUserData);
           }
         }else{
@@ -83,26 +83,12 @@ var carpoolingLayer = {
         }
       }
     });
+    function resetAllIcons(feature){
+	
+    }
     this.layer = positionsLayer;
     return positionsLayer;
 
-    function drawRouteToDestination(feature){
-      var hub = positionsLayer.getFeaturesByAttribute("stationcode",feature.attributes.parent);
-      if (hub.length>0){
-        if (currentDrawnFeatures)
-        positionsLayer.destroyFeatures(currentDrawnFeatures);
-        if (!hub[0].cluster){
-          currentDrawnFeatures = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString([feature.geometry,hub[0].geometry]));
-          positionsLayer.drawFeature(currentDrawnFeatures,{
-            strokeColor: '#3192c5',
-            strokeWidth: 6,
-            strokeOpacity:0.7,
-            strokeLinecap:'square',
-            strokeDashstyle:'dot'
-          });
-        }
-      }
-    }
     function displayClusterFeatures(features){
       $('.modal').hide();
       $('.station .title').html("Choose one");
@@ -122,7 +108,7 @@ var carpoolingLayer = {
           integreen.retrieveData(feature.attributes.stationcode,"carpooling/rest/hubs/",displayHubsData);
         });
         $('.station .content ul .clusteruser'+feature.attributes.stationcode).click(function(){
-          drawRouteToDestination(feature);
+          resetAllIcons(feature);
           integreen.retrieveData(feature.attributes.stationcode,"carpooling/rest/user/",displayUserData);
         });
       });
