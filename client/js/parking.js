@@ -1,6 +1,6 @@
 var myparkings;
 var config = {
-  types: [["free","","","300"]]
+  types: [["occupied","","","300"]]
 };
 var parkingLayer = {
   isCached: true,
@@ -83,7 +83,7 @@ var parkingLayer = {
   displayData: function(details, state){
     var html = ''
     $('.modal').hide();
-    var updatedOn = moment(state['free'].timestamp).locale(lang).format('lll');
+    var updatedOn = moment(state['occupied'].timestamp).locale(lang).format('lll');
     $('.parkinglot-detail .title').html(details.name +"<br/><small>"+updatedOn+"</small>");
     html+='<div class="number-available"></div>';
     html+='<div class="caption">' + jsT[lang].availableParkingSpaces+'</div><hr/>';
@@ -104,7 +104,7 @@ var parkingLayer = {
     $('.parkinglot-detail .backtomap.ibutton').click(function(){
       $('.modal').hide();
     });
-    if (state['free'].value < details.capacity * 0.25){
+    if (state['occupied'].value > details.capacity * 0.75){
       $('.parkinglot-detail .number-available').removeClass("free");
     }
     else{
@@ -112,7 +112,7 @@ var parkingLayer = {
     }
     radialProgress($('.parkinglot-detail .number-available')[0])
     .diameter(180)
-    .value(state['free'].value)
+    .value(details.capacity-state['occupied'].value)
     .maxValue(details.capacity)
     .render();
   },
