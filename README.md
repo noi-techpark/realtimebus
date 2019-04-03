@@ -1,10 +1,13 @@
-DEPRECATED
-===========
+PARTLY DEPRECATED
+=================
 
-This source code is deprecated. Please use:
+This repository contains the client and the server part.
+
+The server part is deprecated. Please use:
 
 https://github.com/idm-suedtirol/realtimebus-v2
 
+For the client part, we will still use the source code in this repository, until we will create a new version of the client as well.
 
 
 realtimebus
