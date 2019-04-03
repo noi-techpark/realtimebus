@@ -1,3 +1,12 @@
+DEPRECATED
+===========
+
+This source code is deprecated. Please use:
+
+https://github.com/idm-suedtirol/realtimebus-v2
+
+
+
 realtimebus
 ===========
 
