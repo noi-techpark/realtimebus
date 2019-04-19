@@ -3,7 +3,7 @@
 div.olMap{width:100%;height:100%;position:absolute}
 .header-mobile{display:block;position:relative;width:100%;height:12vh;padding:0;background:#fff;border-bottom:0;box-shadow:0 0 0;z-index:5000;}
 .header-mobile>*{float:left;}
-#logo-mobile{display:inline-block;text-indent:-9999px;font-size:0;line-height:0;height:50%;position:relative;top:25%;margin-left:10px}
+#logo-mobile{display:inline-block;text-indent:-9999px;font-size:0;line-height:0;height:40%;position:relative;top:25%;margin-left:10px}
 .beta-mobile{display:block;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;width:36px;height:20px;background:url(../images/ico-beta.gif) 0 0 no-repeat;font-size:0;line-height:0;text-indent:-9999px;margin-top:22px;margin-right:10px;}
 .mobile-menu-btn{display:block;width:auto;height:100%;font-size:0;line-height:0;background-color:#5c6369;}
 /*.panel{top:43px;left:auto;right:0px;width:375px;height:400px;box-shadow:0 0 0;z-index:1000}

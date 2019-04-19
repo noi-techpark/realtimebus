@@ -240,7 +240,7 @@ a{color:#c0c0c0;text-decoration:none}
 .footer .logos .idm{top:17px;left:175px}
 .footer .logos .sasa{top:17px;right:46px}
 .footer .logos a{display:block;text-indent:-9999px;font-size:0;line-height:0}
-.footer .logos .merano a{width:102px;height:24px;background:url(../images/logo-merano.gif) 0 0 no-repeat}
+.footer .logos .merano a{width:102px;height:24px;background:url(../images/merano_logo.svg) 0 0 no-repeat}
 .footer .logos .merano a:hover{background-position:0 -24px}
 .footer .logos .idm a{width:36px;height:28px;background:url(../images/idm.svg) no-repeat; background-size:cover}
 .footer .logos .sasa a{width:85px;height:26px;background:url(../images/logo-sasa.jpg) 0 0 no-repeat}
@@ -766,7 +766,7 @@ rect.VW_e_Golf_{
 	background-image:url('../images/r3gis.png');
 }
 .about .meran a{
-	background-image:url('../images/logo-small.gif');
+	background-image:url('../images/merano_logo.svg');
 }
 .about .merang a{
 	background-image:url('../images/merang.png');

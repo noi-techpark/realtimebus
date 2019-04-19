@@ -124,7 +124,7 @@ include 'lang.php';
 
 
 						<header class="header" id="header">
-							<img id = "logo" src ="images/logo.gif" alt="Merano real time bus"/>
+							<img id = "logo" src ="images/merano_logo.svg" alt="Merano real time bus"/>
 							<a href="javascript:void(0)" target="_blank" class="beta">BETA</a>
 							<a href="<?php ___('feedbackform'); ?>" target="_blank" class="feedback">Feedback</a>
 							<nav class="language-switcher">
