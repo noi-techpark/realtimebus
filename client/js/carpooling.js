@@ -11,7 +11,7 @@ var carpoolingLayer = {
     });
     var  params = {
       request:'GetFeature',
-      typeName:'edi:carpooling',
+      typeName:'edi:Carpooling',
       outputFormat:'text/javascript',
       format_options: 'callback: jsonCarpooling'
     };
@@ -46,7 +46,7 @@ var carpoolingLayer = {
         externalGraphic:function(feature){
           var pin= 'images/9_Carpooling/hub_marker.svg';
           if (!feature.cluster){
-            if (feature.attributes.stationtype == 'Carpoolinghub')
+            if (feature.attributes.stationtype == 'CarpoolingHub')
             pin= 'images/9_Carpooling/hub_marker.svg';
             else
             pin= feature.attributes.type==='A'?'images/9_Carpooling/driver_marker.svg':'images/9_Carpooling/passenger_marker.svg';
@@ -71,8 +71,8 @@ var carpoolingLayer = {
         if (!e.feature.cluster){
 	  redrawAllBlueFeatures(e.feature);
           var station = e.feature.attributes.stationcode;
-          if (e.feature.attributes.stationtype=='Carpoolinghub')
-          integreen.retrieveData(station,"carpooling/rest/hubs/",displayHubsData);
+          if (e.feature.attributes.stationtype=='CarpoolingHub')
+          integreen.retrieveData(station,"carpooling/rest/",displayHubsData);
           if (e.feature.attributes.stationtype=='CarpoolingUser'){
             resetAllIcons(e.feature);
             integreen.retrieveData(station,"carpooling/rest/user/",displayUserData);
@@ -89,7 +89,7 @@ var carpoolingLayer = {
 	$.each(features,function(index,value){	
           var pin = 'images/9_Carpooling/hub_marker.svg';
           if (!value.cluster){
-            if (value.attributes.stationtype == 'Carpoolinghub')
+            if (value.attributes.stationtype == 'CarpoolingHub')
               pin= 'images/9_Carpooling/hub_marker.svg';
             else
               pin= value.attributes.type==='A'?'images/9_Carpooling/driver_marker.svg':'images/9_Carpooling/passenger_marker.svg';
@@ -107,7 +107,7 @@ var carpoolingLayer = {
 	$.each(features,function(index,value){
 		if (value.id != feature.id && value.data.stationcode != feature.data.parent){
 			var pin ="";
-            		if (value.attributes.stationtype == 'Carpoolinghub')
+            		if (value.attributes.stationtype == 'CarpoolingHub')
 		          pin= 'images/9_Carpooling/hub_off_marker.svg';
 		        else
               		  pin= value.attributes.type==='A'?'images/9_Carpooling/driver_off_marker.svg':'images/9_Carpooling/passenger_off_marker.svg';
@@ -130,14 +130,14 @@ var carpoolingLayer = {
       features.forEach(function(feature,index){
         var featureHtml;
         featureHtml ='<li style="text-align:center;padding:10px;background-color:#3192c5;margin-bottom:10px">';
-        if (feature.attributes.stationtype=='Carpoolinghub')
+        if (feature.attributes.stationtype=='CarpoolingHub')
         featureHtml+='<a href="javascript:void(0)" class="clusterhub'+feature.attributes.stationcode+'">HUB '+feature.attributes.name+'</a>'
         if (feature.attributes.stationtype=='CarpoolingUser')
         featureHtml+='<a href="javascript:void(0)" class="clusteruser'+feature.attributes.stationcode+'">USER '+feature.attributes.name+'</a>'
         featureHtml+='</li>';
         $('.station .content ul').append(featureHtml);
         $('.station .content ul .clusterhub'+feature.attributes.stationcode).click(function(){
-          integreen.retrieveData(feature.attributes.stationcode,"carpooling/rest/hubs/",displayHubsData);
+          integreen.retrieveData(feature.attributes.stationcode,"carpooling/rest/",displayHubsData);
         });
         $('.station .content ul .clusteruser'+feature.attributes.stationcode).click(function(){
           resetAllIcons(feature);
@@ -147,13 +147,12 @@ var carpoolingLayer = {
       $('.station').show();
     }
     function displayHubsData(details,state){
-      var locale = details.i18n[lang]?lang:'it';
-      $('.station .title').html(details.i18n[locale].name);
+      $('.station .title').html(details.name);
       $('.modal').hide();
       var html = "";
-      html += '<div class="carpooling-info"><div><img style="width:50px;height:50px" src="images/9_Carpooling/location.svg"/><p>'+(details.i18n[locale]?details.i18n[locale].address:'')+'<br/>'+details.i18n[locale].city+'</p></div></div>';
+      html += '<div class="carpooling-info"><div><img style="width:50px;height:50px" src="images/9_Carpooling/location.svg"/><p>'+(details.address)+'<br/>'+details.city+'</p></div></div>';
       html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>About this Hub</div></a></div>';
-      html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[locale].backtomap+'</div></a><hr/></div>';
+      html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>';
       $('.station .content').html(html);
       $('.station .backtomap.ibutton').click(function(){
         $('.modal').hide();
@@ -161,7 +160,6 @@ var carpoolingLayer = {
       $('.station').show();
     }
     function displayUserData(details,state){
-      var locale = details.hubI18n[lang]?lang:'it';
       var htmlTitle = '<div> <img src="images/9_Carpooling/';
       var personType,personImg;
       if (details.type=='A'||details.type=='E'){
@@ -179,11 +177,11 @@ var carpoolingLayer = {
       $('.modal').hide();
       var html = "";
       html += '<div class="carpooling-info">';
-      html += '<div><img src="images/9_Carpooling/location.svg"/><p><strong>'+jsT[locale].startAddressLabel+"</strong><br/>"+(details.location[locale].address +" "+ details.location[locale].city)+'</p></div>';
-      html += '<div><img src="images/Flag.svg"/><p><strong>'+jsT[locale].destinationHubLabel+"</strong><br/>"+(details.hubI18n[locale].address+' '+details.hubI18n[locale].city)+'</p></div>';
+      html += '<div><img src="images/9_Carpooling/location.svg"/><p><strong>'+jsT[lang].startAddressLabel+"</strong><br/>"+details.tripFrom.address+" "+ details.tripFrom.city+'</p></div>';
+      html += '<div><img src="images/Flag.svg"/><p><strong>'+jsT[lang].destinationHubLabel+"</strong><br/>"+details.hub+' '+details.hub+'</p></div>';
       if (details.pendular)	
-      	html += '<div><img src="images/9_Carpooling/pendular.svg"/><strong>'+jsT[locale].pendularLabel+'</strong></div>';
-      html += '<div><img src="images/9_Carpooling/times.svg"/><div class="subflex"><strong>'+jsT[locale].arrivalTimeLabel+'</strong><strong>'+jsT[locale].departureTimeLabel+'</strong></div><div class="subflex"><div>'+details.arrival+'</div><div>'+details.departure+'</div></div></div>';
+      	html += '<div><img src="images/9_Carpooling/pendular.svg"/><strong>'+jsT[lang].pendularLabel+'</strong></div>';
+      html += '<div><img src="images/9_Carpooling/times.svg"/><div class="subflex"><strong>'+jsT[lang].arrivalTimeLabel+'</strong><strong>'+jsT[lang].departureTimeLabel+'</strong></div><div class="subflex"><div>'+details.arrival+'</div><div>'+details.departure+'</div></div></div>';
       html +='</div>';
       html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>Contact person</div></a></div>';
       html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>';
@@ -200,7 +198,7 @@ var carpoolingLayer = {
     self.getTypes(self.retrieveStations);
   },
   getTypes : function(callback){
-    integreen.getStationDetails('carpooling/rest/hubs/',{},displayBrands);
+    integreen.getStationDetails('carpooling/rest/user/',{},displayBrands);
     function displayBrands(data){
       var usertype =  "'E'\\,'A'\\,'P'";
       var hubs = {
@@ -258,7 +256,7 @@ var carpoolingLayer = {
 var statusText = hubs.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
 $('.carpooling .main-config').append('<a href="javascript:void(0)" class="deselect-all" >'+statusText+'</a>');
 $('.carpooling .main-config').append('<hr/>');
-integreen.retrieveData("innovie","carpooling/rest/",displayAllData);
+integreen.retrieveData("innovie","carpooling/rest/user/",displayAllData);
 function displayAllData(stationData,currentState){
   $('.carpooling .main-config').append(stationData.name);
   $('.carpooling .main-config').append("<ul>");
