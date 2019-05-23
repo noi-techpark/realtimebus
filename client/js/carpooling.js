@@ -55,13 +55,13 @@ var carpoolingLayer = {
                 case 'E': pin='images/9_Carpooling/dandp_marker.svg';break;
               }
             }
-          }else{
+          }/*else{
             var vectors = new OpenLayers.Layer.Vector("vector", {isBaseLayer: false});
             vectors.addFeatures(feature.cluster);
             var dataExtent = vectors.getDataExtent();
             SASABus.map.setCenter(feature.geometry.bounds.centerLonLat);
-            SASABus.map.zoomToExtent(dataExtent);
-          }
+            //SASABus.map.zoomToExtent(dataExtent);
+          }*/
           return pin;
         }
       }
@@ -71,7 +71,7 @@ var carpoolingLayer = {
       strategies: [new OpenLayers.Strategy.Cluster({distance: 25,threshold: 2})],
     });
     positionsLayer.events.on({
-      "beforefeatureselected":function(e){
+      "featureselected":function(e){
         if (!e.feature.cluster){
 	  redrawAllBlueFeatures(e.feature);
           var station = e.feature.attributes.stationcode;
@@ -82,12 +82,17 @@ var carpoolingLayer = {
             integreen.retrieveData(station,"carpooling/rest/user/",displayUserData);
           }
         }else{
-          displayClusterFeatures(e.feature.cluster);
+          //displayClusterFeatures(e.feature.cluster);
+          var vectors = new OpenLayers.Layer.Vector("vector", {isBaseLayer: false});
+          vectors.addFeatures(e.feature.cluster);
+          var dataExtent = vectors.getDataExtent();
+          SASABus.map.setCenter(e.feature.geometry.bounds.centerLonLat);
+          SASABus.map.zoomToExtent(dataExtent);
         }
       }
     });
     this.layer = positionsLayer;
-    return positionsLayer;
+    return this.layer;
     function redrawAllBlueFeatures(feature){	
 	var features = feature.layer.features;
 	$.each(features,function(index,value){	
