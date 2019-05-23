@@ -47,10 +47,14 @@ var carpoolingLayer = {
           var pin= 'images/9_Carpooling/hub_marker.svg';
           if (!feature.cluster){
             if (feature.attributes.stationtype == 'CarpoolingHub')
-            pin= 'images/9_Carpooling/hub_marker.svg';
-            else
-            pin= feature.attributes.type==='A'?'images/9_Carpooling/driver_marker.svg':'images/9_Carpooling/passenger_marker.svg';
-
+              pin= 'images/9_Carpooling/hub_marker.svg';
+            else{
+              switch(feature.attributes.type){
+                case 'A': pin='images/9_Carpooling/driver_marker.svg';break;
+                case 'P': pin='images/9_Carpooling/passenger_marker.svg';break;
+                case 'E': pin='images/9_Carpooling/dandp_marker.svg';break;
+              }
+            }
           }else{
             var vectors = new OpenLayers.Layer.Vector("vector", {isBaseLayer: false});
             vectors.addFeatures(feature.cluster);
@@ -91,8 +95,13 @@ var carpoolingLayer = {
           if (!value.cluster){
             if (value.attributes.stationtype == 'CarpoolingHub')
               pin= 'images/9_Carpooling/hub_marker.svg';
-            else
-              pin= value.attributes.type==='A'?'images/9_Carpooling/driver_marker.svg':'images/9_Carpooling/passenger_marker.svg';
+            else{
+              switch(value.attributes.type){
+                case 'A': pin='images/9_Carpooling/driver_marker.svg';break;
+                case 'P': pin='images/9_Carpooling/passenger_marker.svg';break;
+                case 'E': pin='images/9_Carpooling/dandp_marker.svg';break;
+              }
+            }
             value.style={
             	externalGraphic:pin,
                 graphicWidth: 35,
@@ -109,8 +118,13 @@ var carpoolingLayer = {
 			var pin ="";
             		if (value.attributes.stationtype == 'CarpoolingHub')
 		          pin= 'images/9_Carpooling/hub_off_marker.svg';
-		        else
-              		  pin= value.attributes.type==='A'?'images/9_Carpooling/driver_off_marker.svg':'images/9_Carpooling/passenger_off_marker.svg';
+		        else{
+			  switch(value.attributes.type){
+                            case 'A': pin='images/9_Carpooling/driver_off_marker.svg';break;
+                            case 'P': pin='images/9_Carpooling/passenger_off_marker.svg';break;
+                            case 'E': pin='images/9_Carpooling/dandp_off_marker.svg';break;
+			  }
+			}
 			value.style={
 				externalGraphic:pin,
 				graphicWidth: 35,
@@ -150,40 +164,65 @@ var carpoolingLayer = {
       $('.station .title').html(details.name);
       $('.modal').hide();
       var html = "";
-      html += '<div class="carpooling-info"><div><img style="width:50px;height:50px" src="images/9_Carpooling/location.svg"/><p>'+(details.address)+'<br/>'+details.city+'</p></div></div>';
-      html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>About this Hub</div></a></div>';
-      html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>';
-      $('.station .content').html(html);
-      $('.station .backtomap.ibutton').click(function(){
-        $('.modal').hide();
+      html += '<div class="carpooling-info"><div><img style="width:50px;height:50px" src="images/9_Carpooling/location.svg"/><p>'+(details.address)+'<br/>'+details.city+'</p></div><hr/>';
+      integreen.getStationDetails('carpooling/rest/user/',{},function(userDetails){
+	var driverCount = 0, passengerCount = 0;
+	for (i in userDetails){
+          var value = userDetails[i];
+          if (value.parentStation == details.id){
+            if (value.type=='A' || value.type=='E')
+              driverCount++;
+            if (value.type=='P' || value.type=='E')
+              passengerCount++;
+          }
+        }
+        html += '<div><img style="width:40px;height:40px" src="images/9_Carpooling/driver.svg"/><p>'+jsT[lang].driverRequests+" "+driverCount+'</p></div>';
+        html += '<div><img style="width:40px;height:40px" src="images/9_Carpooling/passenger.svg"/><p>'+jsT[lang].passengerRequests+" "+passengerCount+'</p></div>';
+        html += '</div><hr/>'
+        html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a></div>';
+        $('.station .content').html(html);
+        $('.station .backtomap.ibutton').click(function(){
+          $('.modal').hide();
+        });
+        $('.station').show();
       });
-      $('.station').show();
     }
     function displayUserData(details,state){
       var htmlTitle = '<div> <img src="images/9_Carpooling/';
       var personType,personImg;
       if (details.type=='A'||details.type=='E'){
       	personImg = 'driver.svg';
-        personType = 'Driver';
-
+        personType = jsT[lang].driver;
       }
       if (details.type=='P'||details.type=='E'){
         personImg = 'passenger.svg';
-        personType.length==0 ? personType = 'Passenger' : personType += ' / Passenger';
+        personType==undefined||personType.length==0 ? personType = +jsT[lang].passenger : personType += ' / '+jsT[lang].passenger;
       }
-      htmlTitle+=personImg;
-      htmlTitle+='"/><p><strong>'+details.name+'</strong><br/>'+personType+'</p></div>';	     
+      htmlTitle += personImg;
+      htmlTitle += '"/><p><strong>'+details.name+'</strong><br/>'+personType+'<br/>';
+      var numberOfStars = 0;
+      for (numberOfStars; numberOfStars < 5; numberOfStars++){	
+        htmlTitle += numberOfStars < Math.round(details.userRating) ? '<img style="width:25px;height:25px" src="images/9_Carpooling/star.svg"/>' : '<img style="width:25px;height:25px" src="images/9_Carpooling/nostar.svg"/>';
+      }
+      htmlTitle += '</p>';	     
+      htmlTitle += '</div>';	     
       $('.station .title').html(htmlTitle);
       $('.modal').hide();
       var html = "";
       html += '<div class="carpooling-info">';
-      html += '<div><img src="images/9_Carpooling/location.svg"/><p><strong>'+jsT[lang].startAddressLabel+"</strong><br/>"+details.tripFrom.address+" "+ details.tripFrom.city+'</p></div>';
-      html += '<div><img src="images/Flag.svg"/><p><strong>'+jsT[lang].destinationHubLabel+"</strong><br/>"+details.hub+' '+details.hub+'</p></div>';
+      html += '<div><img src="images/9_Carpooling/location.svg"/><p><strong>'+jsT[lang].startAddressLabel+"</strong><br/>"+details.tripFrom.address+" ("+ details.tripFrom.city+')</p></div>';
+      html += '<div><img src="images/Flag.svg"/><p><strong>'+jsT[lang].destinationHubLabel+'</strong><br/>'+details.tripToName+'</p></div>';
       if (details.pendular)	
       	html += '<div><img src="images/9_Carpooling/pendular.svg"/><strong>'+jsT[lang].pendularLabel+'</strong></div>';
       html += '<div><img src="images/9_Carpooling/times.svg"/><div class="subflex"><strong>'+jsT[lang].arrivalTimeLabel+'</strong><strong>'+jsT[lang].departureTimeLabel+'</strong></div><div class="subflex"><div>'+details.arrival+'</div><div>'+details.departure+'</div></div></div>';
+      if (details.additionalProperties && !jQuery.isEmptyObject(details.additionalProperties)){
+        html += '<div><img src="images/9_Carpooling/notes.svg"/><strong>Notes</strong><br/>';
+        for (i in details.additionalProperties)
+          html += "<p>"+i+": "+details.additionalProperties[i]+"</p>";
+        html += '</div>';
+      }    
       html +='</div>';
-      html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>Contact person</div></a></div>';
+      html +='<div><a target="_blank" href="https://hub.flootta.com/mobilitymeran/en/board.aspx?id_u='+details.id.replace('carpooling:','')+'" class="ibutton" ><div>Contact person</div></a></div>';
       html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>';
       $('.station .content').html(html);
       $('.station .backtomap.ibutton').click(function(){
@@ -198,7 +237,7 @@ var carpoolingLayer = {
     self.getTypes(self.retrieveStations);
   },
   getTypes : function(callback){
-    integreen.getStationDetails('carpooling/rest/user/',{},displayBrands);
+    integreen.getStationDetails('carpooling/rest/',{},displayBrands);
     function displayBrands(data){
       var usertype =  "'E'\\,'A'\\,'P'";
       var hubs = {
@@ -256,7 +295,7 @@ var carpoolingLayer = {
 var statusText = hubs.nothingSelected() ? jsT[lang]['selectAll'] : jsT[lang]['deselectAll'] ;
 $('.carpooling .main-config').append('<a href="javascript:void(0)" class="deselect-all" >'+statusText+'</a>');
 $('.carpooling .main-config').append('<hr/>');
-integreen.retrieveData("innovie","carpooling/rest/user/",displayAllData);
+integreen.retrieveData("innovie","carpooling/rest/",displayAllData);
 function displayAllData(stationData,currentState){
   $('.carpooling .main-config').append(stationData.name);
   $('.carpooling .main-config').append("<ul>");
