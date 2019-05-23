@@ -111,7 +111,7 @@ var SASABus = {
 		walking:[wegeStartPointsLayer,artPoints,routesLayer,zugangLayer],
 		bus:[linesLayer,busPositionLayer,stopsLayer],
 		carsharing:[carSharingLayer],
-		bike:[bikeSharingLayer,provinceBikeNetwork],
+		//bike:[bikeSharingLayer,provinceBikeNetwork],
 		emobility:[echargingLayer],
 		carpooling:[carpoolingLayer],
     parking:[parkingLayer],
