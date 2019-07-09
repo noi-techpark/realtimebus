@@ -592,13 +592,14 @@ include 'lang.php';
 										<li class="algorab"><a href="http://www.algorab.com/" target="_blank" title="Algorab"></a><h4>Bikesharing</h4></li>
 										<li class="aew"><a href="https://www.alperiaenergy.eu" target="_blank" title="Alperia"></a><h4>Chargestation</h4></li>
 									</ul>
-									<h3 style="text-align:center"> <a href="https://github.com/tis-innovation-park/realtimebus.git" target="_blank">Source code available on github.com</h3>
+									<h3 style="text-align:center"> <a href="https://github.com/tis-innovation-park/realtimebus.git" target="_blank">Source code available on github.com</a></h3>
 									</div>
 								</div>
 								<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 								<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 								<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" type="text/javascript"></script>
 								<script src="js/OpenLayers.js" type="text/javascript"></script>
+								<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/lib/OpenLayers.js" type="text/javascript"></script>-->
 								<script src="scripts/scripts.js" type="text/javascript"></script>
 								<script> var txtVariante = '';</script>
 								<script type="text/javascript" src="https://www.google.com/jsapi?autoload={

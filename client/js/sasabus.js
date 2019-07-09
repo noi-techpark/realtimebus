@@ -79,7 +79,7 @@ var SASABus = {
 	integreenEndPoint:'ipchannels.integreen-life.bz.it/',
 	apiediEndPoint:'https://apiedi.testingmachine.eu',
 	//apiediEndPoint:'http://localhost:8080/apiedi',
-	geoserverEndPoint:'https://geodata.integreen-life.bz.it/geoserver/',
+	geoserverEndPoint:'https://geodata.integreen-life.bz.it/',
         busPopupSelector: '#busPopup',
         stopPopupSelector: '#stopPopup',
         rowsLimit: 6,

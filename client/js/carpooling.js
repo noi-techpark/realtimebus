@@ -201,7 +201,7 @@ var carpoolingLayer = {
       }
       if (details.type=='P'||details.type=='E'){
         personImg = 'passenger.svg';
-        personType==undefined||personType.length==0 ? personType = +jsT[lang].passenger : personType += ' / '+jsT[lang].passenger;
+        personType==undefined||personType.length==0 ? personType = jsT[lang].passenger : personType += ' / '+jsT[lang].passenger;
       }
       htmlTitle += personImg;
       htmlTitle += '"/><p><strong>'+details.name+'</strong><br/>'+personType+'<br/>';
@@ -219,6 +219,8 @@ var carpoolingLayer = {
       html += '<div><img src="images/Flag.svg"/><p><strong>'+jsT[lang].destinationHubLabel+'</strong><br/>'+details.tripToName+'</p></div>';
       if (details.pendular)	
       	html += '<div><img src="images/9_Carpooling/pendular.svg"/><strong>'+jsT[lang].pendularLabel+'</strong></div>';
+      else
+      	html += '<div><img src="images/9_Carpooling/pendular.svg"/><strong>'+jsT[lang].nonPendularLabel+'</strong></div>';
       html += '<div><img src="images/9_Carpooling/times.svg"/><div class="subflex"><strong>'+jsT[lang].arrivalTimeLabel+'</strong><strong>'+jsT[lang].departureTimeLabel+'</strong></div><div class="subflex"><div>'+details.arrival+'</div><div>'+details.departure+'</div></div></div>';
       if (details.additionalProperties && !jQuery.isEmptyObject(details.additionalProperties)){
         html += '<div><img src="images/9_Carpooling/notes.svg"/><strong>Notes</strong><br/>';
