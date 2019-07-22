@@ -68,7 +68,7 @@ var carpoolingLayer = {
     }));
     var positionsLayer = new OpenLayers.Layer.Vector("carpoolingLayer", {
       styleMap: styleMap,
-      strategies: [new OpenLayers.Strategy.Cluster({distance: 25,threshold: 2})],
+      //strategies: [new OpenLayers.Strategy.Cluster({distance: 25,threshold: 2})],
     });
     positionsLayer.events.on({
       "featureselected":function(e){
@@ -82,7 +82,7 @@ var carpoolingLayer = {
             integreen.retrieveData(station,"carpooling/rest/user/",displayUserData);
           }
         }else{
-          //displayClusterFeatures(e.feature.cluster);
+          displayClusterFeatures(e.feature.cluster);
           var vectors = new OpenLayers.Layer.Vector("vector", {isBaseLayer: false});
           vectors.addFeatures(e.feature.cluster);
           var dataExtent = vectors.getDataExtent();
@@ -264,11 +264,19 @@ var carpoolingLayer = {
         };
       });
       $('.carpoolingtypes').empty();
-      $.each(hubs,function(index,value){
+      var hubArray = [];
+      for (key in hubs){
+	  if (hubs[key].name != 'nothingSelected'){	
+	      hubs[key].id=key;
+              hubArray.push(hubs[key]);
+          }
+      }
+      hubArray.sort(function(a,b){return a.name > b.name ? 1:-1});
+      $.each(hubArray,function(index,value){
         if (typeof value == 'function')
-        return true;
-        var brandClass= index.replace(/[^a-zA-Z0-9]/g,'_');
-        $('.carpooling .carpoolingtypes').append('<li class="clearfix carpoolinghub"><p>'+value.name+'</p><a brand='+index+' href="javascript:void(0)" class="toggler">'
+            return true;
+        var brandClass= value.id.replace(/[^a-zA-Z0-9]/g,'_');
+        $('.carpooling .carpoolingtypes').append('<li class="clearfix carpoolinghub"><p>'+value.name+'</p><a brand='+value.id+' href="javascript:void(0)" class="toggler">'
         +'<svg width="55" height="30">'
         +       '<g>'
         +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#3192c5" height="24"/>'
