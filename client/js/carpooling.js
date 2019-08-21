@@ -15,9 +15,10 @@ var carpoolingLayer = {
       outputFormat:'text/javascript',
       format_options: 'callback: jsonCarpooling'
     };
-    if (hubreq!='')
-    params['viewparams']='hubs:'+hubreq+';';
-    if (usertype!='')
+    params['viewparams'] = '';
+    if (hubreq!='' && hubreq != undefined)
+    params['viewparams']+='hubs:'+hubreq+';';
+    if (usertype!='' && usertype != undefined)
     params['viewparams']+='usertypes:'+usertype;
     $.ajax({
       url : SASABus.config.geoserverEndPoint+'wfs?'+$.param(params),
@@ -166,10 +167,10 @@ var carpoolingLayer = {
       $('.station').show();
     }
     function displayHubsData(details,state){
-      $('.station .title').html(details.name);
+      $('.station .title').html(details.hubName[lang]);
       $('.modal').hide();
       var html = "";
-      html += '<div class="carpooling-info"><div><img style="width:50px;height:50px" src="images/9_Carpooling/location.svg"/><p>'+(details.address)+'<br/>'+details.city+'</p></div><hr/>';
+      html += '<div class="carpooling-info"><div><img style="width:50px;height:50px" src="images/9_Carpooling/location.svg"/><p>'+details.address[lang]+'<br/>'+details.city[lang]+'</p></div><hr/>';
       integreen.getStationDetails('carpooling/rest/user/',{},function(userDetails){
 	var driverCount = 0, passengerCount = 0;
 	for (i in userDetails){
