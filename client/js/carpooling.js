@@ -76,8 +76,10 @@ var carpoolingLayer = {
         if (!e.feature.cluster){
 	  redrawAllBlueFeatures(e.feature);
           var station = e.feature.attributes.stationcode;
-          if (e.feature.attributes.stationtype=='CarpoolingHub')
-          integreen.retrieveData(station,"carpooling/rest/",displayHubsData);
+          if (e.feature.attributes.stationtype=='CarpoolingHub'){
+            resetAllIcons(e.feature);
+            integreen.retrieveData(station,"carpooling/rest/",displayHubsData);
+	  }
           if (e.feature.attributes.stationtype=='CarpoolingUser'){
             resetAllIcons(e.feature);
             integreen.retrieveData(station,"carpooling/rest/user/",displayUserData);
@@ -120,7 +122,7 @@ var carpoolingLayer = {
     function resetAllIcons(feature){
 	var features = feature.layer.features;
 	$.each(features,function(index,value){
-		if (value.id != feature.id && value.data.stationcode != feature.data.parent){
+		if (value.id != feature.id && value.data.stationcode != feature.data.parent && feature.data.stationcode != value.data.parent){
 			var pin ="";
             		if (value.attributes.stationtype == 'CarpoolingHub')
 		          pin= 'images/9_Carpooling/hub_off_marker.svg';
@@ -149,7 +151,7 @@ var carpoolingLayer = {
       $('.station .content').html(html);
       features.forEach(function(feature,index){
         var featureHtml;
-        featureHtml ='<li style="text-align:center;padding:10px;background-color:#3192c5;margin-bottom:10px">';
+        featureHtml ='<li style="text-align:center;padding:10px;background-color:#009a92;margin-bottom:10px">';
         if (feature.attributes.stationtype=='CarpoolingHub')
         featureHtml+='<a href="javascript:void(0)" class="clusterhub'+feature.attributes.stationcode+'">HUB '+feature.attributes.name+'</a>'
         if (feature.attributes.stationtype=='CarpoolingUser')
@@ -157,6 +159,7 @@ var carpoolingLayer = {
         featureHtml+='</li>';
         $('.station .content ul').append(featureHtml);
         $('.station .content ul .clusterhub'+feature.attributes.stationcode).click(function(){
+          resetAllIcons(feature);
           integreen.retrieveData(feature.attributes.stationcode,"carpooling/rest/",displayHubsData);
         });
         $('.station .content ul .clusteruser'+feature.attributes.stationcode).click(function(){
@@ -217,7 +220,7 @@ var carpoolingLayer = {
       var html = "";
       html += '<div class="carpooling-info">';
       html += '<div><img src="images/9_Carpooling/location.svg"/><p><strong>'+jsT[lang].startAddressLabel+"</strong><br/>"+details.tripFrom.address+" ("+ details.tripFrom.city+')</p></div>';
-      html += '<div><img src="images/Flag.svg"/><p><strong>'+jsT[lang].destinationHubLabel+'</strong><br/>'+details.tripToName+'</p></div>';
+      html += '<div><img src="images/Flag.svg"/><p><strong>'+jsT[lang].destinationHubLabel+'</strong><br/>'+details.tripToName[lang]+'</p></div>';
       if (details.pendular)	
       	html += '<div><img src="images/9_Carpooling/pendular.svg"/><strong>'+jsT[lang].pendularLabel+'</strong></div>';
       else
@@ -225,12 +228,12 @@ var carpoolingLayer = {
       html += '<div><img src="images/9_Carpooling/times.svg"/><div class="subflex"><strong>'+jsT[lang].arrivalTimeLabel+'</strong><strong>'+jsT[lang].departureTimeLabel+'</strong></div><div class="subflex"><div>'+details.arrival+'</div><div>'+details.departure+'</div></div></div>';
       if (details.additionalProperties && !jQuery.isEmptyObject(details.additionalProperties)){
         html += '<div><img src="images/9_Carpooling/notes.svg"/><strong>Notes</strong><br/>';
-        for (i in details.additionalProperties)
-          html += "<p>"+i+": "+details.additionalProperties[i]+"</p>";
+        //for (i in details.additionalProperties)
+          //html += "<p>"+i+": "+details.additionalProperties[i]+"</p>";
         html += '</div>';
       }    
       html +='</div>';
-      html +='<div><a target="_blank" href="https://hub.flootta.com/mobilitymeran/en/board.aspx?id_u='+details.id.replace('carpooling:','')+'" class="ibutton" ><div>Contact person</div></a></div>';
+      html +='<div><a target="_blank" href="https://hub.flootta.com/bzbga/de/board.aspx?id_u='+details.id.replace('carpooling:','')+'" class="ibutton" ><div>Contact person</div></a></div>';
       html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>';
       $('.station .content').html(html);
       $('.station .backtomap.ibutton').click(function(){
@@ -280,8 +283,8 @@ var carpoolingLayer = {
         $('.carpooling .carpoolingtypes').append('<li class="clearfix carpoolinghub"><p>'+value.name+'</p><a brand='+value.id+' href="javascript:void(0)" class="toggler">'
         +'<svg width="55" height="30">'
         +       '<g>'
-        +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#3192c5" height="24"/>'
-        +               '<circle cx="34" cy="17" r="9" fill="#3192c5" />'
+        +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#009a92" height="24"/>'
+        +               '<circle cx="34" cy="17" r="9" fill="#009a92" />'
         +       '</g>'
         +       'Sorry, your browser does not support inline SVG.'
         + '</svg>'
@@ -292,8 +295,8 @@ var carpoolingLayer = {
     $('.carpooling .carpoolingtypes').append('<li class="clearfix driver"><p>Autista</p><a href="javascript:void(0)" class="toggler">'
     +'<svg width="55" height="30">'
     +       '<g>'
-    +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#3192c5" height="24"/>'
-    +               '<circle cx="34" cy="17" r="9" fill="#3192c5" />'
+    +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#009a92" height="24"/>'
+    +               '<circle cx="34" cy="17" r="9" fill="#009a92" />'
     +       '</g>'
     +       'Sorry, your browser does not support inline SVG.'
     + '</svg>'
@@ -301,8 +304,8 @@ var carpoolingLayer = {
   ).append('<li class="clearfix passenger"><p>Passeggero</p><a href="javascript:void(0)" class="toggler">'
   +'<svg width="55" height="30">'
   +       '<g>'
-  +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#3192c5" height="24"/>'
-  +               '<circle cx="34" cy="17" r="9" fill="#3192c5" />'
+  +               '<rect x="5" y="5" rx="12" ry="12" width="42" style="stroke:#009a92" height="24"/>'
+  +               '<circle cx="34" cy="17" r="9" fill="#009a92" />'
   +       '</g>'
   +       'Sorry, your browser does not support inline SVG.'
   + '</svg>'
