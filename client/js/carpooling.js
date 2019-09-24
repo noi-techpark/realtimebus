@@ -233,7 +233,7 @@ var carpoolingLayer = {
         html += '</div>';
       }    
       html +='</div>';
-      html +='<div><a target="_blank" href="https://hub.flootta.com/bzbga/de/board.aspx?id_u='+details.id.replace('carpooling:','')+'" class="ibutton" ><div>'+jsT[lang].contact+'</div></a></div>';
+      html +='<div><a target="_blank" href="https://carpooling.bz.it/'+((lang=='it')?'it':'de')+'/board.aspx?id_u='+details.id.replace('carpooling:','')+'" class="ibutton" ><div>'+jsT[lang].contact+'</div></a></div>';
       html +='<div><a href="javascript:void(0)" class="backtomap ibutton" ><div>'+jsT[lang].backtomap+'</div></a><hr/></div>';
       $('.station .content').html(html);
       $('.station .backtomap.ibutton').click(function(){
