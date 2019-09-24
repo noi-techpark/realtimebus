@@ -31,7 +31,7 @@ var jsT= {
 		disabledcapacity:'Kapazität Behindertenparkplätze',
 		operator:'Betreiber',
 		startAddressLabel:'Startpunkt',
-		destinationHubLabel:'Ankunftshub',
+		destinationHubLabel:'Zielort',
 		pendularLabel:'Pendler',
 		nonPendularLabel:'Gelegenheitsfahrer',
 		arrivalTimeLabel:'Hinfahrt',
@@ -40,6 +40,7 @@ var jsT= {
                 driverRequests:'Fahrer Anfragen',
                 driver:'Fahrer',
                 passenger:'Mitfahrer',
+		contact:'Kontaktiere die Person'
 	},
 	it:{
 		altitudep:'Profilo altimetrico',
@@ -73,7 +74,7 @@ var jsT= {
 		disabledcapacity:'Capienza parcheggi disabili',
 		operator:'Operatore',
 		startAddressLabel:'Indirizzo di partenza',
-		destinationHubLabel:'Per hub',
+		destinationHubLabel:'Destinazione',
 		nonPendularLabel:'Utente occasionale',
 		pendularLabel:'Pendolare',
 		arrivalTimeLabel:'Andata',
@@ -82,6 +83,7 @@ var jsT= {
                 driverRequests:'Richiesta passeggeri',
                 driver:'Autista',
                 passenger:'Passeggero',
+		contact:'Contatta persona'
 	},
 	en:{
 		altitudep:'Altitude profile',
@@ -124,6 +126,7 @@ var jsT= {
                 driverRequests:'Driver requests',
                 driver:'Driver',
                 passenger:'Passenger',
+		contact:'Contact person'
 	}
 
 }
