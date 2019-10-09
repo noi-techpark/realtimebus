@@ -258,7 +258,7 @@ get: function(){
 				html += "<div class='plug clearfix'>"
 				+"<h4><svg height='20' width='20'><circle cx='10' cy='10' r='10' fill='" + plugColor + "'></circle></svg>" + jsT[lang].charger + " "+(index+1)+"</h4>";
 				$.each(value.detail.outlets,function(i,outlet){
-					html += "<div class='clearfix outlet'><img src='https://service.aewnet.eu/e-mobility/api/v2/images/outlettypes/"+ outlet.outletTypeCode+"' alt='Plug image not available'/>"
+					html += "<div class='clearfix outlet'><img src='http://api.alperia-emobility.eu/e-mobility/api/v2/images/outlettypes/"+ outlet.outletTypeCode+"' alt='Plug image not available'/>"
 					+"<p>"+outlet.outletTypeCode +" | "
 					+ outlet.minCurrent + " - " + outlet.maxCurrent+" A | "
 					+ outlet.maxPower +" W </p></div>";
