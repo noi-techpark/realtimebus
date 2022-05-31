@@ -1,5 +1,5 @@
-PARTLY DEPRECATED
-=================
+DEPRECATED REPOSITORY
+=====================
 
 This repository contains the client and the server part.
 
